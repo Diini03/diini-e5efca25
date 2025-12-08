@@ -1,8 +1,10 @@
 import { TerminalCard } from "./TerminalCard";
+import { TiltCard } from "../ui/TiltCard";
 
 export function SkillsCard() {
   return (
-    <TerminalCard title="skills.json">
+    <TiltCard tiltAmount={8}>
+      <TerminalCard title="skills.json">
       <div className="p-4 space-y-3">
         <div className="flex items-center gap-3">
           <span className="text-xs text-muted-foreground w-14 text-right shrink-0">Python</span>
@@ -68,6 +70,7 @@ export function SkillsCard() {
           <span className="text-xs text-muted-foreground">85%</span>
         </div>
       </div>
-    </TerminalCard>
+      </TerminalCard>
+    </TiltCard>
   );
 }
