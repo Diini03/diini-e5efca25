@@ -4,18 +4,18 @@ import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
 const testimonials = [
   {
     quote: "Diini has an exceptional ability to transform complex data into clear, actionable insights. His attention to detail and analytical skills are outstanding.",
-    name: "Dr. Ahmed Hassan",
+    name: "Prof. Dr Abdullahi Shariif",
     role: "Professor, Somali National University",
   },
   {
     quote: "Working with Diini was a great experience. He delivered high-quality data analysis work on time and was always eager to learn and improve.",
-    name: "Mohamed Ali",
+    name: "Abdirahim Abdullahi Aden",
     role: "Project Manager, NAPAD",
   },
   {
-    quote: "Diini's data management skills helped our team maintain accurate records during a critical project. His dedication to quality is commendable.",
-    name: "Sarah Johnson",
-    role: "Data Coordinator, MEDAIR",
+    quote: "Diini helped us analyze data and train a model for our smart event recommendation feature. His machine learning skills and dedication to the project were impressive.",
+    name: "Eng Ahmed Mohammed",
+    role: "Operations Manager, Kulmid",
   },
 ];
 
