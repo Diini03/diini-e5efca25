@@ -10,11 +10,14 @@ export function DashboardCard() {
     return true;
   });
   const [clicks, setClicks] = useState(0);
-  const [time, setTime] = useState(new Date());
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [pageViews] = useState(450);
 
+  // Timer that counts time spent on site (resets on each visit)
   useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000);
+    const timer = setInterval(() => {
+      setElapsedSeconds((prev) => prev + 1);
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -39,13 +42,11 @@ export function DashboardCard() {
     }
   };
 
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString("en-US", {
-      hour12: false,
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    });
+  const formatElapsedTime = (totalSeconds: number) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   };
 
   return (
@@ -84,11 +85,11 @@ export function DashboardCard() {
           <span className="text-xs text-muted-foreground">Mogadishu, SO</span>
         </div>
 
-        {/* Time */}
+        {/* Time Spent */}
         <div className="flex flex-col items-center justify-center p-6 bg-card">
           <Clock className="w-6 h-6 text-primary mb-2" />
           <span className="text-xs text-muted-foreground font-mono">
-            {formatTime(time)}
+            {formatElapsedTime(elapsedSeconds)}
           </span>
         </div>
       </div>
