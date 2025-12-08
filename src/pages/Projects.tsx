@@ -6,12 +6,19 @@ const allTags = [
   "all", "python", "pandas", "plotly", "matplotlib", "seaborn", "numpy", "eda", "data-visualization"
 ];
 
+const categories = [
+  { id: "all", label: "All", count: 2 },
+  { id: "data-analysis", label: "Data Analysis", count: 2 },
+  { id: "visualization", label: "Visualization", count: 2 },
+];
+
 const projects = [
   {
     slug: "covid-19-analysis",
     title: "Covid-19 Analysis and Visualization using Plotly Express",
     description: "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations including bar charts, scatter plots, and choropleth maps.",
     tags: ["python", "pandas", "plotly", "matplotlib", "data-visualization"],
+    category: "data-analysis",
     date: "2024",
   },
   {
@@ -19,6 +26,7 @@ const projects = [
     title: "Netflix Data Analysis & Visualization",
     description: "Comprehensive analysis of 8807 Netflix titles exploring content distribution, trends over time, and country-based insights using Python visualization libraries.",
     tags: ["python", "pandas", "seaborn", "matplotlib", "numpy", "eda"],
+    category: "data-analysis",
     date: "2024",
   },
 ];
@@ -26,6 +34,7 @@ const projects = [
 export default function Projects() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTag, setActiveTag] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("all");
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -33,14 +42,14 @@ export default function Projects() {
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesTag = activeTag === "all" || project.tags.includes(activeTag);
-      return matchesSearch && matchesTag;
+      const matchesCategory = activeCategory === "all" || project.category === activeCategory;
+      return matchesSearch && matchesTag && matchesCategory;
     });
-  }, [searchQuery, activeTag]);
+  }, [searchQuery, activeTag, activeCategory]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen animate-fade-in">
       <div className="max-w-3xl mx-auto px-6 py-12">
-        {/* Back Link */}
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
@@ -49,11 +58,32 @@ export default function Projects() {
           Back home
         </Link>
 
-        {/* Title */}
         <h1 className="text-2xl font-bold text-primary mb-2">Projects</h1>
         <p className="text-muted-foreground text-sm mb-8">
           A collection of my data science and development projects.
         </p>
+
+        {/* Category Tabs */}
+        <div className="flex gap-2 mb-6 border-b border-border pb-4">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-4 py-2 text-sm rounded-md transition-colors flex items-center gap-2 ${
+                activeCategory === cat.id
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-secondary text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {cat.label}
+              <span className={`text-xs px-1.5 py-0.5 rounded ${
+                activeCategory === cat.id ? "bg-primary-foreground/20" : "bg-muted"
+              }`}>
+                {cat.count}
+              </span>
+            </button>
+          ))}
+        </div>
 
         {/* Search */}
         <div className="relative mb-6">

@@ -5,6 +5,7 @@ import { SkillsCard } from "@/components/home/SkillsCard";
 import { LanguagesChart } from "@/components/home/LanguagesChart";
 import { ProjectCard } from "@/components/home/ProjectCard";
 import { CompanyBadges } from "@/components/home/CompanyBadges";
+import { TestimonialsCard } from "@/components/home/TestimonialsCard";
 
 const featuredProjects = [
   {
@@ -25,7 +26,7 @@ const featuredProjects = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen animate-fade-in">
       <div className="max-w-3xl mx-auto px-6 py-16">
         {/* Hero Section */}
         <section className="mb-12">
@@ -123,6 +124,14 @@ export default function Home() {
               <ProjectCard key={project.slug} {...project} />
             ))}
           </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="mt-12">
+          <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
+            <span className="text-muted-foreground">//</span> Testimonials
+          </h2>
+          <TestimonialsCard />
         </section>
       </div>
     </div>
