@@ -6,6 +6,7 @@ import { NavLink } from "@/components/NavLink";
 const navItems = [
   { label: "About", path: "/about" },
   { label: "Projects", path: "/projects" },
+  { label: "Blog", path: "/blog" },
   { label: "Contact", path: "/contact" },
 ];
 

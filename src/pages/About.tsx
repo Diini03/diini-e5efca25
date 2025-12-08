@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award } from "lucide-react";
+import { CurrentlyLearning } from "@/components/about/CurrentlyLearning";
 
 const experiences = [
   {
@@ -233,6 +234,9 @@ export default function About() {
             </div>
           </div>
         </section>
+
+        {/* Currently Learning */}
+        <CurrentlyLearning />
       </div>
     </div>
   );
