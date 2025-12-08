@@ -1,8 +1,237 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
 export default function Contact() {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Basic validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    
+    toast({
+      title: "Message sent!",
+      description: "Thank you for reaching out. I'll get back to you soon.",
+    });
+    
+    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(false);
+  };
+
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold">Contact - Coming in Task 7</h1>
+    <div className="min-h-screen">
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        {/* Back Link */}
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back home
+        </Link>
+
+        {/* Title */}
+        <h1 className="text-2xl font-bold mb-2">
+          Get in <span className="text-primary">Touch</span>
+        </h1>
+        <p className="text-muted-foreground text-sm mb-10">
+          I'm always open to new opportunities and collaborations.
+        </p>
+
+        {/* Main Content Grid */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Left Column - Contact Info */}
+          <div>
+            {/* Contact Information */}
+            <h2 className="text-sm font-semibold mb-6">
+              <span className="text-muted-foreground">//</span> Contact Information
+            </h2>
+
+            <div className="space-y-4 mb-10">
+              {/* Email */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center">
+                  <Mail className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground">Email</div>
+                  <a
+                    href="mailto:diiniyare74@gmail.com"
+                    className="text-sm text-foreground hover:text-primary transition-colors"
+                  >
+                    diiniyare74@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center">
+                  <Phone className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground">Phone</div>
+                  <a
+                    href="tel:+252612039107"
+                    className="text-sm text-foreground hover:text-primary transition-colors"
+                  >
+                    +252 612 039 107
+                  </a>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground">Location</div>
+                  <div className="text-sm text-foreground">Mogadishu, Somalia</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Find me on */}
+            <h2 className="text-sm font-semibold mb-4">
+              <span className="text-muted-foreground">//</span> Find me on
+            </h2>
+
+            <div className="flex gap-3 mb-8">
+              <a
+                href="https://github.com/Diini03"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/diinikahiye/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+            </div>
+
+            {/* Availability */}
+            <div className="terminal-card p-4">
+              <div className="text-sm text-muted-foreground mb-1">
+                <span className="text-primary">$</span> check_availability
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-green-500" />
+                <span className="text-sm text-foreground">
+                  Available for freelance & full-time
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Contact Form */}
+          <div className="terminal-card p-6">
+            <h2 className="text-sm font-semibold mb-6">
+              <span className="text-muted-foreground">//</span> Send a Message
+            </h2>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Name */}
+              <div>
+                <label className="block text-xs text-muted-foreground mb-2">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  maxLength={100}
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-xs text-muted-foreground mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  maxLength={255}
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-xs text-muted-foreground mb-2">
+                  Message
+                </label>
+                <textarea
+                  placeholder="Your message..."
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  maxLength={1000}
+                  rows={4}
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary resize-none"
+                />
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3 bg-primary text-primary-foreground rounded font-medium text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
+              >
+                <Send className="w-4 h-4" />
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
