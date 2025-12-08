@@ -8,6 +8,8 @@ interface Particle {
   speedY: number;
   opacity: number;
   isAccent: boolean;
+  pulse: number;
+  pulseSpeed: number;
 }
 
 export function ParticleBackground() {
@@ -17,14 +19,12 @@ export function ParticleBackground() {
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    // Check initial theme
     const checkTheme = () => {
       setIsDark(document.documentElement.classList.contains("dark"));
     };
     
     checkTheme();
     
-    // Observe theme changes
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, { 
       attributes: true, 
@@ -43,22 +43,24 @@ export function ParticleBackground() {
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = 500;
+      canvas.height = document.body.scrollHeight || window.innerHeight;
     };
 
     const createParticles = () => {
       const particles: Particle[] = [];
-      const particleCount = Math.floor(window.innerWidth / 25); // More subtle - fewer particles
+      const particleCount = Math.floor((canvas.width * canvas.height) / 15000); // Density based on area
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 1.5 + 0.3, // Smaller particles
-          speedX: (Math.random() - 0.5) * 0.2, // Slower movement
-          speedY: (Math.random() - 0.5) * 0.2,
-          opacity: Math.random() * 0.2 + 0.05, // Much more subtle opacity
-          isAccent: Math.random() < 0.1, // 10% accent particles
+          size: Math.random() * 2.5 + 0.8, // Slightly larger
+          speedX: (Math.random() - 0.5) * 0.4,
+          speedY: (Math.random() - 0.5) * 0.4,
+          opacity: Math.random() * 0.5 + 0.2, // More visible
+          isAccent: Math.random() < 0.2, // 20% orange particles
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: Math.random() * 0.02 + 0.01,
         });
       }
       particlesRef.current = particles;
@@ -72,28 +74,38 @@ export function ParticleBackground() {
       particlesRef.current.forEach((particle) => {
         particle.x += particle.speedX;
         particle.y += particle.speedY;
+        particle.pulse += particle.pulseSpeed;
 
+        // Wrap around edges
         if (particle.x < 0) particle.x = canvas.width;
         if (particle.x > canvas.width) particle.x = 0;
         if (particle.y < 0) particle.y = canvas.height;
         if (particle.y > canvas.height) particle.y = 0;
 
+        // Pulsing opacity for subtle glow effect
+        const pulseOpacity = particle.opacity * (0.7 + Math.sin(particle.pulse) * 0.3);
+
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         
         if (particle.isAccent) {
-          // Orange accent - works in both modes
-          ctx.fillStyle = `hsla(24, 95%, 53%, ${particle.opacity * 0.8})`;
+          // Orange accent particles - more visible
+          ctx.fillStyle = `hsla(24, 95%, 53%, ${pulseOpacity})`;
+          // Add glow effect for orange particles
+          ctx.shadowColor = "hsla(24, 95%, 53%, 0.5)";
+          ctx.shadowBlur = 8;
         } else {
+          ctx.shadowBlur = 0;
           // Theme-aware neutral particles
           if (isDark) {
-            ctx.fillStyle = `hsla(220, 30%, 60%, ${particle.opacity * 0.4})`;
+            ctx.fillStyle = `hsla(220, 40%, 65%, ${pulseOpacity * 0.6})`;
           } else {
-            ctx.fillStyle = `hsla(220, 20%, 40%, ${particle.opacity * 0.3})`;
+            ctx.fillStyle = `hsla(220, 30%, 35%, ${pulseOpacity * 0.4})`;
           }
         }
         
         ctx.fill();
+        ctx.shadowBlur = 0;
       });
 
       animationRef.current = requestAnimationFrame(animate);
@@ -110,19 +122,23 @@ export function ParticleBackground() {
 
     window.addEventListener("resize", handleResize);
 
+    // Re-check height periodically for dynamic content
+    const heightInterval = setInterval(resizeCanvas, 2000);
+
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
       window.removeEventListener("resize", handleResize);
+      clearInterval(heightInterval);
     };
   }, [isDark]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.4 }}
+      className="fixed inset-0 pointer-events-none z-0"
+      style={{ opacity: 0.7 }}
     />
   );
 }
