@@ -31,10 +31,11 @@ const experiences = [
 ];
 
 const skillCategories = [
-  { name: "Languages", skills: ["Python", "SQL", "JavaScript", "DAX"] },
+  { name: "Languages", skills: ["Python", "SQL", "JavaScript", "TypeScript", "DAX"] },
   { name: "Data Analysis", skills: ["pandas", "matplotlib", "Power BI", "Excel"] },
   { name: "Databases", skills: ["MySQL", "SQLite", "Power Query"] },
-  { name: "Web Dev", skills: ["React", "HTML/CSS", "Node.js"] },
+  { name: "Web Dev", skills: ["React", "HTML/CSS", "Node.js", "Tailwind CSS"] },
+  { name: "AI Development", skills: ["Cursor", "Lovable", "Warp"] },
   { name: "Tools", skills: ["Git", "Jupyter", "Streamlit", "WSL/Linux"] },
 ];
 
@@ -65,20 +66,25 @@ export default function About() {
         {/* Bio */}
         <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-8">
           <p>
-            I'm <span className="text-primary">Diini Kahiye</span>, a passionate Junior Data
-            Scientist from Mogadishu, Somalia. My journey into data science began with a
-            simple curiosity: <em>how can numbers tell stories that drive real decisions?</em>
+            I'm <span className="text-primary">Diini Kahiye</span>, a Data Scientist and 
+            Front-End Developer based in Mogadishu, Somalia. I specialize in transforming 
+            complex datasets into actionable insights and building modern, responsive web 
+            applications that deliver real value.
           </p>
           <p>
-            Currently completing my Computer Science degree at Somali National University,
-            I've developed a deep focus on data science, machine learning, and artificial
-            intelligence. I believe in the power of data-driven decision making and work
-            tirelessly to transform raw data into meaningful insights.
+            My technical toolkit spans the full data pipeline—from Python (pandas, matplotlib, 
+            BeautifulSoup) and SQL for analysis, to Power BI and Plotly for visualization, 
+            to React and TypeScript for front-end development. I leverage cutting-edge AI 
+            development tools like <span className="text-primary">Cursor</span>, <span className="text-primary">Lovable</span>, 
+            and <span className="text-primary">Warp</span> to accelerate development and build 
+            production-ready interfaces efficiently.
           </p>
           <p>
-            When I'm not crunching numbers, I enjoy learning new technologies, contributing
-            to open-source projects, and exploring how AI can solve real-world problems in my
-            community.
+            Currently pursuing my Computer Science degree at Somali National University, 
+            I've contributed to humanitarian data projects, trained machine learning models 
+            for smart event recommendations, and built data visualization dashboards that 
+            drive decision-making. I'm passionate about using technology to solve real-world 
+            problems in my community.
           </p>
         </div>
 
