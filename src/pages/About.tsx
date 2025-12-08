@@ -192,7 +192,7 @@ export default function About() {
         </section>
 
         {/* Certifications */}
-        <section>
+        <section className="mb-12">
           <h2 className="text-base font-semibold mb-6 flex items-center gap-2">
             <Award className="w-4 h-4 text-primary" />
             Certifications
