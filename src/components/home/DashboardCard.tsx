@@ -7,15 +7,24 @@ export function DashboardCard() {
     if (typeof window !== "undefined") {
       return document.documentElement.classList.contains("dark");
     }
-    return false;
+    return true;
   });
   const [clicks, setClicks] = useState(0);
   const [time, setTime] = useState(new Date());
-  const [pageViews] = useState(418);
+  const [pageViews] = useState(450);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    // Initialize dark mode
+    const stored = localStorage.getItem("theme");
+    if (stored === "dark" || (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    }
   }, []);
 
   const toggleTheme = () => {
@@ -41,16 +50,16 @@ export function DashboardCard() {
 
   return (
     <TerminalCard title="dashboard.tsx">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-px bg-border/30">
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
-          className="flex flex-col items-center justify-center p-4 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors border border-border"
+          className="flex flex-col items-center justify-center p-6 bg-card hover:bg-secondary/50 transition-colors"
         >
           {isDark ? (
-            <Moon className="w-5 h-5 text-primary mb-2" />
+            <Moon className="w-6 h-6 text-primary mb-2" />
           ) : (
-            <Sun className="w-5 h-5 text-primary mb-2" />
+            <Sun className="w-6 h-6 text-primary mb-2" />
           )}
           <span className="text-xs text-muted-foreground">
             {isDark ? "Dark Mode" : "Light Mode"}
@@ -60,24 +69,24 @@ export function DashboardCard() {
         {/* Click Counter */}
         <button
           onClick={() => setClicks((c) => c + 1)}
-          className="flex flex-col items-center justify-center p-4 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors border border-border"
+          className="flex flex-col items-center justify-center p-6 bg-card hover:bg-secondary/50 transition-colors"
         >
-          <MousePointer className="w-5 h-5 text-primary mb-2" />
+          <MousePointer className="w-6 h-6 text-primary mb-2" />
           <span className="text-xs text-muted-foreground">{clicks} clicks</span>
         </button>
 
         {/* Location */}
-        <div className="flex flex-col items-center justify-center p-4 rounded-lg bg-secondary/30 border border-border">
+        <div className="flex flex-col items-center justify-center p-6 bg-card">
           <div className="relative">
-            <MapPin className="w-5 h-5 text-primary mb-2" />
-            <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full" />
+            <MapPin className="w-6 h-6 text-primary mb-2" />
+            <span className="absolute top-0 right-0 w-2 h-2 bg-green-500 rounded-full" />
           </div>
           <span className="text-xs text-muted-foreground">Mogadishu, SO</span>
         </div>
 
         {/* Time */}
-        <div className="flex flex-col items-center justify-center p-4 rounded-lg bg-secondary/30 border border-border">
-          <Clock className="w-5 h-5 text-primary mb-2" />
+        <div className="flex flex-col items-center justify-center p-6 bg-card">
+          <Clock className="w-6 h-6 text-primary mb-2" />
           <span className="text-xs text-muted-foreground font-mono">
             {formatTime(time)}
           </span>
@@ -85,7 +94,7 @@ export function DashboardCard() {
       </div>
 
       {/* Page Views */}
-      <div className="mt-3 flex items-center justify-center gap-2 text-muted-foreground text-sm">
+      <div className="flex items-center justify-center gap-2 text-muted-foreground text-xs py-4 bg-card">
         <Eye className="w-4 h-4" />
         <span>{pageViews} page views</span>
       </div>

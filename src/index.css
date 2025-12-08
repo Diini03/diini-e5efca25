@@ -8,21 +8,21 @@
   :root {
     --background: 210 25% 97%;
     --foreground: 220 20% 20%;
-    --card: 0 0% 100%;
+    --card: 210 20% 95%;
     --card-foreground: 220 20% 20%;
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 20%;
     --primary: 24 95% 53%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 20% 93%;
+    --secondary: 210 20% 90%;
     --secondary-foreground: 220 20% 20%;
-    --muted: 210 15% 90%;
+    --muted: 210 15% 88%;
     --muted-foreground: 220 10% 45%;
     --accent: 24 95% 53%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 210 15% 88%;
+    --border: 210 15% 85%;
     --input: 210 15% 88%;
     --ring: 24 95% 53%;
     --radius: 0.5rem;
@@ -37,56 +37,43 @@
     --sidebar-ring: 24 95% 53%;
 
     /* Terminal card colors */
-    --terminal-bg: 220 20% 97%;
-    --terminal-header: 220 15% 93%;
-    --terminal-dot-red: 0 80% 60%;
-    --terminal-dot-yellow: 45 90% 55%;
-    --terminal-dot-green: 140 70% 45%;
-
-    /* Chart colors */
-    --chart-orange: 24 95% 53%;
-    --chart-blue: 210 80% 55%;
-    --chart-cyan: 180 70% 50%;
-    --chart-yellow: 45 90% 55%;
-    --chart-gray: 220 10% 70%;
+    --terminal-bg: 210 20% 95%;
+    --terminal-header: 210 18% 92%;
   }
 
   .dark {
-    --background: 222 25% 12%;
-    --foreground: 210 20% 90%;
-    --card: 222 22% 16%;
-    --card-foreground: 210 20% 90%;
-    --popover: 222 22% 16%;
-    --popover-foreground: 210 20% 90%;
+    --background: 220 30% 8%;
+    --foreground: 210 20% 85%;
+    --card: 220 25% 12%;
+    --card-foreground: 210 20% 85%;
+    --popover: 220 25% 12%;
+    --popover-foreground: 210 20% 85%;
     --primary: 24 95% 53%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 222 18% 22%;
-    --secondary-foreground: 210 15% 85%;
-    --muted: 222 15% 20%;
-    --muted-foreground: 210 10% 55%;
+    --secondary: 220 22% 16%;
+    --secondary-foreground: 210 15% 80%;
+    --muted: 220 20% 14%;
+    --muted-foreground: 210 15% 55%;
     --accent: 24 95% 53%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 222 15% 25%;
-    --input: 222 15% 25%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
     --ring: 24 95% 53%;
     
-    --sidebar-background: 222 22% 14%;
-    --sidebar-foreground: 210 15% 85%;
+    --sidebar-background: 220 25% 10%;
+    --sidebar-foreground: 210 15% 80%;
     --sidebar-primary: 24 95% 53%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 15% 22%;
-    --sidebar-accent-foreground: 210 15% 85%;
-    --sidebar-border: 222 15% 25%;
+    --sidebar-accent: 220 20% 16%;
+    --sidebar-accent-foreground: 210 15% 80%;
+    --sidebar-border: 220 20% 18%;
     --sidebar-ring: 24 95% 53%;
 
     /* Terminal card colors - dark */
-    --terminal-bg: 222 22% 16%;
-    --terminal-header: 222 18% 20%;
-    --terminal-dot-red: 0 80% 60%;
-    --terminal-dot-yellow: 45 90% 55%;
-    --terminal-dot-green: 140 70% 45%;
+    --terminal-bg: 220 25% 12%;
+    --terminal-header: 220 22% 15%;
   }
 }
 
@@ -106,17 +93,14 @@
 }
 
 @layer components {
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(24 95% 53%), hsl(30 90% 60%));
-  }
-  
   .terminal-card {
-    @apply bg-card rounded-lg overflow-hidden border border-border;
+    @apply rounded-lg overflow-hidden;
+    background-color: hsl(var(--terminal-bg));
   }
   
   .terminal-header {
-    @apply flex items-center gap-2 px-4 py-3 bg-secondary/50;
+    @apply flex items-center gap-2 px-4 py-3;
+    background-color: hsl(var(--terminal-header));
   }
   
   .terminal-dot {
@@ -124,27 +108,15 @@
   }
   
   .terminal-dot-red {
-    background-color: hsl(var(--terminal-dot-red));
+    background-color: hsl(0 80% 55%);
   }
   
   .terminal-dot-yellow {
-    background-color: hsl(var(--terminal-dot-yellow));
+    background-color: hsl(45 90% 50%);
   }
   
   .terminal-dot-green {
-    background-color: hsl(var(--terminal-dot-green));
-  }
-  
-  .skill-bar {
-    @apply h-2 rounded-full transition-all duration-500;
-  }
-  
-  .hover-lift {
-    @apply transition-all duration-300;
-  }
-  
-  .hover-lift:hover {
-    transform: translateY(-2px);
+    background-color: hsl(140 70% 45%);
   }
   
   .link-orange {
