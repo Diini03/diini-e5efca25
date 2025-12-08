@@ -1,116 +1,126 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
-import { Typewriter } from "@/components/ui/Typewriter";
-import { DataVisualization } from "@/components/home/DataVisualization";
+import { Github, Linkedin, ExternalLink } from "lucide-react";
+import { DashboardCard } from "@/components/home/DashboardCard";
+import { SkillsCard } from "@/components/home/SkillsCard";
+import { LanguagesChart } from "@/components/home/LanguagesChart";
+import { ProjectCard } from "@/components/home/ProjectCard";
+import { CompanyBadges } from "@/components/home/CompanyBadges";
+
+const featuredProjects = [
+  {
+    slug: "business-analysis",
+    title: "Business Analysis Dashboard",
+    description:
+      "Power BI dashboard to compare employee benefit packages with DAX and Excel transformations.",
+    tags: ["powerbi", "dax", "excel", "analytics"],
+  },
+  {
+    slug: "job-market-eda",
+    title: "Data Science Job Market EDA",
+    description:
+      "Analyzed 7000+ data science job listings to gain insights on landing analytics jobs.",
+    tags: ["python", "pandas", "matplotlib", "wordcloud"],
+  },
+];
 
 export default function Home() {
-  const [showTagline, setShowTagline] = useState(false);
-  const [showContent, setShowContent] = useState(false);
-
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center relative overflow-hidden">
-      <DataVisualization />
-      
-      <div className="relative z-10 max-w-4xl mx-auto px-6 py-20">
-        <div className="space-y-6">
-          {/* Terminal-style intro */}
-          <div className="font-mono text-sm text-muted-foreground">
-            <span className="text-primary">$</span> whoami
-          </div>
-
-          {/* Name with typing effect */}
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            <Typewriter
-              text="DIINI KAHIYE"
-              delay={80}
-              className="gradient-text"
-              onComplete={() => setShowTagline(true)}
-            />
+    <div className="min-h-screen">
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        {/* Hero Section */}
+        <section className="mb-16">
+          <h1 className="text-3xl md:text-4xl font-bold mb-6">
+            Hey! I'm <span className="text-primary">Diini Kahiye</span>
           </h1>
 
-          {/* Tagline */}
-          <div className={`transition-all duration-700 ${showTagline ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-            <p className="text-xl md:text-2xl text-muted-foreground font-light">
-              Junior Data Scientist
+          <div className="space-y-4 text-muted-foreground leading-relaxed mb-6">
+            <p>
+              I'm a Junior Data Scientist based in Mogadishu, Somalia. I specialize
+              in transforming raw data into actionable insights using{" "}
+              <a
+                href="https://python.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-orange"
+              >
+                Python
+              </a>
+              , SQL, and Power BI.
             </p>
-            <p className="text-lg text-muted-foreground/80 mt-2 font-mono">
-              Turning raw data into{" "}
-              <span className="text-primary">actionable insights</span>
+            <p>
+              Currently pursuing my Bachelor's in Computer Science at{" "}
+              <span className="text-foreground">Somali National University</span>{" "}
+              with a focus on Data Science, ML, and AI.
             </p>
-            {showTagline && (
-              <div className="mt-1">
-                <Typewriter
-                  text=""
-                  delay={50}
-                  onComplete={() => setShowContent(true)}
-                />
-              </div>
-            )}
-          </div>
-
-          {/* CTA Buttons */}
-          <div className={`flex flex-wrap gap-4 pt-6 transition-all duration-700 delay-300 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-            <Link
-              to="/projects"
-              className="group inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-all hover-lift"
-            >
-              View Projects
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-lg font-medium hover:bg-secondary transition-all hover-lift"
-            >
-              Get in Touch
-            </Link>
           </div>
 
           {/* Social Links */}
-          <div className={`flex items-center gap-4 pt-8 transition-all duration-700 delay-500 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+          <div className="flex items-center gap-2 mb-8 text-sm">
             <a
               href="https://github.com/Diini03"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-muted-foreground hover:text-primary transition-colors"
-              aria-label="GitHub"
+              className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Github className="w-5 h-5" />
+              <Github className="w-4 h-4" />
+              <span>GitHub</span>
             </a>
+            <span className="text-muted-foreground/50">|</span>
             <a
               href="https://www.linkedin.com/in/diinikahiye/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-muted-foreground hover:text-primary transition-colors"
-              aria-label="LinkedIn"
+              className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Linkedin className="w-5 h-5" />
+              <Linkedin className="w-4 h-4" />
+              <span>LinkedIn</span>
             </a>
-            <a
-              href="mailto:diiniyare74@gmail.com"
-              className="p-2 text-muted-foreground hover:text-primary transition-colors"
-              aria-label="Email"
+            <span className="text-muted-foreground/50">||</span>
+            <Link
+              to="/about"
+              className="flex items-center gap-1.5 text-primary hover:underline"
             >
-              <Mail className="w-5 h-5" />
-            </a>
+              <span>More about me</span>
+              <ExternalLink className="w-3 h-3" />
+            </Link>
           </div>
 
-          {/* Quick Stats */}
-          <div className={`grid grid-cols-3 gap-6 pt-12 max-w-md transition-all duration-700 delay-700 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary font-mono">3+</div>
-              <div className="text-sm text-muted-foreground">Projects</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary font-mono">2+</div>
-              <div className="text-sm text-muted-foreground">Years Exp</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary font-mono">5+</div>
-              <div className="text-sm text-muted-foreground">Certifications</div>
-            </div>
+          {/* Company Badges */}
+          <CompanyBadges />
+        </section>
+
+        {/* Dashboard Section */}
+        <section className="mb-16">
+          <h2 className="text-lg font-semibold mb-6">
+            <span className="text-muted-foreground">//</span> Dashboard
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <DashboardCard />
+            <SkillsCard />
           </div>
-        </div>
+
+          <LanguagesChart />
+        </section>
+
+        {/* Featured Projects */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-semibold">Featured Projects</h2>
+            <Link
+              to="/projects"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              View all
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.slug} {...project} />
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
