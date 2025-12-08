@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Github, Linkedin, ExternalLink } from "lucide-react";
+import { Github, Linkedin, ExternalLink, Star } from "lucide-react";
 import { DashboardCard } from "@/components/home/DashboardCard";
 import { SkillsCard } from "@/components/home/SkillsCard";
 import { LanguagesChart } from "@/components/home/LanguagesChart";
@@ -26,14 +26,14 @@ const featuredProjects = [
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <div className="max-w-4xl mx-auto px-6 py-16">
+      <div className="max-w-3xl mx-auto px-6 py-16">
         {/* Hero Section */}
-        <section className="mb-16">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">
+        <section className="mb-12">
+          <h1 className="text-2xl md:text-3xl font-bold mb-6">
             Hey! I'm <span className="text-primary">Diini Kahiye</span>
           </h1>
 
-          <div className="space-y-4 text-muted-foreground leading-relaxed mb-6">
+          <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-6">
             <p>
               I'm a Junior Data Scientist based in Mogadishu, Somalia. I specialize
               in transforming raw data into actionable insights using{" "}
@@ -48,9 +48,8 @@ export default function Home() {
               , SQL, and Power BI.
             </p>
             <p>
-              Currently pursuing my Bachelor's in Computer Science at{" "}
-              <span className="text-foreground">Somali National University</span>{" "}
-              with a focus on Data Science, ML, and AI.
+              Currently pursuing my Bachelor's in Computer Science at Somali National
+              University with a focus on Data Science, ML, and AI.
             </p>
           </div>
 
@@ -60,7 +59,7 @@ export default function Home() {
               href="https://github.com/Diini03"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-1.5 text-primary hover:underline transition-colors"
             >
               <Github className="w-4 h-4" />
               <span>GitHub</span>
@@ -70,7 +69,7 @@ export default function Home() {
               href="https://www.linkedin.com/in/diinikahiye/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-1.5 text-primary hover:underline transition-colors"
             >
               <Linkedin className="w-4 h-4" />
               <span>LinkedIn</span>
@@ -78,7 +77,7 @@ export default function Home() {
             <span className="text-muted-foreground/50">||</span>
             <Link
               to="/about"
-              className="flex items-center gap-1.5 text-primary hover:underline"
+              className="flex items-center gap-1.5 text-green-500 hover:underline"
             >
               <span>More about me</span>
               <ExternalLink className="w-3 h-3" />
@@ -90,8 +89,8 @@ export default function Home() {
         </section>
 
         {/* Dashboard Section */}
-        <section className="mb-16">
-          <h2 className="text-lg font-semibold mb-6">
+        <section className="mb-12">
+          <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
             <span className="text-muted-foreground">//</span> Dashboard
           </h2>
 
@@ -105,13 +104,17 @@ export default function Home() {
 
         {/* Featured Projects */}
         <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold">Featured Projects</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-base font-semibold flex items-center gap-2">
+              <Star className="w-4 h-4 text-muted-foreground" />
+              Featured Projects
+            </h2>
             <Link
               to="/projects"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              className="text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
             >
               View all
+              <ExternalLink className="w-3 h-3" />
             </Link>
           </div>
 

@@ -11,7 +11,7 @@ export function ProjectCard({ slug, title, description, tags }: ProjectCardProps
   return (
     <Link
       to={`/projects/${slug}`}
-      className="terminal-card block hover:border-primary/50 transition-colors group"
+      className="terminal-card block hover:ring-1 hover:ring-primary/30 transition-all group"
     >
       <div className="terminal-header">
         <div className="flex items-center gap-1.5">
@@ -19,11 +19,11 @@ export function ProjectCard({ slug, title, description, tags }: ProjectCardProps
           <div className="terminal-dot terminal-dot-yellow" />
           <div className="terminal-dot terminal-dot-green" />
         </div>
+        <span className="text-xs text-muted-foreground ml-2">
+          <span className="text-primary">diini</span> / {slug}
+        </span>
       </div>
       <div className="p-4">
-        <div className="text-xs text-muted-foreground mb-2 font-mono">
-          diini / {slug}
-        </div>
         <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
           {title}
         </h3>

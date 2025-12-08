@@ -17,9 +17,7 @@ export function TerminalCard({ title, children, className = "" }: TerminalCardPr
         </div>
         <span className="text-xs text-muted-foreground ml-2 font-mono">{title}</span>
       </div>
-      <div className="p-4">
-        {children}
-      </div>
+      {children}
     </div>
   );
 }
