@@ -41,8 +41,9 @@ export default function Home() {
 
           <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-6">
             <p>
-              I'm a Junior Data Scientist based in Mogadishu, Somalia. I specialize
-              in transforming raw data into actionable insights using{" "}
+              I'm a Data Scientist & React Developer based in Mogadishu, Somalia. I specialize
+              in transforming complex data into actionable insights and building modern web 
+              applications using{" "}
               <a
                 href="https://python.org/"
                 target="_blank"
@@ -51,11 +52,12 @@ export default function Home() {
               >
                 Python
               </a>
-              , SQL, and Power BI.
+              , SQL, React, and AI tools like Cursor, Lovable & Warp.
             </p>
             <p>
-              Currently pursuing my Bachelor's in Computer Science at Somali National
-              University with a focus on Data Science, ML, and AI.
+              Currently pursuing my Computer Science degree at Somali National
+              University, I've worked on humanitarian data projects, ML models, and 
+              data visualization dashboards.
             </p>
           </div>
 
