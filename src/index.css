@@ -94,8 +94,17 @@
 
 @layer components {
   .terminal-card {
-    @apply rounded-lg overflow-hidden;
+    @apply rounded-lg overflow-hidden transition-all duration-300;
     background-color: hsl(var(--terminal-bg));
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .terminal-card:hover {
+    transform: translateY(-4px) rotateX(2deg);
+    box-shadow: 
+      0 20px 40px -15px hsl(var(--primary) / 0.15),
+      0 10px 20px -10px hsl(0 0% 0% / 0.1);
   }
   
   .terminal-header {
@@ -104,7 +113,11 @@
   }
   
   .terminal-dot {
-    @apply w-3 h-3 rounded-full;
+    @apply w-3 h-3 rounded-full transition-transform duration-200;
+  }
+  
+  .terminal-card:hover .terminal-dot {
+    transform: scale(1.1);
   }
   
   .terminal-dot-red {
@@ -121,6 +134,54 @@
   
   .link-orange {
     @apply text-primary hover:underline cursor-pointer;
+  }
+
+  /* 3D Card Effect */
+  .card-3d {
+    @apply transition-all duration-300;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .card-3d:hover {
+    transform: translateY(-6px) rotateX(3deg) rotateY(-2deg);
+    box-shadow: 
+      0 25px 50px -20px hsl(var(--primary) / 0.2),
+      0 15px 30px -15px hsl(0 0% 0% / 0.15);
+  }
+
+  /* Subtle float animation */
+  .float-subtle {
+    animation: float-subtle 6s ease-in-out infinite;
+  }
+
+  @keyframes float-subtle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  /* Glass morphism effect */
+  .glass-card {
+    @apply backdrop-blur-sm;
+    background: hsl(var(--card) / 0.8);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  /* Depth layers */
+  .depth-layer {
+    @apply relative;
+  }
+  
+  .depth-layer::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg -z-10;
+    background: hsl(var(--primary) / 0.05);
+    transform: translateY(4px) translateX(4px);
+    filter: blur(8px);
   }
 }
 
