@@ -42,9 +42,10 @@ export default function Contact() {
         "service_z1pj8c6",
         "template_qdh1fzp",
         {
-          from_name: formData.name,
-          from_email: formData.email,
+          name: formData.name,
+          email: formData.email,
           message: formData.message,
+          title: formData.name,
         },
         "FcW3haw_bw-57YFsw"
       );
