@@ -6,7 +6,7 @@ import { LanguagesChart } from "@/components/home/LanguagesChart";
 import { ProjectCard } from "@/components/home/ProjectCard";
 import { CompanyBadges } from "@/components/home/CompanyBadges";
 import { TestimonialsCard } from "@/components/home/TestimonialsCard";
-
+import { ParticleBackground } from "@/components/home/ParticleBackground";
 const featuredProjects = [
   {
     slug: "covid-19-analysis",
@@ -27,7 +27,12 @@ const featuredProjects = [
 export default function Home() {
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="max-w-3xl mx-auto px-6 py-16">
+      {/* Particle Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <ParticleBackground />
+      </div>
+      
+      <div className="max-w-3xl mx-auto px-6 py-16 relative z-10">
         {/* Hero Section */}
         <section className="mb-12">
           <h1 className="text-2xl md:text-3xl font-bold mb-6">
