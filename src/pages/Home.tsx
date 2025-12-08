@@ -7,6 +7,7 @@ import { ProjectCard } from "@/components/home/ProjectCard";
 import { CompanyBadges } from "@/components/home/CompanyBadges";
 import { TestimonialsCard } from "@/components/home/TestimonialsCard";
 import { ParticleBackground } from "@/components/home/ParticleBackground";
+import { InteractiveGradient } from "@/components/home/InteractiveGradient";
 const featuredProjects = [
   {
     slug: "covid-19-analysis",
@@ -27,6 +28,9 @@ const featuredProjects = [
 export default function Home() {
   return (
     <div className="min-h-screen animate-fade-in">
+      {/* Interactive Gradient Background */}
+      <InteractiveGradient />
+      
       {/* Particle Background */}
       <div className="absolute inset-0 overflow-hidden">
         <ParticleBackground />
