@@ -3,31 +3,23 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Search, ExternalLink } from "lucide-react";
 
 const allTags = [
-  "all", "powerbi", "dax", "excel", "analytics", "dashboard", 
-  "python", "pandas", "matplotlib", "wordcloud", "eda", "sql", "mysql", "visualization"
+  "all", "python", "pandas", "plotly", "matplotlib", "seaborn", "numpy", "eda", "data-visualization"
 ];
 
 const projects = [
   {
-    slug: "business-analysis",
-    title: "Business Analysis Dashboard",
-    description: "Power BI dashboard to compare employee benefit packages with DAX and Excel transformations.",
-    tags: ["powerbi", "dax", "excel", "analytics", "dashboard"],
-    date: "October 2024",
+    slug: "covid-19-analysis",
+    title: "Covid-19 Analysis and Visualization using Plotly Express",
+    description: "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations including bar charts, scatter plots, and choropleth maps.",
+    tags: ["python", "pandas", "plotly", "matplotlib", "data-visualization"],
+    date: "2024",
   },
   {
-    slug: "job-market-eda",
-    title: "Data Science Job Market EDA",
-    description: "Analyzed 7000+ data science job listings to gain insights on landing analytics jobs.",
-    tags: ["python", "pandas", "matplotlib", "wordcloud", "eda"],
-    date: "April 2024",
-  },
-  {
-    slug: "customer-sales",
-    title: "Customer Sales Analysis",
-    description: "SQL-based analysis extracting insights from customer sales databases using complex queries.",
-    tags: ["sql", "python", "mysql", "analytics", "visualization"],
-    date: "November 2024",
+    slug: "netflix-data-analysis",
+    title: "Netflix Data Analysis & Visualization",
+    description: "Comprehensive analysis of 8807 Netflix titles exploring content distribution, trends over time, and country-based insights using Python visualization libraries.",
+    tags: ["python", "pandas", "seaborn", "matplotlib", "numpy", "eda"],
+    date: "2024",
   },
 ];
 

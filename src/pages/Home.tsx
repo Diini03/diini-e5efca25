@@ -8,18 +8,18 @@ import { CompanyBadges } from "@/components/home/CompanyBadges";
 
 const featuredProjects = [
   {
-    slug: "business-analysis",
-    title: "Business Analysis Dashboard",
+    slug: "covid-19-analysis",
+    title: "Covid-19 Analysis and Visualization",
     description:
-      "Power BI dashboard to compare employee benefit packages with DAX and Excel transformations.",
-    tags: ["powerbi", "dax", "excel", "analytics"],
+      "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations.",
+    tags: ["python", "pandas", "plotly"],
   },
   {
-    slug: "job-market-eda",
-    title: "Data Science Job Market EDA",
+    slug: "netflix-data-analysis",
+    title: "Netflix Data Analysis & Visualization",
     description:
-      "Analyzed 7000+ data science job listings to gain insights on landing analytics jobs.",
-    tags: ["python", "pandas", "matplotlib", "wordcloud"],
+      "Comprehensive analysis of 8807 Netflix titles exploring content distribution and trends.",
+    tags: ["python", "pandas", "seaborn", "matplotlib"],
   },
 ];
 
