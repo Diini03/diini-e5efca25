@@ -108,10 +108,15 @@ export default function About() {
         </div>
 
         {/* Download CV Button */}
-        <button className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded text-sm text-foreground hover:bg-secondary transition-colors mb-12">
+        <a 
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded text-sm text-foreground hover:bg-secondary transition-colors mb-12"
+        >
           <Download className="w-4 h-4" />
           Download CV
-        </button>
+        </a>
 
         {/* Experience & Education */}
         <section className="mb-12">
