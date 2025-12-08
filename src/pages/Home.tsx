@@ -27,14 +27,12 @@ const featuredProjects = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen animate-fade-in">
+    <div className="min-h-screen animate-fade-in relative">
       {/* Interactive Gradient Background */}
       <InteractiveGradient />
       
-      {/* Particle Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <ParticleBackground />
-      </div>
+      {/* Particle Background - Full Page */}
+      <ParticleBackground />
       
       <div className="max-w-3xl mx-auto px-6 py-16 relative z-10">
         {/* Hero Section */}

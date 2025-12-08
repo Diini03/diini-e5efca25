@@ -35,13 +35,14 @@ export function InteractiveGradient() {
     ? {
         background: `
           radial-gradient(
-            600px circle at ${mousePosition.x}% ${mousePosition.y}%,
-            hsla(24, 95%, 53%, 0.08) 0%,
-            transparent 50%
+            800px circle at ${mousePosition.x}% ${mousePosition.y}%,
+            hsla(24, 95%, 53%, 0.15) 0%,
+            hsla(24, 95%, 53%, 0.05) 30%,
+            transparent 60%
           ),
           radial-gradient(
-            400px circle at ${mousePosition.x + 10}% ${mousePosition.y - 10}%,
-            hsla(220, 60%, 50%, 0.05) 0%,
+            500px circle at ${100 - mousePosition.x}% ${100 - mousePosition.y}%,
+            hsla(220, 70%, 50%, 0.08) 0%,
             transparent 50%
           )
         `,
@@ -49,13 +50,14 @@ export function InteractiveGradient() {
     : {
         background: `
           radial-gradient(
-            600px circle at ${mousePosition.x}% ${mousePosition.y}%,
-            hsla(24, 95%, 53%, 0.06) 0%,
-            transparent 50%
+            800px circle at ${mousePosition.x}% ${mousePosition.y}%,
+            hsla(24, 95%, 53%, 0.1) 0%,
+            hsla(24, 95%, 53%, 0.03) 30%,
+            transparent 60%
           ),
           radial-gradient(
-            400px circle at ${mousePosition.x + 10}% ${mousePosition.y - 10}%,
-            hsla(220, 60%, 60%, 0.04) 0%,
+            500px circle at ${100 - mousePosition.x}% ${100 - mousePosition.y}%,
+            hsla(220, 70%, 60%, 0.06) 0%,
             transparent 50%
           )
         `,
@@ -63,7 +65,7 @@ export function InteractiveGradient() {
 
   return (
     <div
-      className="fixed inset-0 pointer-events-none z-0 transition-all duration-300 ease-out"
+      className="fixed inset-0 pointer-events-none z-0 transition-all duration-200 ease-out"
       style={gradientStyle}
     />
   );
