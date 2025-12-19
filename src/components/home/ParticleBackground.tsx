@@ -48,17 +48,18 @@ export function ParticleBackground() {
 
     const createParticles = () => {
       const particles: Particle[] = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 12000); // More particles
+      // Softer, less distracting density for readability
+      const particleCount = Math.floor((canvas.width * canvas.height) / 22000);
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 3 + 1.2, // Larger particles
-          speedX: (Math.random() - 0.5) * 0.4,
-          speedY: (Math.random() - 0.5) * 0.4,
-          opacity: Math.random() * 0.7 + 0.4, // Much more visible
-          isAccent: Math.random() < 0.25, // 25% orange particles
+          size: Math.random() * 2 + 0.8,
+          speedX: (Math.random() - 0.5) * 0.25,
+          speedY: (Math.random() - 0.5) * 0.25,
+          opacity: Math.random() * 0.25 + 0.12,
+          isAccent: Math.random() < 0.15,
           pulse: Math.random() * Math.PI * 2,
           pulseSpeed: Math.random() * 0.02 + 0.01,
         });
@@ -134,7 +135,7 @@ export function ParticleBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.85 }}
+      style={{ opacity: 0.35 }}
     />
   );
 }
