@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import emailjs from "@emailjs/browser";
+import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -38,17 +38,21 @@ export default function Contact() {
     setIsSubmitting(true);
     
     try {
-      await emailjs.send(
-        "service_z1pj8c6",
-        "template_qdh1fzp",
-        {
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          title: formData.name,
         },
-        "FcW3haw_bw-57YFsw"
-      );
+      });
+
+      if (error) {
+        throw new Error(error.message || "Failed to send message");
+      }
+
+      if (data?.error) {
+        throw new Error(data.error);
+      }
       
       toast({
         title: "Message sent!",
@@ -56,10 +60,10 @@ export default function Contact() {
       });
       
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again later.",
+        description: error.message || "Failed to send message. Please try again later.",
         variant: "destructive",
       });
     } finally {
