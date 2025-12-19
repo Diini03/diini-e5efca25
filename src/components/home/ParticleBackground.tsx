@@ -43,7 +43,7 @@ export function ParticleBackground() {
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = document.body.scrollHeight || window.innerHeight;
+      canvas.height = window.innerHeight;
     };
 
     const createParticles = () => {
@@ -122,15 +122,11 @@ export function ParticleBackground() {
 
     window.addEventListener("resize", handleResize);
 
-    // Re-check height periodically for dynamic content
-    const heightInterval = setInterval(resizeCanvas, 2000);
-
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
       window.removeEventListener("resize", handleResize);
-      clearInterval(heightInterval);
     };
   }, [isDark]);
 
