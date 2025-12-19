@@ -44,9 +44,8 @@ export default function Home() {
 
           <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-6">
             <p>
-              I'm a Data Scientist & React Developer based in Mogadishu, Somalia. I specialize
-              in transforming complex data into actionable insights and building modern web 
-              applications using{" "}
+              I'm a <span className="text-foreground font-medium">Data Analyst</span> based in Mogadishu, Somalia, 
+              aspiring to become a Data Scientist. I transform raw data into actionable insights using{" "}
               <a
                 href="https://python.org/"
                 target="_blank"
@@ -55,12 +54,24 @@ export default function Home() {
               >
                 Python
               </a>
-              , SQL, React, and AI tools like Cursor, Lovable & Warp.
+              , SQL, Power BI, and Excel.
             </p>
             <p>
-              Currently pursuing my Computer Science degree at Somali National
-              University, I've worked on humanitarian data projects, ML models, and 
-              data visualization dashboards.
+              I also build web applications using AI tools like Cursor, Lovable, and Warp. 
+              I created{" "}
+              <a
+                href="https://kulmid.lovable.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-orange"
+              >
+                Kulmid
+              </a>
+              {" "}— a full event management system similar to Luma.
+            </p>
+            <p>
+              Currently pursuing my Computer Science degree at Somali National University, 
+              with experience in humanitarian data collection at NAPAD and MEDAIR.
             </p>
           </div>
 

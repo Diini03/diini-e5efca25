@@ -16,11 +16,11 @@ export function Footer() {
             </div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <MapPin className="w-3 h-3" />
-              <span>Seoul, South Korea</span>
+              <span>Mogadishu, Somalia</span>
             </div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <Mail className="w-3 h-3" />
-              <span>diinikahiye5@gmail.com</span>
+              <span>diiniyare74@gmail.com</span>
             </div>
           </div>
 
