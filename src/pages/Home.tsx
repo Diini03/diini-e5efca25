@@ -28,7 +28,7 @@ const featuredProjects = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen animate-fade-in relative">
+    <div className="animate-fade-in relative">
       {/* Interactive Gradient Background */}
       <InteractiveGradient />
       
