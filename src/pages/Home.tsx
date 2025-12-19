@@ -35,7 +35,7 @@ export default function Home() {
       {/* Particle Background - Full Page */}
       <ParticleBackground />
       
-      <div className="max-w-3xl mx-auto px-6 py-12 relative z-10 rounded-2xl bg-background/70 backdrop-blur-md border border-border/40 shadow-sm">
+      <div className="max-w-3xl mx-auto px-6 py-12 relative z-10">
         {/* Hero Section */}
         <section className="mb-10">
           <h1 className="text-2xl md:text-3xl font-bold mb-6">
