@@ -103,9 +103,12 @@ export default function Contact() {
             <div className="space-y-4 mb-10">
               {/* Email */}
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center">
+                <a
+                  href="mailto:diiniyare74@gmail.com"
+                  className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center hover:bg-primary/20 transition-colors"
+                >
                   <Mail className="w-5 h-5 text-primary" />
-                </div>
+                </a>
                 <div>
                   <div className="text-xs text-muted-foreground">Email</div>
                   <a
@@ -117,15 +120,22 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Phone */}
+              {/* Phone - WhatsApp */}
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center">
+                <a
+                  href="https://wa.me/252612039107"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center hover:bg-primary/20 transition-colors"
+                >
                   <Phone className="w-5 h-5 text-primary" />
-                </div>
+                </a>
                 <div>
-                  <div className="text-xs text-muted-foreground">Phone</div>
+                  <div className="text-xs text-muted-foreground">WhatsApp</div>
                   <a
-                    href="tel:+252612039107"
+                    href="https://wa.me/252612039107"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-sm text-foreground hover:text-primary transition-colors"
                   >
                     +252 612 039 107
