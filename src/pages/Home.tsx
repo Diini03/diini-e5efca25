@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { Github, Linkedin, ExternalLink, Star } from "lucide-react";
 import { DashboardCard } from "@/components/home/DashboardCard";
 import { SkillsCard } from "@/components/home/SkillsCard";
-import { LanguagesChart } from "@/components/home/LanguagesChart";
+import { QuickStatsCard } from "@/components/home/QuickStatsCard";
 import { ProjectCard } from "@/components/home/ProjectCard";
 import { CompanyBadges } from "@/components/home/CompanyBadges";
 import { TestimonialsCard } from "@/components/home/TestimonialsCard";
 import { ParticleBackground } from "@/components/home/ParticleBackground";
 import { InteractiveGradient } from "@/components/home/InteractiveGradient";
+
 const featuredProjects = [
   {
     slug: "covid-19-analysis",
@@ -34,9 +35,9 @@ export default function Home() {
       {/* Particle Background - Full Page */}
       <ParticleBackground />
       
-      <div className="max-w-3xl mx-auto px-6 py-16 relative z-10">
+      <div className="max-w-3xl mx-auto px-6 py-12 relative z-10">
         {/* Hero Section */}
-        <section className="mb-12">
+        <section className="mb-10">
           <h1 className="text-2xl md:text-3xl font-bold mb-6">
             Hey! I'm <span className="text-primary inline-block hover:scale-105 transition-transform duration-300" style={{ textShadow: '0 4px 20px hsl(24 95% 53% / 0.3)' }}>Diini Kahiye</span>
           </h1>
@@ -99,7 +100,7 @@ export default function Home() {
         </section>
 
         {/* Dashboard Section */}
-        <section className="mb-12">
+        <section className="mb-10">
           <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
             <span className="text-muted-foreground">//</span> Dashboard
           </h2>
@@ -109,11 +110,11 @@ export default function Home() {
             <SkillsCard />
           </div>
 
-          <LanguagesChart />
+          <QuickStatsCard />
         </section>
 
         {/* Featured Projects */}
-        <section>
+        <section className="mb-10">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-semibold flex items-center gap-2">
               <Star className="w-4 h-4 text-muted-foreground" />
@@ -136,7 +137,7 @@ export default function Home() {
         </section>
 
         {/* Testimonials */}
-        <section className="mt-12">
+        <section className="mb-6">
           <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
             <span className="text-muted-foreground">//</span> Testimonials
           </h2>

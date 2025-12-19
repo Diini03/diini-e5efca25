@@ -9,7 +9,13 @@ export function DashboardCard() {
     }
     return true;
   });
-  const [clicks, setClicks] = useState(0);
+  const [sessionClicks, setSessionClicks] = useState(0);
+  const [totalClicks, setTotalClicks] = useState(() => {
+    if (typeof window !== "undefined") {
+      return parseInt(localStorage.getItem("totalClicks") || "0", 10);
+    }
+    return 0;
+  });
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [pageViews] = useState(450);
 
@@ -42,6 +48,13 @@ export function DashboardCard() {
     }
   };
 
+  const handleClick = () => {
+    setSessionClicks((c) => c + 1);
+    const newTotal = totalClicks + 1;
+    setTotalClicks(newTotal);
+    localStorage.setItem("totalClicks", newTotal.toString());
+  };
+
   const formatElapsedTime = (totalSeconds: number) => {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -69,11 +82,14 @@ export function DashboardCard() {
 
         {/* Click Counter */}
         <button
-          onClick={() => setClicks((c) => c + 1)}
+          onClick={handleClick}
           className="flex flex-col items-center justify-center p-6 bg-card hover:bg-secondary/50 transition-colors"
         >
           <MousePointer className="w-6 h-6 text-primary mb-2" />
-          <span className="text-xs text-muted-foreground">{clicks} clicks</span>
+          <div className="flex flex-col items-center">
+            <span className="text-xs text-muted-foreground">{totalClicks.toLocaleString()} total</span>
+            <span className="text-[10px] text-muted-foreground/70">You: {sessionClicks}</span>
+          </div>
         </button>
 
         {/* Location */}
