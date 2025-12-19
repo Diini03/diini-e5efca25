@@ -61,7 +61,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_site_views: {
+        Args: never
+        Returns: {
+          total_clicks: number
+          total_views: number
+        }[]
+      }
+      increment_total_clicks: { Args: never; Returns: number }
+      increment_visitor_clicks: {
+        Args: { p_visitor_id: string }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never

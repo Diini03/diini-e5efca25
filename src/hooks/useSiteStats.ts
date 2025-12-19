@@ -34,28 +34,15 @@ export function useSiteStats() {
   useEffect(() => {
     const initializeStats = async () => {
       try {
-        // Increment total views
-        const { data: currentStats } = await supabase
-          .from("site_stats")
-          .select("total_views, total_clicks")
-          .eq("id", 1)
-          .maybeSingle();
+        // Atomically increment views and get updated stats
+        const { data: viewData, error: viewError } = await supabase
+          .rpc("increment_site_views");
 
-        if (currentStats) {
-          await supabase
-            .from("site_stats")
-            .update({ total_views: currentStats.total_views + 1 })
-            .eq("id", 1);
+        if (viewError) {
+          console.error("Error incrementing views:", viewError);
         }
 
-        // Fetch updated stats
-        const { data: updatedStats } = await supabase
-          .from("site_stats")
-          .select("total_views, total_clicks")
-          .eq("id", 1)
-          .maybeSingle();
-
-        // Fetch or create visitor clicks
+        // Get or create visitor clicks record
         let { data: visitorData } = await supabase
           .from("visitor_clicks")
           .select("click_count")
@@ -63,15 +50,19 @@ export function useSiteStats() {
           .maybeSingle();
 
         if (!visitorData) {
-          await supabase
+          const { data: newVisitor } = await supabase
             .from("visitor_clicks")
-            .insert({ visitor_id: visitorId, click_count: 0 });
-          visitorData = { click_count: 0 };
+            .insert({ visitor_id: visitorId, click_count: 0 })
+            .select("click_count")
+            .single();
+          visitorData = newVisitor;
         }
 
+        const statsRow = Array.isArray(viewData) ? viewData[0] : viewData;
+        
         setStats({
-          totalViews: updatedStats?.total_views ?? 0,
-          totalClicks: updatedStats?.total_clicks ?? 0,
+          totalViews: statsRow?.total_views ?? 0,
+          totalClicks: statsRow?.total_clicks ?? 0,
           visitorClicks: visitorData?.click_count ?? 0,
           sessionClicks: 0,
         });
@@ -86,49 +77,37 @@ export function useSiteStats() {
   }, [visitorId]);
 
   const incrementClick = useCallback(async () => {
+    // Optimistic update for session clicks only
+    setStats((prev) => ({
+      ...prev,
+      sessionClicks: prev.sessionClicks + 1,
+    }));
+
     try {
-      // Optimistic update
+      // Atomically increment total clicks and visitor clicks in parallel
+      const [totalResult, visitorResult] = await Promise.all([
+        supabase.rpc("increment_total_clicks"),
+        supabase.rpc("increment_visitor_clicks", { p_visitor_id: visitorId }),
+      ]);
+
+      if (totalResult.error) {
+        console.error("Error incrementing total clicks:", totalResult.error);
+      }
+      if (visitorResult.error) {
+        console.error("Error incrementing visitor clicks:", visitorResult.error);
+      }
+
+      // Update state with actual database values
       setStats((prev) => ({
         ...prev,
-        totalClicks: prev.totalClicks + 1,
-        visitorClicks: prev.visitorClicks + 1,
-        sessionClicks: prev.sessionClicks + 1,
+        totalClicks: totalResult.data ?? prev.totalClicks + 1,
+        visitorClicks: visitorResult.data ?? prev.visitorClicks + 1,
       }));
-
-      // Update total clicks in site_stats
-      const { data: currentStats } = await supabase
-        .from("site_stats")
-        .select("total_clicks")
-        .eq("id", 1)
-        .maybeSingle();
-
-      if (currentStats) {
-        await supabase
-          .from("site_stats")
-          .update({ total_clicks: currentStats.total_clicks + 1 })
-          .eq("id", 1);
-      }
-
-      // Update visitor clicks
-      const { data: visitorData } = await supabase
-        .from("visitor_clicks")
-        .select("click_count")
-        .eq("visitor_id", visitorId)
-        .maybeSingle();
-
-      if (visitorData) {
-        await supabase
-          .from("visitor_clicks")
-          .update({ click_count: visitorData.click_count + 1 })
-          .eq("visitor_id", visitorId);
-      }
     } catch (error) {
       console.error("Error incrementing click:", error);
-      // Rollback on error
+      // Rollback session clicks on error
       setStats((prev) => ({
         ...prev,
-        totalClicks: prev.totalClicks - 1,
-        visitorClicks: prev.visitorClicks - 1,
         sessionClicks: prev.sessionClicks - 1,
       }));
     }
