@@ -44,21 +44,9 @@ export default function Home() {
 
           <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-6">
             <p>
-              I'm a <span className="text-foreground font-medium">Data Analyst</span> based in Mogadishu, Somalia, 
-              aspiring to become a Data Scientist. I transform raw data into actionable insights using{" "}
-              <a
-                href="https://python.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link-orange"
-              >
-                Python
-              </a>
-              , SQL, Power BI, and Excel.
-            </p>
-            <p>
-              I also build web applications using AI tools like Cursor, Lovable, and Warp. 
-              I created{" "}
+              I am a <span className="text-foreground font-medium">Data Analyst</span> based in Mogadishu, 
+              working with Python, SQL, Power BI, and Excel to turn data into insights that people can actually use. 
+              My work spans real projects, humanitarian initiatives, and business-focused analysis. I also built{" "}
               <a
                 href="https://kulmid.lovable.app"
                 target="_blank"
@@ -67,11 +55,13 @@ export default function Home() {
               >
                 Kulmid
               </a>
-              {" "}— a full event management system similar to Luma.
+              , an event management platform designed to support organized and seamless event experiences.
             </p>
             <p>
-              Currently pursuing my Computer Science degree at Somali National University, 
-              with experience in humanitarian data collection at NAPAD and MEDAIR.
+              I am currently studying Computer Science at Somali National University and have gained practical 
+              field experience with NAPAD and MEDAIR. Along the way, I have strengthened my skills through programs 
+              such as freeCodeCamp's Data Analysis with Python and the Alex the Analyst Bootcamp, and I am continually 
+              pushing myself toward a full Data Science career.
             </p>
           </div>
 
