@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      site_stats: {
+        Row: {
+          id: number
+          total_clicks: number
+          total_views: number
+        }
+        Insert: {
+          id?: number
+          total_clicks?: number
+          total_views?: number
+        }
+        Update: {
+          id?: number
+          total_clicks?: number
+          total_views?: number
+        }
+        Relationships: []
+      }
+      visitor_clicks: {
+        Row: {
+          click_count: number
+          created_at: string
+          id: string
+          updated_at: string
+          visitor_id: string
+        }
+        Insert: {
+          click_count?: number
+          created_at?: string
+          id?: string
+          updated_at?: string
+          visitor_id: string
+        }
+        Update: {
+          click_count?: number
+          created_at?: string
+          id?: string
+          updated_at?: string
+          visitor_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
