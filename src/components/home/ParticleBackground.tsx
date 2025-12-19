@@ -48,17 +48,17 @@ export function ParticleBackground() {
 
     const createParticles = () => {
       const particles: Particle[] = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 15000); // Density based on area
+      const particleCount = Math.floor((canvas.width * canvas.height) / 12000); // More particles
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 2.5 + 0.8, // Slightly larger
+          size: Math.random() * 3 + 1.2, // Larger particles
           speedX: (Math.random() - 0.5) * 0.4,
           speedY: (Math.random() - 0.5) * 0.4,
-          opacity: Math.random() * 0.5 + 0.2, // More visible
-          isAccent: Math.random() < 0.2, // 20% orange particles
+          opacity: Math.random() * 0.7 + 0.4, // Much more visible
+          isAccent: Math.random() < 0.25, // 25% orange particles
           pulse: Math.random() * Math.PI * 2,
           pulseSpeed: Math.random() * 0.02 + 0.01,
         });
@@ -92,15 +92,15 @@ export function ParticleBackground() {
           // Orange accent particles - more visible
           ctx.fillStyle = `hsla(24, 95%, 53%, ${pulseOpacity})`;
           // Add glow effect for orange particles
-          ctx.shadowColor = "hsla(24, 95%, 53%, 0.5)";
-          ctx.shadowBlur = 8;
+          ctx.shadowColor = "hsla(24, 95%, 53%, 0.6)";
+          ctx.shadowBlur = 12;
         } else {
           ctx.shadowBlur = 0;
-          // Theme-aware neutral particles
+          // Theme-aware neutral particles - much more visible
           if (isDark) {
-            ctx.fillStyle = `hsla(220, 40%, 65%, ${pulseOpacity * 0.6})`;
+            ctx.fillStyle = `hsla(220, 50%, 70%, ${pulseOpacity * 0.8})`;
           } else {
-            ctx.fillStyle = `hsla(220, 30%, 35%, ${pulseOpacity * 0.4})`;
+            ctx.fillStyle = `hsla(220, 40%, 30%, ${pulseOpacity * 0.6})`;
           }
         }
         
@@ -138,7 +138,7 @@ export function ParticleBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.7 }}
+      style={{ opacity: 0.85 }}
     />
   );
 }
