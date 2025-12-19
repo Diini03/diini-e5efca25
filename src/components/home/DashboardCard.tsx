@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Sun, Moon, MousePointer, MapPin, Clock, Eye } from "lucide-react";
 import { TerminalCard } from "./TerminalCard";
+import { useSiteStats } from "@/hooks/useSiteStats";
 
 export function DashboardCard() {
   const [isDark, setIsDark] = useState(() => {
@@ -9,15 +10,8 @@ export function DashboardCard() {
     }
     return true;
   });
-  const [sessionClicks, setSessionClicks] = useState(0);
-  const [totalClicks, setTotalClicks] = useState(() => {
-    if (typeof window !== "undefined") {
-      return parseInt(localStorage.getItem("totalClicks") || "0", 10);
-    }
-    return 0;
-  });
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
-  const [pageViews] = useState(450);
+  const { stats, isLoading, incrementClick } = useSiteStats();
 
   // Timer that counts time spent on site (resets on each visit)
   useEffect(() => {
@@ -48,13 +42,6 @@ export function DashboardCard() {
     }
   };
 
-  const handleClick = () => {
-    setSessionClicks((c) => c + 1);
-    const newTotal = totalClicks + 1;
-    setTotalClicks(newTotal);
-    localStorage.setItem("totalClicks", newTotal.toString());
-  };
-
   const formatElapsedTime = (totalSeconds: number) => {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -82,13 +69,17 @@ export function DashboardCard() {
 
         {/* Click Counter */}
         <button
-          onClick={handleClick}
+          onClick={incrementClick}
           className="flex flex-col items-center justify-center p-6 bg-card hover:bg-secondary/50 transition-colors"
         >
           <MousePointer className="w-6 h-6 text-primary mb-2" />
           <div className="flex flex-col items-center">
-            <span className="text-xs text-muted-foreground">{totalClicks.toLocaleString()} total</span>
-            <span className="text-[10px] text-muted-foreground/70">You: {sessionClicks}</span>
+            <span className="text-xs text-muted-foreground">
+              {isLoading ? "..." : stats.totalClicks.toLocaleString()} total
+            </span>
+            <span className="text-[10px] text-muted-foreground/70">
+              You: {stats.visitorClicks} ({stats.sessionClicks} this session)
+            </span>
           </div>
         </button>
 
@@ -113,7 +104,7 @@ export function DashboardCard() {
       {/* Page Views */}
       <div className="flex items-center justify-center gap-2 text-muted-foreground text-xs py-4 bg-card">
         <Eye className="w-4 h-4" />
-        <span>{pageViews} page views</span>
+        <span>{isLoading ? "..." : stats.totalViews.toLocaleString()} page views</span>
       </div>
     </TerminalCard>
   );
