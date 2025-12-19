@@ -44,9 +44,9 @@ export default function Home() {
 
           <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-6">
             <p>
-              I am a <span className="text-foreground font-medium">Data Analyst</span> based in Mogadishu, 
-              working with Python, SQL, Power BI, and Excel to turn data into insights that people can actually use. 
-              My work spans real projects, humanitarian initiatives, and business-focused analysis. I also built{" "}
+              I am a <span className="text-foreground font-medium">Data Analyst</span> based in <span className="text-foreground font-medium">Mogadishu</span>, 
+              working with <span className="text-foreground font-medium">Python, SQL, Power BI, and Excel</span> to turn data into insights that people can actually use. 
+              My work spans real projects, <span className="text-foreground font-medium">humanitarian initiatives</span>, and business-focused analysis. I also built{" "}
               <a
                 href="https://kulmid.lovable.app"
                 target="_blank"
@@ -58,10 +58,10 @@ export default function Home() {
               , an event management platform designed to support organized and seamless event experiences.
             </p>
             <p>
-              I am currently studying Computer Science at Somali National University and have gained practical 
-              field experience with NAPAD and MEDAIR. Along the way, I have strengthened my skills through programs 
-              such as freeCodeCamp's Data Analysis with Python and the Alex the Analyst Bootcamp, and I am continually 
-              pushing myself toward a full Data Science career.
+              I am currently studying <span className="text-foreground font-medium">Computer Science</span> at <span className="text-foreground font-medium">Somali National University</span> and have gained practical 
+              field experience with <span className="text-foreground font-medium">NAPAD</span> and <span className="text-foreground font-medium">MEDAIR</span>. Along the way, I have strengthened my skills through programs 
+              such as <span className="text-foreground font-medium">freeCodeCamp's Data Analysis with Python</span> and the <span className="text-foreground font-medium">Alex the Analyst Bootcamp</span>, and I am continually 
+              pushing myself toward a <span className="text-primary font-semibold">full Data Science career</span>.
             </p>
           </div>
 
