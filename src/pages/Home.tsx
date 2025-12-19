@@ -4,7 +4,7 @@ import { DashboardCard } from "@/components/home/DashboardCard";
 import { SkillsCard } from "@/components/home/SkillsCard";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
 import { ProjectCard } from "@/components/home/ProjectCard";
-import { CompanyBadges } from "@/components/home/CompanyBadges";
+
 import { TestimonialsCard } from "@/components/home/TestimonialsCard";
 import { ParticleBackground } from "@/components/home/ParticleBackground";
 import { InteractiveGradient } from "@/components/home/InteractiveGradient";
@@ -94,9 +94,6 @@ export default function Home() {
               <ExternalLink className="w-3 h-3" />
             </Link>
           </div>
-
-          {/* Company Badges */}
-          <CompanyBadges />
         </section>
 
         {/* Dashboard Section */}
@@ -137,7 +134,7 @@ export default function Home() {
         </section>
 
         {/* Testimonials */}
-        <section className="mb-6">
+        <section>
           <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
             <span className="text-muted-foreground">//</span> Testimonials
           </h2>
