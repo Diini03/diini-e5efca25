@@ -18,16 +18,6 @@ const categories = [
 
 const projects = [
   {
-    slug: "kulmid",
-    title: "Kulmid - Event Management Platform",
-    description: "A full-featured event management web application where users can create, manage, and share events. Features include event registration, attendee management, invitation system, and ticket handling. Built with React, TypeScript, and Supabase.",
-    tags: ["react", "typescript", "supabase", "tailwindcss"],
-    category: "web-development",
-    date: "2025",
-    image: kulmidImg,
-    liveUrl: "https://kulmid.lovable.app/",
-  },
-  {
     slug: "covid-19-analysis",
     title: "Covid-19 Analysis and Visualization using Plotly Express",
     description: "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations including bar charts, scatter plots, and choropleth maps.",
@@ -42,6 +32,16 @@ const projects = [
     tags: ["python", "pandas", "seaborn", "matplotlib", "numpy", "eda"],
     category: "data-analysis",
     date: "2024",
+  },
+  {
+    slug: "kulmid",
+    title: "Kulmid - Event Management Platform",
+    description: "A full-featured event management web application where users can create, manage, and share events. Features include event registration, attendee management, invitation system, and ticket handling. Built with React, TypeScript, and Supabase.",
+    tags: ["react", "typescript", "supabase", "tailwindcss"],
+    category: "web-development",
+    date: "2025",
+    image: kulmidImg,
+    liveUrl: "https://kulmid.lovable.app/",
   },
 ];
 
