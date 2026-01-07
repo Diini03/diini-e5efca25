@@ -100,8 +100,8 @@ export default function Blog() {
   const otherPosts = filteredPosts.slice(1);
 
   return (
-    <div className="min-h-screen animate-fade-in">
-      <div className="max-w-5xl mx-auto px-6 py-12">
+    <div className="min-h-screen animate-fade-in overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 overflow-hidden">
         {/* Back Link */}
         <Link
           to="/"
@@ -150,8 +150,8 @@ export default function Blog() {
 
         {/* Featured Post */}
         {featuredPost && (
-          <div className="mb-12">
-            <div className="terminal-card overflow-hidden group hover:ring-2 hover:ring-primary/30 transition-all duration-300">
+          <Link to={`/blog/${featuredPost.slug}`} className="block mb-12 group">
+            <div className="terminal-card overflow-hidden hover:ring-2 hover:ring-primary/30 transition-all duration-300 cursor-pointer">
               <div className="grid md:grid-cols-2 gap-0">
                 {/* Image */}
                 <div className="relative overflow-hidden aspect-[4/3] md:aspect-auto">
@@ -168,7 +168,7 @@ export default function Blog() {
                 
                 {/* Content */}
                 <div className="p-6 md:p-8 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4 text-xs text-muted-foreground">
+                  <div className="flex flex-wrap items-center gap-3 mb-4 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3.5 h-3.5" />
                       {new Date(featuredPost.date).toLocaleDateString("en-US", {
@@ -206,110 +206,111 @@ export default function Blog() {
                   </div>
                   
                   <div className="flex flex-wrap gap-3">
-                    <Link
-                      to={`/blog/${featuredPost.slug}`}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors"
-                    >
+                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg group-hover:bg-primary/90 transition-colors">
                       Read Article
                       <ArrowRight className="w-4 h-4" />
-                    </Link>
-                    <a
-                      href={featuredPost.linkedinUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A66C2] text-white text-sm font-medium rounded-lg hover:bg-[#0A66C2]/90 transition-colors"
+                    </span>
+                    <span
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.open(featuredPost.linkedinUrl, '_blank');
+                      }}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A66C2] text-white text-sm font-medium rounded-lg hover:bg-[#0A66C2]/90 transition-colors cursor-pointer"
                     >
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                       </svg>
                       View on LinkedIn
-                    </a>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         )}
-
-        {/* Other Posts Grid */}
         {otherPosts.length > 0 && (
           <div className="grid md:grid-cols-2 gap-6">
             {otherPosts.map((post, index) => (
-              <div
+              <Link
                 key={post.slug}
-                className="terminal-card overflow-hidden group hover:ring-2 hover:ring-primary/30 transition-all duration-300 animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
+                to={`/blog/${post.slug}`}
+                className="block group"
               >
-                {/* Image */}
-                <div className="relative overflow-hidden aspect-[16/10]">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-                </div>
-                
-                {/* Content */}
-                <div className="p-5">
-                  <div className="flex items-center gap-3 mb-3 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
-                      {post.readTime}
-                    </span>
-                    <span className="px-2 py-0.5 bg-secondary rounded capitalize">
-                      {post.category.replace("-", " ")}
-                    </span>
+                <div
+                  className="terminal-card overflow-hidden hover:ring-2 hover:ring-primary/30 transition-all duration-300 animate-fade-in cursor-pointer h-full"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {/* Image */}
+                  <div className="relative overflow-hidden aspect-[16/10]">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
                   </div>
                   
-                  <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors mb-2 line-clamp-2">
-                    {post.title}
-                  </h3>
-                  
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                    {post.excerpt}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {post.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-0.5 text-xs bg-secondary/50 text-muted-foreground rounded"
-                      >
-                        {tag}
+                  {/* Content */}
+                  <div className="p-5">
+                    <div className="flex flex-wrap items-center gap-3 mb-3 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5" />
+                        {new Date(post.date).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                        })}
                       </span>
-                    ))}
-                  </div>
-                  
-                  <div className="flex items-center gap-2">
-                    <Link
-                      to={`/blog/${post.slug}`}
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-secondary text-foreground text-sm font-medium rounded-lg hover:bg-secondary/80 transition-colors"
-                    >
-                      Read Article
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                    <a
-                      href={post.linkedinUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center w-10 h-10 bg-[#0A66C2] text-white rounded-lg hover:bg-[#0A66C2]/90 transition-colors"
-                      title="View on LinkedIn"
-                    >
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                      </svg>
-                    </a>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5" />
+                        {post.readTime}
+                      </span>
+                      <span className="px-2 py-0.5 bg-secondary rounded capitalize">
+                        {post.category.replace("-", " ")}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors mb-2 line-clamp-2">
+                      {post.title}
+                    </h3>
+                    
+                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {post.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 text-xs bg-secondary/50 text-muted-foreground rounded"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="flex items-center gap-2">
+                      <span className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-secondary text-foreground text-sm font-medium rounded-lg group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                        Read Article
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                      <span
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          window.open(post.linkedinUrl, '_blank');
+                        }}
+                        className="inline-flex items-center justify-center w-10 h-10 bg-[#0A66C2] text-white rounded-lg hover:bg-[#0A66C2]/90 transition-colors cursor-pointer"
+                        title="View on LinkedIn"
+                      >
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}
