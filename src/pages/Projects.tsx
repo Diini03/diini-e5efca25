@@ -2,17 +2,31 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Search, ExternalLink } from "lucide-react";
 
+// Import project images
+import kulmidImg from "@/assets/projects/kulmid.png";
+
 const allTags = [
-  "all", "python", "pandas", "plotly", "matplotlib", "seaborn", "numpy", "eda", "data-visualization"
+  "all", "react", "typescript", "supabase", "python", "pandas", "plotly", "matplotlib", "seaborn", "numpy", "eda", "data-visualization"
 ];
 
 const categories = [
-  { id: "all", label: "All", count: 2 },
+  { id: "all", label: "All", count: 3 },
+  { id: "web-development", label: "Web Development", count: 1 },
   { id: "data-analysis", label: "Data Analysis", count: 2 },
   { id: "visualization", label: "Visualization", count: 2 },
 ];
 
 const projects = [
+  {
+    slug: "kulmid",
+    title: "Kulmid - Event Management Platform",
+    description: "A full-featured event management web application where users can create, manage, and share events. Features include event registration, attendee management, invitation system, and ticket handling. Built with React, TypeScript, and Supabase.",
+    tags: ["react", "typescript", "supabase", "tailwindcss"],
+    category: "web-development",
+    date: "2025",
+    image: kulmidImg,
+    liveUrl: "https://kulmid.lovable.app/",
+  },
   {
     slug: "covid-19-analysis",
     title: "Covid-19 Analysis and Visualization using Plotly Express",
@@ -119,7 +133,9 @@ export default function Projects() {
           {filteredProjects.map((project) => (
             <Link
               key={project.slug}
-              to={`/projects/${project.slug}`}
+              to={project.liveUrl ? project.liveUrl : `/projects/${project.slug}`}
+              target={project.liveUrl ? "_blank" : undefined}
+              rel={project.liveUrl ? "noopener noreferrer" : undefined}
               className="terminal-card block hover:ring-1 hover:ring-primary/30 transition-all group"
             >
               <div className="terminal-header flex items-center justify-between">
@@ -135,6 +151,24 @@ export default function Projects() {
                 </div>
                 <span className="text-xs text-muted-foreground">{project.date}</span>
               </div>
+              
+              {/* Project Image (if available) */}
+              {project.image && (
+                <div className="relative overflow-hidden aspect-video">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                  {project.liveUrl && (
+                    <span className="absolute top-3 right-3 px-2 py-1 bg-primary text-primary-foreground text-xs font-medium rounded">
+                      Live Demo
+                    </span>
+                  )}
+                </div>
+              )}
+              
               <div className="p-4">
                 <div className="flex items-start justify-between gap-4 mb-2">
                   <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
