@@ -48,19 +48,19 @@ export function ParticleBackground() {
 
     const createParticles = () => {
       const particles: Particle[] = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 12000); // More particles
+      const particleCount = Math.floor((canvas.width * canvas.height) / 28000); // Fewer particles for cleaner look
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 3 + 1.2, // Larger particles
-          speedX: (Math.random() - 0.5) * 0.4,
-          speedY: (Math.random() - 0.5) * 0.4,
-          opacity: Math.random() * 0.7 + 0.4, // Much more visible
-          isAccent: Math.random() < 0.25, // 25% orange particles
+          size: Math.random() * 1.8 + 0.6, // Smaller, more refined particles
+          speedX: (Math.random() - 0.5) * 0.3,
+          speedY: (Math.random() - 0.5) * 0.3,
+          opacity: Math.random() * 0.25 + 0.1, // More subtle opacity
+          isAccent: Math.random() < 0.12, // 12% orange particles
           pulse: Math.random() * Math.PI * 2,
-          pulseSpeed: Math.random() * 0.02 + 0.01,
+          pulseSpeed: Math.random() * 0.015 + 0.005,
         });
       }
       particlesRef.current = particles;
@@ -89,18 +89,17 @@ export function ParticleBackground() {
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         
         if (particle.isAccent) {
-          // Orange accent particles - more visible
-          ctx.fillStyle = `hsla(24, 95%, 53%, ${pulseOpacity})`;
-          // Add glow effect for orange particles
-          ctx.shadowColor = "hsla(24, 95%, 53%, 0.6)";
-          ctx.shadowBlur = 12;
+          // Orange accent particles - subtle glow
+          ctx.fillStyle = `hsla(24, 95%, 53%, ${pulseOpacity * 0.7})`;
+          ctx.shadowColor = "hsla(24, 95%, 53%, 0.3)";
+          ctx.shadowBlur = 5;
         } else {
           ctx.shadowBlur = 0;
-          // Theme-aware neutral particles - much more visible
+          // Theme-aware neutral particles - subtle
           if (isDark) {
-            ctx.fillStyle = `hsla(220, 50%, 70%, ${pulseOpacity * 0.8})`;
+            ctx.fillStyle = `hsla(220, 40%, 65%, ${pulseOpacity * 0.5})`;
           } else {
-            ctx.fillStyle = `hsla(220, 40%, 30%, ${pulseOpacity * 0.6})`;
+            ctx.fillStyle = `hsla(220, 30%, 40%, ${pulseOpacity * 0.35})`;
           }
         }
         
@@ -134,7 +133,7 @@ export function ParticleBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.85 }}
+      style={{ opacity: 0.55 }}
     />
   );
 }
