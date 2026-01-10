@@ -97,6 +97,9 @@ const handler = async (req: Request): Promise<Response> => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // EmailJS can block server-to-server requests unless Origin/Referer are provided
+        "Origin": req.headers.get("origin") ?? "http://localhost",
+        "Referer": (req.headers.get("origin") ?? "http://localhost") + "/",
       },
       body: JSON.stringify({
         service_id: serviceId,
