@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Github, Linkedin, ExternalLink, Star } from "lucide-react";
+import { Github, Linkedin, ExternalLink, Star, Download } from "lucide-react";
 import { DashboardCard } from "@/components/home/DashboardCard";
 import { SkillsCard } from "@/components/home/SkillsCard";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
@@ -58,7 +58,7 @@ export default function Home() {
               , an event management platform designed to support organized and seamless event experiences.
             </p>
             <p>
-              I am currently studying <span className="text-foreground font-medium">Computer Science</span> at <span className="text-foreground font-medium">Somali National University</span> and have gained practical 
+              I recently graduated with a degree in <span className="text-foreground font-medium">Computer Science</span> from <span className="text-foreground font-medium">Somali National University</span> and have gained practical 
               field experience with <span className="text-foreground font-medium">NAPAD</span> and <span className="text-foreground font-medium">MEDAIR</span>. Along the way, I have strengthened my skills through programs 
               such as <span className="text-foreground font-medium">freeCodeCamp's Data Analysis with Python</span> and the <span className="text-foreground font-medium">Alex the Analyst Bootcamp</span>, and I am continually 
               pushing myself toward a <span className="text-primary font-semibold">full Data Science career</span>.
@@ -66,7 +66,7 @@ export default function Home() {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center gap-2 mb-8 text-sm">
+          <div className="flex items-center gap-2 mb-6 text-sm">
             <a
               href="https://github.com/Diini03"
               target="_blank"
@@ -95,6 +95,17 @@ export default function Home() {
               <ExternalLink className="w-3 h-3" />
             </Link>
           </div>
+
+          {/* CV Download Button */}
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 mb-8"
+          >
+            <Download className="w-4 h-4" />
+            Download My CV
+          </a>
         </section>
 
         {/* Dashboard Section */}

@@ -7,6 +7,8 @@ import techTrends2025Img from "@/assets/blog/tech-trends-2025.png";
 import aiVsMlImg from "@/assets/blog/ai-vs-ml.png";
 import dataCareerTipsImg from "@/assets/blog/data-career-tips.png";
 import sqlJoinsImg from "@/assets/blog/sql-joins.png";
+import pythonConceptsImg from "@/assets/blog/python-concepts.png";
+import numpyPandasImg from "@/assets/blog/numpy-pandas.png";
 
 interface BlogPostData {
   title: string;
@@ -184,6 +186,73 @@ Start simple, then optimize — Get your query working first, then worry about p
       "Think about performance — JOINs can be expensive on large tables",
       "Practice with real datasets to build muscle memory",
       "Master ON vs WHERE clause placement for correct results"
+    ]
+  },
+  "python-concepts": {
+    title: "Top Python Concepts Every Data Analyst Must Know",
+    date: "2025-04-07",
+    readTime: "4 min read",
+    category: "tutorials",
+    tags: ["python", "data-analysis", "pandas", "beginners"],
+    image: pythonConceptsImg,
+    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_python-activity-7315032501385646080-rdoT?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEj1U5kBQ4zXy_c1Xtz-dbbcnzmEHnnDPzE",
+    content: `Whether you're just starting your journey or looking to refresh your Python skills, this quick-read guide breaks down the core Python essentials every Data Analyst should know — in a simple, LinkedIn-style format.
+
+Python has become the go-to language for data analysis, and for good reason. Its readable syntax, powerful libraries, and active community make it perfect for turning raw data into actionable insights.
+
+In this visual guide, I've broken down the most essential concepts you need to master as a data analyst using Python.
+
+Variables and Data Types are your foundation. Understanding integers, floats, strings, and booleans is crucial because they determine how you can manipulate and analyze your data. Python's dynamic typing makes it flexible, but knowing your types prevents bugs.
+
+Data Structures like lists, tuples, and dictionaries are how you organize your data. Lists are ordered and mutable — perfect for collections that change. Tuples are immutable — great for fixed data. Dictionaries map keys to values — ideal for structured data like JSON.
+
+Must-Know Libraries: Pandas for data manipulation, NumPy for numerical computing, and Matplotlib for visualization. These three form the holy trinity of data analysis in Python. Master them and you can tackle most data problems.
+
+Data cleaning and visualization examples show you how to handle missing values, remove duplicates, and create compelling charts. Real-world data is messy — knowing how to clean it is half the battle.
+
+Essential tools include Jupyter Notebook for interactive analysis, VS Code for larger projects, and Git for version control. These tools will make your workflow smoother and more professional.`,
+    highlights: [
+      "Python variables & data types — the foundation of all analysis",
+      "Data structures: lists, tuples, dictionaries for organizing data",
+      "Must-know libraries: Pandas, NumPy, and Matplotlib",
+      "Data cleaning techniques — handling messy real-world data",
+      "Visualization examples for communicating insights",
+      "Essential tools: Jupyter, VS Code, Git, and more"
+    ]
+  },
+  "numpy-pandas": {
+    title: "Understand NumPy & Pandas in Just 10 Slides",
+    date: "2025-04-20",
+    readTime: "5 min read",
+    category: "tutorials",
+    tags: ["python", "numpy", "pandas", "data-analysis"],
+    image: numpyPandasImg,
+    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_numby-pandas-activity-7316773479767306240-sn89?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEj1U5kBQ4zXy_c1Xtz-dbbcnzmEHnnDPzE",
+    content: `Want to handle data efficiently using Python? Then you must master NumPy and Pandas — two powerful libraries that handle data efficiently and effectively.
+
+In this carousel, I've broken down everything you need to know about these essential data science tools with beginner-friendly explanations.
+
+NumPy (Numerical Python) is the foundation of scientific computing in Python. It provides support for large, multi-dimensional arrays and matrices, along with a collection of mathematical functions to operate on them. When you need speed and efficiency for numerical operations, NumPy is your best friend.
+
+Creating NumPy arrays is simple: use np.array() to convert lists, or functions like np.zeros(), np.ones(), and np.arange() to generate arrays with specific patterns. Arrays support vectorized operations, meaning you can perform math on entire arrays without writing loops.
+
+Pandas builds on NumPy to provide high-level data structures and tools for practical data analysis. The DataFrame is its flagship feature — think of it as a spreadsheet or SQL table in Python. Each column can have a different data type, and you can access, filter, and transform data with intuitive syntax.
+
+Creating DataFrames is flexible: from dictionaries, lists, CSV files, or even databases. Use df.head() to preview data, df.info() for structure, and df.describe() for statistics.
+
+Cleaning data with Pandas involves handling missing values (dropna(), fillna()), removing duplicates (drop_duplicates()), and converting data types (astype()). These operations are essential for real-world datasets.
+
+Filtering and manipulating data uses boolean indexing and methods like query(). You can select columns by name, filter rows by condition, and chain operations for complex transformations.
+
+When to use NumPy vs Pandas? Use NumPy for numerical computations and when working with homogeneous arrays. Use Pandas when you have tabular data with mixed types and need advanced data manipulation capabilities.`,
+    highlights: [
+      "NumPy — foundation for numerical computing with arrays and matrices",
+      "Pandas — high-level data structures with DataFrame as flagship",
+      "Creating arrays with np.array(), np.zeros(), np.ones(), np.arange()",
+      "Creating DataFrames from dictionaries, lists, or CSV files",
+      "Data cleaning: dropna(), fillna(), drop_duplicates()",
+      "Filtering with boolean indexing and query()",
+      "NumPy for speed and numerical ops, Pandas for tabular data"
     ]
   }
 };
