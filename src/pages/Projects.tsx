@@ -78,12 +78,12 @@ export default function Projects() {
         </p>
 
         {/* Category Tabs */}
-        <div className="flex gap-2 mb-6 border-b border-border pb-4">
+        <div className="flex gap-2 mb-6 border-b border-border pb-4 overflow-x-auto scrollbar-hide -mx-1 px-1">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 text-sm rounded-md transition-colors flex items-center gap-2 ${
+              className={`px-4 py-2 text-sm rounded-md transition-colors flex items-center gap-2 flex-shrink-0 whitespace-nowrap ${
                 activeCategory === cat.id
                   ? "bg-primary text-primary-foreground"
                   : "bg-secondary text-muted-foreground hover:text-foreground"
