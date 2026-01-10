@@ -8,6 +8,8 @@ import techTrends2025Img from "@/assets/blog/tech-trends-2025.png";
 import aiVsMlImg from "@/assets/blog/ai-vs-ml.png";
 import dataCareerTipsImg from "@/assets/blog/data-career-tips.png";
 import sqlJoinsImg from "@/assets/blog/sql-joins.png";
+import pythonConceptsImg from "@/assets/blog/python-concepts.png";
+import numpyPandasImg from "@/assets/blog/numpy-pandas.png";
 
 const categories = ["all", "data-analysis", "tech", "career", "tutorials"];
 
@@ -78,6 +80,28 @@ const blogPosts: BlogPost[] = [
     tags: ["sql", "database", "beginners"],
     image: sqlJoinsImg,
     linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_7-things-i-wish-i-knew-about-sql-joins-activity-7319615813366263809-VN07?utm_source=share&utm_medium=member_desktop",
+  },
+  {
+    slug: "python-concepts",
+    title: "Top Python Concepts Every Data Analyst Must Know",
+    excerpt: "A quick-read guide breaking down core Python essentials every Data Analyst should know — variables, data types, data structures, must-know libraries, and essential tools.",
+    category: "tutorials",
+    date: "2025-04-07",
+    readTime: "4 min read",
+    tags: ["python", "data-analysis", "pandas", "beginners"],
+    image: pythonConceptsImg,
+    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_python-activity-7315032501385646080-rdoT?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEj1U5kBQ4zXy_c1Xtz-dbbcnzmEHnnDPzE",
+  },
+  {
+    slug: "numpy-pandas",
+    title: "Understand NumPy & Pandas in Just 10 Slides",
+    excerpt: "Master NumPy and Pandas — two powerful Python libraries. Learn to create arrays, DataFrames, clean, filter, and manipulate data with beginner-friendly explanations.",
+    category: "tutorials",
+    date: "2025-04-20",
+    readTime: "5 min read",
+    tags: ["python", "numpy", "pandas", "data-analysis"],
+    image: numpyPandasImg,
+    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_numby-pandas-activity-7316773479767306240-sn89?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEj1U5kBQ4zXy_c1Xtz-dbbcnzmEHnnDPzE",
   },
 ];
 

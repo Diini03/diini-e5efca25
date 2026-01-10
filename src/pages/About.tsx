@@ -7,7 +7,7 @@ const experiences = [
     type: "education",
     title: "Bachelor of Computer Science",
     org: "Somali National University",
-    date: "2021 - Present",
+    date: "2021 - 2026",
     description: "Focus: Data Science, Machine Learning, AI",
   },
   {
@@ -80,7 +80,7 @@ export default function About() {
             production-ready interfaces efficiently.
           </p>
           <p>
-            Currently pursuing my Computer Science degree at Somali National University, 
+            Having recently graduated with my Computer Science degree from Somali National University, 
             I've contributed to humanitarian data projects, trained machine learning models 
             for smart event recommendations, and built data visualization dashboards that 
             drive decision-making. I'm passionate about using technology to solve real-world 
@@ -114,15 +114,15 @@ export default function About() {
           </div>
         </div>
 
-        {/* Download CV Button */}
+        {/* Download CV Button - Enhanced */}
         <a 
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded text-sm text-foreground hover:bg-secondary transition-colors mb-12"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] mb-12"
         >
-          <Download className="w-4 h-4" />
-          Download CV
+          <Download className="w-5 h-5" />
+          Download My CV
         </a>
 
         {/* Experience & Education */}

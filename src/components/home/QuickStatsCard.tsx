@@ -16,8 +16,8 @@ const stats = [
   },
   {
     icon: GraduationCap,
-    value: "CS",
-    label: "Student @ SNU",
+    value: "BSc",
+    label: "CS Graduate",
     color: "text-purple-500",
   },
   {
