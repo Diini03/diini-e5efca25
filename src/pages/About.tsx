@@ -66,7 +66,7 @@ export default function About() {
         {/* Bio */}
         <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-8">
           <p>
-            I'm <span className="text-primary">Diini Kahiye</span>, a Data Scientist and 
+            I'm <span className="text-primary">Diini Kahiye</span>, a Data Analyst and 
             Front-End Developer based in Mogadishu, Somalia. I specialize in transforming 
             complex datasets into actionable insights and building modern, responsive web 
             applications that deliver real value.
@@ -81,10 +81,10 @@ export default function About() {
           </p>
           <p>
             Having recently graduated with my Computer Science degree from Somali National University, 
-            I've contributed to humanitarian data projects, trained machine learning models 
-            for smart event recommendations, and built data visualization dashboards that 
-            drive decision-making. I'm passionate about using technology to solve real-world 
-            problems in my community.
+            I'm now on my journey toward becoming a full Data Scientist—building machine learning 
+            models and data-driven projects along the way. I've contributed to humanitarian data 
+            projects and built data visualization dashboards that drive decision-making. I'm 
+            passionate about using technology to solve real-world problems in my community.
           </p>
         </div>
 
