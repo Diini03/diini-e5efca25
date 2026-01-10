@@ -84,22 +84,34 @@ const handler = async (req: Request): Promise<Response> => {
     const publicKey = Deno.env.get("EMAILJS_PUBLIC_KEY");
     const privateKey = Deno.env.get("EMAILJS_PRIVATE_KEY");
 
+    // Log which secrets are present (length only for security)
+    console.log("EmailJS config check:", {
+      serviceId: serviceId ? `set (${serviceId.length} chars)` : "MISSING",
+      templateId: templateId ? `set (${templateId.length} chars)` : "MISSING",
+      publicKey: publicKey ? `set (${publicKey.length} chars)` : "MISSING",
+      privateKey: privateKey ? `set (${privateKey.length} chars)` : "MISSING",
+    });
+
     if (!serviceId || !templateId || !publicKey || !privateKey) {
-      console.error("Missing EmailJS configuration");
+      console.error("Missing EmailJS configuration - one or more secrets not set");
       return new Response(
-        JSON.stringify({ error: "Email service not configured" }),
+        JSON.stringify({ error: "Email service not configured", details: "Missing required secrets" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
+    const requestOrigin = req.headers.get("origin") ?? "http://localhost";
+    console.log("Sending EmailJS request with origin:", requestOrigin);
 
     // Send email via EmailJS REST API with accessToken for server-side calls
     const emailResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // EmailJS can block server-to-server requests unless Origin/Referer are provided
-        "Origin": req.headers.get("origin") ?? "http://localhost",
-        "Referer": (req.headers.get("origin") ?? "http://localhost") + "/",
+        // EmailJS requires browser-like headers for server-side calls
+        "Origin": requestOrigin,
+        "Referer": requestOrigin + "/",
+        "User-Agent": "Mozilla/5.0 (compatible; LovableApp/1.0)",
       },
       body: JSON.stringify({
         service_id: serviceId,
@@ -115,11 +127,20 @@ const handler = async (req: Request): Promise<Response> => {
       }),
     });
 
+    const responseText = await emailResponse.text();
+    console.log("EmailJS response:", {
+      status: emailResponse.status,
+      statusText: emailResponse.statusText,
+      body: responseText,
+    });
+
     if (!emailResponse.ok) {
-      const errorText = await emailResponse.text();
-      console.error("EmailJS error:", errorText);
       return new Response(
-        JSON.stringify({ error: "Failed to send email" }),
+        JSON.stringify({ 
+          error: "Failed to send email", 
+          emailjs_status: emailResponse.status,
+          emailjs_response: responseText 
+        }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
