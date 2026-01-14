@@ -66,18 +66,18 @@ export default function About() {
         {/* Bio */}
         <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-8">
           <p>
-            I'm <span className="text-primary">Diini Kahiye</span>, a Data Analyst and 
-            Front-End Developer based in Mogadishu, Somalia. I specialize in transforming 
-            complex datasets into actionable insights and building modern, responsive web 
-            applications that deliver real value.
+            I'm <span className="text-primary">Diini Kahiye</span>—Data Analyst by day, 
+            aspiring Data Scientist by night. Based in Mogadishu, Somalia, I use Python, SQL, 
+            R, Power BI, Tableau, and JavaScript to transform complex data into insights 
+            that drive real decisions.
           </p>
           <p>
             My technical toolkit spans the full data pipeline—from Python (pandas, matplotlib, 
-            BeautifulSoup) and SQL for analysis, to Power BI and Plotly for visualization, 
-            to React and TypeScript for front-end development. I leverage cutting-edge AI 
-            development tools like <span className="text-primary">Cursor</span>, <span className="text-primary">Lovable</span>, 
-            and <span className="text-primary">Warp</span> to accelerate development and build 
-            production-ready interfaces efficiently.
+            BeautifulSoup), R, and SQL for analysis, to Power BI, Tableau, and Plotly for 
+            visualization, to React, TypeScript, and JavaScript for front-end development. 
+            I leverage cutting-edge AI development tools like <span className="text-primary">Cursor</span>, 
+            <span className="text-primary">Lovable</span>, and <span className="text-primary">Warp</span> to 
+            accelerate development and build production-ready interfaces efficiently.
           </p>
           <p>
             Having recently graduated with my Computer Science degree from Somali National University, 
