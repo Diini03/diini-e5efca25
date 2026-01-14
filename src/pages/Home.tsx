@@ -44,8 +44,8 @@ export default function Home() {
 
           <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-6">
             <p>
-              I am a <span className="text-foreground font-medium">Data Analyst</span> based in <span className="text-foreground font-medium">Mogadishu</span>, 
-              working with <span className="text-foreground font-medium">Python, SQL, Power BI, and Excel</span> to turn data into insights that people can actually use. 
+              <span className="text-foreground font-medium">Data Analyst by day, aspiring Data Scientist by night.</span> Based in <span className="text-foreground font-medium">Mogadishu</span>, 
+              I use <span className="text-foreground font-medium">Python, SQL, R, Power BI, Tableau, and JavaScript</span> to transform complex data into insights that drive real decisions. 
               My work spans real projects, <span className="text-foreground font-medium">humanitarian initiatives</span>, and business-focused analysis. I also built{" "}
               <a
                 href="https://kulmid.lovable.app"
