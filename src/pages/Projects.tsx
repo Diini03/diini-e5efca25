@@ -1,5 +1,6 @@
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, Search, ExternalLink } from "lucide-react";
 
 // Import project images
 import kulmidImg from "@/assets/projects/kulmid.png";
@@ -31,6 +32,18 @@ const projects = [
 ];
 
 export default function Projects() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredProjects = useMemo(() => {
+    return projects.filter((project) => {
+      const matchesSearch = 
+        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+      return matchesSearch;
+    });
+  }, [searchQuery]);
+
   return (
     <div className="min-h-screen animate-fade-in">
       <div className="max-w-3xl mx-auto px-6 py-12">
@@ -47,9 +60,21 @@ export default function Projects() {
           A collection of my data science and development projects.
         </p>
 
+        {/* Search */}
+        <div className="relative mb-8">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Search projects..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 bg-secondary/50 border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+          />
+        </div>
+
         {/* Project Cards */}
         <div className="space-y-4">
-          {projects.map((project) => (
+          {filteredProjects.map((project) => (
             <Link
               key={project.slug}
               to={project.liveUrl ? project.liveUrl : `/projects/${project.slug}`}
@@ -113,9 +138,9 @@ export default function Projects() {
           ))}
         </div>
 
-        {projects.length === 0 && (
+        {filteredProjects.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
-            No projects found.
+            No projects found matching your search.
           </div>
         )}
       </div>
