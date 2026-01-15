@@ -20,7 +20,7 @@ export function Footer() {
             </div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <Mail className="w-3 h-3" />
-              <span>diiniyare74@gmail.com</span>
+              <span>diini@st.snu.edu.so</span>
             </div>
           </div>
 

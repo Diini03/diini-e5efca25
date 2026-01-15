@@ -104,7 +104,7 @@ export default function Contact() {
               {/* Email */}
               <div className="flex items-center gap-4">
                 <a
-                  href="mailto:diiniyare74@gmail.com"
+                  href="mailto:diini@st.snu.edu.so"
                   className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center hover:bg-primary/20 transition-colors"
                 >
                   <Mail className="w-5 h-5 text-primary" />
@@ -112,10 +112,10 @@ export default function Contact() {
                 <div>
                   <div className="text-xs text-muted-foreground">Email</div>
                   <a
-                    href="mailto:diiniyare74@gmail.com"
+                    href="mailto:diini@st.snu.edu.so"
                     className="text-sm text-foreground hover:text-primary transition-colors"
                   >
-                    diiniyare74@gmail.com
+                    diini@st.snu.edu.so
                   </a>
                 </div>
               </div>
