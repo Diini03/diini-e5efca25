@@ -58,8 +58,7 @@ export default function Home() {
               , an event management platform designed to support organized and seamless event experiences.
             </p>
             <p>
-              I recently graduated with a degree in <span className="text-foreground font-medium">Computer Science</span> from <span className="text-foreground font-medium">Somali National University</span> and have gained practical 
-              field experience with <span className="text-foreground font-medium">NAPAD</span> and <span className="text-foreground font-medium">MEDAIR</span>. Along the way, I have strengthened my skills through programs 
+              I recently graduated with a degree in <span className="text-foreground font-medium">Computer Science</span> from <span className="text-foreground font-medium">Somali National University</span>. Along the way, I have strengthened my skills through programs 
               such as <span className="text-foreground font-medium">freeCodeCamp's Data Analysis with Python</span> and the <span className="text-foreground font-medium">Alex the Analyst Bootcamp</span>, and I am continually 
               pushing myself toward a <span className="text-primary font-semibold">full Data Science career</span>.
             </p>
