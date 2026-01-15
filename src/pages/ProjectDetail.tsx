@@ -11,6 +11,13 @@ import casesBarChart from "@/assets/projects/covid-19/cases-by-country-bar.png";
 import testsChart from "@/assets/projects/covid-19/tests-by-country.png";
 import timeSeriesChart from "@/assets/projects/covid-19/confirmed-over-time.png";
 
+// Netflix Chart Images
+import netflixMoviesVsTvShows from "@/assets/projects/netflix/movies-vs-tvshows.png";
+import netflixContentRatings from "@/assets/projects/netflix/content-ratings.png";
+import netflixMovieDurations from "@/assets/projects/netflix/movie-durations.png";
+import netflixContentOverYears from "@/assets/projects/netflix/content-over-years.png";
+import netflixCorrelationHeatmap from "@/assets/projects/netflix/correlation-heatmap.png";
+
 interface ChartData {
   title: string;
   image: string;
@@ -154,6 +161,34 @@ fig.show()`,
     date: "2024",
     description: "Comprehensive analysis of 8807 Netflix titles exploring content distribution, trends over time, and country-based insights using Python visualization libraries. The project includes data cleaning, exploratory data analysis, and multiple visualization techniques.",
     tags: ["python", "pandas", "seaborn", "matplotlib", "numpy", "eda"],
+    keyInsight: "Netflix's content library is heavily movie-focused (69.6% movies vs 30.4% TV shows), with TV-MA rated content dominating the platform. Content additions peaked dramatically in 2019 before declining, likely due to increased competition from other streaming services.",
+    charts: [
+      {
+        title: "Distribution: Movies vs TV Shows",
+        image: netflixMoviesVsTvShows,
+        insight: "Movies make up ~69.6% of Netflix content (5,600+) vs TV Shows (~2,300)"
+      },
+      {
+        title: "Top 10 Content Ratings on Netflix",
+        image: netflixContentRatings,
+        insight: "TV-MA dominates with ~3,000 titles, followed by TV-14 (~1,900)"
+      },
+      {
+        title: "Distribution of Movie Durations",
+        image: netflixMovieDurations,
+        insight: "Most movies are 90-100 minutes long, following a right-skewed distribution"
+      },
+      {
+        title: "Content Added Over the Years",
+        image: netflixContentOverYears,
+        insight: "Content additions peaked in 2019 with 1,350+ movies added that year"
+      },
+      {
+        title: "Correlation Heatmap",
+        image: netflixCorrelationHeatmap,
+        insight: "Weak correlations between numeric features; duration slightly correlates with release year"
+      }
+    ],
     highlights: [
       "Analyzed 8807 Netflix titles with 12 data columns including movies and TV shows",
       "Cleaned missing data: 2634 missing directors, 831 missing countries, 825 missing cast",
