@@ -7,6 +7,13 @@ import kulmidImg from "@/assets/projects/kulmid.png";
 
 const projects = [
   {
+    slug: "fall-armyworm-detection",
+    title: "Fall Armyworm Leaf Disease Detection",
+    description: "Deep learning image classification system achieving 99.07% accuracy to detect Fall Armyworm damage on maize leaves. Built 5 CNN models for PyCon Somalia 2025 Hackathon.",
+    tags: ["python", "tensorflow", "keras", "deep-learning", "cnn", "computer-vision"],
+    date: "2025",
+  },
+  {
     slug: "covid-19-analysis",
     title: "Covid-19 Analysis and Visualization using Plotly Express",
     description: "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations including bar charts, scatter plots, and choropleth maps.",

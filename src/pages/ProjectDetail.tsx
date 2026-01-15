@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, Github, CheckCircle, Wrench, Copy, Check, BarChart3, Lightbulb } from "lucide-react";
+import { ArrowLeft, Calendar, Github, CheckCircle, Wrench, Copy, Check, BarChart3, Lightbulb, ExternalLink, Trophy } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -17,6 +17,18 @@ import netflixContentRatings from "@/assets/projects/netflix/content-ratings.png
 import netflixMovieDurations from "@/assets/projects/netflix/movie-durations.png";
 import netflixContentOverYears from "@/assets/projects/netflix/content-over-years.png";
 import netflixCorrelationHeatmap from "@/assets/projects/netflix/correlation-heatmap.png";
+
+// Fall Armyworm Chart Images
+import fawClassDistribution from "@/assets/projects/fall-armyworm/class-distribution.png";
+import fawSampleLeaves from "@/assets/projects/fall-armyworm/sample-leaves.png";
+import fawModelArchitecture from "@/assets/projects/fall-armyworm/model-architecture.png";
+import fawModel1Accuracy from "@/assets/projects/fall-armyworm/model1-accuracy.png";
+import fawModel5Accuracy from "@/assets/projects/fall-armyworm/model5-accuracy.png";
+import fawPredictionHealthy1 from "@/assets/projects/fall-armyworm/prediction-healthy-1.png";
+import fawPredictionDiseased1 from "@/assets/projects/fall-armyworm/prediction-diseased-1.png";
+import fawPredictionHealthy2 from "@/assets/projects/fall-armyworm/prediction-healthy-2.png";
+import fawPredictionDiseased2 from "@/assets/projects/fall-armyworm/prediction-diseased-2.png";
+import fawPredictionHealthy3 from "@/assets/projects/fall-armyworm/prediction-healthy-3.png";
 
 interface ChartData {
   title: string;
@@ -36,9 +48,174 @@ interface ProjectData {
   githubUrl?: string;
   keyInsight?: string;
   charts?: ChartData[];
+  competitionUrl?: string;
+  competitionName?: string;
 }
 
 const projectsData: Record<string, ProjectData> = {
+  "fall-armyworm-detection": {
+    title: "Fall Armyworm Leaf Disease Detection Using Deep Learning",
+    date: "2025",
+    description: "This project focuses on building an image classification system to detect Fall Armyworm damage on maize leaves using deep learning. Fall Armyworm is a major agricultural pest that significantly affects crop yield, especially in African countries. Early and accurate detection is critical for timely intervention and food security. The goal was to train, evaluate, and compare multiple deep learning models, then select the most effective model for real-world use.",
+    tags: ["python", "tensorflow", "keras", "deep-learning", "cnn", "computer-vision"],
+    competitionUrl: "https://zindi.africa/competitions/combating-food-insecurity-in-somalia",
+    competitionName: "PyCon Somalia 2025 Hackathon",
+    keyInsight: "Transfer learning with fine-tuning dramatically outperformed custom CNNs, achieving 99.07% validation accuracy. Model 4 was selected as the final solution due to its excellent generalization, stable learning curves, and suitability for real-world agricultural decision support.",
+    charts: [
+      {
+        title: "Dataset Class Distribution",
+        image: fawClassDistribution,
+        insight: "Perfectly balanced dataset with 810 healthy and 810 diseased leaf samples"
+      },
+      {
+        title: "Sample Leaf Images",
+        image: fawSampleLeaves,
+        insight: "Visual examples showing clear differences between healthy and FAW-damaged leaves"
+      },
+      {
+        title: "Simple CNN Architecture (Model 1)",
+        image: fawModelArchitecture,
+        insight: "Baseline CNN with 11M parameters using Conv2D, MaxPooling, and Dense layers"
+      },
+      {
+        title: "Model 1: Training Progress",
+        image: fawModel1Accuracy,
+        insight: "Baseline CNN achieved ~85% accuracy with gradual convergence over 10 epochs"
+      },
+      {
+        title: "Model 5: Lightweight Model Accuracy",
+        image: fawModel5Accuracy,
+        insight: "Deployment-friendly model showing stable ~91.5% validation accuracy"
+      },
+      {
+        title: "Prediction: Healthy Leaf Sample 1",
+        image: fawPredictionHealthy1,
+        insight: "Model correctly classifies healthy leaf with high confidence score"
+      },
+      {
+        title: "Prediction: Diseased Leaf Sample",
+        image: fawPredictionDiseased1,
+        insight: "Fall Armyworm damage detected with strong prediction confidence"
+      },
+      {
+        title: "Prediction: Healthy Leaf Sample 2",
+        image: fawPredictionHealthy2,
+        insight: "Consistent healthy classification demonstrating model reliability"
+      },
+      {
+        title: "Prediction: Diseased Leaf Sample 2",
+        image: fawPredictionDiseased2,
+        insight: "Another diseased sample correctly identified by the model"
+      },
+      {
+        title: "Prediction: Healthy Leaf Sample 3",
+        image: fawPredictionHealthy3,
+        insight: "Final test prediction confirming model's accuracy on healthy leaves"
+      }
+    ],
+    highlights: [
+      "Built and compared 5 deep learning models: Simple CNN, Deeper CNN, MobileNetV2, Advanced Transfer Learning, and Lightweight Deployment Model",
+      "Achieved 99.07% validation accuracy with Model 4 (Advanced Transfer Learning with fine-tuning)",
+      "Processed 1620+ labeled leaf images with proper stratified train/validation split",
+      "Implemented data augmentation and preprocessing for robust model training",
+      "Created a reusable .h5 model file for deployment without retraining",
+      "Developed for PyCon Somalia 2025 Hackathon - Combating Food Insecurity in Somalia challenge on Zindi"
+    ],
+    tools: ["Python", "TensorFlow", "Keras", "NumPy", "Pandas", "Matplotlib", "Seaborn", "OpenCV", "Scikit-learn"],
+    codeFile: "Fall_Armyworm_Detection.ipynb",
+    codeContent: `# Fall Armyworm Leaf Disease Detection
+# Deep Learning Image Classification Pipeline
+
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import cv2
+from sklearn.model_selection import train_test_split
+
+# Load and prepare dataset
+train_df = pd.read_csv("train.csv")
+print(f"Dataset shape: {train_df.shape}")
+print(f"Class distribution:\\n{train_df['label'].value_counts()}")
+
+# Data augmentation for training
+train_datagen = ImageDataGenerator(
+    rescale=1./255,
+    rotation_range=20,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    horizontal_flip=True,
+    validation_split=0.2
+)
+
+# Model 1: Simple CNN (Baseline)
+model1 = Sequential([
+    Conv2D(32, (3, 3), activation='relu', input_shape=(224, 224, 3)),
+    MaxPooling2D(2, 2),
+    Conv2D(64, (3, 3), activation='relu'),
+    MaxPooling2D(2, 2),
+    Conv2D(128, (3, 3), activation='relu'),
+    MaxPooling2D(2, 2),
+    Flatten(),
+    Dense(512, activation='relu'),
+    Dropout(0.5),
+    Dense(1, activation='sigmoid')
+])
+
+model1.compile(
+    optimizer='adam',
+    loss='binary_crossentropy',
+    metrics=['accuracy']
+)
+
+# Train with callbacks
+callbacks = [
+    EarlyStopping(patience=5, restore_best_weights=True),
+    ModelCheckpoint('best_model.h5', save_best_only=True)
+]
+
+history = model1.fit(
+    train_generator,
+    epochs=20,
+    validation_data=val_generator,
+    callbacks=callbacks
+)
+
+# Model 4: Advanced Transfer Learning (Best Model - 99.07% accuracy)
+from tensorflow.keras.applications import MobileNetV2
+
+base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
+base_model.trainable = True  # Fine-tuning enabled
+
+model4 = Sequential([
+    base_model,
+    tf.keras.layers.GlobalAveragePooling2D(),
+    Dense(256, activation='relu'),
+    Dropout(0.5),
+    Dense(1, activation='sigmoid')
+])
+
+# Evaluation and prediction
+def predict_leaf(image_path, model):
+    img = cv2.imread(image_path)
+    img = cv2.resize(img, (224, 224))
+    img = img / 255.0
+    img = np.expand_dims(img, axis=0)
+    
+    prediction = model.predict(img)[0][0]
+    label = "Diseased (FAW)" if prediction > 0.5 else "Healthy"
+    confidence = prediction if prediction > 0.5 else 1 - prediction
+    
+    return label, confidence
+
+# Save final model for deployment
+model4.save('fall_armyworm_detector.h5')
+print("Model saved successfully for future use!")`,
+  },
   "covid-19-analysis": {
     title: "Covid-19 Analysis and Visualization using Plotly Express",
     date: "2024",
@@ -348,13 +525,27 @@ export default function ProjectDetail() {
           </div>
         )}
 
+        {/* Competition Badge */}
+        {project.competitionUrl && project.competitionName && (
+          <a
+            href={project.competitionUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-lg text-sm text-primary hover:bg-primary/20 transition-colors mb-6"
+          >
+            <Trophy className="w-4 h-4" />
+            <span className="font-medium">{project.competitionName}</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        )}
+
         {/* View Code Button */}
         {project.githubUrl && (
           <a
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded text-sm text-primary hover:bg-secondary transition-colors mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded text-sm text-primary hover:bg-secondary transition-colors mb-6 ml-3"
           >
             <Github className="w-4 h-4" />
             View Code
