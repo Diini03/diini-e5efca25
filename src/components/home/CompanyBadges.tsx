@@ -1,7 +1,6 @@
 const companies = [
-  { name: "NAPAD", letter: "N", past: false },
+  { name: "System Officer", letter: "S", past: true },
   { name: "MEDAIR", letter: "M", past: true },
-  { name: "SNU", letter: "S", past: false },
 ];
 
 export function CompanyBadges() {
