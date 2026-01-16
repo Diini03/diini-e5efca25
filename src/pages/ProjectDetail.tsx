@@ -610,14 +610,14 @@ export default function ProjectDetail() {
         {/* Chart Lightbox */}
         {selectedChart && (
           <div
-            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4"
             onClick={() => setSelectedChart(null)}
           >
             <div
-              className="terminal-card w-full max-w-2xl"
+              className="terminal-card w-full max-w-xl max-h-[85vh] flex flex-col overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="terminal-header flex items-center justify-between">
+              <div className="terminal-header flex items-center justify-between shrink-0">
                 <div className="flex items-center min-w-0">
                   <div className="flex items-center gap-1.5 shrink-0">
                     <div className="terminal-dot terminal-dot-red" />
@@ -635,16 +635,16 @@ export default function ProjectDetail() {
                   ✕
                 </button>
               </div>
-              <div className="p-3 md:p-4">
-                <div className="bg-card rounded overflow-hidden">
+              <div className="p-3 flex-1 overflow-hidden flex flex-col">
+                <div className="bg-card rounded overflow-hidden flex-1 flex items-center justify-center">
                   <img
                     src={selectedChart.image}
                     alt={selectedChart.title}
-                    className="w-full h-auto max-h-[50vh] object-contain"
+                    className="max-w-full max-h-[55vh] object-contain"
                   />
                 </div>
-                <div className="mt-3 p-2.5 bg-secondary/50 rounded">
-                  <p className="text-xs md:text-sm text-foreground">
+                <div className="mt-3 p-2.5 bg-secondary/50 rounded shrink-0">
+                  <p className="text-xs text-foreground">
                     <span className="text-primary font-medium">💡 Key Insight:</span>{" "}
                     {selectedChart.insight}
                   </p>
