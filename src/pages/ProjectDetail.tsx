@@ -462,7 +462,7 @@ export default function ProjectDetail() {
   const { id } = useParams();
   const project = id ? projectsData[id] : null;
   const [copied, setCopied] = useState(false);
-  const [selectedChart, setSelectedChart] = useState<ChartData | null>(null);
+  
 
   const handleCopyCode = async () => {
     if (project) {
@@ -576,8 +576,7 @@ export default function ProjectDetail() {
               {project.charts.map((chart, index) => (
                 <div
                   key={index}
-                  className="terminal-card overflow-hidden cursor-pointer group hover:border-primary/50 transition-colors"
-                  onClick={() => setSelectedChart(chart)}
+                  className="terminal-card overflow-hidden"
                 >
                   <div className="terminal-header">
                     <div className="flex items-center gap-1.5">
@@ -593,7 +592,7 @@ export default function ProjectDetail() {
                     <img
                       src={chart.image}
                       alt={chart.title}
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-contain"
                     />
                   </div>
                   <div className="p-3 border-t border-border">
@@ -607,52 +606,6 @@ export default function ProjectDetail() {
           </section>
         )}
 
-        {/* Chart Lightbox */}
-        {selectedChart && (
-          <div
-            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4"
-            onClick={() => setSelectedChart(null)}
-          >
-            <div
-              className="terminal-card w-full max-w-xl max-h-[85vh] flex flex-col overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="terminal-header flex items-center justify-between shrink-0">
-                <div className="flex items-center min-w-0">
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    <div className="terminal-dot terminal-dot-red" />
-                    <div className="terminal-dot terminal-dot-yellow" />
-                    <div className="terminal-dot terminal-dot-green" />
-                  </div>
-                  <span className="text-sm text-foreground ml-3 font-medium truncate">
-                    {selectedChart.title}
-                  </span>
-                </div>
-                <button
-                  onClick={() => setSelectedChart(null)}
-                  className="text-muted-foreground hover:text-foreground transition-colors text-sm px-2 shrink-0"
-                >
-                  ✕
-                </button>
-              </div>
-              <div className="p-3 flex-1 overflow-hidden flex flex-col">
-                <div className="bg-card rounded overflow-hidden flex-1 flex items-center justify-center">
-                  <img
-                    src={selectedChart.image}
-                    alt={selectedChart.title}
-                    className="max-w-full max-h-[55vh] object-contain"
-                  />
-                </div>
-                <div className="mt-3 p-2.5 bg-secondary/50 rounded shrink-0">
-                  <p className="text-xs text-foreground">
-                    <span className="text-primary font-medium">💡 Key Insight:</span>{" "}
-                    {selectedChart.insight}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Key Highlights */}
         <section className="mb-10">
