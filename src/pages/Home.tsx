@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, ExternalLink, Star, Download } from "lucide-react";
+import { DashboardCard } from "@/components/home/DashboardCard";
+import { SkillsCard } from "@/components/home/SkillsCard";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
 import { ProjectCard } from "@/components/home/ProjectCard";
 
@@ -98,7 +100,7 @@ export default function Home() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 mb-8"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/25"
           >
             <Download className="w-4 h-4" />
             Download My CV
@@ -130,6 +132,18 @@ export default function Home() {
             {featuredProjects.map((project) => (
               <ProjectCard key={project.slug} {...project} />
             ))}
+          </div>
+        </section>
+
+        {/* Dashboard Section - After Projects */}
+        <section className="mb-10">
+          <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
+            <span className="text-muted-foreground">//</span> Dashboard
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <DashboardCard />
+            <SkillsCard />
           </div>
         </section>
 

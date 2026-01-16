@@ -5,7 +5,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border/50 bg-card/80 backdrop-blur-sm">
-      <div className="max-w-3xl mx-auto px-6 py-6">
+      <div className="max-w-4xl mx-auto px-6 py-6">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
           {/* Brand & Location */}
