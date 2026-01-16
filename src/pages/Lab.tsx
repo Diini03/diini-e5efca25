@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Gamepad2, Brain, Keyboard, FlaskConical } from "lucide-react";
+import { Gamepad2, Brain, Keyboard, FlaskConical, GraduationCap } from "lucide-react";
 import { PageTransition } from "@/components/layout/PageTransition";
 
 const games = [
@@ -23,6 +23,13 @@ const games = [
     description: "Test your typing speed with programming quotes.",
     icon: Keyboard,
     badge: "WPM",
+  },
+  {
+    id: "data-quiz",
+    title: "Data Quiz",
+    description: "Learn tips, test your data analysis knowledge, and get inspired by quotes.",
+    icon: GraduationCap,
+    badge: "5 Questions",
   },
 ];
 

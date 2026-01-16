@@ -17,6 +17,7 @@ import Lab from "@/pages/Lab";
 import TicTacToe from "@/pages/lab/TicTacToe";
 import MemoryGame from "@/pages/lab/MemoryGame";
 import TypingTest from "@/pages/lab/TypingTest";
+import DataQuiz from "@/pages/lab/DataQuiz";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/lab/tic-tac-toe" element={<TicTacToe />} />
             <Route path="/lab/memory-game" element={<MemoryGame />} />
             <Route path="/lab/typing-test" element={<TypingTest />} />
+            <Route path="/lab/data-quiz" element={<DataQuiz />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
