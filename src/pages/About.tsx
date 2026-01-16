@@ -48,7 +48,7 @@ const certifications = [
 export default function About() {
   return (
     <div className="min-h-screen">
-      <div className="max-w-3xl mx-auto px-6 py-12">
+      <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Back Link */}
         <Link
           to="/"

@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, ExternalLink, Star, Download } from "lucide-react";
-import { DashboardCard } from "@/components/home/DashboardCard";
-import { SkillsCard } from "@/components/home/SkillsCard";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
 import { ProjectCard } from "@/components/home/ProjectCard";
 
@@ -35,7 +33,7 @@ export default function Home() {
       {/* Particle Background - Full Page */}
       <ParticleBackground />
       
-      <div className="max-w-3xl mx-auto px-6 py-12 relative z-10">
+      <div className="max-w-4xl mx-auto px-6 py-12 relative z-10">
         {/* Hero Section */}
         <section className="mb-10">
           <h1 className="text-2xl md:text-3xl font-bold mb-6">
@@ -107,17 +105,8 @@ export default function Home() {
           </a>
         </section>
 
-        {/* Dashboard Section */}
+        {/* Quick Stats */}
         <section className="mb-10">
-          <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
-            <span className="text-muted-foreground">//</span> Dashboard
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <DashboardCard />
-            <SkillsCard />
-          </div>
-
           <QuickStatsCard />
         </section>
 

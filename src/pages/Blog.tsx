@@ -125,7 +125,7 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen animate-fade-in overflow-hidden">
-      <div className="max-w-3xl mx-auto px-6 py-12 overflow-hidden">
+      <div className="max-w-4xl mx-auto px-6 py-12 overflow-hidden">
         {/* Back Link */}
         <Link
           to="/"
