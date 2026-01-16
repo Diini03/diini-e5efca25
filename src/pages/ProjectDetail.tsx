@@ -60,6 +60,7 @@ const projectsData: Record<string, ProjectData> = {
     tags: ["python", "tensorflow", "keras", "deep-learning", "cnn", "computer-vision"],
     competitionUrl: "https://zindi.africa/competitions/combating-food-insecurity-in-somalia",
     competitionName: "PyCon Somalia 2025 Hackathon",
+    githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python",
     keyInsight: "Transfer learning with fine-tuning dramatically outperformed custom CNNs, achieving 99.07% validation accuracy. Model 4 was selected as the final solution due to its excellent generalization, stable learning curves, and suitability for real-world agricultural decision support.",
     charts: [
       {
@@ -218,7 +219,7 @@ print("Model saved successfully for future use!")`,
   },
   "covid-19-analysis": {
     title: "Covid-19 Analysis and Visualization using Plotly Express",
-    date: "2024",
+    date: "2025",
     description: "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations including bar charts, scatter plots, and choropleth maps. The project explores total cases, deaths, recoveries, and testing data across different continents and WHO regions.",
     tags: ["python", "pandas", "plotly", "matplotlib", "data-visualization"],
     keyInsight: "The USA consistently led in both total cases and testing capacity, with clear exponential growth patterns visible from February to July 2020. This analysis reveals how different regions responded to the pandemic at varying rates.",
@@ -335,7 +336,7 @@ fig.show()`,
   },
   "netflix-data-analysis": {
     title: "Netflix Data Analysis & Visualization",
-    date: "2024",
+    date: "2025",
     description: "Comprehensive analysis of 8807 Netflix titles exploring content distribution, trends over time, and country-based insights using Python visualization libraries. The project includes data cleaning, exploratory data analysis, and multiple visualization techniques.",
     tags: ["python", "pandas", "seaborn", "matplotlib", "numpy", "eda"],
     keyInsight: "Netflix's content library is heavily movie-focused (69.6% movies vs 30.4% TV shows), with TV-MA rated content dominating the platform. Content additions peaked dramatically in 2019 before declining, likely due to increased competition from other streaming services.",
@@ -609,11 +610,11 @@ export default function ProjectDetail() {
         {/* Chart Lightbox */}
         {selectedChart && (
           <div
-            className="fixed inset-0 z-50 bg-background/90 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-background/90 backdrop-blur-sm flex items-center justify-center p-6"
             onClick={() => setSelectedChart(null)}
           >
             <div
-              className="terminal-card max-w-4xl w-full max-h-[90vh] overflow-hidden"
+              className="terminal-card max-w-3xl w-full"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="terminal-header flex items-center justify-between">
@@ -634,11 +635,11 @@ export default function ProjectDetail() {
                   ✕ Close
                 </button>
               </div>
-              <div className="p-4 overflow-auto max-h-[70vh]">
+              <div className="p-4">
                 <img
                   src={selectedChart.image}
                   alt={selectedChart.title}
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto max-h-[60vh] object-contain mx-auto"
                 />
                 <div className="mt-4 p-3 bg-secondary/50 rounded">
                   <p className="text-sm text-foreground">
