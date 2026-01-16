@@ -610,39 +610,41 @@ export default function ProjectDetail() {
         {/* Chart Lightbox */}
         {selectedChart && (
           <div
-            className="fixed inset-0 z-50 bg-background/90 backdrop-blur-sm flex items-center justify-center p-6"
+            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
             onClick={() => setSelectedChart(null)}
           >
             <div
-              className="terminal-card max-w-3xl w-full"
+              className="terminal-card w-full max-w-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="terminal-header flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="flex items-center gap-1.5">
+                <div className="flex items-center min-w-0">
+                  <div className="flex items-center gap-1.5 shrink-0">
                     <div className="terminal-dot terminal-dot-red" />
                     <div className="terminal-dot terminal-dot-yellow" />
                     <div className="terminal-dot terminal-dot-green" />
                   </div>
-                  <span className="text-sm text-foreground ml-3 font-medium">
+                  <span className="text-sm text-foreground ml-3 font-medium truncate">
                     {selectedChart.title}
                   </span>
                 </div>
                 <button
                   onClick={() => setSelectedChart(null)}
-                  className="text-muted-foreground hover:text-foreground transition-colors text-sm px-2"
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm px-2 shrink-0"
                 >
-                  ✕ Close
+                  ✕
                 </button>
               </div>
-              <div className="p-4">
-                <img
-                  src={selectedChart.image}
-                  alt={selectedChart.title}
-                  className="w-full h-auto max-h-[60vh] object-contain mx-auto"
-                />
-                <div className="mt-4 p-3 bg-secondary/50 rounded">
-                  <p className="text-sm text-foreground">
+              <div className="p-3 md:p-4">
+                <div className="bg-card rounded overflow-hidden">
+                  <img
+                    src={selectedChart.image}
+                    alt={selectedChart.title}
+                    className="w-full h-auto max-h-[50vh] object-contain"
+                  />
+                </div>
+                <div className="mt-3 p-2.5 bg-secondary/50 rounded">
+                  <p className="text-xs md:text-sm text-foreground">
                     <span className="text-primary font-medium">💡 Key Insight:</span>{" "}
                     {selectedChart.insight}
                   </p>

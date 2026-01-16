@@ -18,14 +18,14 @@ const projects = [
     title: "Covid-19 Analysis and Visualization using Plotly Express",
     description: "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations including bar charts, scatter plots, and choropleth maps.",
     tags: ["python", "pandas", "plotly", "matplotlib", "data-visualization"],
-    date: "2024",
+    date: "2025",
   },
   {
     slug: "netflix-data-analysis",
     title: "Netflix Data Analysis & Visualization",
     description: "Comprehensive analysis of 8807 Netflix titles exploring content distribution, trends over time, and country-based insights using Python visualization libraries.",
     tags: ["python", "pandas", "seaborn", "matplotlib", "numpy", "eda"],
-    date: "2024",
+    date: "2025",
   },
   {
     slug: "kulmid",
