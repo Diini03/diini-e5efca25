@@ -13,6 +13,10 @@ import Experience from "@/pages/Experience";
 import Contact from "@/pages/Contact";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
+import Lab from "@/pages/Lab";
+import TicTacToe from "@/pages/lab/TicTacToe";
+import MemoryGame from "@/pages/lab/MemoryGame";
+import TypingTest from "@/pages/lab/TypingTest";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +38,10 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/lab" element={<Lab />} />
+            <Route path="/lab/tic-tac-toe" element={<TicTacToe />} />
+            <Route path="/lab/memory-game" element={<MemoryGame />} />
+            <Route path="/lab/typing-test" element={<TypingTest />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
