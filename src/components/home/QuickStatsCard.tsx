@@ -10,7 +10,7 @@ const stats = [
   },
   {
     icon: Briefcase,
-    value: "10+",
+    value: "5+",
     label: "Projects",
     color: "text-blue-500",
   },
