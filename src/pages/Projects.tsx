@@ -99,12 +99,12 @@ export default function Projects() {
               <div className="terminal-header flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1.5">
-                    <div className="terminal-dot terminal-dot-red" />
-                    <div className="terminal-dot terminal-dot-yellow" />
-                    <div className="terminal-dot terminal-dot-green" />
+                    <div className="terminal-dot terminal-dot-orange" />
+                    <div className="terminal-dot terminal-dot-blue" />
+                    <div className="terminal-dot terminal-dot-purple" />
                   </div>
                   <span className="text-xs text-muted-foreground ml-2">
-                    <span className="text-primary">diini</span> / {project.slug}
+                    <span className="text-primary">projects</span> / {project.slug}
                   </span>
                 </div>
                 <span className="text-xs text-muted-foreground">{project.date}</span>
