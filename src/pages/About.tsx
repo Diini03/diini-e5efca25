@@ -2,6 +2,11 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award, CheckCircle } from "lucide-react";
 import { CurrentlyLearning } from "@/components/about/CurrentlyLearning";
 
+// Certification logos
+import freecodecampLogo from "@/assets/certifications/freecodecamp.png";
+import analystBuilderLogo from "@/assets/certifications/analyst-builder.png";
+import courseraLogo from "@/assets/certifications/coursera.png";
+
 const experiences = [
   {
     type: "education",
@@ -40,9 +45,9 @@ const skillCategories = [
 ];
 
 const certifications = [
-  { name: "Data Analysis with Python", provider: "freeCodeCamp", year: "2024", icon: "🐍" },
-  { name: "Data Analyst Bootcamp", provider: "Alex the Analyst", year: "2025", icon: "📊" },
-  { name: "Google UX Design Certificate", provider: "Coursera", year: "2024", icon: "🎨" },
+  { name: "Data Analysis with Python", provider: "freeCodeCamp", year: "2024", logo: freecodecampLogo },
+  { name: "Data Analyst Bootcamp", provider: "Analyst Builder", year: "2025", logo: analystBuilderLogo },
+  { name: "Google UX Design Certificate", provider: "Coursera", year: "2024", logo: courseraLogo },
 ];
 
 export default function About() {
@@ -210,9 +215,13 @@ export default function About() {
                 key={index}
                 className="group flex items-center gap-4 p-5 border border-border rounded-xl bg-card hover:border-primary/50 hover:bg-card/80 transition-all duration-300"
               >
-                {/* Icon Badge */}
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform duration-300">
-                  {cert.icon}
+                {/* Logo */}
+                <div className="w-14 h-14 rounded-xl bg-card overflow-hidden flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 border border-border">
+                  <img 
+                    src={cert.logo} 
+                    alt={cert.provider} 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 
                 {/* Content */}
