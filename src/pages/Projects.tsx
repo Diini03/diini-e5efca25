@@ -14,6 +14,13 @@ const projects = [
     date: "2025",
   },
   {
+    slug: "world-happiness-analysis",
+    title: "World Happiness Report Analysis (2008-2021)",
+    description: "Analyzed global happiness trends across 2363 data points exploring factors like GDP, social support, freedom, and corruption. Discovered that social support can increase happiness by up to 60%.",
+    tags: ["python", "pandas", "matplotlib", "seaborn", "numpy", "eda"],
+    date: "2025",
+  },
+  {
     slug: "covid-19-analysis",
     title: "Covid-19 Analysis and Visualization using Plotly Express",
     description: "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations including bar charts, scatter plots, and choropleth maps.",
