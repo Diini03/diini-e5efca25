@@ -41,9 +41,9 @@ export function TestimonialsCard() {
     <div className="terminal-card">
       <div className="terminal-header">
         <div className="flex items-center gap-1.5">
-          <div className="terminal-dot terminal-dot-red" />
-          <div className="terminal-dot terminal-dot-yellow" />
-          <div className="terminal-dot terminal-dot-green" />
+          <div className="terminal-dot terminal-dot-orange" />
+          <div className="terminal-dot terminal-dot-blue" />
+          <div className="terminal-dot terminal-dot-purple" />
         </div>
         <span className="text-xs text-muted-foreground ml-2">testimonials.json</span>
       </div>

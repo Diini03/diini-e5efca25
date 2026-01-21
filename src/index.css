@@ -126,16 +126,16 @@
     transform: scale(1.1);
   }
   
-  .terminal-dot-red {
-    background-color: hsl(0 80% 55%);
+  .terminal-dot-orange {
+    background-color: #F97316;
   }
   
-  .terminal-dot-yellow {
-    background-color: hsl(45 90% 50%);
+  .terminal-dot-blue {
+    background-color: #3B82F6;
   }
   
-  .terminal-dot-green {
-    background-color: hsl(140 70% 45%);
+  .terminal-dot-purple {
+    background-color: #A855F7;
   }
   
   .link-orange {
