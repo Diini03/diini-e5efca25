@@ -30,6 +30,12 @@ import fawPredictionHealthy2 from "@/assets/projects/fall-armyworm/prediction-he
 import fawPredictionDiseased2 from "@/assets/projects/fall-armyworm/prediction-diseased-2.png";
 import fawPredictionHealthy3 from "@/assets/projects/fall-armyworm/prediction-healthy-3.png";
 
+// World Happiness Chart Images
+import whHappinessOverTime from "@/assets/projects/world-happiness/happiness-over-time.png";
+import whTop10Countries from "@/assets/projects/world-happiness/top-10-countries.png";
+import whCorrelationHeatmap from "@/assets/projects/world-happiness/correlation-heatmap.png";
+import whGdpVsHappiness from "@/assets/projects/world-happiness/gdp-vs-happiness.png";
+
 interface ChartData {
   title: string;
   image: string;
@@ -216,6 +222,110 @@ def predict_leaf(image_path, model):
 # Save final model for deployment
 model4.save('fall_armyworm_detector.h5')
 print("Model saved successfully for future use!")`,
+  },
+  "world-happiness-analysis": {
+    title: "World Happiness Report Analysis (2008-2021)",
+    date: "2025",
+    description: "People's well-being changed over time, as shown by the World Happiness Data (2008-2021). The world's happiness level increased by almost 8% in the past ten years despite global issues like COVID-19, demonstrating how resilient people are. This analysis explores the key factors that influence happiness across 166+ countries.",
+    tags: ["python", "pandas", "matplotlib", "seaborn", "numpy", "eda"],
+    githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python",
+    keyInsight: "Social support can increase happiness by up to 60%. After a certain income level, joy plateaus - wealth helps but doesn't guarantee happiness. Freedom and corruption perception continue to determine who thrives and who struggles.",
+    charts: [
+      {
+        title: "Average Global Happiness Over Time",
+        image: whHappinessOverTime,
+        insight: "Global happiness remained relatively stable from 2008-2023, with a peak around 2020"
+      },
+      {
+        title: "Top 10 Happiest Countries in 2023",
+        image: whTop10Countries,
+        insight: "Nordic countries (Finland, Iceland, Denmark) consistently rank among the happiest"
+      },
+      {
+        title: "Correlation Between Happiness Factors",
+        image: whCorrelationHeatmap,
+        insight: "GDP (0.77), social support (0.72), and healthy life expectancy (0.71) have strongest positive correlation with happiness"
+      },
+      {
+        title: "Does Money Buy Happiness?",
+        image: whGdpVsHappiness,
+        insight: "Clear positive relationship between GDP per capita and happiness, but with diminishing returns at higher income levels"
+      }
+    ],
+    highlights: [
+      "Analyzed 2363 data points covering 166+ countries from 2008 to 2023",
+      "GDP, social support, and freedom have the strongest positive relationship with happiness",
+      "Corruption perception and negative affect are major negative factors impacting well-being",
+      "Nordic countries (Finland, Iceland, Denmark) consistently rank as the happiest in the world",
+      "Discovered that social support can boost happiness by up to 60% in connected societies",
+      "Emotional well-being aligns closely with happiness - higher positivity, lower negativity"
+    ],
+    tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
+    codeFile: "World_Happiness_Report_2024.ipynb",
+    codeContent: `# World Happiness Report Analysis
+# Exploring factors that influence global happiness
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+%matplotlib inline
+
+# Set plot styles
+sns.set(style="whitegrid", palette="pastel")
+
+# Load dataset
+df = pd.read_csv("world_happiness_report.csv")
+print(f"Dataset shape: {df.shape}")
+df.head()
+
+# Key columns: Country name, year, Life Ladder (happiness score),
+# Log GDP per capita, Social support, Healthy life expectancy,
+# Freedom to make life choices, Generosity, Perceptions of corruption,
+# Positive affect, Negative affect
+
+# Dataset statistics
+print(f"Dataset contains {len(df)} rows and {len(df.columns)} columns")
+df.describe()
+
+# Average happiness over time
+yearly_avg = df.groupby('year')['Life Ladder'].mean()
+plt.figure(figsize=(12, 6))
+plt.plot(yearly_avg.index, yearly_avg.values, marker='o')
+plt.title('Average Global Happiness Over Time')
+plt.xlabel('Year')
+plt.ylabel('Average Happiness Score (Life Ladder)')
+plt.show()
+
+# Top 10 happiest countries (latest year)
+latest_year = df['year'].max()
+top_10 = df[df['year'] == latest_year].nlargest(10, 'Life Ladder')
+plt.figure(figsize=(10, 8))
+plt.barh(top_10['Country name'], top_10['Life Ladder'], color=plt.cm.Pastel1.colors)
+plt.xlabel('Happiness Score')
+plt.title(f'Top 10 Happiest Countries in {latest_year}')
+plt.gca().invert_yaxis()
+plt.show()
+
+# Correlation heatmap
+numeric_cols = df.select_dtypes(include=[np.number]).columns
+corr_matrix = df[numeric_cols].corr()
+plt.figure(figsize=(12, 10))
+sns.heatmap(corr_matrix, annot=True, cmap='RdBu_r', center=0, fmt='.2f')
+plt.title('Correlation Between Happiness Factors')
+plt.show()
+
+# Does money buy happiness?
+plt.figure(figsize=(10, 8))
+plt.scatter(df['Log GDP per capita'], df['Life Ladder'], alpha=0.5)
+plt.xlabel('Log GDP per Capita')
+plt.ylabel('Happiness Score (Life Ladder)')
+plt.title('Does Money Buy Happiness?')
+plt.show()
+
+print("Key Finding: Social support correlates 0.72 with happiness!")
+print("Key Finding: Nordic countries consistently rank highest.")`,
   },
   "covid-19-analysis": {
     title: "Covid-19 Analysis and Visualization using Plotly Express",
