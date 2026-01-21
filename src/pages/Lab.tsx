@@ -2,8 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { 
   FlaskConical, Sparkles, Lightbulb, Code, Trophy, 
-  ArrowRight, RotateCcw, Brain, Keyboard, GraduationCap,
-  Zap
+  ArrowRight, RotateCcw, GraduationCap, Zap, Terminal
 } from "lucide-react";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { Button } from "@/components/ui/button";
@@ -39,6 +38,8 @@ const codeSnippets = [
   { code: "np.array([1,2,3]) * 2", output: "[2, 4, 6]", lang: "NumPy" },
   { code: "df.dropna()", output: "Remove rows with NaN", lang: "Pandas" },
   { code: "plt.scatter(x, y)", output: "Create a scatter plot", lang: "Matplotlib" },
+  { code: "df.merge(df2, on='id')", output: "Merge two DataFrames", lang: "Pandas" },
+  { code: "model.fit(X_train, y_train)", output: "Train the ML model", lang: "Scikit-learn" },
 ];
 
 const funFacts = [
@@ -48,6 +49,8 @@ const funFacts = [
   { emoji: "📊", fact: "SQL was originally called SEQUEL (Structured English Query Language)." },
   { emoji: "🧠", fact: "The human brain can store ~2.5 petabytes—that's 2.5 million gigabytes!" },
   { emoji: "⌨️", fact: "The average developer writes 50-100 bugs per 1000 lines of code." },
+  { emoji: "💾", fact: "The first 1GB hard drive (1980) weighed 550 pounds and cost $40,000!" },
+  { emoji: "🚀", fact: "Netflix's recommendation engine saves them $1 billion per year in customer retention." },
 ];
 
 const quickTips = [
@@ -56,6 +59,9 @@ const quickTips = [
   "Clean data = Better predictions",
   "Version control your notebooks with Git",
   "Document your code—future you will thank you",
+  "Use meaningful variable names, not x, y, z",
+  "Start simple, then iterate to complexity",
+  "Test your queries on small datasets first",
 ];
 
 export default function Lab() {
@@ -69,15 +75,15 @@ export default function Lab() {
   // Knowledge rotation
   const [factIndex, setFactIndex] = useState(0);
   const [tipIndex, setTipIndex] = useState(0);
+  const [snippetIndex, setSnippetIndex] = useState(0);
   
-  const currentSnippet = useMemo(() => 
-    codeSnippets[Math.floor(Math.random() * codeSnippets.length)], 
-  []);
+  const currentSnippet = codeSnippets[snippetIndex];
 
   useEffect(() => {
-    const factTimer = setInterval(() => setFactIndex((p) => (p + 1) % funFacts.length), 5000);
-    const tipTimer = setInterval(() => setTipIndex((p) => (p + 1) % quickTips.length), 4000);
-    return () => { clearInterval(factTimer); clearInterval(tipTimer); };
+    const factTimer = setInterval(() => setFactIndex((p) => (p + 1) % funFacts.length), 6000);
+    const tipTimer = setInterval(() => setTipIndex((p) => (p + 1) % quickTips.length), 5000);
+    const snippetTimer = setInterval(() => setSnippetIndex((p) => (p + 1) % codeSnippets.length), 8000);
+    return () => { clearInterval(factTimer); clearInterval(tipTimer); clearInterval(snippetTimer); };
   }, []);
 
   // Mini game logic
@@ -125,12 +131,6 @@ export default function Lab() {
     setResult("");
   };
 
-  const otherGames = [
-    { id: "memory-game", title: "Memory Match", icon: Brain, desc: "Match icons" },
-    { id: "typing-test", title: "Typing Speed", icon: Keyboard, desc: "Test WPM" },
-    { id: "data-quiz", title: "Data Quiz", icon: GraduationCap, desc: "Learn & Quiz" },
-  ];
-
   return (
     <PageTransition>
       <div className="max-w-4xl mx-auto px-6 py-12">
@@ -139,19 +139,116 @@ export default function Lab() {
           <FlaskConical className="w-8 h-8 text-primary" />
           <h1 className="text-3xl font-mono font-bold text-foreground">Lab</h1>
         </div>
-        <p className="text-muted-foreground font-mono mb-8">
+        <p className="text-muted-foreground font-mono mb-10">
           Play, learn, and explore—all in one place.
         </p>
 
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          
-          {/* Left: Instant Play Tic-Tac-Toe */}
+        {/* Knowledge Cards Section - ENLARGED */}
+        <div className="space-y-6 mb-10">
+          {/* Code Snippet - Large Card */}
+          <div className="border border-border rounded-xl bg-card overflow-hidden">
+            <div className="terminal-header flex items-center gap-2 px-4 py-3">
+              <div className="flex items-center gap-1.5">
+                <div className="terminal-dot terminal-dot-orange" />
+                <div className="terminal-dot terminal-dot-blue" />
+                <div className="terminal-dot terminal-dot-purple" />
+              </div>
+              <span className="text-xs text-muted-foreground ml-2 font-mono">
+                <span className="text-primary">snippets</span> / {currentSnippet.lang.toLowerCase()}.py
+              </span>
+            </div>
+            <div className="p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <Terminal className="w-5 h-5 text-primary" />
+                <span className="text-sm font-mono text-primary font-semibold">{currentSnippet.lang}</span>
+              </div>
+              <code className="block font-mono text-xl text-foreground mb-4 bg-muted/50 px-5 py-4 rounded-lg border border-border">
+                {currentSnippet.code}
+              </code>
+              <p className="text-base font-mono text-muted-foreground flex items-center gap-2">
+                <span className="text-primary">→</span> {currentSnippet.output}
+              </p>
+              <div className="flex gap-1.5 mt-5 justify-center">
+                {codeSnippets.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      i === snippetIndex ? "bg-primary w-6" : "bg-muted hover:bg-muted-foreground/30"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Fun Fact - Large Card */}
+          <div className="border border-border rounded-xl p-6 bg-card relative overflow-hidden group hover:border-primary/30 transition-colors">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500" />
+            <div className="relative">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-primary" />
+                </div>
+                <span className="text-sm font-mono text-primary font-semibold">Did you know?</span>
+              </div>
+              <div className="flex items-start gap-4">
+                <span className="text-4xl">{funFacts[factIndex].emoji}</span>
+                <p className="text-lg font-mono text-foreground leading-relaxed flex-1">
+                  {funFacts[factIndex].fact}
+                </p>
+              </div>
+              <div className="flex gap-1.5 mt-5 justify-center">
+                {funFacts.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      i === factIndex ? "bg-primary w-6" : "bg-muted hover:bg-muted-foreground/30"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Tip - Large Card */}
+          <div className="border border-primary/30 rounded-xl p-6 bg-primary/5 group hover:bg-primary/10 transition-colors">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                <Lightbulb className="w-6 h-6 text-primary" />
+              </div>
+              <div className="flex-1">
+                <span className="text-sm font-mono text-primary font-semibold block mb-2">Quick Tip</span>
+                <p className="text-lg font-mono text-foreground leading-relaxed">
+                  {quickTips[tipIndex]}
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-1.5 mt-5 justify-center">
+              {quickTips.map((_, i) => (
+                <div
+                  key={i}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    i === tipIndex ? "bg-primary w-6" : "bg-primary/30 hover:bg-primary/50"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Interactive Games Section */}
+        <h2 className="text-xl font-mono font-semibold text-foreground mb-6 flex items-center gap-2">
+          <Zap className="w-5 h-5 text-primary" />
+          Interactive Games
+        </h2>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+          {/* Tic-Tac-Toe Card */}
           <div className="border border-border rounded-xl p-6 bg-card">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Zap className="w-5 h-5 text-primary" />
-                <span className="font-mono font-semibold text-foreground">Quick Play</span>
+                <span className="font-mono font-semibold text-foreground">Tic-Tac-Toe</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-xs font-mono text-muted-foreground flex items-center gap-1">
@@ -186,7 +283,7 @@ export default function Lab() {
             </div>
 
             {/* Status */}
-            <div className="text-center">
+            <div className="text-center mb-4">
               {gameOver ? (
                 <p className="text-sm font-mono text-foreground">{result}</p>
               ) : (
@@ -198,84 +295,43 @@ export default function Lab() {
 
             <Link 
               to="/lab/tic-tac-toe" 
-              className="mt-4 flex items-center justify-center gap-1 text-xs font-mono text-primary hover:underline"
+              className="flex items-center justify-center gap-1 text-sm font-mono text-primary hover:underline"
             >
-              Full game with difficulty levels <ArrowRight className="w-3 h-3" />
+              Full game with difficulty levels <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          {/* Right: Knowledge Cards */}
-          <div className="space-y-4">
-            {/* Code Snippet */}
-            <div className="border border-border rounded-xl p-5 bg-card">
-              <div className="flex items-center gap-2 mb-3">
-                <Code className="w-4 h-4 text-primary" />
-                <span className="text-xs font-mono text-primary">{currentSnippet.lang}</span>
-              </div>
-              <code className="block font-mono text-sm text-foreground mb-2 bg-muted/50 px-3 py-2 rounded-lg">
-                {currentSnippet.code}
-              </code>
-              <p className="text-xs font-mono text-muted-foreground">
-                → {currentSnippet.output}
-              </p>
-            </div>
-
-            {/* Fun Fact */}
-            <div className="border border-border rounded-xl p-5 bg-card relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-              <div className="flex items-start gap-3 relative">
-                <Sparkles className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-xs font-mono text-primary block mb-1">Did you know?</span>
-                  <p className="text-sm font-mono text-foreground leading-relaxed">
-                    {funFacts[factIndex].emoji} {funFacts[factIndex].fact}
-                  </p>
+          {/* Data Quiz CTA Card */}
+          <Link
+            to="/lab/data-quiz"
+            className="group border border-border rounded-xl p-6 bg-card hover:border-primary/50 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <GraduationCap className="w-6 h-6 text-primary" />
                 </div>
-              </div>
-              <div className="flex gap-1 mt-3 justify-center">
-                {funFacts.map((_, i) => (
-                  <div
-                    key={i}
-                    className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                      i === factIndex ? "bg-primary" : "bg-muted"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Quick Tip */}
-            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 border border-primary/20">
-              <Lightbulb className="w-4 h-4 text-primary flex-shrink-0" />
-              <p className="text-sm font-mono text-foreground">
-                {quickTips[tipIndex]}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* More Games */}
-        <div className="mb-8">
-          <h2 className="text-lg font-mono font-semibold text-foreground mb-4 flex items-center gap-2">
-            <span>More to Explore</span>
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {otherGames.map((game) => (
-              <Link
-                key={game.id}
-                to={`/lab/${game.id}`}
-                className="group flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary/50 transition-all"
-              >
-                <game.icon className="w-8 h-8 text-primary" />
                 <div>
-                  <h3 className="font-mono font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {game.title}
+                  <h3 className="font-mono font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
+                    Data Quiz
                   </h3>
-                  <p className="text-xs text-muted-foreground font-mono">{game.desc}</p>
+                  <p className="text-sm text-muted-foreground font-mono">Learn & Test Your Knowledge</p>
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
+              <p className="text-muted-foreground font-mono text-sm leading-relaxed mb-6">
+                Start with helpful data analysis tips, then test your skills with multiple-choice questions. 
+                Get detailed explanations and inspiring quotes!
+              </p>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2">
+                <span className="px-2 py-1 text-xs font-mono bg-primary/10 text-primary rounded">5 Tips</span>
+                <span className="px-2 py-1 text-xs font-mono bg-primary/10 text-primary rounded">5 Questions</span>
+                <span className="px-2 py-1 text-xs font-mono bg-primary/10 text-primary rounded">Quotes</span>
+              </div>
+              <ArrowRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
         </div>
 
         {/* Footer CTA */}

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award } from "lucide-react";
+import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award, CheckCircle } from "lucide-react";
 import { CurrentlyLearning } from "@/components/about/CurrentlyLearning";
 
 const experiences = [
@@ -12,12 +12,12 @@ const experiences = [
   },
   {
     type: "work",
-    title: "Enumerator",
-    org: "NAPAD",
+    title: "Data Analyst",
+    org: "Fly Graphics",
     location: "Mogadishu, Somalia",
     date: "Jan 2023 - Dec 2024",
     description:
-      "Collected household and community-level data through structured surveys and digital data-collection tools. Ensured data accuracy and reliability through field verification and quality checks.",
+      "Analyzed business data using Power BI to create interactive dashboards and reports. Transformed raw data into actionable insights for decision-making and strategic planning.",
   },
   {
     type: "work",
@@ -40,9 +40,9 @@ const skillCategories = [
 ];
 
 const certifications = [
-  { name: "Data Analysis with Python", provider: "freeCodeCamp", year: "2024" },
-  { name: "Data Analyst Bootcamp", provider: "Alex the Analyst", year: "2025" },
-  { name: "Google UX Design Certificate", provider: "Coursera", year: "2024" },
+  { name: "Data Analysis with Python", provider: "freeCodeCamp", year: "2024", icon: "🐍" },
+  { name: "Data Analyst Bootcamp", provider: "Alex the Analyst", year: "2025", icon: "📊" },
+  { name: "Google UX Design Certificate", provider: "Coursera", year: "2024", icon: "🎨" },
 ];
 
 export default function About() {
@@ -197,47 +197,43 @@ export default function About() {
           </div>
         </section>
 
-        {/* Certifications */}
+        {/* Certifications - Eye-Catching Cards */}
         <section className="mb-12">
           <h2 className="text-base font-semibold mb-6 flex items-center gap-2">
             <Award className="w-4 h-4 text-primary" />
             Certifications
           </h2>
 
-          <div className="terminal-card">
-            <div className="terminal-header">
-              <div className="flex items-center gap-1.5">
-                <div className="terminal-dot terminal-dot-red" />
-                <div className="terminal-dot terminal-dot-yellow" />
-                <div className="terminal-dot terminal-dot-green" />
-              </div>
-              <span className="text-xs text-muted-foreground ml-2">certifications.json</span>
-            </div>
-            <div className="p-4 font-mono text-sm">
-              <div className="text-muted-foreground">{"{"}</div>
-              <div className="pl-4">
-                <span className="text-foreground">"certifications"</span>
-                <span className="text-muted-foreground">: [</span>
-              </div>
-              {certifications.map((cert, index) => (
-                <div key={index} className="pl-8">
-                  <span className="text-muted-foreground">{"{"}</span>
-                  <span className="text-primary">"{cert.name}"</span>
-                  <span className="text-muted-foreground">, "</span>
-                  <span className="text-foreground">{cert.provider}</span>
-                  <span className="text-muted-foreground">", </span>
-                  <span className="text-primary">{cert.year}</span>
-                  <span className="text-muted-foreground">{" }"}</span>
-                  {index < certifications.length - 1 && (
-                    <span className="text-muted-foreground">,</span>
-                  )}
+          <div className="grid gap-4">
+            {certifications.map((cert, index) => (
+              <div 
+                key={index}
+                className="group flex items-center gap-4 p-5 border border-border rounded-xl bg-card hover:border-primary/50 hover:bg-card/80 transition-all duration-300"
+              >
+                {/* Icon Badge */}
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 text-2xl group-hover:scale-110 transition-transform duration-300">
+                  {cert.icon}
                 </div>
-              ))}
-              <div className="pl-4">
-                <span className="text-muted-foreground">]</span>
+                
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors truncate">
+                    {cert.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">{cert.provider}</p>
+                </div>
+                
+                {/* Year Badge */}
+                <span className="px-3 py-1.5 text-xs font-mono bg-primary/10 text-primary rounded-full font-semibold shrink-0">
+                  {cert.year}
+                </span>
+                
+                {/* Verified Icon */}
+                <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                </div>
               </div>
-              <div className="text-muted-foreground">{"}"}</div>
-            </div>
+            ))}
           </div>
         </section>
 

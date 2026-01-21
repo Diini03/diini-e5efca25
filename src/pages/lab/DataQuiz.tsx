@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Brain, Lightbulb, Quote, CheckCircle, XCircle, RotateCcw, ChevronRight } from "lucide-react";
+import { ArrowLeft, Brain, Lightbulb, Quote, CheckCircle, XCircle, RotateCcw, ChevronRight, Flame, Trophy, Sparkles } from "lucide-react";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { Button } from "@/components/ui/button";
 
@@ -17,22 +17,27 @@ const tips = [
   {
     title: "Clean Your Data First",
     content: "80% of a data analyst's time is spent cleaning and preparing data. Always check for missing values, duplicates, and outliers before analysis.",
+    icon: "🧹",
   },
   {
     title: "Know Your Data Types",
     content: "Understanding the difference between categorical, numerical, ordinal, and nominal data is crucial for choosing the right analysis methods.",
+    icon: "📊",
   },
   {
     title: "Correlation ≠ Causation",
     content: "Just because two variables move together doesn't mean one causes the other. Always consider confounding variables.",
+    icon: "🔗",
   },
   {
     title: "Visualize Before Modeling",
     content: "Create exploratory visualizations before building models. Patterns, outliers, and relationships become obvious when you plot your data.",
+    icon: "📈",
   },
   {
     title: "Document Everything",
     content: "Write clear comments, maintain data dictionaries, and document your methodology. Future you (and your team) will thank you.",
+    icon: "📝",
   },
 ];
 
@@ -150,6 +155,7 @@ export default function DataQuiz() {
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>([]);
+  const [streak, setStreak] = useState(0);
 
   const shuffledQuestions = useMemo(() => {
     return [...questions].sort(() => Math.random() - 0.5).slice(0, 5);
@@ -173,6 +179,9 @@ export default function DataQuiz() {
     setShowExplanation(true);
     if (index === shuffledQuestions[currentQuestion].correct) {
       setScore(score + 1);
+      setStreak(streak + 1);
+    } else {
+      setStreak(0);
     }
     setAnswers([...answers, index]);
   };
@@ -195,16 +204,23 @@ export default function DataQuiz() {
     setShowExplanation(false);
     setScore(0);
     setAnswers([]);
+    setStreak(0);
   };
 
   const getScoreMessage = () => {
     const percentage = (score / shuffledQuestions.length) * 100;
-    if (percentage === 100) return "Perfect! You're a data wizard! 🧙‍♂️";
-    if (percentage >= 80) return "Excellent! You know your data! 📊";
-    if (percentage >= 60) return "Good job! Keep learning! 📚";
-    if (percentage >= 40) return "Not bad! Room for improvement! 💪";
-    return "Keep studying! Data skills take time! 🌱";
+    if (percentage === 100) return { text: "Perfect! You're a data wizard!", emoji: "🧙‍♂️" };
+    if (percentage >= 80) return { text: "Excellent! You know your data!", emoji: "📊" };
+    if (percentage >= 60) return { text: "Good job! Keep learning!", emoji: "📚" };
+    if (percentage >= 40) return { text: "Not bad! Room for improvement!", emoji: "💪" };
+    return { text: "Keep studying! Data skills take time!", emoji: "🌱" };
   };
+
+  const progressPercentage = phase === "tips" 
+    ? ((currentTip + 1) / tips.length) * 100 
+    : phase === "quiz" 
+    ? ((currentQuestion + 1) / shuffledQuestions.length) * 100 
+    : 100;
 
   return (
     <PageTransition>
@@ -227,51 +243,69 @@ export default function DataQuiz() {
           </p>
         </div>
 
-        {/* Progress Indicator */}
-        <div className="flex items-center gap-2 mb-8">
-          <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono ${phase === "tips" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>
-            <Lightbulb className="w-3 h-3" />
-            Tips
+        {/* Progress Bar */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-4">
+              <div className={`flex items-center gap-2 text-sm font-mono ${phase === "tips" ? "text-primary" : "text-muted-foreground"}`}>
+                <Lightbulb className="w-4 h-4" />
+                Tips
+              </div>
+              <ChevronRight className="w-4 h-4 text-muted-foreground" />
+              <div className={`flex items-center gap-2 text-sm font-mono ${phase === "quiz" ? "text-primary" : "text-muted-foreground"}`}>
+                <Brain className="w-4 h-4" />
+                Quiz
+              </div>
+              <ChevronRight className="w-4 h-4 text-muted-foreground" />
+              <div className={`flex items-center gap-2 text-sm font-mono ${phase === "results" ? "text-primary" : "text-muted-foreground"}`}>
+                <Trophy className="w-4 h-4" />
+                Results
+              </div>
+            </div>
+            {phase === "quiz" && streak >= 2 && (
+              <div className="flex items-center gap-1 text-orange-500 animate-pulse">
+                <Flame className="w-4 h-4" />
+                <span className="text-sm font-mono font-bold">{streak} streak!</span>
+              </div>
+            )}
           </div>
-          <ChevronRight className="w-4 h-4 text-muted-foreground" />
-          <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono ${phase === "quiz" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>
-            <Brain className="w-3 h-3" />
-            Quiz
-          </div>
-          <ChevronRight className="w-4 h-4 text-muted-foreground" />
-          <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono ${phase === "results" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>
-            <CheckCircle className="w-3 h-3" />
-            Results
+          <div className="h-2 bg-muted rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-primary rounded-full transition-all duration-500 ease-out"
+              style={{ width: `${progressPercentage}%` }}
+            />
           </div>
         </div>
 
         {/* Tips Phase */}
         {phase === "tips" && (
-          <div className="border border-border rounded-lg p-6 bg-card">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono text-muted-foreground">
+          <div className="border border-border rounded-xl p-8 bg-card animate-fade-in">
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-sm font-mono text-muted-foreground">
                 Tip {currentTip + 1} of {tips.length}
               </span>
-              <Lightbulb className="w-5 h-5 text-primary" />
+              <span className="text-4xl">{tips[currentTip].icon}</span>
             </div>
-            <h2 className="text-xl font-mono font-semibold text-foreground mb-3">
+            <h2 className="text-2xl font-mono font-semibold text-foreground mb-4">
               {tips[currentTip].title}
             </h2>
-            <p className="text-muted-foreground font-mono leading-relaxed mb-6">
+            <p className="text-lg text-muted-foreground font-mono leading-relaxed mb-8">
               {tips[currentTip].content}
             </p>
             <div className="flex items-center justify-between">
-              <div className="flex gap-1">
+              <div className="flex gap-2">
                 {tips.map((_, i) => (
                   <div
                     key={i}
-                    className={`w-2 h-2 rounded-full transition-colors ${i === currentTip ? "bg-primary" : "bg-muted"}`}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      i === currentTip ? "bg-primary scale-125" : i < currentTip ? "bg-primary/50" : "bg-muted"
+                    }`}
                   />
                 ))}
               </div>
-              <Button onClick={handleNextTip} className="font-mono">
+              <Button onClick={handleNextTip} size="lg" className="font-mono">
                 {currentTip < tips.length - 1 ? "Next Tip" : "Start Quiz"}
-                <ChevronRight className="w-4 h-4 ml-1" />
+                <ChevronRight className="w-5 h-5 ml-1" />
               </Button>
             </div>
           </div>
@@ -279,37 +313,44 @@ export default function DataQuiz() {
 
         {/* Quiz Phase */}
         {phase === "quiz" && (
-          <div className="border border-border rounded-lg p-6 bg-card">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono text-muted-foreground">
+          <div className="border border-border rounded-xl p-8 bg-card animate-fade-in">
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-sm font-mono text-muted-foreground">
                 Question {currentQuestion + 1} of {shuffledQuestions.length}
               </span>
-              <span className="text-xs font-mono text-primary">
-                Score: {score}/{currentQuestion + (showExplanation ? 1 : 0)}
-              </span>
+              <div className="flex items-center gap-4">
+                {streak >= 2 && (
+                  <span className="flex items-center gap-1 text-orange-500 text-sm font-mono">
+                    <Flame className="w-4 h-4" /> {streak}
+                  </span>
+                )}
+                <span className="text-sm font-mono px-3 py-1 bg-primary/10 text-primary rounded-full">
+                  Score: {score}/{currentQuestion + (showExplanation ? 1 : 0)}
+                </span>
+              </div>
             </div>
             
-            <h2 className="text-lg font-mono font-semibold text-foreground mb-6">
+            <h2 className="text-xl font-mono font-semibold text-foreground mb-8">
               {shuffledQuestions[currentQuestion].question}
             </h2>
 
-            <div className="space-y-3 mb-6">
+            <div className="space-y-4 mb-8">
               {shuffledQuestions[currentQuestion].options.map((option, index) => {
                 const isCorrect = index === shuffledQuestions[currentQuestion].correct;
                 const isSelected = index === selectedAnswer;
                 
-                let buttonClass = "w-full text-left p-4 rounded-lg border font-mono text-sm transition-all ";
+                let buttonClass = "w-full text-left p-5 rounded-xl border font-mono transition-all duration-300 ";
                 
                 if (showExplanation) {
                   if (isCorrect) {
-                    buttonClass += "border-green-500 bg-green-500/10 text-green-400";
+                    buttonClass += "border-green-500 bg-green-500/10 text-green-400 scale-[1.02]";
                   } else if (isSelected && !isCorrect) {
                     buttonClass += "border-red-500 bg-red-500/10 text-red-400";
                   } else {
                     buttonClass += "border-border text-muted-foreground opacity-50";
                   }
                 } else {
-                  buttonClass += "border-border hover:border-primary hover:bg-primary/5 text-foreground cursor-pointer";
+                  buttonClass += "border-border hover:border-primary hover:bg-primary/5 text-foreground cursor-pointer hover:scale-[1.01]";
                 }
 
                 return (
@@ -319,16 +360,16 @@ export default function DataQuiz() {
                     className={buttonClass}
                     disabled={showExplanation}
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-full border border-current flex items-center justify-center text-xs">
+                    <div className="flex items-center gap-4">
+                      <span className="w-8 h-8 rounded-full border-2 border-current flex items-center justify-center text-sm font-bold">
                         {String.fromCharCode(65 + index)}
                       </span>
-                      <span>{option}</span>
+                      <span className="text-lg">{option}</span>
                       {showExplanation && isCorrect && (
-                        <CheckCircle className="w-4 h-4 ml-auto text-green-500" />
+                        <CheckCircle className="w-6 h-6 ml-auto text-green-500" />
                       )}
                       {showExplanation && isSelected && !isCorrect && (
-                        <XCircle className="w-4 h-4 ml-auto text-red-500" />
+                        <XCircle className="w-6 h-6 ml-auto text-red-500" />
                       )}
                     </div>
                   </button>
@@ -337,9 +378,9 @@ export default function DataQuiz() {
             </div>
 
             {showExplanation && (
-              <div className="bg-muted/50 rounded-lg p-4 mb-6">
-                <p className="text-sm font-mono text-muted-foreground">
-                  <span className="text-primary font-semibold">Explanation: </span>
+              <div className="bg-muted/50 rounded-xl p-5 mb-8 border border-border animate-fade-in">
+                <p className="font-mono text-muted-foreground">
+                  <span className="text-primary font-semibold">💡 Explanation: </span>
                   {shuffledQuestions[currentQuestion].explanation}
                 </p>
               </div>
@@ -347,9 +388,9 @@ export default function DataQuiz() {
 
             {showExplanation && (
               <div className="flex justify-end">
-                <Button onClick={handleNextQuestion} className="font-mono">
+                <Button onClick={handleNextQuestion} size="lg" className="font-mono">
                   {currentQuestion < shuffledQuestions.length - 1 ? "Next Question" : "See Results"}
-                  <ChevronRight className="w-4 h-4 ml-1" />
+                  <ChevronRight className="w-5 h-5 ml-1" />
                 </Button>
               </div>
             )}
@@ -358,36 +399,48 @@ export default function DataQuiz() {
 
         {/* Results Phase */}
         {phase === "results" && (
-          <div className="space-y-6">
+          <div className="space-y-6 animate-fade-in">
             {/* Score Card */}
-            <div className="border border-border rounded-lg p-8 bg-card text-center">
-              <div className="text-6xl font-mono font-bold text-primary mb-2">
-                {score}/{shuffledQuestions.length}
+            <div className="border border-primary/50 rounded-xl p-10 bg-card text-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-primary/5" />
+              <div className="absolute top-4 left-4">
+                <Sparkles className="w-6 h-6 text-primary animate-pulse" />
               </div>
-              <p className="text-xl font-mono text-foreground mb-2">
-                {getScoreMessage()}
-              </p>
-              <p className="text-sm text-muted-foreground font-mono mb-6">
-                You got {Math.round((score / shuffledQuestions.length) * 100)}% correct
-              </p>
-              <Button onClick={handleRestart} className="font-mono">
-                <RotateCcw className="w-4 h-4 mr-2" />
-                Try Again
-              </Button>
+              <div className="absolute top-4 right-4">
+                <Sparkles className="w-6 h-6 text-primary animate-pulse" />
+              </div>
+              <div className="relative">
+                <span className="text-6xl mb-4 block">{getScoreMessage().emoji}</span>
+                <div className="text-7xl font-mono font-bold text-primary mb-4">
+                  {score}/{shuffledQuestions.length}
+                </div>
+                <p className="text-2xl font-mono text-foreground mb-2">
+                  {getScoreMessage().text}
+                </p>
+                <p className="text-lg text-muted-foreground font-mono mb-8">
+                  You got {Math.round((score / shuffledQuestions.length) * 100)}% correct
+                </p>
+                <Button onClick={handleRestart} size="lg" className="font-mono">
+                  <RotateCcw className="w-5 h-5 mr-2" />
+                  Try Again
+                </Button>
+              </div>
             </div>
 
             {/* Inspirational Quote */}
-            <div className="border border-border rounded-lg p-6 bg-card">
-              <div className="flex items-start gap-3">
-                <Quote className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+            <div className="border border-border rounded-xl p-8 bg-card">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  <Quote className="w-6 h-6 text-primary" />
+                </div>
                 <div>
-                  <p className="text-lg font-mono text-foreground italic mb-3">
+                  <p className="text-xl font-mono text-foreground italic mb-4 leading-relaxed">
                     "{randomQuote.text}"
                   </p>
-                  <p className="text-sm font-mono text-muted-foreground">
+                  <p className="text-base font-mono text-muted-foreground">
                     — {randomQuote.author}
                   </p>
-                  <span className="inline-block mt-2 text-xs font-mono px-2 py-1 rounded bg-primary/10 text-primary">
+                  <span className="inline-block mt-3 text-sm font-mono px-3 py-1 rounded-full bg-primary/10 text-primary">
                     {randomQuote.field}
                   </span>
                 </div>
@@ -395,14 +448,14 @@ export default function DataQuiz() {
             </div>
 
             {/* More Quotes */}
-            <div className="border border-border rounded-lg p-6 bg-card">
-              <h3 className="text-lg font-mono font-semibold text-foreground mb-4 flex items-center gap-2">
+            <div className="border border-border rounded-xl p-6 bg-card">
+              <h3 className="text-lg font-mono font-semibold text-foreground mb-6 flex items-center gap-2">
                 <Quote className="w-5 h-5 text-primary" />
                 More Inspiration
               </h3>
               <div className="grid gap-4">
                 {quotes.slice(0, 4).map((quote, index) => (
-                  <div key={index} className="border-l-2 border-primary/30 pl-4">
+                  <div key={index} className="border-l-2 border-primary/30 pl-4 hover:border-primary transition-colors">
                     <p className="text-sm font-mono text-muted-foreground italic">
                       "{quote.text}"
                     </p>
