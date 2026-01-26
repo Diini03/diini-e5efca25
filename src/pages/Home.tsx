@@ -44,9 +44,13 @@ export default function Home() {
 
           <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-6">
             <p>
-              <span className="text-foreground font-medium">Data Analyst by day, aspiring Data Scientist by night.</span> Based in <span className="text-foreground font-medium">Mogadishu</span>, 
-              I use <span className="text-foreground font-medium">Python, SQL, R, Power BI, Tableau, and JavaScript</span> to transform complex data into insights that drive real decisions. 
-              My work spans real projects, <span className="text-foreground font-medium">humanitarian initiatives</span>, and business-focused analysis. I also built{" "}
+              I'm a <span className="text-foreground font-medium">Data Analyst</span> based in <span className="text-foreground font-medium">Mogadishu, Somalia</span>. 
+              I work with <span className="text-foreground font-medium">Python, SQL, R, Power BI</span>, and <span className="text-foreground font-medium">AI development tools</span> like <span className="text-primary">Cursor</span> and <span className="text-primary">Lovable</span> to 
+              analyze real-world datasets and build data-driven solutions. From COVID-19 trends across 209 countries to Netflix content patterns — I turn raw data into meaningful insights.
+            </p>
+            <p>
+              Recently graduated with a <span className="text-foreground font-medium">BSc in Computer Science</span> from <span className="text-foreground font-medium">Somali National University</span>. 
+              I also built{" "}
               <a
                 href="https://kulmid.lovable.app"
                 target="_blank"
@@ -55,12 +59,7 @@ export default function Home() {
               >
                 Kulmid
               </a>
-              , an event management platform designed to support organized and seamless event experiences.
-            </p>
-            <p>
-              I recently graduated with a degree in <span className="text-foreground font-medium">Computer Science</span> from <span className="text-foreground font-medium">Somali National University</span>. Along the way, I have strengthened my skills through programs 
-              such as <span className="text-foreground font-medium">freeCodeCamp's Data Analysis with Python</span> and the <span className="text-foreground font-medium">Alex the Analyst Bootcamp</span>, and I am continually 
-              pushing myself toward a <span className="text-primary font-semibold">full Data Science career</span>.
+              , an event management platform for seamless event experiences.
             </p>
           </div>
 
