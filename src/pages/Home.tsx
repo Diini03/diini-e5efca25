@@ -42,24 +42,11 @@ export default function Home() {
             Hey! I'm <span className="text-primary inline-block hover:scale-105 transition-transform duration-300" style={{ textShadow: '0 4px 20px hsl(24 95% 53% / 0.3)' }}>Diini Kahiye</span>
           </h1>
 
-          <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-6">
+          <div className="text-muted-foreground text-sm leading-relaxed mb-6">
             <p>
-              I'm a <span className="text-foreground font-medium">Data Analyst</span> based in <span className="text-foreground font-medium">Mogadishu, Somalia</span>. 
-              I work with <span className="text-foreground font-medium">Python, SQL, R, Power BI</span>, and <span className="text-foreground font-medium">AI development tools</span> like <span className="text-primary">Cursor</span> and <span className="text-primary">Lovable</span> to 
-              analyze real-world datasets and build data-driven solutions. From COVID-19 trends across 209 countries to Netflix content patterns — I turn raw data into meaningful insights.
-            </p>
-            <p>
-              Recently graduated with a <span className="text-foreground font-medium">BSc in Computer Science</span> from <span className="text-foreground font-medium">Somali National University</span>. 
-              I also built{" "}
-              <a
-                href="https://kulmid.lovable.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link-orange"
-              >
-                Kulmid
-              </a>
-              , an event management platform for seamless event experiences.
+              I'm a <span className="text-foreground font-medium">Junior Data Scientist</span> specializing in machine learning and big data solutions. 
+              I build predictive models, analyze large datasets, and deliver data-driven insights using <span className="text-foreground font-medium">Python, SQL, R</span>, and <span className="text-foreground font-medium">Power BI</span>. 
+              From COVID-19 trends across 209 countries to Netflix content patterns — I work with real-world data.
             </p>
           </div>
 
