@@ -1,9 +1,11 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Search, ExternalLink } from "lucide-react";
+import { useTheme } from "@/hooks/useTheme";
 
 // Import project images
-import kulmidImg from "@/assets/projects/kulmid.png";
+import kulmidDarkImg from "@/assets/projects/kulmid-dark.png";
+import kulmidLightImg from "@/assets/projects/kulmid-light.png";
 
 const projects = [
   {
@@ -40,13 +42,15 @@ const projects = [
     description: "A full-featured event management web application where users can create, manage, and share events. Features include event registration, attendee management, invitation system, and ticket handling. Built with React, TypeScript, and Supabase.",
     tags: ["react", "typescript", "supabase", "tailwindcss"],
     date: "2025",
-    image: kulmidImg,
+    imageDark: kulmidDarkImg,
+    imageLight: kulmidLightImg,
     liveUrl: "https://kulmid.lovable.app/",
   },
 ];
 
 export default function Projects() {
   const [searchQuery, setSearchQuery] = useState("");
+  const { theme } = useTheme();
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -111,12 +115,12 @@ export default function Projects() {
               </div>
               
               {/* Project Image (if available) */}
-              {project.image && (
-                <div className="relative overflow-hidden aspect-video">
+              {(project.imageDark || project.imageLight) && (
+                <div className="relative overflow-hidden h-40">
                   <img 
-                    src={project.image} 
+                    src={theme === "dark" ? project.imageDark : project.imageLight} 
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                   {project.liveUrl && (
