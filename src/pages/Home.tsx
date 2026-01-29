@@ -93,11 +93,6 @@ export default function Home() {
           </a>
         </section>
 
-        {/* Quick Stats */}
-        <section className="mb-10">
-          <QuickStatsCard />
-        </section>
-
         {/* Featured Projects */}
         <section className="mb-10">
           <div className="flex items-center justify-between mb-4">
@@ -119,6 +114,11 @@ export default function Home() {
               <ProjectCard key={project.slug} {...project} />
             ))}
           </div>
+        </section>
+
+        {/* Quick Stats */}
+        <section className="mb-10">
+          <QuickStatsCard />
         </section>
 
         {/* Dashboard Section - After Projects */}
