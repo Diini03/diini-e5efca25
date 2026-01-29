@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, ExternalLink, Star, Download } from "lucide-react";
 import { DashboardCard } from "@/components/home/DashboardCard";
-import { SkillsCard } from "@/components/home/SkillsCard";
+import { ServicesCard } from "@/components/home/ServicesCard";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
 import { ProjectCard } from "@/components/home/ProjectCard";
 
@@ -129,7 +129,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-4">
             <DashboardCard />
-            <SkillsCard />
+            <ServicesCard />
           </div>
         </section>
 
