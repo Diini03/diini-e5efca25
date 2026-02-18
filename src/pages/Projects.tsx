@@ -44,7 +44,7 @@ const projects = [
     date: "2025",
     imageDark: kulmidDarkImg,
     imageLight: kulmidLightImg,
-    liveUrl: "https://kulmid.lovable.app/",
+    liveUrl: "https://www.kulmid.com/",
   },
 ];
 
