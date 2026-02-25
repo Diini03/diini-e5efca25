@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
+import { useTheme } from "@/hooks/useTheme";
 
 const navItems = [
   { label: "About", path: "/about" },
@@ -13,7 +14,7 @@ const navItems = [
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { theme, toggleTheme } = useTheme();
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background">
       <div className="max-w-4xl mx-auto px-6">
@@ -36,6 +37,13 @@ export function Navigation() {
                 {item.label}
               </NavLink>
             ))}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -62,6 +70,13 @@ export function Navigation() {
                 {item.label}
               </NavLink>
             ))}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-2 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-mono"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {theme === "dark" ? "Light Mode" : "Dark Mode"}
+            </button>
           </div>
         )}
       </div>
