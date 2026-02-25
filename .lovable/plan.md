@@ -1,83 +1,101 @@
 
 
-# Home Page Dashboard Redesign
+# Home Page Redesign -- Phase-by-Phase Plan
 
-## Problem Analysis
+## Overview
 
-1. **"View all" link** is tiny muted text -- easy to miss entirely
-2. **Dashboard section** crams 5 widgets into a single terminal card with a basic 2x2 grid -- looks like a first prototype, not a polished portfolio
-3. **Location widget** is unnecessary (user confirmed)
-4. **Dark mode toggle** is buried inside the dashboard -- it's a global action that belongs in the navigation
-5. The current layout lacks visual hierarchy -- everything is the same size and weight
-
-## Design Approach
-
-Inspired by the Jason Cameron reference (bento-grid with distinct cards, bold typography for metrics, playful interactions), but adapted to the existing terminal/monospace aesthetic.
+Restructure the homepage to remove the ICT-style dashboard, add Blog and Lab sections, and relocate page views to the footer.
 
 ---
 
-## Changes
+## Phase 1: Remove from Home Page
 
-### 1. Featured Projects -- Add a visible "View All" button
+**What goes away:**
+- `ServicesCard` -- not relevant (you're not ICT)
+- `TimeOnSiteCard` -- timer removed
+- `PageViewsCard` -- moved to footer (Phase 2)
+- Entire "Dashboard" section heading and grid
 
-Remove the tiny top-right "View all" link. Add a proper styled button below the project cards grid:
+**File:** `src/pages/Home.tsx`
 
-```text
-[ Featured Projects ]
-+------------------+  +------------------+
-|  Covid-19        |  |  Netflix         |
-+------------------+  +------------------+
+---
 
-      [ View All Projects -> ]     <-- centered button
-```
+## Phase 2: Page Views in Footer
 
-### 2. Move Dark Mode Toggle to Navigation Bar
-
-Add a small sun/moon icon button to the right side of the navbar (next to the nav links on desktop, in the mobile menu on mobile). This frees it from the dashboard and makes it globally accessible.
-
-**Files changed:** `Navigation.tsx` -- add toggle button using `useTheme` hook.
-
-### 3. Redesign Dashboard as a Bento Grid
-
-Replace the single `DashboardCard` terminal card with a **bento-style grid** of individual cards. Each widget gets its own card with distinct visual weight.
-
-**Layout (3-column on desktop, stacked on mobile):**
+Add a small, bold page view counter to the footer's bottom bar, next to the copyright line. Clean monospace number with an eye icon.
 
 ```text
-+---------------------+  +-------------------------+
-|   PAGE VIEWS        |  |      CLICK COUNTER      |
-|   862               |  |   784,320               |
-|   total visitors    |  |   [ CLICK ME ]           |
-|                     |  |   you've clicked 116x   |
-+---------------------+  +-------------------------+
-+---------------------+  +-------------------------+
-|   TIME ON SITE      |  |     services.json       |
-|   00:01:13          |  |   (existing services    |
-|   this session      |  |    card, unchanged)     |
-+---------------------+  +-------------------------+
+// (c) 2026 Diini Kahiye          862 views  [eye icon]          </> with passion
 ```
 
-**Key design decisions:**
-- **Page Views card**: Large bold number with a subtle animated counter effect, eye icon
-- **Click Counter card**: Hero-sized number + a prominent "CLICK ME" button styled with primary color, personal click count below -- the fun/interactive centerpiece
-- **Time on Site card**: Clean monospace timer, minimal
-- **Services card**: Stays as-is, it's already well-designed
-- Remove location entirely
-- Remove dark mode from here (moved to navbar)
+**File:** `src/components/layout/Footer.tsx` -- import `useSiteStats` hook, display `totalViews` as bold mono number.
 
-Each card uses the existing `terminal-card` styling with the orange/blue/purple dots header for consistency.
+---
 
-### 4. Technical Details
+## Phase 3: Shrink Click Counter
 
-**Files to modify:**
-- `src/components/layout/Navigation.tsx` -- Add theme toggle button (sun/moon icon)
-- `src/components/home/DashboardCard.tsx` -- Complete rewrite into bento grid with 3 separate sub-cards (PageViewsCard, ClickCounterCard, TimeCard) or inline them
-- `src/pages/Home.tsx` -- Update Featured Projects section (remove top "View all", add bottom button), restructure dashboard grid layout to accommodate bento cards
+Keep `ClickCounterCard` but make it a compact, single-row interactive element -- not a full bento card. A small inline section with the number + button side by side, no terminal header.
 
-**Files unchanged:**
-- `ServicesCard.tsx` -- Stays as-is
-- `useSiteStats.ts` -- No changes needed, same data
-- `useTheme.tsx` -- Already exists, will be used in Navigation
+```text
+784,320 clicks  [ Click Me ]   you: 116
+```
 
-**No new dependencies needed.** All icons come from lucide-react already installed.
+**File:** `src/components/home/DashboardCard.tsx` -- simplify to a compact inline component.
+**File:** `src/pages/Home.tsx` -- place it as a small element, not a grid section.
+
+---
+
+## Phase 4: Add Blog Section
+
+A compact section showing 3 recent blog post titles (pulled from the same data in Blog.tsx, duplicated as a small array). Each shows title + date + category tag. Below: a styled button.
+
+```text
+// Recent Blogs
+- World Happiness Report Analysis        Jan 2025  [data-analysis]
+- Top 5 Emerging Tech Trends of 2025     Dec 2024  [tech]
+- AI vs ML -- Quick Examples              Dec 2024  [tech]
+
+          [ See More Blogs I Wrote -> ]
+```
+
+**File:** `src/pages/Home.tsx` -- add section with hardcoded recent posts array and Link button to `/blog`.
+
+---
+
+## Phase 5: Add Lab Section
+
+A small teaser section with a brief description and button. Mention the quiz and games.
+
+```text
+// Lab
+Test your data knowledge with interactive quizzes, or challenge the AI in Tic-Tac-Toe.
+
+          [ See More Data Quizzes & Fun Games -> ]
+```
+
+**File:** `src/pages/Home.tsx` -- add section with description text and Link button to `/lab`.
+
+---
+
+## Final Section Order on Home Page
+
+1. Hero / Bio
+2. Featured Projects + "View All Projects" button
+3. Quick Stats
+4. Recent Blogs + "See More Blogs" button
+5. Lab teaser + "Explore Lab" button
+6. Click counter (compact inline)
+7. Testimonials
+
+---
+
+## Files Modified
+
+| File | Change |
+|------|--------|
+| `src/pages/Home.tsx` | Remove dashboard grid, add Blog section, Lab section, compact click counter, reorder sections |
+| `src/components/home/DashboardCard.tsx` | Remove `PageViewsCard` and `TimeOnSiteCard` exports, simplify `ClickCounterCard` to compact inline |
+| `src/components/layout/Footer.tsx` | Add page views counter with `useSiteStats` hook |
+
+No new files or dependencies needed.
 
