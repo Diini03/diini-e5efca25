@@ -12,29 +12,29 @@
     --card-foreground: 220 20% 20%;
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 20%;
-    --primary: 24 95% 53%;
+    --primary: 24 90% 48%;
     --primary-foreground: 0 0% 100%;
     --secondary: 210 20% 90%;
     --secondary-foreground: 220 20% 20%;
     --muted: 210 15% 88%;
     --muted-foreground: 220 10% 45%;
-    --accent: 24 95% 53%;
+    --accent: 24 90% 48%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --border: 210 15% 85%;
     --input: 210 15% 88%;
-    --ring: 24 95% 53%;
+    --ring: 24 90% 48%;
     --radius: 0.5rem;
     
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary: 24 90% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 24 95% 53%;
+    --sidebar-ring: 24 90% 48%;
 
     /* Terminal card colors */
     --terminal-bg: 210 20% 95%;
@@ -48,28 +48,28 @@
     --card-foreground: 210 20% 85%;
     --popover: 220 25% 12%;
     --popover-foreground: 210 20% 85%;
-    --primary: 24 95% 53%;
+    --primary: 24 90% 48%;
     --primary-foreground: 0 0% 100%;
     --secondary: 220 22% 16%;
     --secondary-foreground: 210 15% 80%;
     --muted: 220 20% 14%;
     --muted-foreground: 210 15% 55%;
-    --accent: 24 95% 53%;
+    --accent: 24 90% 48%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
     --border: 220 20% 18%;
     --input: 220 20% 18%;
-    --ring: 24 95% 53%;
+    --ring: 24 90% 48%;
     
     --sidebar-background: 220 25% 10%;
     --sidebar-foreground: 210 15% 80%;
-    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary: 24 90% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 220 20% 16%;
     --sidebar-accent-foreground: 210 15% 80%;
     --sidebar-border: 220 20% 18%;
-    --sidebar-ring: 24 95% 53%;
+    --sidebar-ring: 24 90% 48%;
 
     /* Terminal card colors - dark */
     --terminal-bg: 220 25% 12%;
