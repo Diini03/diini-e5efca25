@@ -107,7 +107,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-6 text-center">
-            <Link to="/projects" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+            <Link to="/projects" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-primary/40 text-sm font-medium text-primary hover:bg-primary/10 hover:border-primary/60 transition-all">
               View All Projects
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -145,7 +145,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-4 text-center">
-            <Link to="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+            <Link to="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-primary/40 text-sm font-medium text-primary hover:bg-primary/10 hover:border-primary/60 transition-all">
               See More Blogs I Wrote
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -162,7 +162,7 @@ export default function Home() {
             Test your data knowledge with interactive quizzes, or challenge the AI in Tic-Tac-Toe.
           </p>
           <div className="text-center">
-            <Link to="/lab" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+            <Link to="/lab" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-primary/40 text-sm font-medium text-primary hover:bg-primary/10 hover:border-primary/60 transition-all">
               See More Data Quizzes & Fun Games
               <ArrowRight className="w-4 h-4" />
             </Link>
