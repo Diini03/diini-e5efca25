@@ -107,7 +107,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-6 text-center">
-            <Link to="/projects" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-secondary/50 transition-all">
+            <Link to="/projects" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
               View All Projects
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -145,7 +145,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-4 text-center">
-            <Link to="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-secondary/50 transition-all">
+            <Link to="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
               See More Blogs I Wrote
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -162,7 +162,7 @@ export default function Home() {
             Test your data knowledge with interactive quizzes, or challenge the AI in Tic-Tac-Toe.
           </p>
           <div className="text-center">
-            <Link to="/lab" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-secondary/50 transition-all">
+            <Link to="/lab" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
               See More Data Quizzes & Fun Games
               <ArrowRight className="w-4 h-4" />
             </Link>
