@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Github, Linkedin, ExternalLink, Star, Download } from "lucide-react";
-import { DashboardCard } from "@/components/home/DashboardCard";
+import { Github, Linkedin, ExternalLink, Star, Download, ArrowRight } from "lucide-react";
+import { PageViewsCard, ClickCounterCard, TimeOnSiteCard } from "@/components/home/DashboardCard";
 import { ServicesCard } from "@/components/home/ServicesCard";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
 import { ProjectCard } from "@/components/home/ProjectCard";
@@ -95,24 +95,25 @@ export default function Home() {
 
         {/* Featured Projects */}
         <section className="mb-10">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-base font-semibold flex items-center gap-2">
-              <Star className="w-4 h-4 text-muted-foreground" />
-              Featured Projects
-            </h2>
-            <Link
-              to="/projects"
-              className="text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
-            >
-              View all
-              <ExternalLink className="w-3 h-3" />
-            </Link>
-          </div>
+          <h2 className="text-base font-semibold flex items-center gap-2 mb-4">
+            <Star className="w-4 h-4 text-muted-foreground" />
+            Featured Projects
+          </h2>
 
           <div className="grid md:grid-cols-2 gap-4">
             {featuredProjects.map((project) => (
               <ProjectCard key={project.slug} {...project} />
             ))}
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-secondary/50 transition-all"
+            >
+              View All Projects
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </section>
 
@@ -121,14 +122,16 @@ export default function Home() {
           <QuickStatsCard />
         </section>
 
-        {/* Dashboard Section - After Projects */}
+        {/* Dashboard Section - Bento Grid */}
         <section className="mb-10">
           <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
             <span className="text-muted-foreground">//</span> Dashboard
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-4">
-            <DashboardCard />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <PageViewsCard />
+            <ClickCounterCard />
+            <TimeOnSiteCard />
             <ServicesCard />
           </div>
         </section>
