@@ -7,6 +7,8 @@ export function useTheme() {
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem("theme") as Theme;
       if (stored) return stored;
+      // First visit: default to light and persist it
+      localStorage.setItem("theme", "light");
     }
     return "light";
   });
