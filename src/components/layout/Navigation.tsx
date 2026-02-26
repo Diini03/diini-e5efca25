@@ -87,6 +87,15 @@ export function Navigation() {
         {/* Backdrop */}
         <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
 
+        {/* Close Button */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className="absolute top-4 right-6 z-20 p-2 rounded-full bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
+          aria-label="Close menu"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
         {/* Menu Content */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full px-8">
           <div className="space-y-2 w-full max-w-sm">
