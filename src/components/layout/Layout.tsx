@@ -10,7 +10,7 @@ export default function Layout() {
   const location = useLocation();
   const [showSplash, setShowSplash] = useState(() => {
     const seen = sessionStorage.getItem("splash_seen");
-    return !seen && location.pathname === "/";
+    return !seen;
   });
 
   const handleSplashComplete = useCallback(() => {
