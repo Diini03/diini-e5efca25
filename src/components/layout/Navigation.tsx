@@ -12,7 +12,11 @@ const navItems = [
   { label: "Contact", path: "/contact" },
 ];
 
-export function Navigation() {
+interface NavigationProps {
+  onLogoClick?: () => void;
+}
+
+export function Navigation({ onLogoClick }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
@@ -38,7 +42,7 @@ export function Navigation() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
-            <Link to="/" className="text-lg font-mono text-foreground flex items-center">
+            <Link to="/" className="text-lg font-mono text-foreground flex items-center" onClick={onLogoClick}>
               <span className="text-muted-foreground">~/</span>
               <span className="text-primary animate-pulse">|</span>
             </Link>
