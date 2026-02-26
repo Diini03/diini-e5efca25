@@ -59,11 +59,12 @@ export default function Home() {
             Hi, I'm <span className="text-primary inline-block hover:scale-105 transition-transform duration-300" style={{ textShadow: '0 4px 20px hsl(24 95% 53% / 0.3)' }}>Diini Kahiye</span>
           </h1>
 
-          <div className="text-muted-foreground text-sm leading-relaxed mb-6">
+          <div className="text-muted-foreground text-sm leading-relaxed mb-6 space-y-3">
             <p>
-              I'm a <span className="text-foreground font-medium">Junior Data Scientist</span> specializing in machine learning and big data solutions. 
-              I build predictive models, analyze large datasets, and deliver data-driven insights using <span className="text-foreground font-medium">Python, SQL, R</span>, and <span className="text-foreground font-medium">Power BI</span>. 
-              From COVID-19 trends across 209 countries to Netflix content patterns — I work with real-world data.
+              I work at the intersection of <span className="text-foreground font-medium">Data Science</span>, <span className="text-foreground font-medium">Machine Learning</span>, and <span className="text-foreground font-medium">AI</span>.
+            </p>
+            <p>
+              Using Python, SQL, and modern analytics tools, I build projects that turn complex data into practical solutions.
             </p>
           </div>
 

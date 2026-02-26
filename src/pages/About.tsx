@@ -71,25 +71,16 @@ export default function About() {
         {/* Bio */}
         <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-8">
           <p>
-            I'm <span className="text-primary">Diini Kahiye</span>—Data Analyst by day, 
-            aspiring Data Scientist by night. Based in Mogadishu, Somalia, I use Python, SQL, 
-            R, Power BI, Tableau, and JavaScript to transform complex data into insights 
-            that drive real decisions.
+            I'm <span className="text-primary">Diini Kahiye</span>, a Junior Data Scientist based in Mogadishu, Somalia, with a background in Computer Science. I focus on machine learning and data analysis, building projects that help turn data into useful insights.
           </p>
           <p>
-            My technical toolkit spans the full data pipeline—from Python (pandas, matplotlib, 
-            BeautifulSoup), R, and SQL for analysis, to Power BI, Tableau, and Plotly for 
-            visualization, to React, TypeScript, and JavaScript for front-end development. 
-            I leverage cutting-edge AI development tools like <span className="text-primary">Cursor</span>, 
-            <span className="text-primary">Lovable</span>, and <span className="text-primary">Warp</span> to 
-            accelerate development and build production-ready interfaces efficiently.
+            I work with Python, SQL, and R to collect, clean, and analyze data, and I create dashboards using tools like Power BI and Tableau to present results clearly. I enjoy working with real datasets and using data to understand patterns and support better decisions.
           </p>
           <p>
-            Having recently graduated with my Computer Science degree from Somali National University, 
-            I'm now on my journey toward becoming a full Data Scientist—building machine learning 
-            models and data-driven projects along the way. I've contributed to humanitarian data 
-            projects and built data visualization dashboards that drive decision-making. I'm 
-            passionate about using technology to solve real-world problems in my community.
+            I have developed machine learning and data analysis projects using real-world data, including humanitarian and global datasets. These projects involve building predictive models and visual reports that help explain complex information in a practical way.
+          </p>
+          <p>
+            After graduating from Somali National University, I continue improving my skills in Data Science and AI while working on projects that solve real problems and create meaningful impact in my community.
           </p>
         </div>
 
