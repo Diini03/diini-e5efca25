@@ -56,7 +56,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="mb-10">
           <h1 className="text-2xl md:text-3xl font-bold mb-6">
-            Hey! I'm <span className="text-primary inline-block hover:scale-105 transition-transform duration-300" style={{ textShadow: '0 4px 20px hsl(24 95% 53% / 0.3)' }}>Diini Kahiye</span>
+            Hi, I'm <span className="text-primary inline-block hover:scale-105 transition-transform duration-300" style={{ textShadow: '0 4px 20px hsl(24 95% 53% / 0.3)' }}>Diini Kahiye</span>
           </h1>
 
           <div className="text-muted-foreground text-sm leading-relaxed mb-6">
