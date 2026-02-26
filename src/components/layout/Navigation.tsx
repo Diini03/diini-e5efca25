@@ -83,13 +83,14 @@ export function Navigation() {
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
+        onClick={() => setIsOpen(false)}
       >
         {/* Backdrop */}
-        <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" onClick={() => setIsOpen(false)} />
+        <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
 
         {/* Close Button */}
         <button
-          onClick={() => setIsOpen(false)}
+          onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
           className="absolute top-4 right-6 z-20 p-2 rounded-full bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
           aria-label="Close menu"
         >
@@ -97,7 +98,7 @@ export function Navigation() {
         </button>
 
         {/* Menu Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full px-8">
+        <div className="relative z-10 flex flex-col items-center justify-center h-full px-8" onClick={(e) => e.stopPropagation()}>
           <div className="space-y-2 w-full max-w-sm">
             {navItems.map((item, i) => (
               <NavLink
