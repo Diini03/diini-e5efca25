@@ -85,7 +85,7 @@ export function Navigation() {
         }`}
       >
         {/* Backdrop */}
-        <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
+        <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" onClick={() => setIsOpen(false)} />
 
         {/* Close Button */}
         <button
