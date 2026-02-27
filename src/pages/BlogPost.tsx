@@ -55,7 +55,7 @@ View the project on GitHub to see the complete analysis, charts, and comparisons
   },
   "tech-trends-2025": {
     title: "Top 5 Emerging Tech Trends of 2025",
-    date: "2024-12-15",
+    date: "2025-02-15",
     readTime: "4 min read",
     category: "tech",
     tags: ["ai", "technology", "trends", "2025"],
@@ -85,7 +85,7 @@ Edge Computing moves processing closer to where data is generated, reducing late
   },
   "ai-vs-ml": {
     title: "AI vs ML – Quick Examples to Understand the Difference",
-    date: "2024-12-10",
+    date: "2025-02-10",
     readTime: "3 min read",
     category: "tech",
     tags: ["ai", "machine-learning", "beginners"],
@@ -117,7 +117,7 @@ Understanding this distinction is crucial for anyone entering the tech field, as
   },
   "data-career-tips": {
     title: "7 Underappreciated Data Career Tips (No One Talks About)",
-    date: "2024-11-28",
+    date: "2025-03-28",
     readTime: "5 min read",
     category: "career",
     tags: ["career", "data-science", "tips"],
@@ -153,7 +153,7 @@ Imposter syndrome is normal. Even senior data scientists feel it. Focus on learn
   },
   "sql-joins": {
     title: "7 Things I Wish I Knew About SQL JOINs",
-    date: "2024-11-15",
+    date: "2025-03-15",
     readTime: "4 min read",
     category: "tutorials",
     tags: ["sql", "database", "beginners"],
