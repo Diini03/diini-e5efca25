@@ -8,22 +8,16 @@ import { Footer } from "./Footer";
 
 export default function Layout() {
   const location = useLocation();
-  const [showSplash, setShowSplash] = useState(() => {
-    const seen = sessionStorage.getItem("splash_seen");
-    return !seen;
-  });
+  const [showSplash, setShowSplash] = useState(true);
 
   const handleSplashComplete = useCallback(() => {
     setShowSplash(false);
-    sessionStorage.setItem("splash_seen", "true");
   }, []);
 
-  // Trigger splash when navigating home via logo
+  // Trigger splash when navigating home via logo/nav
   const triggerSplash = useCallback(() => {
-    if (location.pathname === "/") {
-      setShowSplash(true);
-    }
-  }, [location.pathname]);
+    setShowSplash(true);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
