@@ -1,101 +1,54 @@
 
 
-# Home Page Redesign -- Phase-by-Phase Plan
+# Updates Plan
 
-## Overview
+## 1. Fix Blog Dates -- All to 2025
 
-Restructure the homepage to remove the ICT-style dashboard, add Blog and Lab sections, and relocate page views to the footer.
+Update all blog post dates from 2024 to 2025 across three files:
 
----
+- **`src/pages/Blog.tsx`**: Change dates for tech-trends-2025 (`2024-12-15` to `2025-02-15`), ai-vs-ml (`2024-12-10` to `2025-02-10`), data-career-tips (`2024-11-28` to `2025-03-28`), sql-joins (`2024-11-15` to `2025-03-15`). Keep world-happiness-report, python-concepts, and numpy-pandas as they already have 2025 dates.
 
-## Phase 1: Remove from Home Page
+- **`src/pages/BlogPost.tsx`**: Same date changes for the matching blog post detail entries.
 
-**What goes away:**
-- `ServicesCard` -- not relevant (you're not ICT)
-- `TimeOnSiteCard` -- timer removed
-- `PageViewsCard` -- moved to footer (Phase 2)
-- Entire "Dashboard" section heading and grid
+- **`src/pages/Home.tsx`**: Update `recentBlogs` array dates from "Dec 2024" to "Feb 2025" for tech-trends and ai-vs-ml.
 
-**File:** `src/pages/Home.tsx`
+## 2. Update Featured Projects on Home Page
 
----
+In `src/pages/Home.tsx`, replace the `featuredProjects` array:
+- **First**: Fall Armyworm Leaf Disease Detection (slug: `fall-armyworm-detection`, with deep learning/CNN tags)
+- **Second**: Covid-19 Analysis (slug: `covid-19-analysis`, keep current data)
+- Remove Netflix from featured.
 
-## Phase 2: Page Views in Footer
+## 3. Remove Tic-Tac-Toe, Replace with Something Better
 
-Add a small, bold page view counter to the footer's bottom bar, next to the copyright line. Clean monospace number with an eye icon.
+**Remove:**
+- Delete `src/pages/lab/TicTacToe.tsx`
+- Remove TicTacToe route from `src/App.tsx`
+- Remove Tic-Tac-Toe mini-game from `src/pages/Lab.tsx`
 
-```text
-// (c) 2026 Diini Kahiye          862 views  [eye icon]          </> with passion
-```
+**Replace with: "Code Challenge" -- a typing speed test for code snippets.** Users see a data science code snippet and type it as fast as they can. It measures WPM (words per minute) and accuracy. This is more relevant to a data science portfolio than Tic-Tac-Toe -- it reinforces the coding theme and is actually useful/fun for the target audience.
 
-**File:** `src/components/layout/Footer.tsx` -- import `useSiteStats` hook, display `totalViews` as bold mono number.
+### Lab Page Changes
+- Replace the Tic-Tac-Toe card with a "Code Challenge" card that links to `/lab/code-challenge`
+- Create `src/pages/lab/CodeChallenge.tsx` with:
+  - A set of data science code snippets (Python/SQL/Pandas)
+  - Real-time character-by-character comparison as user types
+  - Timer, WPM calculation, accuracy percentage
+  - Difficulty levels (short snippets vs longer ones)
+  - Clean terminal-style UI matching the portfolio aesthetic
 
----
+### Updated Home Page Lab Teaser
+- Update description text to mention "code challenges" instead of "Tic-Tac-Toe"
 
-## Phase 3: Shrink Click Counter
+## Files Summary
 
-Keep `ClickCounterCard` but make it a compact, single-row interactive element -- not a full bento card. A small inline section with the number + button side by side, no terminal header.
-
-```text
-784,320 clicks  [ Click Me ]   you: 116
-```
-
-**File:** `src/components/home/DashboardCard.tsx` -- simplify to a compact inline component.
-**File:** `src/pages/Home.tsx` -- place it as a small element, not a grid section.
-
----
-
-## Phase 4: Add Blog Section
-
-A compact section showing 3 recent blog post titles (pulled from the same data in Blog.tsx, duplicated as a small array). Each shows title + date + category tag. Below: a styled button.
-
-```text
-// Recent Blogs
-- World Happiness Report Analysis        Jan 2025  [data-analysis]
-- Top 5 Emerging Tech Trends of 2025     Dec 2024  [tech]
-- AI vs ML -- Quick Examples              Dec 2024  [tech]
-
-          [ See More Blogs I Wrote -> ]
-```
-
-**File:** `src/pages/Home.tsx` -- add section with hardcoded recent posts array and Link button to `/blog`.
-
----
-
-## Phase 5: Add Lab Section
-
-A small teaser section with a brief description and button. Mention the quiz and games.
-
-```text
-// Lab
-Test your data knowledge with interactive quizzes, or challenge the AI in Tic-Tac-Toe.
-
-          [ See More Data Quizzes & Fun Games -> ]
-```
-
-**File:** `src/pages/Home.tsx` -- add section with description text and Link button to `/lab`.
-
----
-
-## Final Section Order on Home Page
-
-1. Hero / Bio
-2. Featured Projects + "View All Projects" button
-3. Quick Stats
-4. Recent Blogs + "See More Blogs" button
-5. Lab teaser + "Explore Lab" button
-6. Click counter (compact inline)
-7. Testimonials
-
----
-
-## Files Modified
-
-| File | Change |
+| File | Action |
 |------|--------|
-| `src/pages/Home.tsx` | Remove dashboard grid, add Blog section, Lab section, compact click counter, reorder sections |
-| `src/components/home/DashboardCard.tsx` | Remove `PageViewsCard` and `TimeOnSiteCard` exports, simplify `ClickCounterCard` to compact inline |
-| `src/components/layout/Footer.tsx` | Add page views counter with `useSiteStats` hook |
-
-No new files or dependencies needed.
+| `src/pages/Blog.tsx` | Update 4 blog dates to 2025 |
+| `src/pages/BlogPost.tsx` | Update 4 blog dates to 2025 |
+| `src/pages/Home.tsx` | Update featured projects, blog dates, lab description |
+| `src/pages/Lab.tsx` | Remove Tic-Tac-Toe, add Code Challenge card |
+| `src/pages/lab/TicTacToe.tsx` | Delete |
+| `src/pages/lab/CodeChallenge.tsx` | Create new |
+| `src/App.tsx` | Replace TicTacToe route with CodeChallenge route |
 
