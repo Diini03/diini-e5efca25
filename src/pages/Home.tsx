@@ -10,18 +10,18 @@ import { Badge } from "@/components/ui/badge";
 
 const featuredProjects = [
   {
+    slug: "fall-armyworm-detection",
+    title: "Fall Armyworm Leaf Disease Detection",
+    description:
+      "Deep learning model using CNNs to detect Fall Armyworm damage on maize leaves with high accuracy.",
+    tags: ["python", "deep-learning", "CNN", "tensorflow"],
+  },
+  {
     slug: "covid-19-analysis",
     title: "Covid-19 Analysis and Visualization",
     description:
       "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations.",
     tags: ["python", "pandas", "plotly"],
-  },
-  {
-    slug: "netflix-data-analysis",
-    title: "Netflix Data Analysis & Visualization",
-    description:
-      "Comprehensive analysis of 8807 Netflix titles exploring content distribution and trends.",
-    tags: ["python", "pandas", "seaborn", "matplotlib"],
   },
 ];
 
@@ -35,13 +35,13 @@ const recentBlogs = [
   {
     slug: "tech-trends-2025",
     title: "Top 5 Emerging Tech Trends of 2025",
-    date: "Dec 2024",
+    date: "Feb 2025",
     category: "tech",
   },
   {
     slug: "ai-vs-ml",
     title: "AI vs ML — Quick Examples",
-    date: "Dec 2024",
+    date: "Feb 2025",
     category: "tech",
   },
 ];
@@ -160,11 +160,11 @@ export default function Home() {
             Lab
           </h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Test your data knowledge with interactive quizzes, or challenge the AI in Tic-Tac-Toe.
+            Test your data knowledge with interactive quizzes, or try the code typing challenge.
           </p>
           <div className="text-center">
             <Link to="/lab" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-primary/40 text-sm font-medium text-primary hover:bg-primary/10 hover:border-primary/60 transition-all">
-              See More Data Quizzes & Fun Games
+              Explore Quizzes & Code Challenges
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

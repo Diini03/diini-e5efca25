@@ -2,31 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { 
   FlaskConical, Zap, GraduationCap, ArrowRight, 
-  RotateCcw, Trophy, Terminal, Lightbulb
+  Terminal, Lightbulb, Keyboard
 } from "lucide-react";
 import { PageTransition } from "@/components/layout/PageTransition";
-
-// Tic-Tac-Toe logic
-type Player = "X" | "O" | null;
-
-const WINNING_COMBOS = [
-  [0, 1, 2], [3, 4, 5], [6, 7, 8],
-  [0, 3, 6], [1, 4, 7], [2, 5, 8],
-  [0, 4, 8], [2, 4, 6],
-];
-
-const checkWinner = (board: Player[]): Player => {
-  for (const combo of WINNING_COMBOS) {
-    const [a, b, c] = combo;
-    if (board[a] && board[a] === board[b] && board[a] === board[c]) return board[a];
-  }
-  return null;
-};
-
-const getAIMove = (board: Player[]): number => {
-  const empty = board.map((v, i) => (v === null ? i : -1)).filter((i) => i !== -1);
-  return empty[Math.floor(Math.random() * empty.length)];
-};
 
 const codeSnippets = [
   { code: "df.groupby('category').mean()", output: "Group by category, get mean", lang: "Python" },
@@ -49,11 +27,6 @@ const quickTips = [
 ];
 
 export default function Lab() {
-  const [board, setBoard] = useState<Player[]>(Array(9).fill(null));
-  const [isPlayerTurn, setIsPlayerTurn] = useState(true);
-  const [gameOver, setGameOver] = useState(false);
-  const [result, setResult] = useState("");
-  const [wins, setWins] = useState(0);
   const [snippetIndex, setSnippetIndex] = useState(0);
   const [tipIndex, setTipIndex] = useState(0);
 
@@ -64,36 +37,6 @@ export default function Lab() {
     const t = setInterval(() => setTipIndex((p) => (p + 1) % quickTips.length), 5000);
     return () => { clearInterval(s); clearInterval(t); };
   }, []);
-
-  useEffect(() => {
-    const winner = checkWinner(board);
-    const isFull = board.every((c) => c !== null);
-    if (winner) {
-      setGameOver(true);
-      if (winner === "X") { setResult("You won! 🎉"); setWins((w) => w + 1); }
-      else setResult("AI wins! 🤖");
-    } else if (isFull) {
-      setGameOver(true);
-      setResult("It's a tie! 🤝");
-    } else if (!isPlayerTurn && !gameOver) {
-      const timeout = setTimeout(() => {
-        const move = getAIMove(board);
-        if (move !== undefined) {
-          const nb = [...board]; nb[move] = "O"; setBoard(nb); setIsPlayerTurn(true);
-        }
-      }, 400);
-      return () => clearTimeout(timeout);
-    }
-  }, [board, isPlayerTurn, gameOver]);
-
-  const handleCellClick = (idx: number) => {
-    if (board[idx] || !isPlayerTurn || gameOver) return;
-    const nb = [...board]; nb[idx] = "X"; setBoard(nb); setIsPlayerTurn(false);
-  };
-
-  const resetGame = () => {
-    setBoard(Array(9).fill(null)); setIsPlayerTurn(true); setGameOver(false); setResult("");
-  };
 
   return (
     <PageTransition>
@@ -159,54 +102,43 @@ export default function Lab() {
           </div>
         </div>
 
-        {/* Interactive Games — two columns */}
+        {/* Interactive Activities */}
         <h2 className="text-lg font-mono font-semibold text-foreground mb-4 flex items-center gap-2">
           <Zap className="w-4 h-4 text-primary" />
-          Interactive Games
+          Interactive Activities
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Tic-Tac-Toe */}
-          <div className="border border-border rounded-xl p-4 bg-card">
-            <div className="flex items-center justify-between mb-3">
-              <span className="font-mono font-semibold text-sm text-foreground">Tic-Tac-Toe</span>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono text-muted-foreground flex items-center gap-1">
-                  <Trophy className="w-3 h-3 text-yellow-500" /> {wins}
-                </span>
-                <button onClick={resetGame} className="p-1 rounded-md hover:bg-muted transition-colors">
-                  <RotateCcw className="w-3.5 h-3.5 text-muted-foreground" />
-                </button>
+          {/* Code Challenge CTA */}
+          <Link
+            to="/lab/code-challenge"
+            className="group border border-border rounded-xl p-4 bg-card hover:border-primary/50 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <Keyboard className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-mono font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
+                    Code Challenge
+                  </h3>
+                  <p className="text-[10px] text-muted-foreground font-mono">Typing Speed Test</p>
+                </div>
               </div>
+              <p className="text-muted-foreground font-mono text-xs leading-relaxed mb-4">
+                Type data science code snippets as fast as you can. Measures WPM and accuracy.
+              </p>
             </div>
-
-            <div className="grid grid-cols-3 gap-1.5 mb-2 max-w-[200px] mx-auto">
-              {board.map((cell, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleCellClick(idx)}
-                  disabled={!!cell || gameOver || !isPlayerTurn}
-                  className={`aspect-square rounded-md text-lg font-bold transition-all ${cell ? "bg-muted" : "bg-muted/50 hover:bg-muted"} ${cell === "X" ? "text-primary" : "text-orange-500"} disabled:cursor-default`}
-                >
-                  {cell}
-                </button>
-              ))}
+            <div className="flex items-center justify-between">
+              <div className="flex gap-1.5">
+                <span className="px-2 py-0.5 text-[10px] font-mono bg-primary/10 text-primary rounded">Python</span>
+                <span className="px-2 py-0.5 text-[10px] font-mono bg-primary/10 text-primary rounded">SQL</span>
+                <span className="px-2 py-0.5 text-[10px] font-mono bg-primary/10 text-primary rounded">Pandas</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
             </div>
-
-            <div className="text-center mb-3">
-              {gameOver ? (
-                <p className="text-xs font-mono text-foreground">{result}</p>
-              ) : (
-                <p className="text-[10px] font-mono text-muted-foreground">
-                  {isPlayerTurn ? "Your turn (X)" : "AI thinking..."}
-                </p>
-              )}
-            </div>
-
-            <Link to="/lab/tic-tac-toe" className="flex items-center justify-center gap-1 text-xs font-mono text-primary hover:underline">
-              Full game with difficulty levels <ArrowRight className="w-3 h-3" />
-            </Link>
-          </div>
+          </Link>
 
           {/* Data Quiz CTA */}
           <Link

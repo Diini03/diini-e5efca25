@@ -14,7 +14,7 @@ import Contact from "@/pages/Contact";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import Lab from "@/pages/Lab";
-import TicTacToe from "@/pages/lab/TicTacToe";
+import CodeChallenge from "@/pages/lab/CodeChallenge";
 import DataQuiz from "@/pages/lab/DataQuiz";
 import NotFound from "@/pages/NotFound";
 
@@ -38,7 +38,7 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/lab" element={<Lab />} />
-            <Route path="/lab/tic-tac-toe" element={<TicTacToe />} />
+            <Route path="/lab/code-challenge" element={<CodeChallenge />} />
             <Route path="/lab/data-quiz" element={<DataQuiz />} />
           </Route>
           <Route path="*" element={<NotFound />} />
