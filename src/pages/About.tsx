@@ -84,40 +84,36 @@ export default function About() {
           </p>
         </div>
 
-        {/* Location & Email Cards */}
+        {/* Location & Email */}
         <div className="grid md:grid-cols-2 gap-4 mb-8">
-          <div className="terminal-card">
-            <div className="p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                <MapPin className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Location</div>
-                <div className="text-sm text-foreground">Mogadishu, Somalia</div>
-              </div>
+          <div className="clean-card p-4 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg border border-border flex items-center justify-center">
+              <MapPin className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <div className="text-xs text-muted-foreground">Location</div>
+              <div className="text-sm text-foreground">Mogadishu, Somalia</div>
             </div>
           </div>
-          <div className="terminal-card">
-            <div className="p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                <Mail className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Email</div>
-                <div className="text-sm text-foreground">diini@st.snu.edu.so</div>
-              </div>
+          <div className="clean-card p-4 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg border border-border flex items-center justify-center">
+              <Mail className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <div className="text-xs text-muted-foreground">Email</div>
+              <div className="text-sm text-foreground">diini@st.snu.edu.so</div>
             </div>
           </div>
         </div>
 
-        {/* Download CV Button - Enhanced */}
-        <a 
+        {/* Download CV Button */}
+        <a
           href="/cv.html"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] mb-12"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background font-medium rounded-lg hover:bg-foreground/85 transition-all mb-12"
         >
-          <Download className="w-5 h-5" />
+          <Download className="w-4 h-4" />
           Download My CV
         </a>
 
@@ -174,15 +170,15 @@ export default function About() {
             Skills & Technologies
           </h2>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {skillCategories.map((category) => (
-              <div key={category.name} className="terminal-card p-4">
-                <div className="text-xs text-primary mb-3">{category.name}</div>
-                <div className="flex flex-wrap gap-2">
+              <div key={category.name} className="clean-card p-4">
+                <div className="text-xs font-mono text-muted-foreground mb-3">{category.name}</div>
+                <div className="flex flex-wrap gap-1.5">
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1 text-xs bg-secondary text-foreground rounded"
+                      className="px-2.5 py-1 text-xs border border-border text-foreground rounded font-mono"
                     >
                       {skill}
                     </span>
