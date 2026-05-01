@@ -175,7 +175,7 @@ export default function Blog() {
         {/* Featured Post */}
         {featuredPost && (
           <Link to={`/blog/${featuredPost.slug}`} className="block mb-12 group">
-            <div className="terminal-card overflow-hidden hover:ring-2 hover:ring-primary/30 transition-all duration-300 cursor-pointer">
+            <div className="clean-card overflow-hidden cursor-pointer">
               <div className="grid md:grid-cols-2 gap-0">
                 {/* Image */}
                 <div className="relative overflow-hidden aspect-[4/3] md:aspect-auto">
@@ -262,7 +262,7 @@ export default function Blog() {
                 className="block group"
               >
                 <div
-                  className="terminal-card overflow-hidden hover:ring-2 hover:ring-primary/30 transition-all duration-300 animate-fade-in cursor-pointer h-full"
+                  className="clean-card overflow-hidden animate-fade-in cursor-pointer h-full"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {/* Image */}

@@ -98,54 +98,38 @@ export default function Projects() {
               to={project.liveUrl ? project.liveUrl : `/projects/${project.slug}`}
               target={project.liveUrl ? "_blank" : undefined}
               rel={project.liveUrl ? "noopener noreferrer" : undefined}
-              className="terminal-card block hover:ring-1 hover:ring-primary/30 transition-all group"
+              className="clean-card block overflow-hidden group"
             >
-              <div className="terminal-header flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <div className="terminal-dot terminal-dot-orange" />
-                    <div className="terminal-dot terminal-dot-blue" />
-                    <div className="terminal-dot terminal-dot-purple" />
-                  </div>
-                  <span className="text-xs text-muted-foreground ml-2">
-                    <span className="text-primary">projects</span> / {project.slug}
-                  </span>
-                </div>
-                <span className="text-xs text-muted-foreground">{project.date}</span>
-              </div>
-              
-              {/* Project Image (if available) */}
               {(project.imageDark || project.imageLight) && (
-                <div className="relative overflow-hidden h-40">
-                  <img 
-                    src={theme === "dark" ? project.imageDark : project.imageLight} 
+                <div className="relative overflow-hidden h-40 border-b border-border">
+                  <img
+                    src={theme === "dark" ? project.imageDark : project.imageLight}
                     alt={project.title}
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                   {project.liveUrl && (
-                    <span className="absolute top-3 right-3 px-2 py-1 bg-primary text-primary-foreground text-xs font-medium rounded">
-                      Live Demo
+                    <span className="absolute top-3 right-3 px-2 py-1 bg-foreground text-background text-[11px] font-medium rounded">
+                      Live
                     </span>
                   )}
                 </div>
               )}
-              
-              <div className="p-4">
+
+              <div className="p-5">
                 <div className="flex items-start justify-between gap-4 mb-2">
-                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
                     {project.title}
                   </h3>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground shrink-0" />
+                  <span className="text-xs text-muted-foreground font-mono shrink-0">{project.date}</span>
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 text-xs bg-secondary text-muted-foreground rounded"
+                      className="px-2 py-0.5 text-[11px] font-mono text-muted-foreground border border-border rounded"
                     >
                       {tag}
                     </span>
