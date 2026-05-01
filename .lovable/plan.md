@@ -1,130 +1,54 @@
 
-# Portfolio v2.0 — Design Refresh
 
-> **Status check:** No prior "v2.0" exists. The current site is still v1 (terminal-styled, orange-accent, copied-feeling layout). This will be the **first** v2.0 release.
+# Updates Plan
 
-## Goals
+## 1. Fix Blog Dates -- All to 2025
 
-1. Move away from the copied "dev/terminal/JSON" look toward an **editorial, project-focused** portfolio.
-2. **Refined black & white** as the design foundation, with a single calmer accent color (default).
-3. **Cleaner Home page** — remove Testimonials, tighten the hero, lead with work.
-4. Keep light + dark themes only (no 4-palette switcher), but redesign both to feel premium and minimal.
+Update all blog post dates from 2024 to 2025 across three files:
 
----
+- **`src/pages/Blog.tsx`**: Change dates for tech-trends-2025 (`2024-12-15` to `2025-02-15`), ai-vs-ml (`2024-12-10` to `2025-02-10`), data-career-tips (`2024-11-28` to `2025-03-28`), sql-joins (`2024-11-15` to `2025-03-15`). Keep world-happiness-report, python-concepts, and numpy-pandas as they already have 2025 dates.
 
-## 1. New Design System
+- **`src/pages/BlogPost.tsx`**: Same date changes for the matching blog post detail entries.
 
-### Color tokens (`src/index.css`)
+- **`src/pages/Home.tsx`**: Update `recentBlogs` array dates from "Dec 2024" to "Feb 2025" for tech-trends and ai-vs-ml.
 
-**Light mode (refined B&W):**
-- Background: near-white `0 0% 99%`
-- Foreground: near-black `0 0% 10%`
-- Card: `0 0% 97%` (subtle off-white, no blue tint)
-- Border: `0 0% 90%`
-- Muted-foreground: `0 0% 45%`
+## 2. Update Featured Projects on Home Page
 
-**Dark mode (refined B&W):**
-- Background: true near-black `0 0% 7%`
-- Foreground: `0 0% 92%`
-- Card: `0 0% 11%`
-- Border: `0 0% 18%`
-- Muted-foreground: `0 0% 60%`
+In `src/pages/Home.tsx`, replace the `featuredProjects` array:
+- **First**: Fall Armyworm Leaf Disease Detection (slug: `fall-armyworm-detection`, with deep learning/CNN tags)
+- **Second**: Covid-19 Analysis (slug: `covid-19-analysis`, keep current data)
+- Remove Netflix from featured.
 
-**New default accent — calmer than orange:**
-- Primary: **deep teal / slate-blue** `200 70% 45%` (HSL) — feels editorial and data-science-appropriate, works on B&W.
-- Used sparingly: links, primary CTA, active nav, key highlights only.
+## 3. Remove Tic-Tac-Toe, Replace with Something Better
 
-**Removes** the `--terminal-bg` / `--terminal-header` chart-color sprawl. Charts can use foreground/muted/primary tints.
+**Remove:**
+- Delete `src/pages/lab/TicTacToe.tsx`
+- Remove TicTacToe route from `src/App.tsx`
+- Remove Tic-Tac-Toe mini-game from `src/pages/Lab.tsx`
 
-### Typography
+**Replace with: "Code Challenge" -- a typing speed test for code snippets.** Users see a data science code snippet and type it as fast as they can. It measures WPM (words per minute) and accuracy. This is more relevant to a data science portfolio than Tic-Tac-Toe -- it reinforces the coding theme and is actually useful/fun for the target audience.
 
-- **Headings & body:** switch primary font to **Inter** (already loaded). Reserve **JetBrains Mono** for: `~/` logo, code snippets, project slugs/paths, Lab.
-- Larger heading scale on Home hero (`text-4xl md:text-5xl`) for editorial feel.
+### Lab Page Changes
+- Replace the Tic-Tac-Toe card with a "Code Challenge" card that links to `/lab/code-challenge`
+- Create `src/pages/lab/CodeChallenge.tsx` with:
+  - A set of data science code snippets (Python/SQL/Pandas)
+  - Real-time character-by-character comparison as user types
+  - Timer, WPM calculation, accuracy percentage
+  - Difficulty levels (short snippets vs longer ones)
+  - Clean terminal-style UI matching the portfolio aesthetic
 
-### Component cleanup
-
-- Remove/retire heavy "terminal card" treatments on Home, About, Projects, Blog (drop the colored dot headers + fake terminal chrome).
-- Replace with **clean cards**: subtle border, generous padding, no gradient shadows, no 3D tilt on hover (keep only a tiny lift).
-- Keep `~/` logo and mono accents in Navigation/Footer for personality.
-- **Lab page keeps the playful terminal vibe** (it's the right place for it).
-
-### Files affected
-- `src/index.css` — rewrite token palette, drop terminal/3D/glass utility classes that won't be used.
-- `tailwind.config.ts` — drop unused `chart` colors if not referenced.
-- `src/components/home/TerminalCard.tsx`, `DashboardCard.tsx` (CompactClickCounter), `ParticleBackground.tsx`, `InteractiveGradient.tsx` — remove from Home (kept in repo only if used elsewhere; otherwise deleted).
-
----
-
-## 2. Home Page Redesign
-
-New section order (removes Testimonials; keeps everything else as you chose):
-
-```text
-1. Hero            — name, one-line role, 2-line bio, CV button, social links
-2. Featured Work   — Fall Armyworm + Covid-19 (clean cards, no terminal chrome)
-3. Quick Stats     — kept, restyled minimal (numbers + labels, no card chrome)
-4. Recent Blogs    — kept, list style refined
-5. Lab teaser      — kept
-6. Click Counter   — kept, smaller/inline
-7. (Testimonials removed)
-```
-
-Hero changes:
-- Larger, editorial headline.
-- Drop the orange glow text-shadow on the name; use the new accent for `Diini Kahiye` only.
-- Remove particle background + interactive gradient from Home (too noisy for the new minimal direction). Background stays clean.
-- CV button: outline style matching new accent, not heavy filled+shadow.
-
-Featured Projects:
-- Replace `ProjectCard`'s terminal-chrome look with a clean card: title, one-line description, tag chips, arrow link. No "projects / slug" path header.
-
-### Files affected
-- `src/pages/Home.tsx` — restructure, remove Testimonials section + ParticleBackground + InteractiveGradient imports.
-- `src/components/home/ProjectCard.tsx` — redesign to clean card.
-- `src/components/home/QuickStatsCard.tsx` — strip terminal chrome.
-- `src/components/home/DashboardCard.tsx` (CompactClickCounter) — strip terminal chrome, keep compact.
-- `src/components/home/TestimonialsCard.tsx` — delete (no longer referenced anywhere).
-
----
-
-## 3. Other Pages — light alignment pass
-
-To keep v2.0 cohesive (without rewriting everything in one shot):
-- **About** (`src/pages/About.tsx`) — replace terminal-card wrapper with a clean two-column-ish layout (bio + sidebar with location/education). Keep content unchanged.
-- **Projects** (`src/pages/Projects.tsx`) — list of clean project cards (same component as Home).
-- **Blog** (`src/pages/Blog.tsx`) — already cleaner; just swap card chrome to match new style.
-- **Lab** (`src/pages/Lab.tsx`) — **keep terminal aesthetic** intentionally; it fits the playful nature.
-- **Contact, Experience, BlogPost, ProjectDetail** — inherit new tokens; minor polish only (no structural rewrites this round).
-- **Navigation/Footer** — keep structure, restyle to match new B&W tokens. Sun/Moon toggle stays (only 2 themes).
-
----
-
-## 4. What we are NOT doing in v2.0
-
-- No 4-palette (Latte/Frappe/Mocha) switcher — you chose 2-theme.
-- Not adding profile photo (you said you'll handle that).
-- Not touching Testimonials behavior beyond removal — section is gone.
-- Not rewriting Lab interactions; only ensuring they still look right under new tokens.
-
----
+### Updated Home Page Lab Teaser
+- Update description text to mention "code challenges" instead of "Tic-Tac-Toe"
 
 ## Files Summary
 
 | File | Action |
-|---|---|
-| `src/index.css` | Rewrite color tokens, remove terminal/3D utility classes |
-| `tailwind.config.ts` | Remove unused chart colors |
-| `src/pages/Home.tsx` | Restructure, remove Testimonials + heavy backgrounds |
-| `src/pages/About.tsx` | Replace terminal card with clean layout |
-| `src/pages/Projects.tsx` | Use new clean project cards |
-| `src/pages/Blog.tsx` | Card chrome refresh |
-| `src/components/home/ProjectCard.tsx` | Redesign — clean, no terminal chrome |
-| `src/components/home/QuickStatsCard.tsx` | Strip terminal chrome |
-| `src/components/home/DashboardCard.tsx` | Strip terminal chrome |
-| `src/components/home/TestimonialsCard.tsx` | Delete |
-| `src/components/home/ParticleBackground.tsx` | Delete (unused after Home refactor) |
-| `src/components/home/InteractiveGradient.tsx` | Delete (unused after Home refactor) |
-| `src/components/layout/Navigation.tsx` | Restyle to new tokens |
-| `src/components/layout/Footer.tsx` | Restyle to new tokens |
+|------|--------|
+| `src/pages/Blog.tsx` | Update 4 blog dates to 2025 |
+| `src/pages/BlogPost.tsx` | Update 4 blog dates to 2025 |
+| `src/pages/Home.tsx` | Update featured projects, blog dates, lab description |
+| `src/pages/Lab.tsx` | Remove Tic-Tac-Toe, add Code Challenge card |
+| `src/pages/lab/TicTacToe.tsx` | Delete |
+| `src/pages/lab/CodeChallenge.tsx` | Create new |
+| `src/App.tsx` | Replace TicTacToe route with CodeChallenge route |
 
-After approval, I'll implement everything in one pass and you can review in the preview.
