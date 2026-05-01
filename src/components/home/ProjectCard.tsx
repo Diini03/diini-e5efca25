@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 
 interface ProjectCardProps {
   slug: string;
@@ -11,35 +12,26 @@ export function ProjectCard({ slug, title, description, tags }: ProjectCardProps
   return (
     <Link
       to={`/projects/${slug}`}
-      className="terminal-card depth-layer block hover:ring-1 hover:ring-primary/30 transition-all group"
+      className="clean-card group block p-5"
     >
-      <div className="terminal-header">
-        <div className="flex items-center gap-1.5">
-          <div className="terminal-dot terminal-dot-orange" />
-          <div className="terminal-dot terminal-dot-blue" />
-          <div className="terminal-dot terminal-dot-purple" />
-        </div>
-        <span className="text-xs text-muted-foreground ml-2">
-          <span className="text-primary">projects</span> / {slug}
-        </span>
-      </div>
-      <div className="p-4">
-        <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+      <div className="flex items-start justify-between gap-3 mb-2">
+        <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
           {title}
         </h3>
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-          {description}
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-0.5 text-xs bg-secondary text-muted-foreground rounded"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        <ArrowUpRight className="w-4 h-4 text-muted-foreground shrink-0 group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+      </div>
+      <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
+        {description}
+      </p>
+      <div className="flex flex-wrap gap-1.5">
+        {tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-2 py-0.5 text-[11px] font-mono text-muted-foreground border border-border rounded"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
     </Link>
   );
