@@ -29,7 +29,7 @@ export function Footer() {
           {/* Social Links */}
           <div className="space-y-2 sm:text-right">
             <span className="text-xs font-semibold text-foreground">Connect</span>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 sm:justify-end">
               <a
                 href="https://github.com/Diini03"
                 target="_blank"
