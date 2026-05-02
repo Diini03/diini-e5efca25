@@ -1,6 +1,5 @@
-import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Search, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 
 // Import project images
