@@ -48,18 +48,7 @@ const projects = [
 ];
 
 export default function Projects() {
-  const [searchQuery, setSearchQuery] = useState("");
   const { theme } = useTheme();
-
-  const filteredProjects = useMemo(() => {
-    return projects.filter((project) => {
-      const matchesSearch = 
-        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-      return matchesSearch;
-    });
-  }, [searchQuery]);
 
   return (
     <div className="min-h-screen animate-fade-in">
@@ -77,21 +66,9 @@ export default function Projects() {
           A collection of my data science and development projects.
         </p>
 
-        {/* Search */}
-        <div className="relative mb-8">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <input
-            type="text"
-            placeholder="Search projects..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-secondary/50 border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-border"
-          />
-        </div>
-
         {/* Project Cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredProjects.map((project) => (
+          {projects.map((project) => (
             <Link
               key={project.slug}
               to={project.liveUrl ? project.liveUrl : `/projects/${project.slug}`}
@@ -102,8 +79,8 @@ export default function Projects() {
               {/* Project Image (if available) */}
               {(project.imageDark || project.imageLight) && (
                 <div className="relative overflow-hidden h-32">
-                  <img 
-                    src={theme === "dark" ? project.imageDark : project.imageLight} 
+                  <img
+                    src={theme === "dark" ? project.imageDark : project.imageLight}
                     alt={project.title}
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
@@ -122,29 +99,17 @@ export default function Projects() {
                   </h3>
                   <ExternalLink className="w-3.5 h-3.5 text-muted-foreground shrink-0 mt-0.5" />
                 </div>
-                <p className="text-xs text-muted-foreground mb-3 flex-1 line-clamp-3">
+                <p className="text-xs text-muted-foreground flex-1 line-clamp-3">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-1.5 py-0.5 text-[10px] bg-secondary text-muted-foreground rounded"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </div>
             </Link>
           ))}
         </div>
-
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-12 text-muted-foreground">
-            No projects found matching your search.
-          </div>
-        )}
+      </div>
+    </div>
+  );
+}
       </div>
     </div>
   );
