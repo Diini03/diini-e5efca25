@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="border-t border-border/50 bg-card/80 backdrop-blur-sm">
       <div className="max-w-4xl mx-auto px-6 py-6">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
           {/* Brand & Location */}
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
@@ -26,19 +26,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-2">
-            <span className="text-xs font-semibold text-foreground">Quick Links</span>
-            <div className="flex flex-col gap-1 text-xs text-muted-foreground">
-              <a href="/about" className="hover:text-primary transition-colors">About</a>
-              <a href="/projects" className="hover:text-primary transition-colors">Projects</a>
-              <a href="/blog" className="hover:text-primary transition-colors">Blog</a>
-              <a href="/contact" className="hover:text-primary transition-colors">Contact</a>
-            </div>
-          </div>
-
           {/* Social Links */}
-          <div className="space-y-2">
+          <div className="space-y-2 sm:text-right">
             <span className="text-xs font-semibold text-foreground">Connect</span>
             <div className="flex items-center gap-3">
               <a

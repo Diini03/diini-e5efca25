@@ -64,7 +64,7 @@ export default function Projects() {
 
   return (
     <div className="min-h-screen animate-fade-in">
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      <div className="max-w-6xl mx-auto px-6 py-12">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
@@ -91,61 +91,46 @@ export default function Projects() {
         </div>
 
         {/* Project Cards */}
-        <div className="space-y-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredProjects.map((project) => (
             <Link
               key={project.slug}
               to={project.liveUrl ? project.liveUrl : `/projects/${project.slug}`}
               target={project.liveUrl ? "_blank" : undefined}
               rel={project.liveUrl ? "noopener noreferrer" : undefined}
-              className="terminal-card block hover:ring-1 hover:ring-primary/30 transition-all group"
+              className="block rounded-lg border border-border/60 bg-card/50 hover:bg-card hover:border-primary/40 transition-all group overflow-hidden flex flex-col"
             >
-              <div className="terminal-header flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <div className="terminal-dot terminal-dot-orange" />
-                    <div className="terminal-dot terminal-dot-blue" />
-                    <div className="terminal-dot terminal-dot-purple" />
-                  </div>
-                  <span className="text-xs text-muted-foreground ml-2">
-                    <span className="text-primary">projects</span> / {project.slug}
-                  </span>
-                </div>
-                <span className="text-xs text-muted-foreground">{project.date}</span>
-              </div>
-              
               {/* Project Image (if available) */}
               {(project.imageDark || project.imageLight) && (
-                <div className="relative overflow-hidden h-40">
+                <div className="relative overflow-hidden h-32">
                   <img 
                     src={theme === "dark" ? project.imageDark : project.imageLight} 
                     alt={project.title}
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                   {project.liveUrl && (
-                    <span className="absolute top-3 right-3 px-2 py-1 bg-primary text-primary-foreground text-xs font-medium rounded">
-                      Live Demo
+                    <span className="absolute top-2 right-2 px-2 py-0.5 bg-primary text-primary-foreground text-[10px] font-medium rounded">
+                      Live
                     </span>
                   )}
                 </div>
               )}
-              
-              <div className="p-4">
-                <div className="flex items-start justify-between gap-4 mb-2">
-                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+
+              <div className="p-4 flex-1 flex flex-col">
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <h3 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors leading-snug">
                     {project.title}
                   </h3>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-muted-foreground shrink-0 mt-0.5" />
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-xs text-muted-foreground mb-3 flex-1 line-clamp-3">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 text-xs bg-secondary text-muted-foreground rounded"
+                      className="px-1.5 py-0.5 text-[10px] bg-secondary text-muted-foreground rounded"
                     >
                       {tag}
                     </span>
