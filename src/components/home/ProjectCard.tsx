@@ -4,10 +4,10 @@ interface ProjectCardProps {
   slug: string;
   title: string;
   description: string;
-  tags: string[];
+  tags?: string[];
 }
 
-export function ProjectCard({ slug, title, description, tags }: ProjectCardProps) {
+export function ProjectCard({ slug, title, description }: ProjectCardProps) {
   return (
     <Link
       to={`/projects/${slug}`}
@@ -27,19 +27,9 @@ export function ProjectCard({ slug, title, description, tags }: ProjectCardProps
         <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
           {title}
         </h3>
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+        <p className="text-sm text-muted-foreground line-clamp-2">
           {description}
         </p>
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-0.5 text-xs bg-secondary text-muted-foreground rounded"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
       </div>
     </Link>
   );
