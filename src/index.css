@@ -196,6 +196,20 @@
     text-wrap: balance;
   }
 
+  /* Subtle grid background pattern */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .dark .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--foreground) / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+  }
+
   /* Hide scrollbar for horizontal scroll */
   .scrollbar-hide {
     -ms-overflow-style: none;
