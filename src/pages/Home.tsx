@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Github, Linkedin, ExternalLink, Star, Download, ArrowRight, BookOpen, FlaskConical, MousePointer } from "lucide-react";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
 import { ProjectCard } from "@/components/home/ProjectCard";
-import { TestimonialsCard } from "@/components/home/TestimonialsCard";
+
 import { ParticleBackground } from "@/components/home/ParticleBackground";
 import { InteractiveGradient } from "@/components/home/InteractiveGradient";
 import { CompactClickCounter } from "@/components/home/DashboardCard";
@@ -171,16 +171,8 @@ export default function Home() {
         </section>
 
         {/* Compact Click Counter */}
-        <section className="mb-10">
-          <CompactClickCounter />
-        </section>
-
-        {/* Testimonials */}
         <section>
-          <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
-            <span className="text-muted-foreground">//</span> Testimonials
-          </h2>
-          <TestimonialsCard />
+          <CompactClickCounter />
         </section>
       </div>
     </div>

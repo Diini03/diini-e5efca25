@@ -20,7 +20,7 @@ export default function Layout() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background bg-grid flex flex-col">
       {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
       <ScrollToTop />
       <Navigation onLogoClick={triggerSplash} />
