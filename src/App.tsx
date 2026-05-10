@@ -13,9 +13,6 @@ import Experience from "@/pages/Experience";
 import Contact from "@/pages/Contact";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
-import Lab from "@/pages/Lab";
-import CodeChallenge from "@/pages/lab/CodeChallenge";
-import DataQuiz from "@/pages/lab/DataQuiz";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
