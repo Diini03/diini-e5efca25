@@ -1,54 +1,139 @@
 
+# Portfolio Refinement Plan (v1.1)
 
-# Updates Plan
+This is a **refinement**, not a redesign. All current identity stays: dark/light terminal aesthetic, orange `#EA580C`, grid background, `max-w-4xl`, terminal cards, splash screen, click counter. No new gradients, no glassmorphism, no heavy motion.
 
-## 1. Fix Blog Dates -- All to 2025
+---
 
-Update all blog post dates from 2024 to 2025 across three files:
+## 1. Hero (Home)
 
-- **`src/pages/Blog.tsx`**: Change dates for tech-trends-2025 (`2024-12-15` to `2025-02-15`), ai-vs-ml (`2024-12-10` to `2025-02-10`), data-career-tips (`2024-11-28` to `2025-03-28`), sql-joins (`2024-11-15` to `2025-03-15`). Keep world-happiness-report, python-concepts, and numpy-pandas as they already have 2025 dates.
+Keep current bio text exactly as you wrote it — no rewrite. Only adjust **rhythm**:
 
-- **`src/pages/BlogPost.tsx`**: Same date changes for the matching blog post detail entries.
+- Increase top padding: `py-12` → `pt-20 pb-16` so the name breathes.
+- Bump name scale slightly on desktop: `text-2xl md:text-3xl` → `text-3xl md:text-4xl`.
+- Tighten the `GitHub | LinkedIn || More about me` row spacing; replace `||` separator with a single `·` (dot) for a more editorial feel.
+- Keep the orange CV button as-is.
 
-- **`src/pages/Home.tsx`**: Update `recentBlogs` array dates from "Dec 2024" to "Feb 2025" for tech-trends and ai-vs-ml.
+No copy changes. No new CTAs.
 
-## 2. Update Featured Projects on Home Page
+---
 
-In `src/pages/Home.tsx`, replace the `featuredProjects` array:
-- **First**: Fall Armyworm Leaf Disease Detection (slug: `fall-armyworm-detection`, with deep learning/CNN tags)
-- **Second**: Covid-19 Analysis (slug: `covid-19-analysis`, keep current data)
-- Remove Netflix from featured.
+## 2. Featured Projects (Home) — new hierarchy
 
-## 3. Remove Tic-Tac-Toe, Replace with Something Better
+Current: two equal small cards. New: **1 lead + 2 secondary** layout to make featured work feel curated.
 
-**Remove:**
-- Delete `src/pages/lab/TicTacToe.tsx`
-- Remove TicTacToe route from `src/App.tsx`
-- Remove Tic-Tac-Toe mini-game from `src/pages/Lab.tsx`
+```
+┌──────────────────────────────────────────┐
+│  LEAD CARD — Fall Armyworm Detection      │
+│  category label · larger title · 1-line   │
+│  description · subtle metric (99.07%)     │
+└──────────────────────────────────────────┘
+┌─────────────────────┬───────────────────┐
+│ Covid-19 Analysis   │ World Happiness   │
+│ small terminal card │ small terminal    │
+└─────────────────────┴───────────────────┘
+```
 
-**Replace with: "Code Challenge" -- a typing speed test for code snippets.** Users see a data science code snippet and type it as fast as they can. It measures WPM (words per minute) and accuracy. This is more relevant to a data science portfolio than Tic-Tac-Toe -- it reinforces the coding theme and is actually useful/fun for the target audience.
+- Lead card: full width, slightly taller, terminal header with `projects / fall-armyworm-detection`, larger title (`text-lg`), uppercase category tag (`MACHINE LEARNING`), one short metric line.
+- Secondary cards: reuse existing `ProjectCard` (no tags, as decided earlier).
+- Add a third featured slot: replace one Covid card with **Kulmid** to demonstrate product-engineering range alongside ML and analytics.
 
-### Lab Page Changes
-- Replace the Tic-Tac-Toe card with a "Code Challenge" card that links to `/lab/code-challenge`
-- Create `src/pages/lab/CodeChallenge.tsx` with:
-  - A set of data science code snippets (Python/SQL/Pandas)
-  - Real-time character-by-character comparison as user types
-  - Timer, WPM calculation, accuracy percentage
-  - Difficulty levels (short snippets vs longer ones)
-  - Clean terminal-style UI matching the portfolio aesthetic
+Final featured list:
+1. Fall Armyworm Detection — Machine Learning (lead)
+2. World Happiness Report — Data Analysis
+3. Kulmid — Product Engineering
 
-### Updated Home Page Lab Teaser
-- Update description text to mention "code challenges" instead of "Tic-Tac-Toe"
+"View All Projects" button stays.
 
-## Files Summary
+---
 
-| File | Action |
-|------|--------|
-| `src/pages/Blog.tsx` | Update 4 blog dates to 2025 |
-| `src/pages/BlogPost.tsx` | Update 4 blog dates to 2025 |
-| `src/pages/Home.tsx` | Update featured projects, blog dates, lab description |
-| `src/pages/Lab.tsx` | Remove Tic-Tac-Toe, add Code Challenge card |
-| `src/pages/lab/TicTacToe.tsx` | Delete |
-| `src/pages/lab/CodeChallenge.tsx` | Create new |
-| `src/App.tsx` | Replace TicTacToe route with CodeChallenge route |
+## 3. Projects page — categorization
 
+Decision: **section headings** (cleanest, most senior-feeling). No filter chips, no search.
+
+```
+Machine Learning
+  └─ Fall Armyworm Detection
+
+Data Analysis
+  └─ World Happiness · Covid-19 · Netflix
+
+Product Engineering
+  └─ Kulmid
+```
+
+- Each section has a small uppercase label (`text-xs tracking-wider text-muted-foreground`) and a thin divider.
+- Grid stays `sm:grid-cols-2 lg:grid-cols-3` within each section, `max-w-4xl` preserved.
+- Cards keep their current minimal style (no tags, no dates).
+- Add a small uppercase category label inside each card (e.g. `PYTHON · CNN`) — one line, muted, no chips. This restores categorical signal without re-introducing tag clutter.
+
+---
+
+## 4. Remove Lab entirely
+
+- Delete `src/pages/Lab.tsx`, `src/pages/lab/CodeChallenge.tsx`, `src/pages/lab/DataQuiz.tsx`.
+- Remove the three Lab routes from `src/App.tsx`.
+- Remove the Lab link from `Navigation.tsx` (desktop + mobile overlay).
+- Remove the entire "Lab Teaser" section from `Home.tsx`.
+- Update relevant memory entries (Lab Playground / Lab Hero Engagement / Lab Data Quiz) — mark as removed.
+
+The click counter stays exactly where it is (Home, bottom). It remains the playful artifact.
+
+---
+
+## 5. Recent Blogs — editorial cleanup
+
+Current already shows 3 — good. Improvements only:
+
+- Drop the `BookOpen` icon next to heading; keep heading minimal.
+- Convert each row from bordered card to a quiet editorial row: thin bottom border only, no background fill, more vertical padding.
+- Remove the colored category `Badge`; replace with muted uppercase label (`text-[10px] tracking-wider text-muted-foreground`).
+- Keep "See More Blogs" button.
+
+Result: less repetitive, more "magazine index" feel.
+
+---
+
+## 6. Spacing & rhythm pass (Home)
+
+- Section gap: `mb-10` → `mb-20` between major sections so each section earns its place.
+- Section headings: keep `text-base` but add `mb-6` and a thin `border-b border-border/40 pb-2` only on the section title row — gives editorial separation without boxes.
+- Quick Stats card stays but moves **after** Recent Blogs so the flow becomes: Identity → Featured Work → Writing → Stats → Click Counter.
+
+Final Home order:
+1. Hero
+2. Featured Projects (1 lead + 2 secondary)
+3. Recent Blogs (editorial rows)
+4. Quick Stats
+5. Click Counter
+
+No Lab section.
+
+---
+
+## 7. Motion
+
+No new animations. Keep existing `animate-fade-in`, splash, page transitions. Remove the `hover:scale-105` on the name (slightly toy-like) — replace with a subtle color softening on hover only.
+
+---
+
+## Files affected
+
+| File | Change |
+|---|---|
+| `src/pages/Home.tsx` | Hero rhythm, featured layout (lead+2), blog rows, section order, remove Lab teaser |
+| `src/pages/Projects.tsx` | Group projects by category with headings, add inline category label |
+| `src/components/home/ProjectCard.tsx` | Add optional `category` line |
+| New: `src/components/home/FeaturedProjectCard.tsx` | Lead-card variant for hero project |
+| `src/App.tsx` | Remove Lab routes |
+| `src/components/layout/Navigation.tsx` | Remove Lab nav link |
+| Delete: `src/pages/Lab.tsx`, `src/pages/lab/CodeChallenge.tsx`, `src/pages/lab/DataQuiz.tsx` |
+| Memory: update index + retire Lab-related entries |
+
+## What is NOT changing
+
+- Color palette, grid background, particles, interactive gradient
+- Splash screen, terminal cards, dots, path formatting
+- `max-w-4xl` constraint, footer, click counter
+- Bio copy, About page, Blog content, Contact page
+- Theme system, fonts
