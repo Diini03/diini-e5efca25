@@ -7,7 +7,6 @@ import { useTheme } from "@/hooks/useTheme";
 const navItems = [
   { label: "About", path: "/about" },
   { label: "Projects", path: "/projects" },
-  { label: "Lab", path: "/lab" },
   { label: "Blog", path: "/blog" },
   { label: "Contact", path: "/contact" },
 ];
