@@ -4,10 +4,11 @@ interface ProjectCardProps {
   slug: string;
   title: string;
   description: string;
+  category?: string;
   tags?: string[];
 }
 
-export function ProjectCard({ slug, title, description }: ProjectCardProps) {
+export function ProjectCard({ slug, title, description, category }: ProjectCardProps) {
   return (
     <Link
       to={`/projects/${slug}`}
@@ -24,6 +25,11 @@ export function ProjectCard({ slug, title, description }: ProjectCardProps) {
         </span>
       </div>
       <div className="p-4">
+        {category && (
+          <p className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground/70 mb-2">
+            {category}
+          </p>
+        )}
         <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
           {title}
         </h3>
