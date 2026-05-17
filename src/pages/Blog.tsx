@@ -37,6 +37,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["data-analysis", "visualization", "plotly"],
     image: worldHappinessImg,
     linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_world-happiness-report-2024-activity-7387382352618049537-nLEe?utm_source=share&utm_medium=member_desktop",
+    featuredOnHome: true,
   },
   {
     slug: "tech-trends-2025",
@@ -48,6 +49,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["ai", "technology", "trends"],
     image: techTrends2025Img,
     linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_top-5-emerging-tech-trends-of-2025-activity-7335583585871040514-HiK_?utm_source=share&utm_medium=member_desktop",
+    featuredOnHome: true,
   },
   {
     slug: "ai-vs-ml",
@@ -59,6 +61,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["ai", "machine-learning", "beginners"],
     image: aiVsMlImg,
     linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_whats-the-difference-between-ai-and-ml-activity-7332661785382072320-o10x?utm_source=share&utm_medium=member_desktop",
+    featuredOnHome: true,
   },
   {
     slug: "data-career-tips",
