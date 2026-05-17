@@ -1,139 +1,79 @@
+## Refinement Plan v1.2
 
-# Portfolio Refinement Plan (v1.1)
-
-This is a **refinement**, not a redesign. All current identity stays: dark/light terminal aesthetic, orange `#EA580C`, grid background, `max-w-4xl`, terminal cards, splash screen, click counter. No new gradients, no glassmorphism, no heavy motion.
-
----
-
-## 1. Hero (Home)
-
-Keep current bio text exactly as you wrote it — no rewrite. Only adjust **rhythm**:
-
-- Increase top padding: `py-12` → `pt-20 pb-16` so the name breathes.
-- Bump name scale slightly on desktop: `text-2xl md:text-3xl` → `text-3xl md:text-4xl`.
-- Tighten the `GitHub | LinkedIn || More about me` row spacing; replace `||` separator with a single `·` (dot) for a more editorial feel.
-- Keep the orange CV button as-is.
-
-No copy changes. No new CTAs.
+Goal: make the portfolio feel more intentional and professional. Remove dark mode (no one uses it), promote the resume to the nav, calm the background, and rebalance Home + About content. Preserve identity: terminal aesthetic, orange `#EA580C`, `max-w-4xl`, terminal cards, splash, click counter.
 
 ---
 
-## 2. Featured Projects (Home) — new hierarchy
+### 1. Remove dark mode — lock to one polished light theme
 
-Current: two equal small cards. New: **1 lead + 2 secondary** layout to make featured work feel curated.
+**Decision:** keep **light mode only** (current default). It matches the editorial / data-science direction better than the dark variant and reads more professional in screenshots and shares.
 
-```
-┌──────────────────────────────────────────┐
-│  LEAD CARD — Fall Armyworm Detection      │
-│  category label · larger title · 1-line   │
-│  description · subtle metric (99.07%)     │
-└──────────────────────────────────────────┘
-┌─────────────────────┬───────────────────┐
-│ Covid-19 Analysis   │ World Happiness   │
-│ small terminal card │ small terminal    │
-└─────────────────────┴───────────────────┘
-```
+- `src/hooks/useTheme.tsx` — delete (or stub) the toggle; force `light`, never add `.dark` class, never read/write `localStorage`.
+- `src/index.css` — remove the entire `.dark { ... }` block and the `.dark .bg-grid` override. Keep only the `:root` light tokens.
+- `src/components/layout/Navigation.tsx` — remove `useTheme` import, the desktop `Sun/Moon` toggle button, and the mobile "Light/Dark Mode" row + divider.
+- Polish the single light theme slightly for a more "pro" feel:
+  - `--background: 210 25% 98%` (a touch cleaner)
+  - `--foreground: 220 25% 15%` (stronger text contrast)
+  - `--muted-foreground: 220 12% 40%` (more legible secondary text)
+  - `--border: 220 14% 88%` (softer dividers)
 
-- Lead card: full width, slightly taller, terminal header with `projects / fall-armyworm-detection`, larger title (`text-lg`), uppercase category tag (`MACHINE LEARNING`), one short metric line.
-- Secondary cards: reuse existing `ProjectCard` (no tags, as decided earlier).
-- Add a third featured slot: replace one Covid card with **Kulmid** to demonstrate product-engineering range alongside ML and analytics.
+### 2. Replace "Download My CV" hero button with a "Resume" nav button
 
-Final featured list:
-1. Fall Armyworm Detection — Machine Learning (lead)
-2. World Happiness Report — Data Analysis
-3. Kulmid — Product Engineering
+- `src/pages/Home.tsx` — delete the `Download My CV` button block from the hero section. Keep the bio + GitHub/LinkedIn/More-about-me row.
+- `src/components/layout/Navigation.tsx` — add a `Resume` pill (last item, visually distinct: `border border-primary/40 text-primary hover:bg-primary/10`, small `FileText` icon) on desktop, opening `/cv.html` in a new tab. In the mobile overlay, add the same as the final menu item below the nav links (no theme toggle there anymore).
+- `src/pages/About.tsx` — keep the existing "Download My CV" button there (it's contextually correct on About). Unchanged.
 
-"View All Projects" button stays.
+### 3. Soften the grid background
 
----
+- `src/index.css` `.bg-grid` — reduce opacity from `0.04` → `0.018`, and increase tile from `48px` → `64px`. Result: barely-there structure instead of a visible grid. The dark override is gone with step 1.
 
-## 3. Projects page — categorization
+### 4. Home — restructure Writing + add a quiet Experience/Education strip
 
-Decision: **section headings** (cleanest, most senior-feeling). No filter chips, no search.
+**4a. Writing section — curate which posts appear:**
+- Add an `featuredOnHome: boolean` flag to each entry in `src/pages/Blog.tsx`'s `blogPosts` array (single source of truth — no duplicated list in `Home.tsx`).
+- Default `true` for the current 3 (`world-happiness-report`, `tech-trends-2025`, `ai-vs-ml`).
+- `src/pages/Home.tsx` imports `blogPosts`, filters `featuredOnHome`, takes the first 3, renders the same editorial rows. To "change which ones show," you flip the flag in `Blog.tsx`. (Lightweight, no UI/admin, no DB — matches the "no over-engineering" constraint.)
+- Visual refinement: tighten row spacing (`py-3`), date in tabular-nums, hover moves a small `→` arrow in from the right.
 
-```
-Machine Learning
-  └─ Fall Armyworm Detection
+**4b. New "Background" strip (Experience + Education) — between Selected Work and Writing:**
+- Compact, two-column on `md`, single column on mobile. No icons-in-circles, no timeline rail. Pure editorial:
+  - Left column header: `EXPERIENCE` (10px tracking-[0.2em] uppercase muted)
+  - Two rows: role · org · date (one line each), one-line description below in muted.
+  - Right column header: `EDUCATION` — one row (BSc Computer Science · SNU · 2021–2026).
+- Data lives in a new file `src/components/home/BackgroundStrip.tsx` (self-contained, easy to edit). Pulls from a short inline array — does not import the heavier `About.tsx` data.
 
-Data Analysis
-  └─ World Happiness · Covid-19 · Netflix
+**New Home section order:**
+Hero → Selected Work → **Background (Experience + Education)** → Writing → Quick Stats → Click Counter.
 
-Product Engineering
-  └─ Kulmid
-```
+### 5. About — slim "Currently Learning" and "Skills & Technologies"
 
-- Each section has a small uppercase label (`text-xs tracking-wider text-muted-foreground`) and a thin divider.
-- Grid stays `sm:grid-cols-2 lg:grid-cols-3` within each section, `max-w-4xl` preserved.
-- Cards keep their current minimal style (no tags, no dates).
-- Add a small uppercase category label inside each card (e.g. `PYTHON · CNN`) — one line, muted, no chips. This restores categorical signal without re-introducing tag clutter.
+- **Currently Learning:** remove entirely from About (it duplicates intent of Skills and feels like filler). Delete the `<CurrentlyLearning />` import + render. (Component file kept on disk in case of future reuse.)
+- **Skills & Technologies:** collapse 6 category cards → **one** clean block:
+  - Section title kept.
+  - Replace the grid of `terminal-card` boxes with a single editorial layout: each category is a row — left side small uppercase label (`LANGUAGES`, `DATA`, `DATABASES`, `WEB`, `AI TOOLS`, `TOOLS`), right side inline chips on one line (`text-xs`, no card backgrounds, just `border border-border/60 rounded px-2 py-0.5`). Result: same info, ~1/3 the vertical space, much more "senior" feel.
+- Keep Experience & Education and Certifications sections as-is.
 
----
+### 6. Memory updates
 
-## 4. Remove Lab entirely
-
-- Delete `src/pages/Lab.tsx`, `src/pages/lab/CodeChallenge.tsx`, `src/pages/lab/DataQuiz.tsx`.
-- Remove the three Lab routes from `src/App.tsx`.
-- Remove the Lab link from `Navigation.tsx` (desktop + mobile overlay).
-- Remove the entire "Lab Teaser" section from `Home.tsx`.
-- Update relevant memory entries (Lab Playground / Lab Hero Engagement / Lab Data Quiz) — mark as removed.
-
-The click counter stays exactly where it is (Home, bottom). It remains the playful artifact.
+- Remove dark-mode references in `mem://index.md` ("Theme: Default light mode" → "Theme: Light mode only, dark mode removed").
+- Add constraint: "Dark mode removed. Do not re-add toggle or `.dark` styles."
+- Update Home order memory: Hero → Selected Work → Background → Writing → Quick Stats → Click Counter.
+- Update About description (no Currently Learning, slim Skills).
+- Retire/update: `Navigation Theme Toggle`, `Smooth Theme Transition` (keep transition but note no theme switching), `Currently Learning` memory.
 
 ---
 
-## 5. Recent Blogs — editorial cleanup
+### Files touched
 
-Current already shows 3 — good. Improvements only:
+- edit `src/index.css` (remove `.dark`, soften tokens, soften grid)
+- edit `src/hooks/useTheme.tsx` (stub to always-light, or delete usages)
+- edit `src/components/layout/Navigation.tsx` (remove toggle, add Resume button desktop + mobile)
+- edit `src/pages/Home.tsx` (drop CV button, reorder, source blogs from Blog.tsx, render BackgroundStrip)
+- new `src/components/home/BackgroundStrip.tsx`
+- edit `src/pages/Blog.tsx` (add `featuredOnHome` to data + export)
+- edit `src/pages/About.tsx` (remove CurrentlyLearning, restructure Skills)
+- edit `mem://index.md` + small memory edits
 
-- Drop the `BookOpen` icon next to heading; keep heading minimal.
-- Convert each row from bordered card to a quiet editorial row: thin bottom border only, no background fill, more vertical padding.
-- Remove the colored category `Badge`; replace with muted uppercase label (`text-[10px] tracking-wider text-muted-foreground`).
-- Keep "See More Blogs" button.
+### Not changing
 
-Result: less repetitive, more "magazine index" feel.
-
----
-
-## 6. Spacing & rhythm pass (Home)
-
-- Section gap: `mb-10` → `mb-20` between major sections so each section earns its place.
-- Section headings: keep `text-base` but add `mb-6` and a thin `border-b border-border/40 pb-2` only on the section title row — gives editorial separation without boxes.
-- Quick Stats card stays but moves **after** Recent Blogs so the flow becomes: Identity → Featured Work → Writing → Stats → Click Counter.
-
-Final Home order:
-1. Hero
-2. Featured Projects (1 lead + 2 secondary)
-3. Recent Blogs (editorial rows)
-4. Quick Stats
-5. Click Counter
-
-No Lab section.
-
----
-
-## 7. Motion
-
-No new animations. Keep existing `animate-fade-in`, splash, page transitions. Remove the `hover:scale-105` on the name (slightly toy-like) — replace with a subtle color softening on hover only.
-
----
-
-## Files affected
-
-| File | Change |
-|---|---|
-| `src/pages/Home.tsx` | Hero rhythm, featured layout (lead+2), blog rows, section order, remove Lab teaser |
-| `src/pages/Projects.tsx` | Group projects by category with headings, add inline category label |
-| `src/components/home/ProjectCard.tsx` | Add optional `category` line |
-| New: `src/components/home/FeaturedProjectCard.tsx` | Lead-card variant for hero project |
-| `src/App.tsx` | Remove Lab routes |
-| `src/components/layout/Navigation.tsx` | Remove Lab nav link |
-| Delete: `src/pages/Lab.tsx`, `src/pages/lab/CodeChallenge.tsx`, `src/pages/lab/DataQuiz.tsx` |
-| Memory: update index + retire Lab-related entries |
-
-## What is NOT changing
-
-- Color palette, grid background, particles, interactive gradient
-- Splash screen, terminal cards, dots, path formatting
-- `max-w-4xl` constraint, footer, click counter
-- Bio copy, About page, Blog content, Contact page
-- Theme system, fonts
+Hero copy, splash, click counter, particles, interactive gradient, terminal cards, footer, project cards, Contact, BlogPost, ProjectDetail, color `#EA580C`, `max-w-4xl` width, fonts, splash, page transitions.
