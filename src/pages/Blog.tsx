@@ -26,12 +26,7 @@ export interface BlogPost {
   featuredOnHome?: boolean;
 }
 
-export const blogPosts: BlogPost[] = blogPostsData();
-
-function blogPostsData(): BlogPost[] { return _blogPosts; }
-const _blogPosts: BlogPost[] = 
-
-const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[] = [
   {
     slug: "world-happiness-report",
     title: "World Happiness Report Analysis (2008-2021)",
