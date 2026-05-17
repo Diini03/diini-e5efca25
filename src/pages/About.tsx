@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award, CheckCircle } from "lucide-react";
-import { CurrentlyLearning } from "@/components/about/CurrentlyLearning";
 
 // Certification logos
 import freecodecampLogo from "@/assets/certifications/freecodecamp.png";
@@ -37,10 +36,10 @@ const experiences = [
 
 const skillCategories = [
   { name: "Languages", skills: ["Python", "SQL", "JavaScript", "TypeScript", "DAX"] },
-  { name: "Data Analysis", skills: ["pandas", "matplotlib", "Power BI", "Excel"] },
+  { name: "Data", skills: ["pandas", "matplotlib", "Power BI", "Excel"] },
   { name: "Databases", skills: ["MySQL", "SQLite", "Power Query"] },
-  { name: "Web Dev", skills: ["React", "HTML/CSS", "Node.js", "Tailwind CSS"] },
-  { name: "AI Development", skills: ["Cursor", "Lovable", "Warp"] },
+  { name: "Web", skills: ["React", "HTML/CSS", "Node.js", "Tailwind CSS"] },
+  { name: "AI Tools", skills: ["Cursor", "Lovable", "Warp"] },
   { name: "Tools", skills: ["Git", "Jupyter", "Streamlit", "WSL/Linux"] },
 ];
 
@@ -167,22 +166,27 @@ export default function About() {
           </div>
         </section>
 
-        {/* Skills & Technologies */}
+        {/* Skills & Technologies — editorial */}
         <section className="mb-12">
           <h2 className="text-base font-semibold mb-6 flex items-center gap-2">
             <span className="text-primary">&lt;/&gt;</span>
-            Skills & Technologies
+            Skills &amp; Technologies
           </h2>
 
-          <div className="space-y-4">
+          <div className="divide-y divide-border/50">
             {skillCategories.map((category) => (
-              <div key={category.name} className="terminal-card p-4">
-                <div className="text-xs text-primary mb-3">{category.name}</div>
-                <div className="flex flex-wrap gap-2">
+              <div
+                key={category.name}
+                className="grid grid-cols-[110px_1fr] gap-4 items-start py-3"
+              >
+                <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground/80 pt-1">
+                  {category.name}
+                </div>
+                <div className="flex flex-wrap gap-1.5">
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1 text-xs bg-secondary text-foreground rounded"
+                      className="px-2 py-0.5 text-xs border border-border/60 text-foreground/80 rounded"
                     >
                       {skill}
                     </span>
@@ -237,8 +241,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Currently Learning */}
-        <CurrentlyLearning />
       </div>
     </div>
   );
