@@ -124,6 +124,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Background — Experience + Education */}
+        <BackgroundStrip />
+
         {/* Recent Blogs — editorial rows */}
         <section className="mb-20">
           <h2 className="text-base font-semibold mb-6 pb-2 border-b border-border/40">
