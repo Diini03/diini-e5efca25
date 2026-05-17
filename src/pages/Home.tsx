@@ -77,7 +77,7 @@ export default function Home() {
               <ExternalLink className="w-3 h-3" />
             </Link>
           </div>
-
+        </section>
 
         {/* Featured Projects */}
         <section className="mb-20">
