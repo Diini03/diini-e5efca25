@@ -6,27 +6,27 @@
 
 @layer base {
   :root {
-    --background: 210 25% 97%;
-    --foreground: 220 20% 20%;
+    --background: 210 25% 98%;
+    --foreground: 220 25% 15%;
     --card: 210 20% 95%;
-    --card-foreground: 220 20% 20%;
+    --card-foreground: 220 25% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 20%;
+    --popover-foreground: 220 25% 15%;
     --primary: 24 90% 48%;
     --primary-foreground: 0 0% 100%;
     --secondary: 210 20% 90%;
-    --secondary-foreground: 220 20% 20%;
+    --secondary-foreground: 220 25% 15%;
     --muted: 210 15% 88%;
-    --muted-foreground: 220 10% 45%;
+    --muted-foreground: 220 12% 40%;
     --accent: 24 90% 48%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 210 15% 85%;
+    --border: 220 14% 88%;
     --input: 210 15% 88%;
     --ring: 24 90% 48%;
     --radius: 0.5rem;
-    
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 24 90% 48%;
@@ -39,41 +39,6 @@
     /* Terminal card colors */
     --terminal-bg: 210 20% 95%;
     --terminal-header: 210 18% 92%;
-  }
-
-  .dark {
-    --background: 220 30% 8%;
-    --foreground: 210 20% 85%;
-    --card: 220 25% 12%;
-    --card-foreground: 210 20% 85%;
-    --popover: 220 25% 12%;
-    --popover-foreground: 210 20% 85%;
-    --primary: 24 90% 48%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 22% 16%;
-    --secondary-foreground: 210 15% 80%;
-    --muted: 220 20% 14%;
-    --muted-foreground: 210 15% 55%;
-    --accent: 24 90% 48%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 72% 55%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 220 20% 18%;
-    --input: 220 20% 18%;
-    --ring: 24 90% 48%;
-    
-    --sidebar-background: 220 25% 10%;
-    --sidebar-foreground: 210 15% 80%;
-    --sidebar-primary: 24 90% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 20% 16%;
-    --sidebar-accent-foreground: 210 15% 80%;
-    --sidebar-border: 220 20% 18%;
-    --sidebar-ring: 24 90% 48%;
-
-    /* Terminal card colors - dark */
-    --terminal-bg: 220 25% 12%;
-    --terminal-header: 220 22% 15%;
   }
 }
 
@@ -199,15 +164,9 @@
   /* Subtle grid background pattern */
   .bg-grid {
     background-image:
-      linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-
-  .dark .bg-grid {
-    background-image:
-      linear-gradient(to right, hsl(var(--foreground) / 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+      linear-gradient(to right, hsl(var(--foreground) / 0.018) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.018) 1px, transparent 1px);
+    background-size: 64px 64px;
   }
 
   /* Hide scrollbar for horizontal scroll */

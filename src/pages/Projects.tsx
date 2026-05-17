@@ -112,7 +112,7 @@ export default function Projects() {
                     {(project.imageDark || project.imageLight) && (
                       <div className="relative overflow-hidden h-32">
                         <img
-                          src={theme === "dark" ? project.imageDark : project.imageLight}
+                          src={project.imageLight || project.imageDark}
                           alt={project.title}
                           className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         />

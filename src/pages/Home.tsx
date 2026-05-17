@@ -1,33 +1,24 @@
 import { Link } from "react-router-dom";
-import { Github, Linkedin, ExternalLink, Star, Download, ArrowRight } from "lucide-react";
+import { Github, Linkedin, ExternalLink, Star, ArrowRight } from "lucide-react";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
 import { ProjectCard } from "@/components/home/ProjectCard";
 import { FeaturedProjectCard } from "@/components/home/FeaturedProjectCard";
+import { BackgroundStrip } from "@/components/home/BackgroundStrip";
 
 import { ParticleBackground } from "@/components/home/ParticleBackground";
 import { InteractiveGradient } from "@/components/home/InteractiveGradient";
 import { CompactClickCounter } from "@/components/home/DashboardCard";
+import { blogPosts } from "@/pages/Blog";
 
-const recentBlogs = [
-  {
-    slug: "world-happiness-report",
-    title: "World Happiness Report Analysis",
-    date: "Jan 2025",
-    category: "data-analysis",
-  },
-  {
-    slug: "tech-trends-2025",
-    title: "Top 5 Emerging Tech Trends of 2025",
-    date: "Feb 2025",
-    category: "tech",
-  },
-  {
-    slug: "ai-vs-ml",
-    title: "AI vs ML — Quick Examples",
-    date: "Feb 2025",
-    category: "tech",
-  },
-];
+const recentBlogs = blogPosts
+  .filter((p) => p.featuredOnHome)
+  .slice(0, 3)
+  .map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    date: new Date(p.date).toLocaleDateString("en-US", { month: "short", year: "numeric" }),
+    category: p.category,
+  }));
 
 export default function Home() {
   return (
@@ -86,16 +77,6 @@ export default function Home() {
               <ExternalLink className="w-3 h-3" />
             </Link>
           </div>
-
-          <a
-            href="/cv.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/25"
-          >
-            <Download className="w-4 h-4" />
-            Download My CV
-          </a>
         </section>
 
         {/* Featured Projects */}
@@ -142,6 +123,9 @@ export default function Home() {
             </Link>
           </div>
         </section>
+
+        {/* Background — Experience + Education */}
+        <BackgroundStrip />
 
         {/* Recent Blogs — editorial rows */}
         <section className="mb-20">

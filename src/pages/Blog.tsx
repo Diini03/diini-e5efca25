@@ -13,7 +13,7 @@ import numpyPandasImg from "@/assets/blog/numpy-pandas.png";
 
 const categories = ["all", "data-analysis", "tech", "career", "tutorials"];
 
-interface BlogPost {
+export interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
@@ -23,9 +23,10 @@ interface BlogPost {
   tags: string[];
   image: string;
   linkedinUrl: string;
+  featuredOnHome?: boolean;
 }
 
-const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[] = [
   {
     slug: "world-happiness-report",
     title: "World Happiness Report Analysis (2008-2021)",
@@ -36,6 +37,7 @@ const blogPosts: BlogPost[] = [
     tags: ["data-analysis", "visualization", "plotly"],
     image: worldHappinessImg,
     linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_world-happiness-report-2024-activity-7387382352618049537-nLEe?utm_source=share&utm_medium=member_desktop",
+    featuredOnHome: true,
   },
   {
     slug: "tech-trends-2025",
@@ -47,6 +49,7 @@ const blogPosts: BlogPost[] = [
     tags: ["ai", "technology", "trends"],
     image: techTrends2025Img,
     linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_top-5-emerging-tech-trends-of-2025-activity-7335583585871040514-HiK_?utm_source=share&utm_medium=member_desktop",
+    featuredOnHome: true,
   },
   {
     slug: "ai-vs-ml",
@@ -58,6 +61,7 @@ const blogPosts: BlogPost[] = [
     tags: ["ai", "machine-learning", "beginners"],
     image: aiVsMlImg,
     linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_whats-the-difference-between-ai-and-ml-activity-7332661785382072320-o10x?utm_source=share&utm_medium=member_desktop",
+    featuredOnHome: true,
   },
   {
     slug: "data-career-tips",
