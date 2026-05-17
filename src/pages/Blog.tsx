@@ -13,7 +13,7 @@ import numpyPandasImg from "@/assets/blog/numpy-pandas.png";
 
 const categories = ["all", "data-analysis", "tech", "career", "tutorials"];
 
-interface BlogPost {
+export interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
@@ -23,7 +23,13 @@ interface BlogPost {
   tags: string[];
   image: string;
   linkedinUrl: string;
+  featuredOnHome?: boolean;
 }
+
+export const blogPosts: BlogPost[] = blogPostsData();
+
+function blogPostsData(): BlogPost[] { return _blogPosts; }
+const _blogPosts: BlogPost[] = 
 
 const blogPosts: BlogPost[] = [
   {
