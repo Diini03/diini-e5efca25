@@ -3,22 +3,12 @@ import { Github, Linkedin, ExternalLink, Star, ArrowRight } from "lucide-react";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
 import { ProjectCard } from "@/components/home/ProjectCard";
 import { FeaturedProjectCard } from "@/components/home/FeaturedProjectCard";
-import { BackgroundStrip } from "@/components/home/BackgroundStrip";
+import { TrajectoryStrip } from "@/components/home/TrajectoryStrip";
+import { WritingCarousel } from "@/components/home/WritingCarousel";
 
 import { ParticleBackground } from "@/components/home/ParticleBackground";
 import { InteractiveGradient } from "@/components/home/InteractiveGradient";
 import { CompactClickCounter } from "@/components/home/DashboardCard";
-import { blogPosts } from "@/pages/Blog";
-
-const recentBlogs = blogPosts
-  .filter((p) => p.featuredOnHome)
-  .slice(0, 3)
-  .map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    date: new Date(p.date).toLocaleDateString("en-US", { month: "short", year: "numeric" }),
-    category: p.category,
-  }));
 
 export default function Home() {
   return (
@@ -124,43 +114,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Background — Experience + Education */}
-        <BackgroundStrip />
+        {/* Trajectory — Experience + Education with scroll line */}
+        <TrajectoryStrip />
 
-        {/* Recent Blogs — editorial rows */}
-        <section className="mb-20">
-          <h2 className="text-base font-semibold mb-6 pb-2 border-b border-border/40">
-            Writing
-          </h2>
-          <div>
-            {recentBlogs.map((post) => (
-              <Link
-                key={post.slug}
-                to={`/blog/${post.slug}`}
-                className="flex items-center justify-between gap-3 py-4 border-b border-border/30 hover:border-primary/30 transition-colors group"
-              >
-                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">
-                  {post.title}
-                </span>
-                <div className="flex items-center gap-3 shrink-0">
-                  <span className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground/70">
-                    {post.category}
-                  </span>
-                  <span className="text-xs text-muted-foreground">{post.date}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div className="mt-6 text-center">
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-primary/40 text-sm font-medium text-primary hover:bg-primary/10 hover:border-primary/60 transition-all"
-            >
-              See More Blogs I Wrote
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
+        {/* Writing — interactive carousel */}
+        <WritingCarousel />
 
         {/* Quick Stats */}
         <section className="mb-20">
