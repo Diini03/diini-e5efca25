@@ -1,79 +1,100 @@
-## Refinement Plan v1.2
+# v1.3 Refinement Plan
 
-Goal: make the portfolio feel more intentional and professional. Remove dark mode (no one uses it), promote the resume to the nav, calm the background, and rebalance Home + About content. Preserve identity: terminal aesthetic, orange `#EA580C`, `max-w-4xl`, terminal cards, splash, click counter.
-
----
-
-### 1. Remove dark mode — lock to one polished light theme
-
-**Decision:** keep **light mode only** (current default). It matches the editorial / data-science direction better than the dark variant and reads more professional in screenshots and shares.
-
-- `src/hooks/useTheme.tsx` — delete (or stub) the toggle; force `light`, never add `.dark` class, never read/write `localStorage`.
-- `src/index.css` — remove the entire `.dark { ... }` block and the `.dark .bg-grid` override. Keep only the `:root` light tokens.
-- `src/components/layout/Navigation.tsx` — remove `useTheme` import, the desktop `Sun/Moon` toggle button, and the mobile "Light/Dark Mode" row + divider.
-- Polish the single light theme slightly for a more "pro" feel:
-  - `--background: 210 25% 98%` (a touch cleaner)
-  - `--foreground: 220 25% 15%` (stronger text contrast)
-  - `--muted-foreground: 220 12% 40%` (more legible secondary text)
-  - `--border: 220 14% 88%` (softer dividers)
-
-### 2. Replace "Download My CV" hero button with a "Resume" nav button
-
-- `src/pages/Home.tsx` — delete the `Download My CV` button block from the hero section. Keep the bio + GitHub/LinkedIn/More-about-me row.
-- `src/components/layout/Navigation.tsx` — add a `Resume` pill (last item, visually distinct: `border border-primary/40 text-primary hover:bg-primary/10`, small `FileText` icon) on desktop, opening `/cv.html` in a new tab. In the mobile overlay, add the same as the final menu item below the nav links (no theme toggle there anymore).
-- `src/pages/About.tsx` — keep the existing "Download My CV" button there (it's contextually correct on About). Unchanged.
-
-### 3. Soften the grid background
-
-- `src/index.css` `.bg-grid` — reduce opacity from `0.04` → `0.018`, and increase tile from `48px` → `64px`. Result: barely-there structure instead of a visible grid. The dark override is gone with step 1.
-
-### 4. Home — restructure Writing + add a quiet Experience/Education strip
-
-**4a. Writing section — curate which posts appear:**
-- Add an `featuredOnHome: boolean` flag to each entry in `src/pages/Blog.tsx`'s `blogPosts` array (single source of truth — no duplicated list in `Home.tsx`).
-- Default `true` for the current 3 (`world-happiness-report`, `tech-trends-2025`, `ai-vs-ml`).
-- `src/pages/Home.tsx` imports `blogPosts`, filters `featuredOnHome`, takes the first 3, renders the same editorial rows. To "change which ones show," you flip the flag in `Blog.tsx`. (Lightweight, no UI/admin, no DB — matches the "no over-engineering" constraint.)
-- Visual refinement: tighten row spacing (`py-3`), date in tabular-nums, hover moves a small `→` arrow in from the right.
-
-**4b. New "Background" strip (Experience + Education) — between Selected Work and Writing:**
-- Compact, two-column on `md`, single column on mobile. No icons-in-circles, no timeline rail. Pure editorial:
-  - Left column header: `EXPERIENCE` (10px tracking-[0.2em] uppercase muted)
-  - Two rows: role · org · date (one line each), one-line description below in muted.
-  - Right column header: `EDUCATION` — one row (BSc Computer Science · SNU · 2021–2026).
-- Data lives in a new file `src/components/home/BackgroundStrip.tsx` (self-contained, easy to edit). Pulls from a short inline array — does not import the heavier `About.tsx` data.
-
-**New Home section order:**
-Hero → Selected Work → **Background (Experience + Education)** → Writing → Quick Stats → Click Counter.
-
-### 5. About — slim "Currently Learning" and "Skills & Technologies"
-
-- **Currently Learning:** remove entirely from About (it duplicates intent of Skills and feels like filler). Delete the `<CurrentlyLearning />` import + render. (Component file kept on disk in case of future reuse.)
-- **Skills & Technologies:** collapse 6 category cards → **one** clean block:
-  - Section title kept.
-  - Replace the grid of `terminal-card` boxes with a single editorial layout: each category is a row — left side small uppercase label (`LANGUAGES`, `DATA`, `DATABASES`, `WEB`, `AI TOOLS`, `TOOLS`), right side inline chips on one line (`text-xs`, no card backgrounds, just `border border-border/60 rounded px-2 py-0.5`). Result: same info, ~1/3 the vertical space, much more "senior" feel.
-- Keep Experience & Education and Certifications sections as-is.
-
-### 6. Memory updates
-
-- Remove dark-mode references in `mem://index.md` ("Theme: Default light mode" → "Theme: Light mode only, dark mode removed").
-- Add constraint: "Dark mode removed. Do not re-add toggle or `.dark` styles."
-- Update Home order memory: Hero → Selected Work → Background → Writing → Quick Stats → Click Counter.
-- Update About description (no Currently Learning, slim Skills).
-- Retire/update: `Navigation Theme Toggle`, `Smooth Theme Transition` (keep transition but note no theme switching), `Currently Learning` memory.
+Goal: refine four areas without breaking the existing identity (terminal aesthetic, orange `#EA580C`, max-w-4xl, monospace, light mode only).
 
 ---
 
-### Files touched
+## 1. Background color — calmer, not white
 
-- edit `src/index.css` (remove `.dark`, soften tokens, soften grid)
-- edit `src/hooks/useTheme.tsx` (stub to always-light, or delete usages)
-- edit `src/components/layout/Navigation.tsx` (remove toggle, add Resume button desktop + mobile)
-- edit `src/pages/Home.tsx` (drop CV button, reorder, source blogs from Blog.tsx, render BackgroundStrip)
-- new `src/components/home/BackgroundStrip.tsx`
-- edit `src/pages/Blog.tsx` (add `featuredOnHome` to data + export)
-- edit `src/pages/About.tsx` (remove CurrentlyLearning, restructure Skills)
-- edit `mem://index.md` + small memory edits
+Currently `--background: 210 25% 98%` reads almost pure white and hurts readability on long sessions.
 
-### Not changing
+Switch to a soft, slightly tinted off-white that feels modern (think Linear / Vercel docs / Notion light):
 
-Hero copy, splash, click counter, particles, interactive gradient, terminal cards, footer, project cards, Contact, BlogPost, ProjectDetail, color `#EA580C`, `max-w-4xl` width, fonts, splash, page transitions.
+- `--background: 35 25% 96%` — very subtle warm cream, easier on the eyes
+- `--card: 35 20% 93%` and `--terminal-bg: 35 20% 93%` to match
+- `--terminal-header: 35 18% 90%`
+- `--muted: 35 15% 90%`, `--border: 35 14% 86%`
+- Keep `--foreground`, primary orange, and grid opacity unchanged.
+
+Will spot-check Home, Projects, About, Blog, ProjectDetail to confirm contrast stays AA. Adjust 1–2 ticks if any surface looks muddy.
+
+Alternative if the warm cream feels off: a cool neutral `210 20% 96%` with `--card 210 16% 93%`. I will pick warm cream as the default.
+
+---
+
+## 2. Home "Writing" section → interactive vertical-tab carousel
+
+Replace the current list of editorial rows with a layout inspired by the screenshots (brittanychiang.com "Where I've Worked"):
+
+```text
+┌──────────────────────────────────────────────┐
+│ Writing                                      │
+├────────────┬─────────────────────────────────┤
+│ • Post A   │  Title of selected post         │
+│ • Post B   │  Category · date · read time    │
+│ • Post C   │                                 │
+│            │  Excerpt paragraph...           │
+│            │                                 │
+│            │  [Read on blog →]               │
+└────────────┴─────────────────────────────────┘
+              [ View All Writing → ]
+```
+
+Behavior:
+- Left rail: vertical list of `featuredOnHome` post titles. Active item has an orange left border + orange text; inactive items muted.
+- Click (or hover with small delay on desktop) swaps the right pane.
+- Right pane: title, meta line, excerpt (first ~160 chars), and a "Read post" link to `/blog/{slug}`.
+- Smooth fade/slide transition (CSS `opacity` + `translateY(4px)`, 200ms) when switching.
+- Mobile (`< md`): collapses to a horizontal scrolling chip row on top + content below.
+- Centered "View all writing" button below, replacing current "See More Blogs I Wrote".
+
+New component: `src/components/home/WritingCarousel.tsx`. Drops into `Home.tsx` in place of the current Writing block. Pulls from `blogPosts.filter(p => p.featuredOnHome)`.
+
+---
+
+## 3. "Background" section — scroll-progress connector line
+
+Keep the same two-column Experience + Education content, but redesign visually so it doesn't look like a generic timeline/section. Inspired by the cursor/scroll line idea:
+
+- Render a thin vertical line down the left edge of the section.
+- The line has two layers: a faint base track (`border` color, opacity 30%) and a filled overlay (`primary` color) whose height is driven by the user's scroll position relative to the section.
+- As the user scrolls down through the section the orange fill grows from top to bottom; scrolling back up shrinks it. Implemented with an `IntersectionObserver` + `requestAnimationFrame` on `scroll` reading the section's `getBoundingClientRect()`. No external libs.
+- Each row (Experience item, Education item) gets a small dot anchored on the line. Dot turns from muted → orange once the fill passes it.
+- Section heading changes from "Background" to a more intentional label: **"Trajectory"** (short, not buzzword-y, signals movement).
+- Layout stays two-column on `md+`, single column on mobile (line still works).
+
+New component: `src/components/home/TrajectoryStrip.tsx` replacing `BackgroundStrip.tsx` (old file deleted). Same data shape.
+
+---
+
+## 4. Click-Me button — tooltip + modern feedback animation
+
+Current button: bare "Click Me" with a counter that just ticks.
+
+Additions in `DashboardCard.tsx` (CompactClickCounter):
+
+- **Hover tooltip**: small pill above the button: *"Tap to leave your mark — see the counter rise."* Use existing `@/components/ui/tooltip` (shadcn), with 150ms delay, subtle fade.
+- **Modern click feedback** (replacing the common "+1"): on each click, spawn a short-lived **ripple ring** that expands and fades out from the button center, plus a tiny **spark dot** that floats up-and-out at a random angle (-20° to +20°) and fades. No text/numbers floating — feels more tactile and original than "+1".
+  - Ripple: absolutely positioned `span`, scales `0 → 2.2`, opacity `0.4 → 0`, 600ms ease-out, orange.
+  - Spark: 4px dot, translates `0 → -28px` with x jitter, fades over 500ms.
+  - Implemented with a small `useState` array of click events and CSS keyframes (no framer-motion needed). Auto-cleans after animation ends.
+- Button itself gets a tiny `active:scale-95` (already present) + a subtle orange glow shadow on hover.
+- The numeric counter still updates as before — animation is additive.
+
+---
+
+## Files touched
+
+- `src/index.css` — palette tokens (background/card/terminal/border/muted).
+- `src/components/home/WritingCarousel.tsx` — **new**.
+- `src/components/home/TrajectoryStrip.tsx` — **new** (replaces BackgroundStrip).
+- `src/components/home/BackgroundStrip.tsx` — **delete**.
+- `src/components/home/DashboardCard.tsx` — tooltip + ripple/spark animation.
+- `src/pages/Home.tsx` — swap Writing block → `<WritingCarousel />`, swap `<BackgroundStrip />` → `<TrajectoryStrip />`.
+- `mem://index.md` + small memory file updates (palette tint, Writing carousel pattern, Trajectory section, Click-Me micro-interaction).
+
+## Not changing
+
+Hero copy, splash, nav (Resume pill), particles, interactive gradient, primary orange, grid opacity, fonts, max-w-4xl, project cards, About/Projects/Blog pages, footer.
+
+After implementation I'll spot-check the preview for: contrast on the new bg, carousel swap behavior, scroll-line fill timing, and the click ripple feel.
