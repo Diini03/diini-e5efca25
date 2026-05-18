@@ -6,39 +6,39 @@
 
 @layer base {
   :root {
-    --background: 210 25% 98%;
+    --background: 35 25% 96%;
     --foreground: 220 25% 15%;
-    --card: 210 20% 95%;
+    --card: 35 20% 93%;
     --card-foreground: 220 25% 15%;
-    --popover: 0 0% 100%;
+    --popover: 35 25% 97%;
     --popover-foreground: 220 25% 15%;
     --primary: 24 90% 48%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 20% 90%;
+    --secondary: 35 18% 90%;
     --secondary-foreground: 220 25% 15%;
-    --muted: 210 15% 88%;
+    --muted: 35 15% 90%;
     --muted-foreground: 220 12% 40%;
     --accent: 24 90% 48%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 14% 88%;
-    --input: 210 15% 88%;
+    --border: 35 14% 86%;
+    --input: 35 15% 88%;
     --ring: 24 90% 48%;
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 35 25% 97%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 24 90% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent: 35 18% 92%;
     --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
+    --sidebar-border: 35 14% 88%;
     --sidebar-ring: 24 90% 48%;
 
     /* Terminal card colors */
-    --terminal-bg: 210 20% 95%;
-    --terminal-header: 210 18% 92%;
+    --terminal-bg: 35 20% 93%;
+    --terminal-header: 35 18% 90%;
   }
 }
 
@@ -224,4 +224,16 @@
   .animate-slide-up {
     animation: slide-up 0.5s ease-out forwards;
   }
+
+  /* Click-Me micro-interactions */
+  @keyframes ripple {
+    0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.5; }
+    100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+  }
+  @keyframes spark {
+    0% { transform: translate(-50%, -50%) rotate(var(--spark-angle, 0deg)) translateY(0); opacity: 1; }
+    100% { transform: translate(-50%, -50%) rotate(var(--spark-angle, 0deg)) translateY(-32px); opacity: 0; }
+  }
+  .animate-ripple { animation: ripple 0.65s ease-out forwards; }
+  .animate-spark { animation: spark 0.6s ease-out forwards; }
 }
