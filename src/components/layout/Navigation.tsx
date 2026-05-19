@@ -74,66 +74,71 @@ export function Navigation({ onLogoClick }: NavigationProps) {
         </div>
       </nav>
 
+      {/* Backdrop */}
       <div
-        className={`fixed inset-0 z-[55] md:hidden transition-all duration-300 ${
+        className={`fixed inset-0 z-[54] md:hidden bg-background/60 backdrop-blur-sm transition-opacity duration-300 ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsOpen(false)}
+      />
+
+      {/* Right-side drawer */}
+      <aside
+        className={`fixed top-0 right-0 z-[55] md:hidden h-full w-[78%] max-w-xs bg-popover border-l border-border shadow-2xl transform transition-transform duration-300 ease-out ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+        aria-hidden={!isOpen}
       >
-        <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
+        <div className="flex items-center justify-between h-14 px-5 border-b border-border/60">
+          <span className="text-sm font-mono text-primary">Navigation</span>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-2 rounded-md text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
 
-        <button
-          onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
-          className="absolute top-4 right-6 z-20 p-2 rounded-full bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
-          aria-label="Close menu"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        <div className="relative z-10 flex flex-col items-center justify-center h-full px-8" onClick={(e) => e.stopPropagation()}>
-          <div className="space-y-2 w-full max-w-sm">
+        <div className="flex flex-col h-[calc(100%-3.5rem)] px-5 py-6">
+          <nav className="flex flex-col gap-1">
             {navItems.map((item, i) => (
               <NavLink
                 key={item.path}
                 to={item.path}
-                className={`flex items-center justify-between w-full px-4 py-4 rounded-xl text-lg font-mono text-muted-foreground hover:text-foreground hover:bg-card transition-all ${
+                className={`flex items-center justify-between w-full px-3 py-3 rounded-lg text-base font-mono text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all ${
                   isOpen ? "animate-fade-in" : ""
                 }`}
                 activeClassName="text-primary bg-primary/10"
-                style={{ animationDelay: `${i * 60}ms`, animationFillMode: "both" }}
+                style={{ animationDelay: `${i * 50}ms`, animationFillMode: "both" }}
                 onClick={() => setIsOpen(false)}
               >
-                <span>{item.label}</span>
+                <span>
+                  <span className="text-primary/60 mr-2 text-xs">0{i + 1}.</span>
+                  {item.label}
+                </span>
                 <ArrowRight className="w-4 h-4 opacity-40" />
               </NavLink>
             ))}
+          </nav>
 
-            <div className="border-t border-border/50 my-4" />
-
+          <div className="mt-6 pt-6 border-t border-border/60">
             <a
               href="/cv.html"
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center justify-between w-full px-4 py-4 rounded-xl text-lg font-mono text-primary border border-primary/40 hover:bg-primary/10 transition-all ${
-                isOpen ? "animate-fade-in" : ""
-              }`}
-              style={{ animationDelay: `${navItems.length * 60}ms`, animationFillMode: "both" }}
+              className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg text-sm font-mono text-primary border border-primary/40 hover:bg-primary/10 transition-all"
             >
-              <span>Resume</span>
-              <FileText className="w-5 h-5" />
+              <FileText className="w-4 h-4" />
+              Resume
             </a>
           </div>
 
-          <div
-            className={`absolute bottom-10 text-xs text-muted-foreground/40 font-mono ${
-              isOpen ? "animate-fade-in" : ""
-            }`}
-            style={{ animationDelay: "400ms", animationFillMode: "both" }}
-          >
+          <div className="mt-auto pt-6 text-xs text-muted-foreground/50 font-mono">
             ~/diini-kahiye
           </div>
         </div>
-      </div>
+      </aside>
     </>
   );
 }
