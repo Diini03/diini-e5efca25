@@ -12,7 +12,7 @@ export function SocialRail() {
   return (
     <aside
       aria-label="Social links"
-      className="hidden lg:flex fixed left-6 bottom-0 z-30 flex-col items-center gap-5 text-muted-foreground"
+      className="hidden lg:flex fixed left-12 xl:left-16 bottom-0 z-30 flex-col items-center gap-5 text-muted-foreground"
     >
       <ul className="flex flex-col items-center gap-4">
         {links.map(({ href, label, Icon }) => (
