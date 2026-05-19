@@ -5,6 +5,7 @@ import { PageTransition } from "./PageTransition";
 import { SplashScreen } from "./SplashScreen";
 import ScrollToTop from "./ScrollToTop";
 import { Footer } from "./Footer";
+import { SocialRail } from "./SocialRail";
 
 export default function Layout() {
   const location = useLocation();
@@ -24,6 +25,7 @@ export default function Layout() {
       {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
       <ScrollToTop />
       <Navigation onLogoClick={triggerSplash} />
+      <SocialRail />
       <main className="pt-14 flex-1">
         <PageTransition key={location.pathname}>
           <Outlet />
