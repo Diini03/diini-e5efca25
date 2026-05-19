@@ -6,40 +6,40 @@
 
 @layer base {
   :root {
-    /* Soft slate-blue mist — cool, professional, easy on the eyes */
-    --background: 210 22% 94%;
-    --foreground: 220 30% 14%;
-    --card: 210 20% 91%;
-    --card-foreground: 220 30% 14%;
-    --popover: 210 25% 96%;
-    --popover-foreground: 220 30% 14%;
-    --primary: 24 90% 48%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 210 18% 88%;
-    --secondary-foreground: 220 30% 14%;
-    --muted: 210 16% 88%;
-    --muted-foreground: 220 14% 38%;
-    --accent: 24 90% 48%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 210 16% 84%;
-    --input: 210 16% 86%;
-    --ring: 24 90% 48%;
+    /* Catppuccin Frappe — soft dark, modern, easy on the eyes (#303446 base) */
+    --background: 229 19% 23%;
+    --foreground: 227 68% 88%;
+    --card: 230 16% 30%;
+    --card-foreground: 227 68% 88%;
+    --popover: 231 19% 20%;
+    --popover-foreground: 227 68% 88%;
+    --primary: 24 90% 56%;
+    --primary-foreground: 229 19% 12%;
+    --secondary: 227 15% 37%;
+    --secondary-foreground: 227 68% 88%;
+    --muted: 230 16% 30%;
+    --muted-foreground: 228 24% 73%;
+    --accent: 24 90% 56%;
+    --accent-foreground: 229 19% 12%;
+    --destructive: 359 68% 71%;
+    --destructive-foreground: 229 19% 12%;
+    --border: 227 15% 37%;
+    --input: 227 15% 37%;
+    --ring: 24 90% 56%;
     --radius: 0.5rem;
 
-    --sidebar-background: 210 25% 95%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 24 90% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 18% 90%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 210 16% 86%;
-    --sidebar-ring: 24 90% 48%;
+    --sidebar-background: 231 19% 20%;
+    --sidebar-foreground: 227 68% 88%;
+    --sidebar-primary: 24 90% 56%;
+    --sidebar-primary-foreground: 229 19% 12%;
+    --sidebar-accent: 230 16% 30%;
+    --sidebar-accent-foreground: 227 68% 88%;
+    --sidebar-border: 227 15% 37%;
+    --sidebar-ring: 24 90% 56%;
 
     /* Terminal card colors */
-    --terminal-bg: 210 20% 91%;
-    --terminal-header: 210 18% 88%;
+    --terminal-bg: 230 16% 30%;
+    --terminal-header: 231 19% 20%;
   }
 }
 
