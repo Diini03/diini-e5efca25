@@ -39,7 +39,7 @@ import whGdpVsHappiness from "@/assets/projects/world-happiness/gdp-vs-happiness
 interface ChartData {
   title: string;
   image: string;
-  insight: string;
+  insight?: string;
 }
 
 interface ProjectData {
@@ -47,10 +47,10 @@ interface ProjectData {
   date: string;
   description: string;
   tags: string[];
-  highlights: string[];
+  highlights?: string[];
   tools: string[];
-  codeFile: string;
-  codeContent: string;
+  codeFile?: string;
+  codeContent?: string;
   githubUrl?: string;
   keyInsight?: string;
   charts?: ChartData[];
