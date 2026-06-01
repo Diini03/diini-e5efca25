@@ -604,24 +604,26 @@ export default function ProjectDetail() {
 
 
         {/* Key Highlights */}
-        <section className="mb-10">
-          <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-primary" />
-            Key Highlights
-          </h2>
-          <div className="terminal-card p-4">
-            <ol className="space-y-3">
-              {project.highlights.map((highlight, index) => (
-                <li key={index} className="flex items-start gap-3 text-sm text-muted-foreground">
-                  <span className="w-5 h-5 rounded bg-secondary flex items-center justify-center text-xs text-foreground shrink-0">
-                    {index + 1}
-                  </span>
-                  {highlight}
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+        {project.highlights && project.highlights.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-primary" />
+              Key Highlights
+            </h2>
+            <div className="terminal-card p-4">
+              <ol className="space-y-3">
+                {project.highlights.map((highlight, index) => (
+                  <li key={index} className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <span className="w-5 h-5 rounded bg-secondary flex items-center justify-center text-xs text-foreground shrink-0">
+                      {index + 1}
+                    </span>
+                    {highlight}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        )}
 
         {/* Tools & Technologies */}
         <section className="mb-10">
