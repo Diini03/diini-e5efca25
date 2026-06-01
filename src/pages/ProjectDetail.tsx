@@ -36,10 +36,15 @@ import whTop10Countries from "@/assets/projects/world-happiness/top-10-countries
 import whCorrelationHeatmap from "@/assets/projects/world-happiness/correlation-heatmap.png";
 import whGdpVsHappiness from "@/assets/projects/world-happiness/gdp-vs-happiness.png";
 
+// Power BI Dashboards
+import somaliaForecastDashboard from "@/assets/projects/powerbi/somalia-displacement-forecast.png";
+import somaliaIdpsDashboard from "@/assets/projects/powerbi/somalia-idps-unhcr.png";
+
+
 interface ChartData {
   title: string;
   image: string;
-  insight: string;
+  insight?: string;
 }
 
 interface ProjectData {
@@ -47,10 +52,10 @@ interface ProjectData {
   date: string;
   description: string;
   tags: string[];
-  highlights: string[];
+  highlights?: string[];
   tools: string[];
-  codeFile: string;
-  codeContent: string;
+  codeFile?: string;
+  codeContent?: string;
   githubUrl?: string;
   keyInsight?: string;
   charts?: ChartData[];
@@ -59,74 +64,39 @@ interface ProjectData {
 }
 
 const projectsData: Record<string, ProjectData> = {
+  "somalia-displacement-forecast": {
+    title: "Somalia Displacement Forecast Dashboard",
+    date: "2025",
+    description: "Interactive Power BI dashboard analyzing displacement across Somali districts — broken down by conflict, drought and flood, with forecast vs. actual comparison.",
+    tags: ["power-bi", "dax", "power-query", "data-visualization", "humanitarian"],
+    charts: [
+      { title: "Somalia Displacement Forecast Dashboard", image: somaliaForecastDashboard },
+    ],
+    tools: ["Power BI", "DAX", "Power Query", "Excel"],
+  },
+  "somalia-idps-unhcr": {
+    title: "Somalia IDPs Movement Dashboard (UNHCR-PRMN)",
+    date: "2025",
+    description: "Power BI dashboard built on the UNHCR-PRMN August 2023 dataset, exploring internal displacement movements across Somalia by region, reason, and priority need.",
+    tags: ["power-bi", "dax", "power-query", "unhcr", "humanitarian"],
+    charts: [
+      { title: "Somalia IDPs Dashboard", image: somaliaIdpsDashboard },
+    ],
+    tools: ["Power BI", "DAX", "Power Query"],
+  },
   "fall-armyworm-detection": {
     title: "Fall Armyworm Leaf Disease Detection Using Deep Learning",
     date: "2025",
-    description: "This project focuses on building an image classification system to detect Fall Armyworm damage on maize leaves using deep learning. Fall Armyworm is a major agricultural pest that significantly affects crop yield, especially in African countries. Early and accurate detection is critical for timely intervention and food security. The goal was to train, evaluate, and compare multiple deep learning models, then select the most effective model for real-world use.",
+    description: "Image classification system that detects Fall Armyworm damage on maize leaves using deep learning. Compared 5 CNN architectures and selected the strongest model for real-world agricultural use.",
     tags: ["python", "tensorflow", "keras", "deep-learning", "cnn", "computer-vision"],
     competitionUrl: "https://zindi.africa/competitions/combating-food-insecurity-in-somalia",
     competitionName: "PyCon Somalia 2025 Hackathon",
     githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python",
-    keyInsight: "Transfer learning with fine-tuning dramatically outperformed custom CNNs, achieving 99.07% validation accuracy. Model 4 was selected as the final solution due to its excellent generalization, stable learning curves, and suitability for real-world agricultural decision support.",
     charts: [
-      {
-        title: "Dataset Class Distribution",
-        image: fawClassDistribution,
-        insight: "Perfectly balanced dataset with 810 healthy and 810 diseased leaf samples"
-      },
-      {
-        title: "Sample Leaf Images",
-        image: fawSampleLeaves,
-        insight: "Visual examples showing clear differences between healthy and FAW-damaged leaves"
-      },
-      {
-        title: "Simple CNN Architecture (Model 1)",
-        image: fawModelArchitecture,
-        insight: "Baseline CNN with 11M parameters using Conv2D, MaxPooling, and Dense layers"
-      },
-      {
-        title: "Model 1: Training Progress",
-        image: fawModel1Accuracy,
-        insight: "Baseline CNN achieved ~85% accuracy with gradual convergence over 10 epochs"
-      },
-      {
-        title: "Model 5: Lightweight Model Accuracy",
-        image: fawModel5Accuracy,
-        insight: "Deployment-friendly model showing stable ~91.5% validation accuracy"
-      },
-      {
-        title: "Prediction: Healthy Leaf Sample 1",
-        image: fawPredictionHealthy1,
-        insight: "Model correctly classifies healthy leaf with high confidence score"
-      },
-      {
-        title: "Prediction: Diseased Leaf Sample",
-        image: fawPredictionDiseased1,
-        insight: "Fall Armyworm damage detected with strong prediction confidence"
-      },
-      {
-        title: "Prediction: Healthy Leaf Sample 2",
-        image: fawPredictionHealthy2,
-        insight: "Consistent healthy classification demonstrating model reliability"
-      },
-      {
-        title: "Prediction: Diseased Leaf Sample 2",
-        image: fawPredictionDiseased2,
-        insight: "Another diseased sample correctly identified by the model"
-      },
-      {
-        title: "Prediction: Healthy Leaf Sample 3",
-        image: fawPredictionHealthy3,
-        insight: "Final test prediction confirming model's accuracy on healthy leaves"
-      }
-    ],
-    highlights: [
-      "Built and compared 5 deep learning models: Simple CNN, Deeper CNN, MobileNetV2, Advanced Transfer Learning, and Lightweight Deployment Model",
-      "Achieved 99.07% validation accuracy with Model 4 (Advanced Transfer Learning with fine-tuning)",
-      "Processed 1620+ labeled leaf images with proper stratified train/validation split",
-      "Implemented data augmentation and preprocessing for robust model training",
-      "Created a reusable .h5 model file for deployment without retraining",
-      "Developed for PyCon Somalia 2025 Hackathon - Combating Food Insecurity in Somalia challenge on Zindi"
+      { title: "Dataset Class Distribution", image: fawClassDistribution },
+      { title: "Simple CNN Architecture", image: fawModelArchitecture },
+      { title: "Model 5: Training Accuracy", image: fawModel5Accuracy },
+      { title: "Prediction: Diseased Leaf", image: fawPredictionDiseased1 },
     ],
     tools: ["Python", "TensorFlow", "Keras", "NumPy", "Pandas", "Matplotlib", "Seaborn", "OpenCV", "Scikit-learn"],
     codeFile: "Fall_Armyworm_Detection.ipynb",
@@ -226,39 +196,13 @@ print("Model saved successfully for future use!")`,
   "world-happiness-analysis": {
     title: "World Happiness Report Analysis (2008-2021)",
     date: "2025",
-    description: "People's well-being changed over time, as shown by the World Happiness Data (2008-2021). The world's happiness level increased by almost 8% in the past ten years despite global issues like COVID-19, demonstrating how resilient people are. This analysis explores the key factors that influence happiness across 166+ countries.",
+    description: "Exploration of global happiness trends across 166+ countries (2008–2021), looking at GDP, social support, freedom, and corruption.",
     tags: ["python", "pandas", "matplotlib", "seaborn", "numpy", "eda"],
     githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python",
-    keyInsight: "Social support can increase happiness by up to 60%. After a certain income level, joy plateaus - wealth helps but doesn't guarantee happiness. Freedom and corruption perception continue to determine who thrives and who struggles.",
     charts: [
-      {
-        title: "Average Global Happiness Over Time",
-        image: whHappinessOverTime,
-        insight: "Global happiness remained relatively stable from 2008-2023, with a peak around 2020"
-      },
-      {
-        title: "Top 10 Happiest Countries in 2023",
-        image: whTop10Countries,
-        insight: "Nordic countries (Finland, Iceland, Denmark) consistently rank among the happiest"
-      },
-      {
-        title: "Correlation Between Happiness Factors",
-        image: whCorrelationHeatmap,
-        insight: "GDP (0.77), social support (0.72), and healthy life expectancy (0.71) have strongest positive correlation with happiness"
-      },
-      {
-        title: "Does Money Buy Happiness?",
-        image: whGdpVsHappiness,
-        insight: "Clear positive relationship between GDP per capita and happiness, but with diminishing returns at higher income levels"
-      }
-    ],
-    highlights: [
-      "Analyzed 2363 data points covering 166+ countries from 2008 to 2023",
-      "GDP, social support, and freedom have the strongest positive relationship with happiness",
-      "Corruption perception and negative affect are major negative factors impacting well-being",
-      "Nordic countries (Finland, Iceland, Denmark) consistently rank as the happiest in the world",
-      "Discovered that social support can boost happiness by up to 60% in connected societies",
-      "Emotional well-being aligns closely with happiness - higher positivity, lower negativity"
+      { title: "Average Global Happiness Over Time", image: whHappinessOverTime },
+      { title: "Top 10 Happiest Countries", image: whTop10Countries },
+      { title: "Correlation Between Happiness Factors", image: whCorrelationHeatmap },
     ],
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
     codeFile: "World_Happiness_Report_2024.ipynb",
@@ -330,42 +274,12 @@ print("Key Finding: Nordic countries consistently rank highest.")`,
   "covid-19-analysis": {
     title: "Covid-19 Analysis and Visualization using Plotly Express",
     date: "2025",
-    description: "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations including bar charts, scatter plots, and choropleth maps. The project explores total cases, deaths, recoveries, and testing data across different continents and WHO regions.",
+    description: "Global COVID-19 analysis across 209 countries using interactive Plotly visualizations — bar charts, scatter plots, and choropleth maps.",
     tags: ["python", "pandas", "plotly", "matplotlib", "data-visualization"],
-    keyInsight: "The USA consistently led in both total cases and testing capacity, with clear exponential growth patterns visible from February to July 2020. This analysis reveals how different regions responded to the pandemic at varying rates.",
     charts: [
-      {
-        title: "Total Cases by Country (Bubble Chart)",
-        image: casesBubbleChart,
-        insight: "USA, Brazil, and India had the highest case counts globally"
-      },
-      {
-        title: "Cases Distribution by Continent",
-        image: casesContinentChart,
-        insight: "North America led with 5M+ cases, followed by South America"
-      },
-      {
-        title: "Top 15 Countries by Total Cases",
-        image: casesBarChart,
-        insight: "USA alone accounted for nearly 5M confirmed cases"
-      },
-      {
-        title: "COVID-19 Testing by Country",
-        image: testsChart,
-        insight: "USA conducted 60M+ tests, significantly more than other nations"
-      },
-      {
-        title: "Confirmed Cases Over Time",
-        image: timeSeriesChart,
-        insight: "Exponential growth from Feb to Jul 2020 across all countries"
-      }
-    ],
-    highlights: [
-      "Imported and analyzed COVID-19 datasets covering 209 countries with 17 data columns",
-      "Created interactive bar charts comparing total cases, deaths, and recoveries by country",
-      "Built scatter plots showing correlation between confirmed cases and deaths",
-      "Developed choropleth maps for global visualization of pandemic spread",
-      "Analyzed time-series data with 35,156 entries tracking daily case changes",
+      { title: "Total Cases by Country", image: casesBubbleChart },
+      { title: "Cases Distribution by Continent", image: casesContinentChart },
+      { title: "Confirmed Cases Over Time", image: timeSeriesChart },
     ],
     tools: ["Python", "Pandas", "Plotly Express", "Plotly Graph Objects", "Matplotlib"],
     codeFile: "Covid-19_Analysis.ipynb",
@@ -447,42 +361,12 @@ fig.show()`,
   "netflix-data-analysis": {
     title: "Netflix Data Analysis & Visualization",
     date: "2025",
-    description: "Comprehensive analysis of 8807 Netflix titles exploring content distribution, trends over time, and country-based insights using Python visualization libraries. The project includes data cleaning, exploratory data analysis, and multiple visualization techniques.",
+    description: "Analysis of 8,807 Netflix titles exploring content distribution, ratings, and trends over time.",
     tags: ["python", "pandas", "seaborn", "matplotlib", "numpy", "eda"],
-    keyInsight: "Netflix's content library is heavily movie-focused (69.6% movies vs 30.4% TV shows), with TV-MA rated content dominating the platform. Content additions peaked dramatically in 2019 before declining, likely due to increased competition from other streaming services.",
     charts: [
-      {
-        title: "Distribution: Movies vs TV Shows",
-        image: netflixMoviesVsTvShows,
-        insight: "Movies make up ~69.6% of Netflix content (5,600+) vs TV Shows (~2,300)"
-      },
-      {
-        title: "Top 10 Content Ratings on Netflix",
-        image: netflixContentRatings,
-        insight: "TV-MA dominates with ~3,000 titles, followed by TV-14 (~1,900)"
-      },
-      {
-        title: "Distribution of Movie Durations",
-        image: netflixMovieDurations,
-        insight: "Most movies are 90-100 minutes long, following a right-skewed distribution"
-      },
-      {
-        title: "Content Added Over the Years",
-        image: netflixContentOverYears,
-        insight: "Content additions peaked in 2019 with 1,350+ movies added that year"
-      },
-      {
-        title: "Correlation Heatmap",
-        image: netflixCorrelationHeatmap,
-        insight: "Weak correlations between numeric features; duration slightly correlates with release year"
-      }
-    ],
-    highlights: [
-      "Analyzed 8807 Netflix titles with 12 data columns including movies and TV shows",
-      "Cleaned missing data: 2634 missing directors, 831 missing countries, 825 missing cast",
-      "Created distribution charts comparing Movies vs TV Shows (6131 movies, 2676 TV shows)",
-      "Visualized top 10 countries by content production with United States leading at 2818 titles",
-      "Performed trend analysis showing content additions over years from 1925 to 2021",
+      { title: "Movies vs TV Shows", image: netflixMoviesVsTvShows },
+      { title: "Top 10 Content Ratings", image: netflixContentRatings },
+      { title: "Content Added Over the Years", image: netflixContentOverYears },
     ],
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
     codeFile: "Netflix_Data_Analysis.ipynb",
@@ -705,11 +589,13 @@ export default function ProjectDetail() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <div className="p-3 border-t border-border">
-                    <p className="text-xs text-muted-foreground">
-                      💡 {chart.insight}
-                    </p>
-                  </div>
+                  {chart.insight && (
+                    <div className="p-3 border-t border-border">
+                      <p className="text-xs text-muted-foreground">
+                        💡 {chart.insight}
+                      </p>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -718,24 +604,26 @@ export default function ProjectDetail() {
 
 
         {/* Key Highlights */}
-        <section className="mb-10">
-          <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-primary" />
-            Key Highlights
-          </h2>
-          <div className="terminal-card p-4">
-            <ol className="space-y-3">
-              {project.highlights.map((highlight, index) => (
-                <li key={index} className="flex items-start gap-3 text-sm text-muted-foreground">
-                  <span className="w-5 h-5 rounded bg-secondary flex items-center justify-center text-xs text-foreground shrink-0">
-                    {index + 1}
-                  </span>
-                  {highlight}
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+        {project.highlights && project.highlights.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-primary" />
+              Key Highlights
+            </h2>
+            <div className="terminal-card p-4">
+              <ol className="space-y-3">
+                {project.highlights.map((highlight, index) => (
+                  <li key={index} className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <span className="w-5 h-5 rounded bg-secondary flex items-center justify-center text-xs text-foreground shrink-0">
+                      {index + 1}
+                    </span>
+                    {highlight}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        )}
 
         {/* Tools & Technologies */}
         <section className="mb-10">
@@ -756,56 +644,58 @@ export default function ProjectDetail() {
         </section>
 
         {/* Code Snippet */}
-        <section>
-          <div className="terminal-card">
-            <div className="terminal-header flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="flex items-center gap-1.5">
-                  <div className="terminal-dot terminal-dot-red" />
-                  <div className="terminal-dot terminal-dot-yellow" />
-                  <div className="terminal-dot terminal-dot-green" />
+        {project.codeContent && (
+          <section>
+            <div className="terminal-card">
+              <div className="terminal-header flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="flex items-center gap-1.5">
+                    <div className="terminal-dot terminal-dot-red" />
+                    <div className="terminal-dot terminal-dot-yellow" />
+                    <div className="terminal-dot terminal-dot-green" />
+                  </div>
+                  <span className="text-xs text-muted-foreground ml-2">{project.codeFile}</span>
                 </div>
-                <span className="text-xs text-muted-foreground ml-2">{project.codeFile}</span>
+                <button
+                  onClick={handleCopyCode}
+                  className="flex items-center gap-1.5 px-2 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-green-500" />
+                      <span className="text-green-500">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
               </div>
-              <button
-                onClick={handleCopyCode}
-                className="flex items-center gap-1.5 px-2 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-green-500" />
-                    <span className="text-green-500">Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
+              <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
+                <SyntaxHighlighter
+                  language="python"
+                  style={oneDark}
+                  showLineNumbers
+                  customStyle={{
+                    margin: 0,
+                    padding: "1rem",
+                    background: "transparent",
+                    fontSize: "0.75rem",
+                  }}
+                  lineNumberStyle={{
+                    color: "hsl(var(--muted-foreground))",
+                    opacity: 0.5,
+                    minWidth: "2.5em",
+                  }}
+                >
+                  {project.codeContent}
+                </SyntaxHighlighter>
+              </div>
             </div>
-            <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
-              <SyntaxHighlighter
-                language="python"
-                style={oneDark}
-                showLineNumbers
-                customStyle={{
-                  margin: 0,
-                  padding: "1rem",
-                  background: "transparent",
-                  fontSize: "0.75rem",
-                }}
-                lineNumberStyle={{
-                  color: "hsl(var(--muted-foreground))",
-                  opacity: 0.5,
-                  minWidth: "2.5em",
-                }}
-              >
-                {project.codeContent}
-              </SyntaxHighlighter>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
       </div>
     </div>
   );

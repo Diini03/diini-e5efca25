@@ -15,7 +15,33 @@ type Project = {
   liveUrl?: string;
 };
 
+import somaliaForecastImg from "@/assets/projects/powerbi/somalia-displacement-forecast.png";
+import somaliaIdpsImg from "@/assets/projects/powerbi/somalia-idps-unhcr.png";
+
 const groups: { name: string; projects: Project[] }[] = [
+  {
+    name: "Business Intelligence",
+    projects: [
+      {
+        slug: "somalia-displacement-forecast",
+        title: "Somalia Displacement Forecast Dashboard",
+        description:
+          "Power BI dashboard analyzing 8.03M displaced people across 20+ Somali districts — conflict, drought and flood, with forecast vs. actual comparison.",
+        category: "Power BI · DAX · Power Query",
+        imageDark: somaliaForecastImg,
+        imageLight: somaliaForecastImg,
+      },
+      {
+        slug: "somalia-idps-unhcr",
+        title: "Somalia IDPs Movement Dashboard (UNHCR-PRMN)",
+        description:
+          "Interactive Power BI dashboard exploring internal displacement flows in Somalia using the UNHCR-PRMN August 2023 dataset.",
+        category: "Power BI · DAX · Power Query",
+        imageDark: somaliaIdpsImg,
+        imageLight: somaliaIdpsImg,
+      },
+    ],
+  },
   {
     name: "Machine Learning",
     projects: [
@@ -23,7 +49,7 @@ const groups: { name: string; projects: Project[] }[] = [
         slug: "fall-armyworm-detection",
         title: "Fall Armyworm Leaf Disease Detection",
         description:
-          "Deep learning image classification achieving 99.07% accuracy to detect Fall Armyworm damage on maize leaves. Built 5 CNN models for PyCon Somalia 2025 Hackathon.",
+          "Deep learning image classification achieving 99.07% accuracy to detect Fall Armyworm damage on maize leaves.",
         category: "Python · TensorFlow · CNN",
       },
     ],
@@ -35,21 +61,21 @@ const groups: { name: string; projects: Project[] }[] = [
         slug: "world-happiness-analysis",
         title: "World Happiness Report Analysis (2008–2021)",
         description:
-          "Analyzed global happiness trends across 2,363 data points exploring GDP, social support, freedom, and corruption.",
+          "Trends across 2,363 data points exploring GDP, social support, freedom, and corruption.",
         category: "Python · Pandas · Seaborn",
       },
       {
         slug: "covid-19-analysis",
         title: "Covid-19 Analysis & Visualization",
         description:
-          "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations including bar charts, scatter plots, and choropleth maps.",
+          "Global COVID-19 data across 209 countries using interactive Plotly visualizations.",
         category: "Python · Plotly · Pandas",
       },
       {
         slug: "netflix-data-analysis",
         title: "Netflix Data Analysis & Visualization",
         description:
-          "Comprehensive analysis of 8,807 Netflix titles exploring content distribution, trends over time, and country-based insights.",
+          "Analysis of 8,807 Netflix titles exploring content distribution and trends over time.",
         category: "Python · Pandas · EDA",
       },
     ],
@@ -61,7 +87,7 @@ const groups: { name: string; projects: Project[] }[] = [
         slug: "kulmid",
         title: "Kulmid — Event Management Platform",
         description:
-          "A full-featured event management web app where users can create, manage, and share events. Includes registration, attendee management, invitations, and ticketing.",
+          "Full-featured event management web app with registration, attendee management, invitations, and ticketing.",
         category: "React · TypeScript · Supabase",
         imageDark: kulmidDarkImg,
         imageLight: kulmidLightImg,
