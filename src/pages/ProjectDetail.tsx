@@ -67,71 +67,16 @@ const projectsData: Record<string, ProjectData> = {
   "fall-armyworm-detection": {
     title: "Fall Armyworm Leaf Disease Detection Using Deep Learning",
     date: "2025",
-    description: "This project focuses on building an image classification system to detect Fall Armyworm damage on maize leaves using deep learning. Fall Armyworm is a major agricultural pest that significantly affects crop yield, especially in African countries. Early and accurate detection is critical for timely intervention and food security. The goal was to train, evaluate, and compare multiple deep learning models, then select the most effective model for real-world use.",
+    description: "Image classification system that detects Fall Armyworm damage on maize leaves using deep learning. Compared 5 CNN architectures and selected the strongest model for real-world agricultural use.",
     tags: ["python", "tensorflow", "keras", "deep-learning", "cnn", "computer-vision"],
     competitionUrl: "https://zindi.africa/competitions/combating-food-insecurity-in-somalia",
     competitionName: "PyCon Somalia 2025 Hackathon",
     githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python",
-    keyInsight: "Transfer learning with fine-tuning dramatically outperformed custom CNNs, achieving 99.07% validation accuracy. Model 4 was selected as the final solution due to its excellent generalization, stable learning curves, and suitability for real-world agricultural decision support.",
     charts: [
-      {
-        title: "Dataset Class Distribution",
-        image: fawClassDistribution,
-        insight: "Perfectly balanced dataset with 810 healthy and 810 diseased leaf samples"
-      },
-      {
-        title: "Sample Leaf Images",
-        image: fawSampleLeaves,
-        insight: "Visual examples showing clear differences between healthy and FAW-damaged leaves"
-      },
-      {
-        title: "Simple CNN Architecture (Model 1)",
-        image: fawModelArchitecture,
-        insight: "Baseline CNN with 11M parameters using Conv2D, MaxPooling, and Dense layers"
-      },
-      {
-        title: "Model 1: Training Progress",
-        image: fawModel1Accuracy,
-        insight: "Baseline CNN achieved ~85% accuracy with gradual convergence over 10 epochs"
-      },
-      {
-        title: "Model 5: Lightweight Model Accuracy",
-        image: fawModel5Accuracy,
-        insight: "Deployment-friendly model showing stable ~91.5% validation accuracy"
-      },
-      {
-        title: "Prediction: Healthy Leaf Sample 1",
-        image: fawPredictionHealthy1,
-        insight: "Model correctly classifies healthy leaf with high confidence score"
-      },
-      {
-        title: "Prediction: Diseased Leaf Sample",
-        image: fawPredictionDiseased1,
-        insight: "Fall Armyworm damage detected with strong prediction confidence"
-      },
-      {
-        title: "Prediction: Healthy Leaf Sample 2",
-        image: fawPredictionHealthy2,
-        insight: "Consistent healthy classification demonstrating model reliability"
-      },
-      {
-        title: "Prediction: Diseased Leaf Sample 2",
-        image: fawPredictionDiseased2,
-        insight: "Another diseased sample correctly identified by the model"
-      },
-      {
-        title: "Prediction: Healthy Leaf Sample 3",
-        image: fawPredictionHealthy3,
-        insight: "Final test prediction confirming model's accuracy on healthy leaves"
-      }
-    ],
-    highlights: [
-      "Built and compared 5 deep learning models: Simple CNN, Deeper CNN, MobileNetV2, Advanced Transfer Learning, and Lightweight Deployment Model",
-      "Achieved 99.07% validation accuracy with Model 4 (Advanced Transfer Learning with fine-tuning)",
-      "Processed 1620+ labeled leaf images with proper stratified train/validation split",
-      "Implemented data augmentation and preprocessing for robust model training",
-      "Created a reusable .h5 model file for deployment without retraining",
-      "Developed for PyCon Somalia 2025 Hackathon - Combating Food Insecurity in Somalia challenge on Zindi"
+      { title: "Dataset Class Distribution", image: fawClassDistribution },
+      { title: "Simple CNN Architecture", image: fawModelArchitecture },
+      { title: "Model 5: Training Accuracy", image: fawModel5Accuracy },
+      { title: "Prediction: Diseased Leaf", image: fawPredictionDiseased1 },
     ],
     tools: ["Python", "TensorFlow", "Keras", "NumPy", "Pandas", "Matplotlib", "Seaborn", "OpenCV", "Scikit-learn"],
     codeFile: "Fall_Armyworm_Detection.ipynb",
