@@ -64,6 +64,26 @@ interface ProjectData {
 }
 
 const projectsData: Record<string, ProjectData> = {
+  "somalia-displacement-forecast": {
+    title: "Somalia Displacement Forecast Dashboard",
+    date: "2025",
+    description: "Interactive Power BI dashboard analyzing displacement across Somali districts — broken down by conflict, drought and flood, with forecast vs. actual comparison.",
+    tags: ["power-bi", "dax", "power-query", "data-visualization", "humanitarian"],
+    charts: [
+      { title: "Somalia Displacement Forecast Dashboard", image: somaliaForecastDashboard },
+    ],
+    tools: ["Power BI", "DAX", "Power Query", "Excel"],
+  },
+  "somalia-idps-unhcr": {
+    title: "Somalia IDPs Movement Dashboard (UNHCR-PRMN)",
+    date: "2025",
+    description: "Power BI dashboard built on the UNHCR-PRMN August 2023 dataset, exploring internal displacement movements across Somalia by region, reason, and priority need.",
+    tags: ["power-bi", "dax", "power-query", "unhcr", "humanitarian"],
+    charts: [
+      { title: "Somalia IDPs Dashboard", image: somaliaIdpsDashboard },
+    ],
+    tools: ["Power BI", "DAX", "Power Query"],
+  },
   "fall-armyworm-detection": {
     title: "Fall Armyworm Leaf Disease Detection Using Deep Learning",
     date: "2025",
