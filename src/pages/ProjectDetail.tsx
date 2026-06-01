@@ -36,6 +36,11 @@ import whTop10Countries from "@/assets/projects/world-happiness/top-10-countries
 import whCorrelationHeatmap from "@/assets/projects/world-happiness/correlation-heatmap.png";
 import whGdpVsHappiness from "@/assets/projects/world-happiness/gdp-vs-happiness.png";
 
+// Power BI Dashboards
+import somaliaForecastDashboard from "@/assets/projects/powerbi/somalia-displacement-forecast.png";
+import somaliaIdpsDashboard from "@/assets/projects/powerbi/somalia-idps-unhcr.png";
+
+
 interface ChartData {
   title: string;
   image: string;
