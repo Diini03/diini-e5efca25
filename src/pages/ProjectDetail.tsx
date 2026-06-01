@@ -176,39 +176,13 @@ print("Model saved successfully for future use!")`,
   "world-happiness-analysis": {
     title: "World Happiness Report Analysis (2008-2021)",
     date: "2025",
-    description: "People's well-being changed over time, as shown by the World Happiness Data (2008-2021). The world's happiness level increased by almost 8% in the past ten years despite global issues like COVID-19, demonstrating how resilient people are. This analysis explores the key factors that influence happiness across 166+ countries.",
+    description: "Exploration of global happiness trends across 166+ countries (2008–2021), looking at GDP, social support, freedom, and corruption.",
     tags: ["python", "pandas", "matplotlib", "seaborn", "numpy", "eda"],
     githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python",
-    keyInsight: "Social support can increase happiness by up to 60%. After a certain income level, joy plateaus - wealth helps but doesn't guarantee happiness. Freedom and corruption perception continue to determine who thrives and who struggles.",
     charts: [
-      {
-        title: "Average Global Happiness Over Time",
-        image: whHappinessOverTime,
-        insight: "Global happiness remained relatively stable from 2008-2023, with a peak around 2020"
-      },
-      {
-        title: "Top 10 Happiest Countries in 2023",
-        image: whTop10Countries,
-        insight: "Nordic countries (Finland, Iceland, Denmark) consistently rank among the happiest"
-      },
-      {
-        title: "Correlation Between Happiness Factors",
-        image: whCorrelationHeatmap,
-        insight: "GDP (0.77), social support (0.72), and healthy life expectancy (0.71) have strongest positive correlation with happiness"
-      },
-      {
-        title: "Does Money Buy Happiness?",
-        image: whGdpVsHappiness,
-        insight: "Clear positive relationship between GDP per capita and happiness, but with diminishing returns at higher income levels"
-      }
-    ],
-    highlights: [
-      "Analyzed 2363 data points covering 166+ countries from 2008 to 2023",
-      "GDP, social support, and freedom have the strongest positive relationship with happiness",
-      "Corruption perception and negative affect are major negative factors impacting well-being",
-      "Nordic countries (Finland, Iceland, Denmark) consistently rank as the happiest in the world",
-      "Discovered that social support can boost happiness by up to 60% in connected societies",
-      "Emotional well-being aligns closely with happiness - higher positivity, lower negativity"
+      { title: "Average Global Happiness Over Time", image: whHappinessOverTime },
+      { title: "Top 10 Happiest Countries", image: whTop10Countries },
+      { title: "Correlation Between Happiness Factors", image: whCorrelationHeatmap },
     ],
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
     codeFile: "World_Happiness_Report_2024.ipynb",
