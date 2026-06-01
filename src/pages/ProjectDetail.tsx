@@ -644,56 +644,58 @@ export default function ProjectDetail() {
         </section>
 
         {/* Code Snippet */}
-        <section>
-          <div className="terminal-card">
-            <div className="terminal-header flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="flex items-center gap-1.5">
-                  <div className="terminal-dot terminal-dot-red" />
-                  <div className="terminal-dot terminal-dot-yellow" />
-                  <div className="terminal-dot terminal-dot-green" />
+        {project.codeContent && (
+          <section>
+            <div className="terminal-card">
+              <div className="terminal-header flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="flex items-center gap-1.5">
+                    <div className="terminal-dot terminal-dot-red" />
+                    <div className="terminal-dot terminal-dot-yellow" />
+                    <div className="terminal-dot terminal-dot-green" />
+                  </div>
+                  <span className="text-xs text-muted-foreground ml-2">{project.codeFile}</span>
                 </div>
-                <span className="text-xs text-muted-foreground ml-2">{project.codeFile}</span>
+                <button
+                  onClick={handleCopyCode}
+                  className="flex items-center gap-1.5 px-2 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-green-500" />
+                      <span className="text-green-500">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
               </div>
-              <button
-                onClick={handleCopyCode}
-                className="flex items-center gap-1.5 px-2 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-green-500" />
-                    <span className="text-green-500">Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
+              <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
+                <SyntaxHighlighter
+                  language="python"
+                  style={oneDark}
+                  showLineNumbers
+                  customStyle={{
+                    margin: 0,
+                    padding: "1rem",
+                    background: "transparent",
+                    fontSize: "0.75rem",
+                  }}
+                  lineNumberStyle={{
+                    color: "hsl(var(--muted-foreground))",
+                    opacity: 0.5,
+                    minWidth: "2.5em",
+                  }}
+                >
+                  {project.codeContent}
+                </SyntaxHighlighter>
+              </div>
             </div>
-            <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
-              <SyntaxHighlighter
-                language="python"
-                style={oneDark}
-                showLineNumbers
-                customStyle={{
-                  margin: 0,
-                  padding: "1rem",
-                  background: "transparent",
-                  fontSize: "0.75rem",
-                }}
-                lineNumberStyle={{
-                  color: "hsl(var(--muted-foreground))",
-                  opacity: 0.5,
-                  minWidth: "2.5em",
-                }}
-              >
-                {project.codeContent}
-              </SyntaxHighlighter>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
       </div>
     </div>
   );
