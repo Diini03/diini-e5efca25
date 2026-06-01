@@ -589,11 +589,13 @@ export default function ProjectDetail() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <div className="p-3 border-t border-border">
-                    <p className="text-xs text-muted-foreground">
-                      💡 {chart.insight}
-                    </p>
-                  </div>
+                  {chart.insight && (
+                    <div className="p-3 border-t border-border">
+                      <p className="text-xs text-muted-foreground">
+                        💡 {chart.insight}
+                      </p>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
