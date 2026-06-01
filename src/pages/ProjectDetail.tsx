@@ -254,42 +254,12 @@ print("Key Finding: Nordic countries consistently rank highest.")`,
   "covid-19-analysis": {
     title: "Covid-19 Analysis and Visualization using Plotly Express",
     date: "2025",
-    description: "Analyzed global COVID-19 data across 209 countries using interactive Plotly visualizations including bar charts, scatter plots, and choropleth maps. The project explores total cases, deaths, recoveries, and testing data across different continents and WHO regions.",
+    description: "Global COVID-19 analysis across 209 countries using interactive Plotly visualizations — bar charts, scatter plots, and choropleth maps.",
     tags: ["python", "pandas", "plotly", "matplotlib", "data-visualization"],
-    keyInsight: "The USA consistently led in both total cases and testing capacity, with clear exponential growth patterns visible from February to July 2020. This analysis reveals how different regions responded to the pandemic at varying rates.",
     charts: [
-      {
-        title: "Total Cases by Country (Bubble Chart)",
-        image: casesBubbleChart,
-        insight: "USA, Brazil, and India had the highest case counts globally"
-      },
-      {
-        title: "Cases Distribution by Continent",
-        image: casesContinentChart,
-        insight: "North America led with 5M+ cases, followed by South America"
-      },
-      {
-        title: "Top 15 Countries by Total Cases",
-        image: casesBarChart,
-        insight: "USA alone accounted for nearly 5M confirmed cases"
-      },
-      {
-        title: "COVID-19 Testing by Country",
-        image: testsChart,
-        insight: "USA conducted 60M+ tests, significantly more than other nations"
-      },
-      {
-        title: "Confirmed Cases Over Time",
-        image: timeSeriesChart,
-        insight: "Exponential growth from Feb to Jul 2020 across all countries"
-      }
-    ],
-    highlights: [
-      "Imported and analyzed COVID-19 datasets covering 209 countries with 17 data columns",
-      "Created interactive bar charts comparing total cases, deaths, and recoveries by country",
-      "Built scatter plots showing correlation between confirmed cases and deaths",
-      "Developed choropleth maps for global visualization of pandemic spread",
-      "Analyzed time-series data with 35,156 entries tracking daily case changes",
+      { title: "Total Cases by Country", image: casesBubbleChart },
+      { title: "Cases Distribution by Continent", image: casesContinentChart },
+      { title: "Confirmed Cases Over Time", image: timeSeriesChart },
     ],
     tools: ["Python", "Pandas", "Plotly Express", "Plotly Graph Objects", "Matplotlib"],
     codeFile: "Covid-19_Analysis.ipynb",
