@@ -341,42 +341,12 @@ fig.show()`,
   "netflix-data-analysis": {
     title: "Netflix Data Analysis & Visualization",
     date: "2025",
-    description: "Comprehensive analysis of 8807 Netflix titles exploring content distribution, trends over time, and country-based insights using Python visualization libraries. The project includes data cleaning, exploratory data analysis, and multiple visualization techniques.",
+    description: "Analysis of 8,807 Netflix titles exploring content distribution, ratings, and trends over time.",
     tags: ["python", "pandas", "seaborn", "matplotlib", "numpy", "eda"],
-    keyInsight: "Netflix's content library is heavily movie-focused (69.6% movies vs 30.4% TV shows), with TV-MA rated content dominating the platform. Content additions peaked dramatically in 2019 before declining, likely due to increased competition from other streaming services.",
     charts: [
-      {
-        title: "Distribution: Movies vs TV Shows",
-        image: netflixMoviesVsTvShows,
-        insight: "Movies make up ~69.6% of Netflix content (5,600+) vs TV Shows (~2,300)"
-      },
-      {
-        title: "Top 10 Content Ratings on Netflix",
-        image: netflixContentRatings,
-        insight: "TV-MA dominates with ~3,000 titles, followed by TV-14 (~1,900)"
-      },
-      {
-        title: "Distribution of Movie Durations",
-        image: netflixMovieDurations,
-        insight: "Most movies are 90-100 minutes long, following a right-skewed distribution"
-      },
-      {
-        title: "Content Added Over the Years",
-        image: netflixContentOverYears,
-        insight: "Content additions peaked in 2019 with 1,350+ movies added that year"
-      },
-      {
-        title: "Correlation Heatmap",
-        image: netflixCorrelationHeatmap,
-        insight: "Weak correlations between numeric features; duration slightly correlates with release year"
-      }
-    ],
-    highlights: [
-      "Analyzed 8807 Netflix titles with 12 data columns including movies and TV shows",
-      "Cleaned missing data: 2634 missing directors, 831 missing countries, 825 missing cast",
-      "Created distribution charts comparing Movies vs TV Shows (6131 movies, 2676 TV shows)",
-      "Visualized top 10 countries by content production with United States leading at 2818 titles",
-      "Performed trend analysis showing content additions over years from 1925 to 2021",
+      { title: "Movies vs TV Shows", image: netflixMoviesVsTvShows },
+      { title: "Top 10 Content Ratings", image: netflixContentRatings },
+      { title: "Content Added Over the Years", image: netflixContentOverYears },
     ],
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
     codeFile: "Netflix_Data_Analysis.ipynb",
