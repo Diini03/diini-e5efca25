@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface SiteStats {
@@ -29,9 +29,13 @@ export function useSiteStats() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [visitorId] = useState(getOrCreateVisitorId);
+  const initRef = useRef(false);
+  const clickInFlightRef = useRef(false);
 
   // Fetch initial stats and increment view on mount
   useEffect(() => {
+    if (initRef.current) return; // guard against React StrictMode double-invoke
+    initRef.current = true;
     const initializeStats = async () => {
       try {
         // Atomically increment views and get updated stats
@@ -77,6 +81,10 @@ export function useSiteStats() {
   }, [visitorId]);
 
   const incrementClick = useCallback(async () => {
+    // Prevent overlapping in-flight increments which can cause double counts
+    if (clickInFlightRef.current) return;
+    clickInFlightRef.current = true;
+
     // Optimistic update for session clicks only
     setStats((prev) => ({
       ...prev,
@@ -110,6 +118,8 @@ export function useSiteStats() {
         ...prev,
         sessionClicks: prev.sessionClicks - 1,
       }));
+    } finally {
+      clickInFlightRef.current = false;
     }
   }, [visitorId]);
 

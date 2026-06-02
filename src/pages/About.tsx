@@ -8,29 +8,29 @@ import courseraLogo from "@/assets/certifications/coursera.png";
 
 const experiences = [
   {
+    type: "learning",
+    title: "Machine Learning",
+    org: "Self-directed",
+    location: "",
+    date: "2026 — Present",
+    description:
+      "Started building machine learning models — CNNs, classification, and applied deep learning projects.",
+  },
+  {
+    type: "learning",
+    title: "Data Analytics",
+    org: "Self-directed",
+    location: "",
+    date: "Oct 2024 — Present",
+    description:
+      "Learning data analysis with Python, SQL, Power BI and statistics through hands-on projects and real datasets.",
+  },
+  {
     type: "education",
     title: "Bachelor of Computer Science",
     org: "Somali National University",
     date: "2021 - 2026",
     description: "Focus: Data Science, Machine Learning, AI",
-  },
-  {
-    type: "work",
-    title: "Data Analyst",
-    org: "Fly Graphics",
-    location: "Mogadishu, Somalia",
-    date: "Jan 2023 - Dec 2024",
-    description:
-      "Analyzed business data using Power BI to create interactive dashboards and reports. Transformed raw data into actionable insights for decision-making and strategic planning.",
-  },
-  {
-    type: "work",
-    title: "Data Management Assistant",
-    org: "MEDAIR",
-    location: "Mogadishu, Somalia",
-    date: "Jun 2020 - Jul 2020",
-    description:
-      "Collected, stored, and monitored large datasets using Excel for accurate reporting. Explored and cleaned data to ensure consistency and accuracy in reports.",
   },
 ];
 

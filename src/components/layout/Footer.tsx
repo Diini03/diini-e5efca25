@@ -1,9 +1,7 @@
-import { Github, Linkedin, Facebook, Twitter, Mail, MapPin, Code, Eye } from "lucide-react";
-import { useSiteStats } from "@/hooks/useSiteStats";
+import { Github, Linkedin, Facebook, Twitter, Mail, MapPin, Code } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const { stats, isLoading } = useSiteStats();
 
   return (
     <footer className="border-t border-border/50 bg-card/80 backdrop-blur-sm">
@@ -75,11 +73,6 @@ export function Footer() {
           <span className="font-mono">
             <span className="text-muted-foreground/60">// </span>
             © {currentYear} Diini Kahiye. All rights reserved.
-          </span>
-          <span className="flex items-center gap-1.5 font-mono">
-            <Eye className="w-3.5 h-3.5 text-primary" />
-            <span className="font-bold text-foreground text-sm">{isLoading ? "..." : stats.totalViews.toLocaleString()}</span>
-            <span>views</span>
           </span>
           <span className="text-muted-foreground/60 font-mono">
             &lt;/&gt; with passion

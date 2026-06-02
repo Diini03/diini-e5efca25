@@ -2,29 +2,32 @@ import { useState, useRef } from "react";
 import { MousePointer, Eye, Info } from "lucide-react";
 import { useSiteStats } from "@/hooks/useSiteStats";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type Burst = { id: number; angle: number };
 
 function InfoDot({ text }: { text: string }) {
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <button
-          type="button"
-          aria-label="More info"
-          className="inline-flex items-center justify-center w-4 h-4 rounded-full text-muted-foreground hover:text-primary transition-colors"
-        >
-          <Info className="w-3.5 h-3.5" />
-        </button>
-      </PopoverTrigger>
-      <PopoverContent side="top" className="w-56 text-xs leading-relaxed">
-        {text}
-      </PopoverContent>
-    </Popover>
+    <TooltipProvider delayDuration={100}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span
+            tabIndex={0}
+            aria-label="More info"
+            className="inline-flex items-center justify-center w-4 h-4 rounded-full text-muted-foreground hover:text-primary transition-colors cursor-help"
+          >
+            <Info className="w-3.5 h-3.5" />
+          </span>
+        </TooltipTrigger>
+        <TooltipContent side="top" className="max-w-56 text-xs leading-relaxed">
+          {text}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
 
