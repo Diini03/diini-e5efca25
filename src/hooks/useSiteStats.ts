@@ -29,9 +29,13 @@ export function useSiteStats() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [visitorId] = useState(getOrCreateVisitorId);
+  const initRef = useRef(false);
+  const clickInFlightRef = useRef(false);
 
   // Fetch initial stats and increment view on mount
   useEffect(() => {
+    if (initRef.current) return; // guard against React StrictMode double-invoke
+    initRef.current = true;
     const initializeStats = async () => {
       try {
         // Atomically increment views and get updated stats
