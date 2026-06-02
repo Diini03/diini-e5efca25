@@ -81,6 +81,10 @@ export function useSiteStats() {
   }, [visitorId]);
 
   const incrementClick = useCallback(async () => {
+    // Prevent overlapping in-flight increments which can cause double counts
+    if (clickInFlightRef.current) return;
+    clickInFlightRef.current = true;
+
     // Optimistic update for session clicks only
     setStats((prev) => ({
       ...prev,
@@ -114,6 +118,8 @@ export function useSiteStats() {
         ...prev,
         sessionClicks: prev.sessionClicks - 1,
       }));
+    } finally {
+      clickInFlightRef.current = false;
     }
   }, [visitorId]);
 
