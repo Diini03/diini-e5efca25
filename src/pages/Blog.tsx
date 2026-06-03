@@ -1,17 +1,17 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Search, Calendar, Clock, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, Search, Calendar, Clock, ArrowRight } from "lucide-react";
 
 // Import blog images
-import worldHappinessImg from "@/assets/blog/world-happiness-report.png";
 import techTrends2025Img from "@/assets/blog/tech-trends-2025.png";
 import aiVsMlImg from "@/assets/blog/ai-vs-ml.png";
 import dataCareerTipsImg from "@/assets/blog/data-career-tips.png";
 import sqlJoinsImg from "@/assets/blog/sql-joins.png";
-import pythonConceptsImg from "@/assets/blog/python-concepts.png";
-import numpyPandasImg from "@/assets/blog/numpy-pandas.png";
+import datasetUsefulImg from "@/assets/blog/what-makes-dataset-useful.png";
+import mlMistakesImg from "@/assets/blog/ml-learn-from-mistakes.png";
+import mlPredictionsImg from "@/assets/blog/ml-make-predictions.png";
 
-const categories = ["all", "data-analysis", "tech", "career", "tutorials"];
+const categories = ["all", "data-analysis", "machine-learning", "tech", "career", "tutorials"];
 
 export interface BlogPost {
   slug: string;
@@ -28,21 +28,49 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "world-happiness-report",
-    title: "World Happiness Report Analysis (2008-2021)",
-    excerpt: "People's well-being changed over time, as shown by the World Happiness Data. The world's happiness level increased by almost 8% in the past ten years despite global issues like COVID-19, demonstrating how resilient people are.",
+    slug: "what-makes-dataset-useful",
+    title: "What Makes a Dataset Actually Useful?",
+    excerpt:
+      "A dataset can look complete and still be useless. Rows fill the screen, columns line up neatly, and then you start asking real questions — and the cracks show. Missing values, cryptic labels, fields that have nothing to do with what you're trying to answer. The lesson: existence isn't usefulness. A dataset earns its keep only when it's clear, relevant, and trustworthy enough to answer a real question. Good analysis doesn't start with tools — it starts with good information.",
     category: "data-analysis",
-    date: "2025-01-03",
+    date: "2026-05-12",
+    readTime: "4 min read",
+    tags: ["data-analysis", "data-quality", "fundamentals"],
+    image: datasetUsefulImg,
+    linkedinUrl: "https://www.linkedin.com/in/diinikahiye/",
+    featuredOnHome: true,
+  },
+  {
+    slug: "ml-learn-from-mistakes",
+    title: "How Machine Learning Models Learn From Mistakes",
+    excerpt:
+      "Machine learning models learn the way humans do — by being wrong first. Early predictions are weak. Then feedback arrives, errors get measured, and the model adjusts. Over many iterations, patterns sharpen, errors shrink, and the system becomes something you can actually trust in a decision. This is the quiet loop behind every accurate model: predict, fail, correct, repeat. Understanding it is the difference between treating ML as magic and treating it as a craft.",
+    category: "machine-learning",
+    date: "2026-04-28",
     readTime: "5 min read",
-    tags: ["data-analysis", "visualization", "plotly"],
-    image: worldHappinessImg,
-    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_world-happiness-report-2024-activity-7387382352618049537-nLEe?utm_source=share&utm_medium=member_desktop",
+    tags: ["machine-learning", "model-training", "fundamentals"],
+    image: mlMistakesImg,
+    linkedinUrl: "https://www.linkedin.com/in/diinikahiye/",
+    featuredOnHome: true,
+  },
+  {
+    slug: "ml-make-predictions",
+    title: "How Machine Learning Models Make Predictions",
+    excerpt:
+      "Why should anyone trust a number a model spits out? Because it isn't a guess. Behind every prediction is a methodical process — the model reads the input, compares it to patterns it learned during training, weighs the evidence, attaches a confidence score, and only then commits to an answer. Businesses now make real decisions on top of those numbers, which is exactly why understanding how the prediction was produced matters as much as the prediction itself.",
+    category: "machine-learning",
+    date: "2026-04-10",
+    readTime: "5 min read",
+    tags: ["machine-learning", "predictions", "explainability"],
+    image: mlPredictionsImg,
+    linkedinUrl: "https://www.linkedin.com/in/diinikahiye/",
     featuredOnHome: true,
   },
   {
     slug: "tech-trends-2025",
     title: "Top 5 Emerging Tech Trends of 2025",
-    excerpt: "The future is developing more quickly than before. These ground-breaking technologies, from synthetic media to agentic AI, are fundamentally altering entire industries and daily life.",
+    excerpt:
+      "The future is arriving faster than the headlines. From agentic AI that plans and executes on its own, to synthetic media that's indistinguishable from real footage, these five shifts aren't buzzwords — they're quietly reshaping how entire industries operate and how the rest of us spend our days.",
     category: "tech",
     date: "2025-02-15",
     readTime: "4 min read",
@@ -53,8 +81,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "ai-vs-ml",
-    title: "AI vs ML – Quick Examples to Understand the Difference",
-    excerpt: "Still confused between Artificial Intelligence and Machine Learning? Swipe through this quick carousel to see the difference with simple examples that make it click.",
+    title: "AI vs ML — Quick Examples to Understand the Difference",
+    excerpt:
+      "Still mixing up AI and ML? You're not alone. AI is the big idea — machines doing things that look smart. ML is one specific way to get there: letting the machine learn the pattern instead of hand-coding the rules. A few simple examples make the difference click for good.",
     category: "tech",
     date: "2025-02-10",
     readTime: "3 min read",
@@ -66,7 +95,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "data-career-tips",
     title: "7 Underappreciated Data Career Tips",
-    excerpt: "These aren't just inspirational quotes—they're practical lessons drawn from years of real-world experience, expert advice, and insights from 'Build a Career in Data Science'.",
+    excerpt:
+      "These aren't motivational quotes. They're the lessons that don't make it into bootcamp curricula — drawn from real work, mentor conversations, and the parts of 'Build a Career in Data Science' that actually stuck. Technical skill opens the door. Storytelling, business sense, and domain knowledge keep you in the room.",
     category: "career",
     date: "2025-03-28",
     readTime: "5 min read",
@@ -77,35 +107,14 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "sql-joins",
     title: "7 Things I Wish I Knew About SQL JOINs",
-    excerpt: "If you're starting with SQL, JOINs can be confusing—and that's perfectly normal. Here's what I wish I knew when I was just getting started with relational thinking.",
+    excerpt:
+      "If JOINs confuse you, that's normal — they confused me too. Looking back, a handful of simple ideas would have shortened the learning curve dramatically: stop using SELECT *, picture the JOIN types visually, think in relationships before syntax, and respect what NULLs do to your results.",
     category: "tutorials",
     date: "2025-03-15",
     readTime: "4 min read",
     tags: ["sql", "database", "beginners"],
     image: sqlJoinsImg,
     linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_7-things-i-wish-i-knew-about-sql-joins-activity-7319615813366263809-VN07?utm_source=share&utm_medium=member_desktop",
-  },
-  {
-    slug: "python-concepts",
-    title: "Top Python Concepts Every Data Analyst Must Know",
-    excerpt: "A quick-read guide breaking down core Python essentials every Data Analyst should know — variables, data types, data structures, must-know libraries, and essential tools.",
-    category: "tutorials",
-    date: "2025-04-07",
-    readTime: "4 min read",
-    tags: ["python", "data-analysis", "pandas", "beginners"],
-    image: pythonConceptsImg,
-    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_python-activity-7315032501385646080-rdoT?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEj1U5kBQ4zXy_c1Xtz-dbbcnzmEHnnDPzE",
-  },
-  {
-    slug: "numpy-pandas",
-    title: "Understand NumPy & Pandas in Just 10 Slides",
-    excerpt: "Master NumPy and Pandas — two powerful Python libraries. Learn to create arrays, DataFrames, clean, filter, and manipulate data with beginner-friendly explanations.",
-    category: "tutorials",
-    date: "2025-04-20",
-    readTime: "5 min read",
-    tags: ["python", "numpy", "pandas", "data-analysis"],
-    image: numpyPandasImg,
-    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_numby-pandas-activity-7316773479767306240-sn89?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEj1U5kBQ4zXy_c1Xtz-dbbcnzmEHnnDPzE",
   },
 ];
 
@@ -115,17 +124,15 @@ export default function Blog() {
 
   const filteredPosts = useMemo(() => {
     return blogPosts.filter((post) => {
+      const q = searchQuery.toLowerCase();
       const matchesSearch =
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        post.title.toLowerCase().includes(q) ||
+        post.excerpt.toLowerCase().includes(q) ||
+        post.tags.some((tag) => tag.toLowerCase().includes(q));
       const matchesCategory = activeCategory === "all" || post.category === activeCategory;
       return matchesSearch && matchesCategory;
     });
   }, [searchQuery, activeCategory]);
-
-  const featuredPost = filteredPosts[0];
-  const otherPosts = filteredPosts.slice(1);
 
   return (
     <div className="min-h-screen animate-fade-in overflow-hidden">
@@ -141,209 +148,135 @@ export default function Blog() {
 
         {/* Header */}
         <div className="mb-10">
-          <h1 className="text-3xl font-bold text-primary mb-3">Blog</h1>
-          <p className="text-muted-foreground">
-            Insights, tutorials, and carousel posts from my LinkedIn on data science, AI, and career growth.
+          <div className="flex items-baseline gap-3 mb-3">
+            <h1 className="text-3xl font-bold text-primary">Writing</h1>
+            <span className="text-xs font-mono text-muted-foreground/70">
+              {blogPosts.length} posts
+            </span>
+          </div>
+          <p className="text-muted-foreground max-w-2xl">
+            Notes, carousels, and short essays on data, machine learning, and the
+            craft of turning information into decisions.
           </p>
         </div>
 
         {/* Search */}
-        <div className="relative mb-6">
+        <div className="relative mb-5">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Search posts..."
+            placeholder="Search posts, topics, tags…"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-secondary/50 border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+            className="w-full pl-10 pr-4 py-3 bg-secondary/40 border border-border/60 rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-all"
           />
         </div>
 
         {/* Category Filters */}
         <div className="flex flex-wrap gap-2 mb-10">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-4 py-2 text-sm rounded-lg transition-all capitalize font-medium ${
-                activeCategory === category
-                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                  : "bg-secondary/70 text-muted-foreground hover:text-foreground hover:bg-secondary"
-              }`}
-            >
-              {category.replace("-", " ")}
-            </button>
-          ))}
+          {categories.map((category) => {
+            const count =
+              category === "all"
+                ? blogPosts.length
+                : blogPosts.filter((p) => p.category === category).length;
+            const isActive = activeCategory === category;
+            return (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-full border transition-all capitalize font-medium ${
+                  isActive
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-border/60 bg-transparent text-muted-foreground hover:text-foreground hover:border-border"
+                }`}
+              >
+                {category.replace("-", " ")}
+                <span
+                  className={`text-[10px] font-mono ${
+                    isActive ? "text-primary/70" : "text-muted-foreground/60"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Featured Post */}
-        {featuredPost && (
-          <Link to={`/blog/${featuredPost.slug}`} className="block mb-12 group">
-            <div className="terminal-card overflow-hidden hover:ring-2 hover:ring-primary/30 transition-all duration-300 cursor-pointer">
-              <div className="grid md:grid-cols-2 gap-0">
-                {/* Image */}
-                <div className="relative overflow-hidden aspect-[4/3] md:aspect-auto">
-                  <img
-                    src={featuredPost.image}
-                    alt={featuredPost.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-                  <span className="absolute top-4 left-4 px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
-                    Featured
-                  </span>
-                </div>
-                
-                {/* Content */}
-                <div className="p-6 md:p-8 flex flex-col justify-center">
-                  <div className="flex flex-wrap items-center gap-3 mb-4 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {new Date(featuredPost.date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
-                      {featuredPost.readTime}
-                    </span>
-                    <span className="px-2 py-0.5 bg-secondary rounded capitalize">
-                      {featuredPost.category.replace("-", " ")}
-                    </span>
-                  </div>
-                  
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-3">
-                    {featuredPost.title}
-                  </h2>
-                  
-                  <p className="text-sm text-muted-foreground mb-5 line-clamp-3">
-                    {featuredPost.excerpt}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {featuredPost.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 text-xs bg-secondary/70 text-muted-foreground rounded"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-3">
-                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg group-hover:bg-primary/90 transition-colors">
-                      Read Article
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                    <span
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        window.open(featuredPost.linkedinUrl, '_blank');
-                      }}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A66C2] text-white text-sm font-medium rounded-lg hover:bg-[#0A66C2]/90 transition-colors cursor-pointer"
-                    >
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                      </svg>
-                      View on LinkedIn
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Link>
-        )}
-        {otherPosts.length > 0 && (
-          <div className="grid md:grid-cols-2 gap-6">
-            {otherPosts.map((post, index) => (
-              <Link
-                key={post.slug}
-                to={`/blog/${post.slug}`}
-                className="block group"
-              >
-                <div
-                  className="terminal-card overflow-hidden hover:ring-2 hover:ring-primary/30 transition-all duration-300 animate-fade-in cursor-pointer h-full"
-                  style={{ animationDelay: `${index * 100}ms` }}
+        {/* 3-column compact grid */}
+        {filteredPosts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {filteredPosts.map((post, index) => {
+              const dateLabel = new Date(post.date).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              });
+              return (
+                <Link
+                  key={post.slug}
+                  to={`/blog/${post.slug}`}
+                  className="group block animate-fade-in"
+                  style={{ animationDelay: `${index * 60}ms` }}
                 >
-                  {/* Image */}
-                  <div className="relative overflow-hidden aspect-[16/10]">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="p-5">
-                    <div className="flex flex-wrap items-center gap-3 mb-3 text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5" />
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                        })}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5" />
-                        {post.readTime}
-                      </span>
-                      <span className="px-2 py-0.5 bg-secondary rounded capitalize">
+                  <article className="h-full flex flex-col rounded-xl border border-border/60 bg-secondary/20 overflow-hidden hover:border-primary/40 hover:bg-secondary/30 transition-all duration-300 hover:-translate-y-0.5">
+                    {/* Small header image */}
+                    <div className="relative aspect-[16/8] overflow-hidden bg-secondary/40">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <span className="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-medium tracking-wide uppercase rounded-full bg-background/80 backdrop-blur text-foreground/90 border border-border/60">
                         {post.category.replace("-", " ")}
                       </span>
                     </div>
-                    
-                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors mb-2 line-clamp-2">
-                      {post.title}
-                    </h3>
-                    
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                      {post.excerpt}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 text-xs bg-secondary/50 text-muted-foreground rounded"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
-                      <span className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-secondary text-foreground text-sm font-medium rounded-lg group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                        Read Article
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </span>
-                      <span
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          window.open(post.linkedinUrl, '_blank');
-                        }}
-                        className="inline-flex items-center justify-center w-10 h-10 bg-[#0A66C2] text-white rounded-lg hover:bg-[#0A66C2]/90 transition-colors cursor-pointer"
-                        title="View on LinkedIn"
-                      >
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
 
-        {filteredPosts.length === 0 && (
+                    {/* Text-focused body */}
+                    <div className="flex-1 flex flex-col p-4">
+                      <div className="flex items-center gap-3 mb-2 text-[11px] text-muted-foreground tabular-nums">
+                        <span className="inline-flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          {dateLabel}
+                        </span>
+                        <span className="inline-flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {post.readTime}
+                        </span>
+                      </div>
+
+                      <h3 className="text-[15px] font-semibold leading-snug text-foreground group-hover:text-primary transition-colors mb-2 line-clamp-2">
+                        {post.title}
+                      </h3>
+
+                      <p className="text-[13px] leading-relaxed text-muted-foreground mb-4 line-clamp-5 flex-1">
+                        {post.excerpt}
+                      </p>
+
+                      <div className="flex items-center justify-between mt-auto pt-3 border-t border-border/40">
+                        <div className="flex flex-wrap gap-1">
+                          {post.tags.slice(0, 2).map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-[10px] font-mono text-muted-foreground/80"
+                            >
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+                        <span className="inline-flex items-center gap-1 text-xs font-medium text-primary group-hover:gap-2 transition-all">
+                          Read
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                </Link>
+              );
+            })}
+          </div>
+        ) : (
           <div className="text-center py-16">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-secondary/50 flex items-center justify-center">
               <Search className="w-6 h-6 text-muted-foreground" />
