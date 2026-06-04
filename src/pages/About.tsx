@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award, CheckCircle } from "lucide-react";
+import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award, CheckCircle, ExternalLink, Lock } from "lucide-react";
 import { RESUME_URL } from "@/lib/resume";
 
 // Certification logos
@@ -45,9 +45,27 @@ const skillCategories = [
 ];
 
 const certifications = [
-  { name: "Data Analysis with Python", provider: "freeCodeCamp", year: "2024", logo: freecodecampLogo },
-  { name: "Data Analyst Bootcamp", provider: "Analyst Builder", year: "2025", logo: analystBuilderLogo },
-  { name: "Google UX Design Certificate", provider: "Coursera", year: "2024", logo: courseraLogo },
+  {
+    name: "Data Analysis with Python",
+    provider: "freeCodeCamp",
+    year: "2024",
+    logo: freecodecampLogo,
+    url: "https://drive.google.com/file/d/1J2J4wXIgyM1MRpKoDnVCFdY38aanN41s/view?usp=drive_link",
+  },
+  {
+    name: "Data Analyst Bootcamp",
+    provider: "Analyst Builder — Alex The Analyst",
+    year: "2025",
+    logo: analystBuilderLogo,
+    url: "https://drive.google.com/file/d/1b-eNmSMsAanGKf1zRhw8bc3mr8gg8B5Z/view",
+  },
+  {
+    name: "Google UX Design Certificate",
+    provider: "Coursera",
+    year: "2024",
+    logo: courseraLogo,
+    url: null,
+  },
 ];
 
 export default function About() {
@@ -198,47 +216,79 @@ export default function About() {
           </div>
         </section>
 
-        {/* Certifications - Eye-Catching Cards */}
+        {/* Certifications - Modern terminal-style cards */}
         <section className="mb-12">
           <h2 className="text-base font-semibold mb-6 flex items-center gap-2">
             <Award className="w-4 h-4 text-primary" />
             Certifications
           </h2>
 
-          <div className="grid gap-4">
-            {certifications.map((cert, index) => (
-              <div 
-                key={index}
-                className="group flex items-center gap-4 p-5 border border-border rounded-xl bg-card hover:border-primary/50 hover:bg-card/80 transition-all duration-300"
-              >
-                {/* Logo */}
-                <div className="w-14 h-14 rounded-xl bg-card overflow-hidden flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 border border-border">
-                  <img 
-                    src={cert.logo} 
-                    alt={cert.provider} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors truncate">
-                    {cert.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{cert.provider}</p>
-                </div>
-                
-                {/* Year Badge */}
-                <span className="px-3 py-1.5 text-xs font-mono bg-primary/10 text-primary rounded-full font-semibold shrink-0">
-                  {cert.year}
-                </span>
-                
-                {/* Verified Icon */}
-                <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center shrink-0">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                </div>
-              </div>
-            ))}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {certifications.map((cert, index) => {
+              const isLinked = !!cert.url;
+              const Wrapper: any = isLinked ? "a" : "div";
+              const wrapperProps = isLinked
+                ? { href: cert.url!, target: "_blank", rel: "noopener noreferrer" }
+                : {};
+
+              return (
+                <Wrapper
+                  key={index}
+                  {...wrapperProps}
+                  className={`group relative block overflow-hidden rounded-xl border border-border bg-card/60 backdrop-blur-sm transition-all duration-300 ${
+                    isLinked
+                      ? "hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 cursor-pointer"
+                      : "opacity-90"
+                  }`}
+                >
+                  {/* Glow accent */}
+                  <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  {/* Header bar */}
+                  <div className="flex items-center justify-between px-4 py-2.5 border-b border-border/60 bg-secondary/30">
+                    <div className="flex items-center gap-1.5">
+                      <div className="terminal-dot terminal-dot-orange" />
+                      <div className="terminal-dot terminal-dot-blue" />
+                      <div className="terminal-dot terminal-dot-purple" />
+                    </div>
+                    <span className="text-[10px] font-mono text-muted-foreground tracking-wider uppercase">
+                      cert / {cert.year}
+                    </span>
+                  </div>
+
+                  {/* Body */}
+                  <div className="p-5 flex gap-4">
+                    <div className="w-14 h-14 rounded-lg overflow-hidden border border-border/60 bg-background shrink-0 group-hover:scale-105 transition-transform">
+                      <img src={cert.logo} alt={cert.provider} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
+                        {cert.name}
+                      </h3>
+                      <p className="text-xs text-muted-foreground mt-1">{cert.provider}</p>
+
+                      <div className="flex items-center gap-2 mt-3">
+                        <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
+                          <CheckCircle className="w-3 h-3" />
+                          Verified
+                        </span>
+                        {isLinked ? (
+                          <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 group-hover:bg-primary/20 transition-colors">
+                            <ExternalLink className="w-3 h-3" />
+                            View
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-secondary/60 text-muted-foreground border border-border/60">
+                            <Lock className="w-3 h-3" />
+                            Soon
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </Wrapper>
+              );
+            })}
           </div>
         </section>
 
