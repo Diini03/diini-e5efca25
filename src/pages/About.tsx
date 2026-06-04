@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award, CheckCircle } from "lucide-react";
+import { RESUME_URL } from "@/lib/resume";
 
 // Certification logos
 import freecodecampLogo from "@/assets/certifications/freecodecamp.png";
@@ -111,7 +112,7 @@ export default function About() {
 
         {/* Download CV Button - Enhanced */}
         <a 
-          href="/resume.pdf"
+          href={RESUME_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] mb-12"

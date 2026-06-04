@@ -237,4 +237,9 @@
   }
   .animate-ripple { animation: ripple 0.65s ease-out forwards; }
   .animate-spark { animation: spark 0.6s ease-out forwards; }
+
+  @keyframes splash-bar {
+    0% { transform: translateX(-120%); }
+    100% { transform: translateX(420%); }
+  }
 }
