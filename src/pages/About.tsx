@@ -45,9 +45,27 @@ const skillCategories = [
 ];
 
 const certifications = [
-  { name: "Data Analysis with Python", provider: "freeCodeCamp", year: "2024", logo: freecodecampLogo },
-  { name: "Data Analyst Bootcamp", provider: "Analyst Builder", year: "2025", logo: analystBuilderLogo },
-  { name: "Google UX Design Certificate", provider: "Coursera", year: "2024", logo: courseraLogo },
+  {
+    name: "Data Analysis with Python",
+    provider: "freeCodeCamp",
+    year: "2024",
+    logo: freecodecampLogo,
+    url: "https://drive.google.com/file/d/1J2J4wXIgyM1MRpKoDnVCFdY38aanN41s/view?usp=drive_link",
+  },
+  {
+    name: "Data Analyst Bootcamp",
+    provider: "Analyst Builder — Alex The Analyst",
+    year: "2025",
+    logo: analystBuilderLogo,
+    url: "https://drive.google.com/file/d/1b-eNmSMsAanGKf1zRhw8bc3mr8gg8B5Z/view",
+  },
+  {
+    name: "Google UX Design Certificate",
+    provider: "Coursera",
+    year: "2024",
+    logo: courseraLogo,
+    url: null,
+  },
 ];
 
 export default function About() {
