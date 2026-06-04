@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award, CheckCircle } from "lucide-react";
+import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award, CheckCircle, ExternalLink, Lock } from "lucide-react";
 import { RESUME_URL } from "@/lib/resume";
 
 // Certification logos
