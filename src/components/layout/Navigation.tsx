@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight, FileText } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
+import { RESUME_URL } from "@/lib/resume";
 
 const navItems = [
   { label: "About", path: "/about" },
@@ -53,7 +54,7 @@ export function Navigation({ onLogoClick }: NavigationProps) {
                 </NavLink>
               ))}
               <a
-                href="/resume.pdf"
+                href={RESUME_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-primary/40 text-xs font-mono text-primary hover:bg-primary/10 hover:border-primary/60 transition-all"
@@ -124,7 +125,7 @@ export function Navigation({ onLogoClick }: NavigationProps) {
 
           <div className="mt-6 pt-6 border-t border-border/60">
             <a
-              href="/resume.pdf"
+              href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg text-sm font-mono text-primary border border-primary/40 hover:bg-primary/10 transition-all"

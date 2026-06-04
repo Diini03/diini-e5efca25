@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, MapPin, Mail, Download, GraduationCap, Briefcase, Award, CheckCircle } from "lucide-react";
+import { RESUME_URL } from "@/lib/resume";
 
 // Certification logos
 import freecodecampLogo from "@/assets/certifications/freecodecamp.png";
