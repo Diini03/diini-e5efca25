@@ -10,34 +10,6 @@ import freecodecampLogo from "@/assets/certifications/freecodecamp.png";
 import analystBuilderLogo from "@/assets/certifications/analyst-builder.png";
 import courseraLogo from "@/assets/certifications/coursera.png";
 
-const experiences = [
-  {
-    type: "learning",
-    title: "Machine Learning",
-    org: "Self-directed",
-    location: "",
-    date: "2026 — Present",
-    description:
-      "Started building machine learning models — CNNs, classification, and applied deep learning projects.",
-  },
-  {
-    type: "learning",
-    title: "Data Analytics",
-    org: "Self-directed",
-    location: "",
-    date: "Oct 2024 — Present",
-    description:
-      "Learning data analysis with Python, SQL, Power BI and statistics through hands-on projects and real datasets.",
-  },
-  {
-    type: "education",
-    title: "Bachelor of Computer Science",
-    org: "Somali National University",
-    date: "2021 - 2026",
-    description: "Focus: Data Science, Machine Learning, AI",
-  },
-];
-
 const skillCategories = [
   { name: "Languages", skills: ["Python", "SQL", "JavaScript", "TypeScript", "DAX"] },
   { name: "Data", skills: ["pandas", "matplotlib", "Power BI", "Excel"] },
