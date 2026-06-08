@@ -122,7 +122,7 @@ export default function About() {
               </div>
               <div>
                 <div className="text-xs text-muted-foreground">Email</div>
-                <div className="text-sm text-foreground">diini@st.snu.edu.so</div>
+                <div className="text-sm text-foreground">diiniyare74@gmail.com</div>
               </div>
             </div>
           </div>

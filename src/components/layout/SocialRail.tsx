@@ -5,7 +5,7 @@ const links = [
   { href: "https://www.linkedin.com/in/diinikahiye/", label: "LinkedIn", Icon: Linkedin },
   { href: "https://x.com/DiiniCade0", label: "Twitter", Icon: Twitter },
   { href: "https://www.facebook.com/diiniCade8", label: "Facebook", Icon: Facebook },
-  { href: "mailto:diini@st.snu.edu.so", label: "Email", Icon: Mail },
+  { href: "mailto:diiniyare74@gmail.com", label: "Email", Icon: Mail },
 ];
 
 export function SocialRail() {
