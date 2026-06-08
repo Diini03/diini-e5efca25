@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, ExternalLink, Star, ArrowRight } from "lucide-react";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
-import { ProjectCard } from "@/components/home/ProjectCard";
-import { FeaturedProjectCard } from "@/components/home/FeaturedProjectCard";
+import { FeaturedProjects } from "@/components/home/FeaturedProjects";
 import { TrajectoryStrip } from "@/components/home/TrajectoryStrip";
 import { WritingCarousel } from "@/components/home/WritingCarousel";
 
@@ -76,32 +75,8 @@ export default function Home() {
             Selected Work
           </h2>
 
-          {/* Lead project */}
-          <div className="mb-4">
-            <FeaturedProjectCard
-              slug="fall-armyworm-detection"
-              category="Machine Learning"
-              title="Fall Armyworm Leaf Disease Detection"
-              description="Deep learning image classification system using CNNs to detect Fall Armyworm damage on maize leaves. Built for PyCon Somalia 2025 Hackathon."
-              metric="99.07% accuracy across 5 CNN models"
-            />
-          </div>
+          <FeaturedProjects />
 
-          {/* Secondary projects */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <ProjectCard
-              slug="world-happiness-analysis"
-              category="Data Analysis"
-              title="World Happiness Report Analysis"
-              description="Analyzed global happiness trends across 2,363 data points exploring GDP, social support, freedom and corruption."
-            />
-            <ProjectCard
-              slug="kulmid"
-              category="Product Engineering"
-              title="Kulmid — Event Management Platform"
-              description="A full-featured event management web app with registration, attendee management, and ticketing. Built with React, TypeScript, and Supabase."
-            />
-          </div>
 
           <div className="mt-8 text-center">
             <Link
