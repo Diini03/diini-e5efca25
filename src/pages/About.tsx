@@ -61,24 +61,47 @@ export default function About() {
           About <span className="text-primary">Me</span>
         </h1>
 
-        {/* Bio */}
-        <div className="space-y-4 text-muted-foreground text-sm leading-relaxed mb-8">
-          <p>
-            I'm <span className="text-primary">Diini Kahiye</span>, a Junior Data Scientist based in Mogadishu, Somalia, with a background in Computer Science. I focus on machine learning and data analysis, building projects that help turn data into useful insights.
-          </p>
-          <p>
-            I work with Python, SQL, and R to collect, clean, and analyze data, and I create dashboards using tools like Power BI and Tableau to present results clearly. I enjoy working with real datasets and using data to understand patterns and support better decisions.
-          </p>
-          <p>
-            I have developed machine learning and data analysis projects using real-world data, including humanitarian and global datasets. These projects involve building predictive models and visual reports that help explain complex information in a practical way.
-          </p>
-          <p>
-            After graduating from Somali National University, I continue improving my skills in Data Science and AI while working on projects that solve real problems and create meaningful impact in my community.
-          </p>
+        {/* Bio + Portrait */}
+        <div className="grid md:grid-cols-[1fr_240px] gap-8 mb-10 items-start">
+          <div className="space-y-4 text-muted-foreground text-sm leading-relaxed order-2 md:order-1">
+            <p>
+              I'm <span className="text-primary">Diini Kahiye</span>, a senior data analyst, where I use Python, SQL, and modern BI tools like Power BI to clean, analyze, and visualize data — turning raw numbers into clear, actionable insights.
+            </p>
+            <p>
+              I'm a certified Data Visualization developer at freeCodeCamp, with real projects to back it up.{" "}
+              <Link to="/projects" className="text-primary underline-offset-4 hover:underline">
+                View Projects →
+              </Link>
+            </p>
+            <p>
+              On the machine learning side, I've built a Fall Armyworm crop disease classifier, a Bitcoin analysis project, and I'm actively deepening my skills in statistics, supervised learning, and model building. The tools I work with include Python, Scikit-learn, Pandas, Matplotlib, Seaborn, SQL, and Power BI.
+            </p>
+            <p>
+              Computer Science graduate from Somali National University, Mogadishu — continuously building, learning, and working on problems that matter.
+            </p>
+          </div>
+
+          <div className="order-1 md:order-2">
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-2xl blur-md opacity-60 group-hover:opacity-100 transition" />
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-card aspect-[3/4]">
+                <img
+                  src={diiniPhoto.url}
+                  alt="Diini Kahiye — Class of 2026, Somali National University"
+                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3">
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-white/70">Class of 2026</div>
+                  <div className="text-xs text-white font-medium">Somali National University</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Location & Email Cards */}
-        <div className="grid md:grid-cols-2 gap-4 mb-8">
+        <div className="grid md:grid-cols-2 gap-4 mb-6">
           <div className="terminal-card">
             <div className="p-4 flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
@@ -103,6 +126,31 @@ export default function About() {
           </div>
         </div>
 
+        {/* Linktree — playful CTA */}
+        <a
+          href={LINKTREE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative block overflow-hidden rounded-xl border border-border bg-card/60 hover:border-primary/50 transition-all hover:-translate-y-0.5 mb-8"
+        >
+          <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="p-4 flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <Link2 className="w-5 h-5 text-primary" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="text-sm font-semibold text-foreground flex items-center gap-2">
+                Peek at my Linktree
+                <Sparkles className="w-3.5 h-3.5 text-primary" />
+              </div>
+              <div className="text-xs text-muted-foreground mt-0.5">
+                Warning: contains every link I've ever made. Click if you're curious 👀
+              </div>
+            </div>
+            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+          </div>
+        </a>
+
         {/* Download CV Button - Enhanced */}
         <a 
           href={RESUME_URL}
@@ -114,51 +162,6 @@ export default function About() {
           Download My CV
         </a>
 
-        {/* Experience & Education */}
-        <section className="mb-12">
-          <h2 className="text-base font-semibold mb-6 flex items-center gap-2">
-            <Briefcase className="w-4 h-4 text-primary" />
-            Experience & Education
-          </h2>
-
-          <div className="space-y-6">
-            {experiences.map((exp, index) => (
-              <div key={index} className="flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center shrink-0">
-                    {exp.type === "education" ? (
-                      <GraduationCap className="w-5 h-5 text-primary" />
-                    ) : (
-                      <Briefcase className="w-5 h-5 text-muted-foreground" />
-                    )}
-                  </div>
-                  {index < experiences.length - 1 && (
-                    <div className="w-px h-full bg-border mt-2" />
-                  )}
-                </div>
-                <div className="flex-1 pb-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-sm font-semibold text-foreground">{exp.title}</h3>
-                      <div className="text-sm text-primary">
-                        {exp.org}
-                        {exp.location && (
-                          <span className="text-muted-foreground"> • {exp.location}</span>
-                        )}
-                      </div>
-                    </div>
-                    <span className="text-xs text-muted-foreground whitespace-nowrap px-2 py-1 bg-secondary rounded">
-                      {exp.date}
-                    </span>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
-                    {exp.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* Skills & Technologies — editorial */}
         <section className="mb-12">
