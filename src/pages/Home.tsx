@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, ExternalLink, Star, ArrowRight } from "lucide-react";
 import { QuickStatsCard } from "@/components/home/QuickStatsCard";
-import { ProjectCard } from "@/components/home/ProjectCard";
-import { FeaturedProjectCard } from "@/components/home/FeaturedProjectCard";
+import { FeaturedProjects } from "@/components/home/FeaturedProjects";
 import { TrajectoryStrip } from "@/components/home/TrajectoryStrip";
 import { WritingCarousel } from "@/components/home/WritingCarousel";
 
