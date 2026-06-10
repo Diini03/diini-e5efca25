@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, MapPin, Mail, Download, Award, CheckCircle, ExternalLink, Lock, Link2, Sparkles } from "lucide-react";
 import { RESUME_URL } from "@/lib/resume";
-import diiniPhoto from "@/assets/diini-graduation.jpeg.asset.json";
+const DIINI_PHOTO_URL = "/diini-graduation.jpg";
 
 const LINKTREE_URL = "https://linktr.ee/diinikahiye";
 
