@@ -86,10 +86,10 @@ export default function About() {
               <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-2xl blur-md opacity-60 group-hover:opacity-100 transition" />
               <div className="relative overflow-hidden rounded-2xl border border-border bg-card aspect-[3/4]">
                 <img
-                  src={diiniPhoto.url}
+                  src={DIINI_PHOTO_URL}
                   alt="Diini Kahiye — Class of 2026, Somali National University"
                   className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                  loading="lazy"
+                  loading="eager"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3">
                   <div className="text-[10px] font-mono uppercase tracking-widest text-white/70">Class of 2026</div>
