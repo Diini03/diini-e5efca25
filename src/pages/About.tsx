@@ -87,14 +87,10 @@ export default function About() {
               <div className="relative overflow-hidden rounded-2xl border border-border bg-card aspect-[3/4]">
                 <img
                   src={DIINI_PHOTO_URL}
-                  alt="Diini Kahiye — Class of 2026, Somali National University"
+                  alt="Diini Kahiye"
                   className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
                   loading="eager"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-white/70">Class of 2026</div>
-                  <div className="text-xs text-white font-medium">Somali National University</div>
-                </div>
               </div>
             </div>
           </div>
