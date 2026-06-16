@@ -319,27 +319,25 @@ export default function BlogPost() {
           ))}
         </div>
 
-        {/* Highlights */}
+        {/* Highlights — "What to remember" */}
         {post.highlights && post.highlights.length > 0 && (
-          <div className="rounded-xl border border-border/60 bg-secondary/30 p-6 mb-8">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Lightbulb className="w-4 h-4 text-primary" />
-              </div>
-              <h2 className="text-base font-semibold text-foreground">Key Takeaways</h2>
+          <div className="relative mb-8 pl-5 border-l-2 border-primary/60">
+            <div className="flex items-center gap-2 mb-4">
+              <Lightbulb className="w-4 h-4 text-primary" />
+              <h2 className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary">
+                What to remember
+              </h2>
             </div>
-            <ul className="space-y-3">
-              {post.highlights.map((highlight, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
-                    {index + 1}
-                  </span>
-                  <span className="text-sm text-muted-foreground leading-relaxed">
-                    {highlight}
-                  </span>
-                </li>
+            <div className="space-y-4">
+              {post.highlights.slice(0, 2).map((highlight, index) => (
+                <p
+                  key={index}
+                  className="text-[15px] text-foreground/90 leading-relaxed font-medium"
+                >
+                  {highlight}
+                </p>
               ))}
-            </ul>
+            </div>
           </div>
         )}
 
