@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Mail, Download, Award, CheckCircle, ExternalLink, Lock, Link2, Sparkles } from "lucide-react";
+import { ArrowLeft, Download, Award, CheckCircle, ExternalLink, Lock, Link2 } from "lucide-react";
 import { RESUME_URL } from "@/lib/resume";
 const DIINI_PHOTO_URL = "/diini-graduation.jpg";
 
@@ -96,54 +96,26 @@ export default function About() {
           </div>
         </div>
 
-        {/* Location & Email Cards */}
-        <div className="grid md:grid-cols-2 gap-4 mb-6">
-          <div className="terminal-card">
-            <div className="p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                <MapPin className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Location</div>
-                <div className="text-sm text-foreground">Mogadishu, Somalia</div>
-              </div>
-            </div>
-          </div>
-          <div className="terminal-card">
-            <div className="p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                <Mail className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Email</div>
-                <div className="text-sm text-foreground">diiniyare74@gmail.com</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Linktree — playful CTA */}
+        {/* Linktree — bold CTA */}
         <a
           href={LINKTREE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative block overflow-hidden rounded-xl border border-border bg-card/60 hover:border-primary/50 transition-all hover:-translate-y-0.5 mb-8"
+          className="group relative block overflow-hidden rounded-xl border-2 border-primary/40 bg-gradient-to-br from-primary/10 via-card to-card hover:border-primary hover:-translate-y-0.5 transition-all mb-8 shadow-lg shadow-primary/10 hover:shadow-xl hover:shadow-primary/20"
         >
-          <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="p-4 flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-              <Link2 className="w-5 h-5 text-primary" />
+          <div className="p-5 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <Link2 className="w-6 h-6 text-primary" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-sm font-semibold text-foreground flex items-center gap-2">
+              <div className="text-base font-bold text-foreground">
                 Peek at my Linktree
-                <Sparkles className="w-3.5 h-3.5 text-primary" />
               </div>
-              <div className="text-xs text-muted-foreground mt-0.5">
+              <div className="text-sm text-muted-foreground mt-0.5">
                 Warning: contains every link I've ever made. Click if you're curious 👀
               </div>
             </div>
-            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+            <ExternalLink className="w-5 h-5 text-primary group-hover:translate-x-0.5 transition-transform" />
           </div>
         </a>
 
