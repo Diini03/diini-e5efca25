@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Download, Award, CheckCircle, ExternalLink, Lock, Link2 } from "lucide-react";
+import {
+  ArrowLeft,
+  Download,
+  Award,
+  CheckCircle,
+  ExternalLink,
+  Lock,
+  Link2,
+} from "lucide-react";
 import { RESUME_URL } from "@/lib/resume";
 const DIINI_PHOTO_URL = "/diini-graduation.jpg";
 
-const LINKTREE_URL = "https://linktr.ee/diinikahiye";
+const LINKTREE_URL = "https://linktr.ee/diinicade";
 
 // Certification logos
 import freecodecampLogo from "@/assets/certifications/freecodecamp.png";
@@ -11,7 +19,10 @@ import analystBuilderLogo from "@/assets/certifications/analyst-builder.png";
 import courseraLogo from "@/assets/certifications/coursera.png";
 
 const skillCategories = [
-  { name: "Languages", skills: ["Python", "SQL", "JavaScript", "TypeScript", "DAX"] },
+  {
+    name: "Languages",
+    skills: ["Python", "SQL", "JavaScript", "TypeScript", "DAX"],
+  },
   { name: "Data", skills: ["pandas", "matplotlib", "Power BI", "Excel"] },
   { name: "Databases", skills: ["MySQL", "SQLite", "Power Query"] },
   { name: "Web", skills: ["React", "HTML/CSS", "Node.js", "Tailwind CSS"] },
@@ -65,19 +76,32 @@ export default function About() {
         <div className="grid md:grid-cols-[1fr_240px] gap-8 mb-10 items-start">
           <div className="space-y-4 text-muted-foreground text-sm leading-relaxed order-2 md:order-1">
             <p>
-              I'm <span className="text-primary">Diini Kahiye</span>, a senior data analyst, where I use Python, SQL, and modern BI tools like Power BI to clean, analyze, and visualize data — turning raw numbers into clear, actionable insights.
+              I'm <span className="text-primary">Diini Kahiye</span>, a senior
+              data analyst, where I use Python, SQL, and modern BI tools like
+              Power BI to clean, analyze, and visualize data — turning raw
+              numbers into clear, actionable insights.
             </p>
             <p>
-              I'm a certified Data Visualization developer at freeCodeCamp, with real projects to back it up.{" "}
-              <Link to="/projects" className="text-primary underline-offset-4 hover:underline">
+              I'm a certified Data Visualization developer at freeCodeCamp, with
+              real projects to back it up.{" "}
+              <Link
+                to="/projects"
+                className="text-primary underline-offset-4 hover:underline"
+              >
                 View Projects →
               </Link>
             </p>
             <p>
-              On the machine learning side, I've built a Fall Armyworm crop disease classifier, a Bitcoin analysis project, and I'm actively deepening my skills in statistics, supervised learning, and model building. The tools I work with include Python, Scikit-learn, Pandas, Matplotlib, Seaborn, SQL, and Power BI.
+              On the machine learning side, I've built a Fall Armyworm crop
+              disease classifier, a Bitcoin analysis project, and I'm actively
+              deepening my skills in statistics, supervised learning, and model
+              building. The tools I work with include Python, Scikit-learn,
+              Pandas, Matplotlib, Seaborn, SQL, and Power BI.
             </p>
             <p>
-              Computer Science graduate from Somali National University, Mogadishu — continuously building, learning, and working on problems that matter.
+              Computer Science graduate from Somali National University,
+              Mogadishu — continuously building, learning, and working on
+              problems that matter.
             </p>
           </div>
 
@@ -112,7 +136,8 @@ export default function About() {
                 Peek at my Linktree
               </div>
               <div className="text-sm text-muted-foreground mt-0.5">
-                Warning: contains every link I've ever made. Click if you're curious 👀
+                Warning: contains every link I've ever made. Click if you're
+                curious 👀
               </div>
             </div>
             <ExternalLink className="w-5 h-5 text-primary group-hover:translate-x-0.5 transition-transform" />
@@ -120,7 +145,7 @@ export default function About() {
         </a>
 
         {/* Download CV Button - Enhanced */}
-        <a 
+        <a
           href={RESUME_URL}
           target="_blank"
           rel="noopener noreferrer"
@@ -129,7 +154,6 @@ export default function About() {
           <Download className="w-5 h-5" />
           Download My CV
         </a>
-
 
         {/* Skills & Technologies — editorial */}
         <section className="mb-12">
@@ -174,7 +198,11 @@ export default function About() {
               const isLinked = !!cert.url;
               const Wrapper: any = isLinked ? "a" : "div";
               const wrapperProps = isLinked
-                ? { href: cert.url!, target: "_blank", rel: "noopener noreferrer" }
+                ? {
+                    href: cert.url!,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  }
                 : {};
 
               return (
@@ -205,13 +233,19 @@ export default function About() {
                   {/* Body */}
                   <div className="p-5 flex gap-4">
                     <div className="w-14 h-14 rounded-lg overflow-hidden border border-border/60 bg-background shrink-0 group-hover:scale-105 transition-transform">
-                      <img src={cert.logo} alt={cert.provider} className="w-full h-full object-cover" />
+                      <img
+                        src={cert.logo}
+                        alt={cert.provider}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
                         {cert.name}
                       </h3>
-                      <p className="text-xs text-muted-foreground mt-1">{cert.provider}</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {cert.provider}
+                      </p>
 
                       <div className="flex items-center gap-2 mt-3">
                         <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
@@ -237,7 +271,6 @@ export default function About() {
             })}
           </div>
         </section>
-
       </div>
     </div>
   );
