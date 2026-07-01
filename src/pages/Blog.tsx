@@ -24,6 +24,8 @@ export interface BlogPost {
   image: string;
   linkedinUrl: string;
   featuredOnHome?: boolean;
+  source?: "linkedin" | "medium";
+  externalUrl?: string;
 }
 
 export const blogPosts: BlogPost[] = [
