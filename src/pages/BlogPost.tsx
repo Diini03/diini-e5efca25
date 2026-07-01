@@ -21,9 +21,82 @@ interface BlogPostData {
   content: string;
   highlights?: string[];
   references?: { title: string; url: string }[];
+  source?: "linkedin" | "medium";
+  externalUrl?: string;
 }
 
 const blogPostsData: Record<string, BlogPostData> = {
+  "why-data-somalia-never-used": {
+    title: "Why Most Data in Somalia Never Gets Used",
+    date: "2026-06-20",
+    readTime: "6 min read",
+    category: "data-analysis",
+    tags: ["data", "somalia", "humanitarian"],
+    image: datasetUsefulImg,
+    linkedinUrl: "https://medium.com/@diiniyare74/why-most-data-in-somalia-never-gets-used-c88889eb3f22",
+    source: "medium",
+    externalUrl: "https://medium.com/@diiniyare74/why-most-data-in-somalia-never-gets-used-c88889eb3f22?sharedUserId=diiniyare74",
+    content: `Every year, organizations arrive in Somalia with projects. Before the work starts, data gets collected. Surveys, field assessments, household interviews. After the project ends, more data gets collected. Did it work. How many people were reached.
+
+That data gets cleaned, visualized and put into a report. The report goes to the funder. The funder releases the next budget. The cycle repeats.
+
+If you go to the Humanitarian Data Exchange right now, you will find 488 datasets for Somalia from 75 organizations. Food prices, displacement, population movement, health indicators. All collected, processed and published.
+
+But who is actually using it to make decisions?`,
+    highlights: [
+      "Data is collected for reports, not for decisions",
+      "488 open datasets exist for Somalia — most sit unused",
+    ],
+  },
+  "correlation-vs-causation": {
+    title: "Correlation vs Causation — The mistake every beginner makes reading data",
+    date: "2026-06-10",
+    readTime: "5 min read",
+    category: "data-analysis",
+    tags: ["data-analysis", "statistics", "fundamentals"],
+    image: mlPredictionsImg,
+    linkedinUrl: "https://medium.com/@diiniyare74/correlation-vs-causation-the-mistake-every-beginner-makes-reading-data-efe8cc6e1fd4",
+    source: "medium",
+    externalUrl: "https://medium.com/@diiniyare74/correlation-vs-causation-the-mistake-every-beginner-makes-reading-data-efe8cc6e1fd4?sharedUserId=diiniyare74",
+    content: `Correlation means two things move together. Causation means one is making the other happen. One line of Python finds correlation in seconds. Understanding whether it actually means anything takes much longer. Most tutorials skip that second part entirely.
+
+This is the one concept that changed how I read data. Not because it is complicated but because nobody explained it clearly the first time.
+
+What correlation actually is.
+
+When two variables move in the same direction that is correlation. One goes up, the other follows. One drops, the other drops with it. Python gives you a number between minus one and one. Close to one means they move tightly together. Close to zero means they don't. But a strong correlation doesn't tell you why.`,
+    highlights: [
+      "Correlation is easy to compute — causation is the hard part",
+      "A strong correlation never explains why two variables move together",
+    ],
+  },
+  "what-is-a-model": {
+    title: "What is a model — and why two AIs can give you completely different answers?",
+    date: "2026-05-30",
+    readTime: "6 min read",
+    category: "machine-learning",
+    tags: ["ai", "machine-learning", "fundamentals"],
+    image: aiVsMlImg,
+    linkedinUrl: "https://medium.com/@diiniyare74/what-is-a-model-and-why-two-ais-can-give-you-completely-different-answers-2edc1ba3c669",
+    source: "medium",
+    externalUrl: "https://medium.com/@diiniyare74/what-is-a-model-and-why-two-ais-can-give-you-completely-different-answers-2edc1ba3c669?sharedUserId=diiniyare74",
+    content: `You open ChatGPT. You ask it something. You get an answer.
+
+Then you open Claude and ask the exact same thing. The answer is different. Not slightly different — sometimes completely different. One is confident. The other is cautious. One gives you five steps. The other gives you a paragraph.
+
+You sit there wondering: which one is right? Is one broken? Are they guessing?
+
+Neither is broken. And this is not random.
+
+The reason they answer differently comes down to one word you've probably heard but never fully understood: Model.
+
+So what is a model, exactly? A model is a system trained on data to recognize patterns and produce outputs. Different data, different training, different behavior — even if the question is identical.`,
+    highlights: [
+      "A model is shaped by the data and training it went through",
+      "Two AIs answer differently because they are literally different models",
+    ],
+  },
+
   "what-makes-dataset-useful": {
     title: "What Makes a Dataset Actually Useful?",
     date: "2026-05-12",
