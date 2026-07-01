@@ -30,6 +30,51 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "why-data-somalia-never-used",
+    title: "Why Most Data in Somalia Never Gets Used",
+    excerpt:
+      "Every year, organizations arrive in Somalia with projects. Surveys, field assessments, household interviews. The report goes to the funder. The funder releases the next budget. The cycle repeats. If you go to the Humanitarian Data Exchange right now, you'll find 488 datasets for Somalia from 75 organizations — but who's actually using them to make decisions?",
+    category: "data-analysis",
+    date: "2026-06-20",
+    readTime: "6 min read",
+    tags: ["data", "somalia", "humanitarian"],
+    image: datasetUsefulImg,
+    linkedinUrl: "https://medium.com/@diiniyare74/why-most-data-in-somalia-never-gets-used-c88889eb3f22",
+    source: "medium",
+    externalUrl: "https://medium.com/@diiniyare74/why-most-data-in-somalia-never-gets-used-c88889eb3f22?sharedUserId=diiniyare74",
+    featuredOnHome: true,
+  },
+  {
+    slug: "correlation-vs-causation",
+    title: "Correlation vs Causation — The mistake every beginner makes reading data",
+    excerpt:
+      "Correlation means two things move together. Causation means one is making the other happen. One line of Python finds correlation in seconds. Understanding whether it actually means anything takes much longer. Most tutorials skip that second part entirely. This is the one concept that changed how I read data.",
+    category: "data-analysis",
+    date: "2026-06-10",
+    readTime: "5 min read",
+    tags: ["data-analysis", "statistics", "fundamentals"],
+    image: mlPredictionsImg,
+    linkedinUrl: "https://medium.com/@diiniyare74/correlation-vs-causation-the-mistake-every-beginner-makes-reading-data-efe8cc6e1fd4",
+    source: "medium",
+    externalUrl: "https://medium.com/@diiniyare74/correlation-vs-causation-the-mistake-every-beginner-makes-reading-data-efe8cc6e1fd4?sharedUserId=diiniyare74",
+    featuredOnHome: true,
+  },
+  {
+    slug: "what-is-a-model",
+    title: "What is a model — and why two AIs can give you completely different answers?",
+    excerpt:
+      "You open ChatGPT. You ask it something. You get an answer. Then you open Claude and ask the exact same thing. The answer is different — sometimes completely different. Neither is broken. And this is not random. The reason they answer differently comes down to one word you've probably heard but never fully understood: Model.",
+    category: "machine-learning",
+    date: "2026-05-30",
+    readTime: "6 min read",
+    tags: ["ai", "machine-learning", "fundamentals"],
+    image: aiVsMlImg,
+    linkedinUrl: "https://medium.com/@diiniyare74/what-is-a-model-and-why-two-ais-can-give-you-completely-different-answers-2edc1ba3c669",
+    source: "medium",
+    externalUrl: "https://medium.com/@diiniyare74/what-is-a-model-and-why-two-ais-can-give-you-completely-different-answers-2edc1ba3c669?sharedUserId=diiniyare74",
+    featuredOnHome: true,
+  },
+  {
     slug: "what-makes-dataset-useful",
     title: "What Makes a Dataset Actually Useful?",
     excerpt:
@@ -40,7 +85,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["data-analysis", "data-quality", "fundamentals"],
     image: datasetUsefulImg,
     linkedinUrl: "https://www.linkedin.com/in/diinikahiye/",
-    featuredOnHome: true,
+    source: "linkedin",
   },
   {
     slug: "ml-learn-from-mistakes",
@@ -53,7 +98,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["machine-learning", "model-training", "fundamentals"],
     image: mlMistakesImg,
     linkedinUrl: "https://www.linkedin.com/in/diinikahiye/",
-    featuredOnHome: true,
+    source: "linkedin",
   },
   {
     slug: "ml-make-predictions",
@@ -66,7 +111,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["machine-learning", "predictions", "explainability"],
     image: mlPredictionsImg,
     linkedinUrl: "https://www.linkedin.com/in/diinikahiye/",
-    featuredOnHome: true,
+    source: "linkedin",
   },
   {
     slug: "tech-trends-2025",
@@ -79,6 +124,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["ai", "technology", "trends"],
     image: techTrends2025Img,
     linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_top-5-emerging-tech-trends-of-2025-activity-7335583585871040514-HiK_?utm_source=share&utm_medium=member_desktop",
+    source: "linkedin",
     featuredOnHome: true,
   },
   {
@@ -92,6 +138,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["ai", "machine-learning", "beginners"],
     image: aiVsMlImg,
     linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_whats-the-difference-between-ai-and-ml-activity-7332661785382072320-o10x?utm_source=share&utm_medium=member_desktop",
+    source: "linkedin",
     featuredOnHome: true,
   },
   {
