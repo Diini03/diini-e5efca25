@@ -1,5 +1,13 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, Clock, Tag, ExternalLink, Lightbulb, BookOpen } from "lucide-react";
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  Tag,
+  ExternalLink,
+  Lightbulb,
+  BookOpen,
+} from "lucide-react";
 
 // Import blog images
 import techTrends2025Img from "@/assets/blog/tech-trends-2025.png";
@@ -33,9 +41,11 @@ const blogPostsData: Record<string, BlogPostData> = {
     category: "data-analysis",
     tags: ["data", "somalia", "humanitarian"],
     image: datasetUsefulImg,
-    linkedinUrl: "https://medium.com/@diiniyare74/why-most-data-in-somalia-never-gets-used-c88889eb3f22",
+    linkedinUrl:
+      "https://medium.com/@diiniyare74/why-most-data-in-somalia-never-gets-used-c88889eb3f22",
     source: "medium",
-    externalUrl: "https://medium.com/@diiniyare74/why-most-data-in-somalia-never-gets-used-c88889eb3f22?sharedUserId=diiniyare74",
+    externalUrl:
+      "https://medium.com/@diiniyare74/why-most-data-in-somalia-never-gets-used-c88889eb3f22?sharedUserId=diiniyare74",
     content: `Every year, organizations arrive in Somalia with projects. Before the work starts, data gets collected. Surveys, field assessments, household interviews. After the project ends, more data gets collected. Did it work. How many people were reached.
 
 That data gets cleaned, visualized and put into a report. The report goes to the funder. The funder releases the next budget. The cycle repeats.
@@ -49,15 +59,18 @@ But who is actually using it to make decisions?`,
     ],
   },
   "correlation-vs-causation": {
-    title: "Correlation vs Causation — The mistake every beginner makes reading data",
+    title:
+      "Correlation vs Causation — The mistake every beginner makes reading data",
     date: "2026-06-10",
     readTime: "5 min read",
     category: "data-analysis",
     tags: ["data-analysis", "statistics", "fundamentals"],
     image: mlPredictionsImg,
-    linkedinUrl: "https://medium.com/@diiniyare74/correlation-vs-causation-the-mistake-every-beginner-makes-reading-data-efe8cc6e1fd4",
+    linkedinUrl:
+      "https://medium.com/@diiniyare74/correlation-vs-causation-the-mistake-every-beginner-makes-reading-data-efe8cc6e1fd4",
     source: "medium",
-    externalUrl: "https://medium.com/@diiniyare74/correlation-vs-causation-the-mistake-every-beginner-makes-reading-data-efe8cc6e1fd4?sharedUserId=diiniyare74",
+    externalUrl:
+      "https://medium.com/@diiniyare74/correlation-vs-causation-the-mistake-every-beginner-makes-reading-data-efe8cc6e1fd4?sharedUserId=diiniyare74",
     content: `Correlation means two things move together. Causation means one is making the other happen. One line of Python finds correlation in seconds. Understanding whether it actually means anything takes much longer. Most tutorials skip that second part entirely.
 
 This is the one concept that changed how I read data. Not because it is complicated but because nobody explained it clearly the first time.
@@ -71,15 +84,18 @@ When two variables move in the same direction that is correlation. One goes up, 
     ],
   },
   "what-is-a-model": {
-    title: "What is a model — and why two AIs can give you completely different answers?",
+    title:
+      "What is a model — and why two AIs can give you completely different answers?",
     date: "2026-05-30",
     readTime: "6 min read",
     category: "machine-learning",
     tags: ["ai", "machine-learning", "fundamentals"],
     image: aiVsMlImg,
-    linkedinUrl: "https://medium.com/@diiniyare74/what-is-a-model-and-why-two-ais-can-give-you-completely-different-answers-2edc1ba3c669",
+    linkedinUrl:
+      "https://medium.com/@diiniyare74/what-is-a-model-and-why-two-ais-can-give-you-completely-different-answers-2edc1ba3c669",
     source: "medium",
-    externalUrl: "https://medium.com/@diiniyare74/what-is-a-model-and-why-two-ais-can-give-you-completely-different-answers-2edc1ba3c669?sharedUserId=diiniyare74",
+    externalUrl:
+      "https://medium.com/@diiniyare74/what-is-a-model-and-why-two-ais-can-give-you-completely-different-answers-2edc1ba3c669?sharedUserId=diiniyare74",
     content: `You open ChatGPT. You ask it something. You get an answer.
 
 Then you open Claude and ask the exact same thing. The answer is different. Not slightly different — sometimes completely different. One is confident. The other is cautious. One gives you five steps. The other gives you a paragraph.
@@ -183,7 +199,8 @@ Understanding how the prediction was produced is what separates teams that use M
     category: "tech",
     tags: ["ai", "technology", "trends", "2025"],
     image: techTrends2025Img,
-    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_top-5-emerging-tech-trends-of-2025-activity-7335583585871040514-HiK_?utm_source=share&utm_medium=member_desktop",
+    linkedinUrl:
+      "https://www.linkedin.com/posts/diinikahiye_top-5-emerging-tech-trends-of-2025-activity-7335583585871040514-HiK_?utm_source=share&utm_medium=member_desktop",
     content: `The future is developing more quickly than before. These ground-breaking technologies — from synthetic media to agentic AI — aren't just catchphrases. They're fundamentally altering entire industries and daily life.
 
 Agentic AI represents a shift from reactive to proactive AI systems. Unlike traditional AI that responds to prompts, agentic AI can autonomously plan, execute, and adapt to achieve goals — think AI assistants that can actually complete complex tasks without constant human guidance.
@@ -206,7 +223,8 @@ Edge Computing moves processing closer to where data is generated, reducing late
     category: "tech",
     tags: ["ai", "machine-learning", "beginners"],
     image: aiVsMlImg,
-    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_whats-the-difference-between-ai-and-ml-activity-7332661785382072320-o10x?utm_source=share&utm_medium=member_desktop",
+    linkedinUrl:
+      "https://www.linkedin.com/posts/diinikahiye_whats-the-difference-between-ai-and-ml-activity-7332661785382072320-o10x?utm_source=share&utm_medium=member_desktop",
     content: `Still confused between Artificial Intelligence and Machine Learning? You're not alone.
 
 AI is the big idea. ML is how it learns from data. Let's break it down.
@@ -236,7 +254,8 @@ Understanding this distinction matters because it shapes how you approach proble
     category: "career",
     tags: ["career", "data-science", "tips"],
     image: dataCareerTipsImg,
-    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_7-data-career-tips-nobody-talks-about-activity-7325470658199543810-kRcC?utm_source=share&utm_medium=member_desktop",
+    linkedinUrl:
+      "https://www.linkedin.com/posts/diinikahiye_7-data-career-tips-nobody-talks-about-activity-7325470658199543810-kRcC?utm_source=share&utm_medium=member_desktop",
     content: `These aren't motivational quotes — they're practical lessons drawn from real-world experience, mentor advice, and one impactful read: Build a Career in Data Science by Emily Robinson & Jacqueline Nolis.
 
 Technical skills get you in the door, but communication keeps you in the room. The best data scientists explain complex findings to non-technical stakeholders in ways that drive action.
@@ -257,7 +276,8 @@ Imposter syndrome is normal. Even senior data scientists feel it. Focus on learn
     ],
     references: [
       {
-        title: "Build a Career in Data Science by Emily Robinson & Jacqueline Nolis",
+        title:
+          "Build a Career in Data Science by Emily Robinson & Jacqueline Nolis",
         url: "https://www.manning.com/books/build-a-career-in-data-science",
       },
     ],
@@ -269,7 +289,8 @@ Imposter syndrome is normal. Even senior data scientists feel it. Focus on learn
     category: "tutorials",
     tags: ["sql", "database", "beginners"],
     image: sqlJoinsImg,
-    linkedinUrl: "https://www.linkedin.com/posts/diinikahiye_7-things-i-wish-i-knew-about-sql-joins-activity-7319615813366263809-VN07?utm_source=share&utm_medium=member_desktop",
+    linkedinUrl:
+      "https://www.linkedin.com/posts/diinikahiye_7-things-i-wish-i-knew-about-sql-joins-activity-7319615813366263809-VN07?utm_source=share&utm_medium=member_desktop",
     content: `"I thought I understood SQL… until I met JOINs." This used to be me.
 
 If you're starting with SQL, JOINs can be confusing — and that's perfectly normal.
@@ -308,8 +329,12 @@ export default function BlogPost() {
           <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-secondary/50 flex items-center justify-center">
             <BookOpen className="w-8 h-8 text-muted-foreground" />
           </div>
-          <h1 className="text-2xl font-bold text-foreground mb-4">Post not found</h1>
-          <p className="text-muted-foreground mb-6">The article you're looking for doesn't exist.</p>
+          <h1 className="text-2xl font-bold text-foreground mb-4">
+            Post not found
+          </h1>
+          <p className="text-muted-foreground mb-6">
+            The article you're looking for doesn't exist.
+          </p>
           <Link
             to="/blog"
             className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
@@ -448,7 +473,7 @@ export default function BlogPost() {
             className="inline-flex items-center gap-3 px-5 py-3 mb-10 bg-foreground text-background font-medium rounded-lg hover:opacity-90 transition-all"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+              <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
             </svg>
             Read the full story on Medium
             <ExternalLink className="w-4 h-4" />
@@ -475,7 +500,9 @@ export default function BlogPost() {
               <div className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center">
                 <BookOpen className="w-4 h-4 text-foreground" />
               </div>
-              <h2 className="text-base font-semibold text-foreground">References & Resources</h2>
+              <h2 className="text-base font-semibold text-foreground">
+                References & Resources
+              </h2>
             </div>
             <ul className="space-y-2">
               {post.references.map((ref, index) => (
