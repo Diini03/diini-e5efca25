@@ -411,6 +411,13 @@ fig.show()`,
       { title: "Content Added Over the Years", image: netflixContentOverYears },
     ],
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
+    role: "Exploratory data analysis",
+    stack: [
+      { name: "Python", role: "notebook workflow" },
+      { name: "Pandas", role: "cleaning 8,807 Netflix titles" },
+      { name: "NumPy", role: "numeric summaries" },
+      { name: "Matplotlib / Seaborn", role: "distribution, trend and rating charts" },
+    ],
     codeFile: "Netflix_Data_Analysis.ipynb",
     githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python/blob/main/Netflix%20Data%20Analysis%20%26%20Visualization.ipynb",
     codeContent: `# Cell 1: Import necessary libraries
