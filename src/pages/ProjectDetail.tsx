@@ -47,6 +47,11 @@ interface ChartData {
   insight?: string;
 }
 
+interface StackEntry {
+  name: string;
+  role: string;
+}
+
 interface ProjectData {
   title: string;
   date: string;
@@ -54,6 +59,8 @@ interface ProjectData {
   tags: string[];
   highlights?: string[];
   tools: string[];
+  stack?: StackEntry[];
+  role?: string;
   codeFile?: string;
   codeContent?: string;
   githubUrl?: string;
