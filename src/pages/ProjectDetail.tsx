@@ -547,7 +547,7 @@ export default function ProjectDetail() {
         </div>
 
         {/* Title */}
-        <h1 className="text-2xl md:text-3xl font-bold text-primary mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-primary mb-4">
           {project.title}
         </h1>
 
@@ -569,44 +569,87 @@ export default function ProjectDetail() {
           </div>
         )}
 
-        {/* Competition Badge */}
-        {project.competitionUrl && project.competitionName && (
-          <a
-            href={project.competitionUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-lg text-sm text-primary hover:bg-primary/20 transition-colors mb-6"
-          >
-            <Trophy className="w-4 h-4" />
-            <span className="font-medium">{project.competitionName}</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
-        )}
-
-        {/* View Code Button */}
-        {project.githubUrl && (
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded text-sm text-primary hover:bg-secondary transition-colors mb-6 ml-3"
-          >
-            <Github className="w-4 h-4" />
-            View Code
-          </a>
-        )}
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 text-xs bg-secondary text-foreground rounded"
-            >
-              {tag}
+        {/* Spec sheet — role · stack · links */}
+        <div className="terminal-card mb-10">
+          <div className="terminal-header">
+            <div className="flex items-center gap-1.5">
+              <div className="terminal-dot terminal-dot-orange" />
+              <div className="terminal-dot terminal-dot-blue" />
+              <div className="terminal-dot terminal-dot-purple" />
+            </div>
+            <span className="text-xs text-muted-foreground ml-2">
+              <span className="text-primary">project</span> / spec
             </span>
-          ))}
+          </div>
+          <div className="p-5 md:p-6 space-y-4 text-sm">
+            {project.role && (
+              <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-muted-foreground pt-0.5">
+                  role
+                </span>
+                <span className="text-foreground">{project.role}</span>
+              </div>
+            )}
+
+            {(project.stack && project.stack.length > 0) ? (
+              <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-muted-foreground pt-0.5">
+                  stack
+                </span>
+                <ul className="space-y-1.5">
+                  {project.stack.map((s) => (
+                    <li key={s.name} className="flex flex-wrap gap-x-2 items-baseline">
+                      <span className="font-mono text-foreground">{s.name}</span>
+                      <span className="text-muted-foreground/70">—</span>
+                      <span className="text-muted-foreground">{s.role}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-muted-foreground pt-0.5">
+                  stack
+                </span>
+                <span className="text-muted-foreground">{project.tools.join(" · ")}</span>
+              </div>
+            )}
+
+            {(project.githubUrl || project.competitionUrl) && (
+              <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-muted-foreground pt-1.5">
+                  links
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-border rounded text-xs text-primary hover:bg-secondary transition-colors"
+                    >
+                      <Github className="w-3.5 h-3.5" />
+                      View Code
+                    </a>
+                  )}
+                  {project.competitionUrl && project.competitionName && (
+                    <a
+                      href={project.competitionUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 border border-primary/30 rounded text-xs text-primary hover:bg-primary/20 transition-colors"
+                    >
+                      <Trophy className="w-3.5 h-3.5" />
+                      {project.competitionName}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
+
 
         {/* Visualizations Gallery */}
         {project.charts && project.charts.length > 0 && (
