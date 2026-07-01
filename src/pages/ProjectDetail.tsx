@@ -317,6 +317,13 @@ print("Key Finding: Nordic countries consistently rank highest.")`,
       { title: "Confirmed Cases Over Time", image: timeSeriesChart },
     ],
     tools: ["Python", "Pandas", "Plotly Express", "Plotly Graph Objects", "Matplotlib"],
+    role: "Interactive data visualization",
+    stack: [
+      { name: "Python", role: "loading and preparing the datasets" },
+      { name: "Pandas", role: "shaping COVID data across 209 countries" },
+      { name: "Plotly Express", role: "bar charts, scatter plots, bubble maps" },
+      { name: "Plotly Graph Objects", role: "choropleth maps and custom layouts" },
+    ],
     codeFile: "Covid-19_Analysis.ipynb",
     githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python/blob/main/Covid-19%20Analysis%20and%20Visualization%20using%20Plotly%20Express.ipynb",
     codeContent: `# Data analysis and Manipulation
