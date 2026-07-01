@@ -1,100 +1,79 @@
-# v1.3 Refinement Plan
+## 1. Add 3 Medium blog posts
 
-Goal: refine four areas without breaking the existing identity (terminal aesthetic, orange `#EA580C`, max-w-4xl, monospace, light mode only).
+Extend `src/pages/Blog.tsx` `blogPosts` array with 3 new entries (`source: "medium"`, `externalUrl: <Medium URL>`, `featuredOnHome: true`) and full-body content stored on the post so the dedicated post page renders it. The Medium URLs will be attached to each post:
 
----
+- **Why Most Data in Somalia Never Gets Used?**
+  `https://medium.com/@diiniyare74/why-most-data-in-somalia-never-gets-used-c88889eb3f22`
+- **Correlation vs Causation — The mistake every beginner makes reading data**
+  `https://medium.com/@diiniyare74/correlation-vs-causation-the-mistake-every-beginner-makes-reading-data-efe8cc6e1fd4`
+- **What is a model — and why two AIs can give you completely different answers?**
+  `https://medium.com/@diiniyare74/what-is-a-model-and-why-two-ais-can-give-you-completely-different-answers-2edc1ba3c669`
 
-## 1. Background color — calmer, not white
+Each post stores the opening paragraphs the user provided (broken into ~2 sections) plus a headline. Excerpts for cards use the first ~220 chars.
 
-Currently `--background: 210 25% 98%` reads almost pure white and hurts readability on long sessions.
+## 2. BlogPost page: in-body Medium CTA
 
-Switch to a soft, slightly tinted off-white that feels modern (think Linear / Vercel docs / Notion light):
+Update `src/pages/BlogPost.tsx` so that when `post.source === "medium"`:
 
-- `--background: 35 25% 96%` — very subtle warm cream, easier on the eyes
-- `--card: 35 20% 93%` and `--terminal-bg: 35 20% 93%` to match
-- `--terminal-header: 35 18% 90%`
-- `--muted: 35 15% 90%`, `--border: 35 14% 86%`
-- Keep `--foreground`, primary orange, and grid opacity unchanged.
+- Render the first section of paragraphs (opening hook — roughly the first 2–3 paragraphs the user pasted).
+- Insert a centered CTA block mid-body:
+  ```
+  ┌──────────────────────────────────────────────┐
+  │  Continue reading on Medium         →        │
+  │  Full story with the rest of the breakdown.  │
+  └──────────────────────────────────────────────┘
+  ```
+  Styled with `border border-primary/40`, `bg-primary/5`, opens the Medium URL in a new tab, `ExternalLink` icon.
+- Render the remaining pasted paragraphs after it, followed by a second smaller "Read the full story on Medium →" link at the end.
 
-Will spot-check Home, Projects, About, Blog, ProjectDetail to confirm contrast stays AA. Adjust 1–2 ticks if any surface looks muddy.
+LinkedIn posts keep their existing rendering — no change.
 
-Alternative if the warm cream feels off: a cool neutral `210 20% 96%` with `--card 210 16% 93%`. I will pick warm cream as the default.
+## 3. Home Writing section redesign
 
----
+Rewrite `src/components/home/WritingCarousel.tsx`:
 
-## 2. Home "Writing" section → interactive vertical-tab carousel
+- Pull `blogPosts.filter(p => p.featuredOnHome)` and sort by date desc — mixed order, no category grouping, no category chips or category labels in the left rail or on the active pane.
+- Left rail (desktop) shows just the title (with subtle date under it), no `CATEGORY` tag line.
+- Mobile chip row: replace category chips with post-title chips (truncated).
+- Right pane keeps title + excerpt + read-time strip.
+- CTA row becomes a single element: `Read the post  →  LinkedIn` or `Read the post  →  Medium`, where the platform word is a link to `linkedinUrl` / Medium URL. The internal `Read post` link points to `/blog/{slug}` and wraps the "Read the post" text; the arrow sits between.
+- Keep hover/animation styling that the user liked.
 
-Replace the current list of editorial rows with a layout inspired by the screenshots (brittanychiang.com "Where I've Worked"):
+## 4. ProjectDetail redesign — Terminal Spec Sheet
+
+Rewrite the top section of `src/pages/ProjectDetail.tsx` and remove duplication. Going with the "Terminal spec sheet" direction:
 
 ```text
-┌──────────────────────────────────────────────┐
-│ Writing                                      │
-├────────────┬─────────────────────────────────┤
-│ • Post A   │  Title of selected post         │
-│ • Post B   │  Category · date · read time    │
-│ • Post C   │                                 │
-│            │  Excerpt paragraph...           │
-│            │                                 │
-│            │  [Read on blog →]               │
-└────────────┴─────────────────────────────────┘
-              [ View All Writing → ]
+┌── project / somalia-displacement-forecast ────────────────┐
+│ Somalia Displacement Forecast Dashboard         2025      │
+│ One-line summary…                                          │
+├────────────────────────────────────────────────────────────┤
+│ role     Data analysis · BI dashboarding                   │
+│ stack    Power BI    — modeling, DAX measures, report      │
+│          Power Query — cleaning & shaping the raw feed     │
+│          DAX         — KPIs, forecast vs actual measures   │
+│ links    [ GitHub ]  [ Competition ]                       │
+└────────────────────────────────────────────────────────────┘
 ```
 
-Behavior:
-- Left rail: vertical list of `featuredOnHome` post titles. Active item has an orange left border + orange text; inactive items muted.
-- Click (or hover with small delay on desktop) swaps the right pane.
-- Right pane: title, meta line, excerpt (first ~160 chars), and a "Read post" link to `/blog/{slug}`.
-- Smooth fade/slide transition (CSS `opacity` + `translateY(4px)`, 200ms) when switching.
-- Mobile (`< md`): collapses to a horizontal scrolling chip row on top + content below.
-- Centered "View all writing" button below, replacing current "See More Blogs I Wrote".
+Concretely:
 
-New component: `src/components/home/WritingCarousel.tsx`. Drops into `Home.tsx` in place of the current Writing block. Pulls from `blogPosts.filter(p => p.featuredOnHome)`.
+- **Remove** the tag-chips row (`project.tags`) and the separate "Tools & Technologies" section — they duplicate each other and the header.
+- **Extend the `ProjectData` type** with an optional `stack: { name: string; role: string }[]` field. `role` is a short phrase describing what that tool did on this specific project (e.g. Power BI → "modeling & report design"; Power Query → "cleaning & shaping"; DAX → "measures for forecast vs actual"; Python → "analysis pipeline & plotting"; Pandas → "data wrangling"; Plotly → "interactive charts").
+- For every project in `projectsData`, populate `stack` with 3–5 entries. Keep the old `tools: string[]` as a fallback so nothing breaks if `stack` is missing.
+- Render a single **terminal-card "spec sheet"** at the top containing: Role, Stack (list with `name` in mono + `—` + `role` in muted text), Links (GitHub / Competition inline buttons).
+- Keep: title, description, Key Insight card (when present), Visualizations gallery, Key Highlights (when present), Code snippet.
 
----
+## Technical notes
 
-## 3. "Background" section — scroll-progress connector line
-
-Keep the same two-column Experience + Education content, but redesign visually so it doesn't look like a generic timeline/section. Inspired by the cursor/scroll line idea:
-
-- Render a thin vertical line down the left edge of the section.
-- The line has two layers: a faint base track (`border` color, opacity 30%) and a filled overlay (`primary` color) whose height is driven by the user's scroll position relative to the section.
-- As the user scrolls down through the section the orange fill grows from top to bottom; scrolling back up shrinks it. Implemented with an `IntersectionObserver` + `requestAnimationFrame` on `scroll` reading the section's `getBoundingClientRect()`. No external libs.
-- Each row (Experience item, Education item) gets a small dot anchored on the line. Dot turns from muted → orange once the fill passes it.
-- Section heading changes from "Background" to a more intentional label: **"Trajectory"** (short, not buzzword-y, signals movement).
-- Layout stays two-column on `md+`, single column on mobile (line still works).
-
-New component: `src/components/home/TrajectoryStrip.tsx` replacing `BackgroundStrip.tsx` (old file deleted). Same data shape.
-
----
-
-## 4. Click-Me button — tooltip + modern feedback animation
-
-Current button: bare "Click Me" with a counter that just ticks.
-
-Additions in `DashboardCard.tsx` (CompactClickCounter):
-
-- **Hover tooltip**: small pill above the button: *"Tap to leave your mark — see the counter rise."* Use existing `@/components/ui/tooltip` (shadcn), with 150ms delay, subtle fade.
-- **Modern click feedback** (replacing the common "+1"): on each click, spawn a short-lived **ripple ring** that expands and fades out from the button center, plus a tiny **spark dot** that floats up-and-out at a random angle (-20° to +20°) and fades. No text/numbers floating — feels more tactile and original than "+1".
-  - Ripple: absolutely positioned `span`, scales `0 → 2.2`, opacity `0.4 → 0`, 600ms ease-out, orange.
-  - Spark: 4px dot, translates `0 → -28px` with x jitter, fades over 500ms.
-  - Implemented with a small `useState` array of click events and CSS keyframes (no framer-motion needed). Auto-cleans after animation ends.
-- Button itself gets a tiny `active:scale-95` (already present) + a subtle orange glow shadow on hover.
-- The numeric counter still updates as before — animation is additive.
-
----
+- BlogPost body: instead of parsing arbitrary markdown, store each Medium post's body as a `paragraphs: string[]` array and a `mediumCtaAfter: number` index (e.g. after paragraph 2) that determines where the mid-body CTA slot appears.
+- Add a `source: "linkedin" | "medium"` field on `BlogPost`; default to `"linkedin"` for existing posts.
+- `WritingCarousel` needs no new files — refactor in place.
+- All colors stay on existing semantic tokens (`primary`, `border`, `muted-foreground`, terminal classes). No new palette.
 
 ## Files touched
 
-- `src/index.css` — palette tokens (background/card/terminal/border/muted).
-- `src/components/home/WritingCarousel.tsx` — **new**.
-- `src/components/home/TrajectoryStrip.tsx` — **new** (replaces BackgroundStrip).
-- `src/components/home/BackgroundStrip.tsx` — **delete**.
-- `src/components/home/DashboardCard.tsx` — tooltip + ripple/spark animation.
-- `src/pages/Home.tsx` — swap Writing block → `<WritingCarousel />`, swap `<BackgroundStrip />` → `<TrajectoryStrip />`.
-- `mem://index.md` + small memory file updates (palette tint, Writing carousel pattern, Trajectory section, Click-Me micro-interaction).
-
-## Not changing
-
-Hero copy, splash, nav (Resume pill), particles, interactive gradient, primary orange, grid opacity, fonts, max-w-4xl, project cards, About/Projects/Blog pages, footer.
-
-After implementation I'll spot-check the preview for: contrast on the new bg, carousel swap behavior, scroll-line fill timing, and the click ripple feel.
+- `src/pages/Blog.tsx` — add 3 posts, extend `BlogPost` interface (`source`, `externalUrl`, `paragraphs`, `mediumCtaAfter`).
+- `src/pages/BlogPost.tsx` — render Medium-style body with mid-body CTA.
+- `src/components/home/WritingCarousel.tsx` — remove categories, mix all featured posts, new CTA row.
+- `src/pages/ProjectDetail.tsx` — extend `ProjectData` with `stack`, remove tag chips + Tools section, add terminal spec-sheet block.

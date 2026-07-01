@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, Github, CheckCircle, Wrench, Copy, Check, BarChart3, Lightbulb, ExternalLink, Trophy } from "lucide-react";
+import { ArrowLeft, Calendar, Github, CheckCircle, Copy, Check, BarChart3, Lightbulb, ExternalLink, Trophy } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -47,6 +47,11 @@ interface ChartData {
   insight?: string;
 }
 
+interface StackEntry {
+  name: string;
+  role: string;
+}
+
 interface ProjectData {
   title: string;
   date: string;
@@ -54,6 +59,8 @@ interface ProjectData {
   tags: string[];
   highlights?: string[];
   tools: string[];
+  stack?: StackEntry[];
+  role?: string;
   codeFile?: string;
   codeContent?: string;
   githubUrl?: string;
@@ -69,20 +76,33 @@ const projectsData: Record<string, ProjectData> = {
     date: "2025",
     description: "Interactive Power BI dashboard analyzing displacement across Somali districts — broken down by conflict, drought and flood, with forecast vs. actual comparison.",
     tags: ["power-bi", "dax", "power-query", "data-visualization", "humanitarian"],
+    role: "Data analysis · BI dashboarding",
     charts: [
       { title: "Somalia Displacement Forecast Dashboard", image: somaliaForecastDashboard },
     ],
     tools: ["Power BI", "DAX", "Power Query", "Excel"],
+    stack: [
+      { name: "Power BI", role: "modeling & report design" },
+      { name: "Power Query", role: "cleaning and shaping the raw feed" },
+      { name: "DAX", role: "KPIs, forecast vs actual measures" },
+      { name: "Excel", role: "source dataset staging" },
+    ],
   },
   "somalia-idps-unhcr": {
     title: "Somalia IDPs Movement Dashboard (UNHCR-PRMN)",
     date: "2025",
     description: "Power BI dashboard built on the UNHCR-PRMN August 2023 dataset, exploring internal displacement movements across Somalia by region, reason, and priority need.",
     tags: ["power-bi", "dax", "power-query", "unhcr", "humanitarian"],
+    role: "Data analysis · BI dashboarding",
     charts: [
       { title: "Somalia IDPs Dashboard", image: somaliaIdpsDashboard },
     ],
     tools: ["Power BI", "DAX", "Power Query"],
+    stack: [
+      { name: "Power BI", role: "interactive report & visuals" },
+      { name: "Power Query", role: "shaping UNHCR-PRMN feed" },
+      { name: "DAX", role: "region/reason/priority measures" },
+    ],
   },
   "fall-armyworm-detection": {
     title: "Fall Armyworm Leaf Disease Detection Using Deep Learning",
@@ -99,6 +119,14 @@ const projectsData: Record<string, ProjectData> = {
       { title: "Prediction: Diseased Leaf", image: fawPredictionDiseased1 },
     ],
     tools: ["Python", "TensorFlow", "Keras", "NumPy", "Pandas", "Matplotlib", "Seaborn", "OpenCV", "Scikit-learn"],
+    role: "Deep learning · Computer vision",
+    stack: [
+      { name: "Python", role: "end-to-end training pipeline" },
+      { name: "TensorFlow / Keras", role: "building & training 5 CNN architectures" },
+      { name: "OpenCV", role: "image preprocessing and augmentation" },
+      { name: "Scikit-learn", role: "train/test split & evaluation metrics" },
+      { name: "Matplotlib / Seaborn", role: "accuracy & loss visualization" },
+    ],
     codeFile: "Fall_Armyworm_Detection.ipynb",
     codeContent: `# Fall Armyworm Leaf Disease Detection
 # Deep Learning Image Classification Pipeline
@@ -205,6 +233,13 @@ print("Model saved successfully for future use!")`,
       { title: "Correlation Between Happiness Factors", image: whCorrelationHeatmap },
     ],
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
+    role: "Exploratory data analysis",
+    stack: [
+      { name: "Python", role: "analysis and scripting" },
+      { name: "Pandas", role: "cleaning and grouping 2,363 rows across 166+ countries" },
+      { name: "NumPy", role: "numeric operations on the happiness factors" },
+      { name: "Matplotlib / Seaborn", role: "trend lines, top-10 rankings, correlation heatmap" },
+    ],
     codeFile: "World_Happiness_Report_2024.ipynb",
     codeContent: `# World Happiness Report Analysis
 # Exploring factors that influence global happiness
@@ -282,6 +317,13 @@ print("Key Finding: Nordic countries consistently rank highest.")`,
       { title: "Confirmed Cases Over Time", image: timeSeriesChart },
     ],
     tools: ["Python", "Pandas", "Plotly Express", "Plotly Graph Objects", "Matplotlib"],
+    role: "Interactive data visualization",
+    stack: [
+      { name: "Python", role: "loading and preparing the datasets" },
+      { name: "Pandas", role: "shaping COVID data across 209 countries" },
+      { name: "Plotly Express", role: "bar charts, scatter plots, bubble maps" },
+      { name: "Plotly Graph Objects", role: "choropleth maps and custom layouts" },
+    ],
     codeFile: "Covid-19_Analysis.ipynb",
     githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python/blob/main/Covid-19%20Analysis%20and%20Visualization%20using%20Plotly%20Express.ipynb",
     codeContent: `# Data analysis and Manipulation
@@ -369,6 +411,13 @@ fig.show()`,
       { title: "Content Added Over the Years", image: netflixContentOverYears },
     ],
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
+    role: "Exploratory data analysis",
+    stack: [
+      { name: "Python", role: "notebook workflow" },
+      { name: "Pandas", role: "cleaning 8,807 Netflix titles" },
+      { name: "NumPy", role: "numeric summaries" },
+      { name: "Matplotlib / Seaborn", role: "distribution, trend and rating charts" },
+    ],
     codeFile: "Netflix_Data_Analysis.ipynb",
     githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python/blob/main/Netflix%20Data%20Analysis%20%26%20Visualization.ipynb",
     codeContent: `# Cell 1: Import necessary libraries
@@ -498,7 +547,7 @@ export default function ProjectDetail() {
         </div>
 
         {/* Title */}
-        <h1 className="text-2xl md:text-3xl font-bold text-primary mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-primary mb-4">
           {project.title}
         </h1>
 
@@ -520,44 +569,87 @@ export default function ProjectDetail() {
           </div>
         )}
 
-        {/* Competition Badge */}
-        {project.competitionUrl && project.competitionName && (
-          <a
-            href={project.competitionUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-lg text-sm text-primary hover:bg-primary/20 transition-colors mb-6"
-          >
-            <Trophy className="w-4 h-4" />
-            <span className="font-medium">{project.competitionName}</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
-        )}
-
-        {/* View Code Button */}
-        {project.githubUrl && (
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded text-sm text-primary hover:bg-secondary transition-colors mb-6 ml-3"
-          >
-            <Github className="w-4 h-4" />
-            View Code
-          </a>
-        )}
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 text-xs bg-secondary text-foreground rounded"
-            >
-              {tag}
+        {/* Spec sheet — role · stack · links */}
+        <div className="terminal-card mb-10">
+          <div className="terminal-header">
+            <div className="flex items-center gap-1.5">
+              <div className="terminal-dot terminal-dot-orange" />
+              <div className="terminal-dot terminal-dot-blue" />
+              <div className="terminal-dot terminal-dot-purple" />
+            </div>
+            <span className="text-xs text-muted-foreground ml-2">
+              <span className="text-primary">project</span> / spec
             </span>
-          ))}
+          </div>
+          <div className="p-5 md:p-6 space-y-4 text-sm">
+            {project.role && (
+              <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-muted-foreground pt-0.5">
+                  role
+                </span>
+                <span className="text-foreground">{project.role}</span>
+              </div>
+            )}
+
+            {(project.stack && project.stack.length > 0) ? (
+              <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-muted-foreground pt-0.5">
+                  stack
+                </span>
+                <ul className="space-y-1.5">
+                  {project.stack.map((s) => (
+                    <li key={s.name} className="flex flex-wrap gap-x-2 items-baseline">
+                      <span className="font-mono text-foreground">{s.name}</span>
+                      <span className="text-muted-foreground/70">—</span>
+                      <span className="text-muted-foreground">{s.role}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-muted-foreground pt-0.5">
+                  stack
+                </span>
+                <span className="text-muted-foreground">{project.tools.join(" · ")}</span>
+              </div>
+            )}
+
+            {(project.githubUrl || project.competitionUrl) && (
+              <div className="grid grid-cols-[70px_1fr] gap-3 items-start">
+                <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-muted-foreground pt-1.5">
+                  links
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-border rounded text-xs text-primary hover:bg-secondary transition-colors"
+                    >
+                      <Github className="w-3.5 h-3.5" />
+                      View Code
+                    </a>
+                  )}
+                  {project.competitionUrl && project.competitionName && (
+                    <a
+                      href={project.competitionUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 border border-primary/30 rounded text-xs text-primary hover:bg-primary/20 transition-colors"
+                    >
+                      <Trophy className="w-3.5 h-3.5" />
+                      {project.competitionName}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
+
 
         {/* Visualizations Gallery */}
         {project.charts && project.charts.length > 0 && (
@@ -625,23 +717,6 @@ export default function ProjectDetail() {
           </section>
         )}
 
-        {/* Tools & Technologies */}
-        <section className="mb-10">
-          <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
-            <Wrench className="w-4 h-4 text-primary" />
-            Tools & Technologies
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {project.tools.map((tool) => (
-              <span
-                key={tool}
-                className="px-4 py-2 text-sm bg-card border border-border text-foreground rounded"
-              >
-                {tool}
-              </span>
-            ))}
-          </div>
-        </section>
 
         {/* Code Snippet */}
         {project.codeContent && (
