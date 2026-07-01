@@ -119,6 +119,14 @@ const projectsData: Record<string, ProjectData> = {
       { title: "Prediction: Diseased Leaf", image: fawPredictionDiseased1 },
     ],
     tools: ["Python", "TensorFlow", "Keras", "NumPy", "Pandas", "Matplotlib", "Seaborn", "OpenCV", "Scikit-learn"],
+    role: "Deep learning · Computer vision",
+    stack: [
+      { name: "Python", role: "end-to-end training pipeline" },
+      { name: "TensorFlow / Keras", role: "building & training 5 CNN architectures" },
+      { name: "OpenCV", role: "image preprocessing and augmentation" },
+      { name: "Scikit-learn", role: "train/test split & evaluation metrics" },
+      { name: "Matplotlib / Seaborn", role: "accuracy & loss visualization" },
+    ],
     codeFile: "Fall_Armyworm_Detection.ipynb",
     codeContent: `# Fall Armyworm Leaf Disease Detection
 # Deep Learning Image Classification Pipeline
