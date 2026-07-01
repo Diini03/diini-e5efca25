@@ -717,23 +717,6 @@ export default function ProjectDetail() {
           </section>
         )}
 
-        {/* Tools & Technologies */}
-        <section className="mb-10">
-          <h2 className="text-base font-semibold mb-4 flex items-center gap-2">
-            <Wrench className="w-4 h-4 text-primary" />
-            Tools & Technologies
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {project.tools.map((tool) => (
-              <span
-                key={tool}
-                className="px-4 py-2 text-sm bg-card border border-border text-foreground rounded"
-              >
-                {tool}
-              </span>
-            ))}
-          </div>
-        </section>
 
         {/* Code Snippet */}
         {project.codeContent && (
