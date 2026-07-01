@@ -76,20 +76,33 @@ const projectsData: Record<string, ProjectData> = {
     date: "2025",
     description: "Interactive Power BI dashboard analyzing displacement across Somali districts — broken down by conflict, drought and flood, with forecast vs. actual comparison.",
     tags: ["power-bi", "dax", "power-query", "data-visualization", "humanitarian"],
+    role: "Data analysis · BI dashboarding",
     charts: [
       { title: "Somalia Displacement Forecast Dashboard", image: somaliaForecastDashboard },
     ],
     tools: ["Power BI", "DAX", "Power Query", "Excel"],
+    stack: [
+      { name: "Power BI", role: "modeling & report design" },
+      { name: "Power Query", role: "cleaning and shaping the raw feed" },
+      { name: "DAX", role: "KPIs, forecast vs actual measures" },
+      { name: "Excel", role: "source dataset staging" },
+    ],
   },
   "somalia-idps-unhcr": {
     title: "Somalia IDPs Movement Dashboard (UNHCR-PRMN)",
     date: "2025",
     description: "Power BI dashboard built on the UNHCR-PRMN August 2023 dataset, exploring internal displacement movements across Somalia by region, reason, and priority need.",
     tags: ["power-bi", "dax", "power-query", "unhcr", "humanitarian"],
+    role: "Data analysis · BI dashboarding",
     charts: [
       { title: "Somalia IDPs Dashboard", image: somaliaIdpsDashboard },
     ],
     tools: ["Power BI", "DAX", "Power Query"],
+    stack: [
+      { name: "Power BI", role: "interactive report & visuals" },
+      { name: "Power Query", role: "shaping UNHCR-PRMN feed" },
+      { name: "DAX", role: "region/reason/priority measures" },
+    ],
   },
   "fall-armyworm-detection": {
     title: "Fall Armyworm Leaf Disease Detection Using Deep Learning",
