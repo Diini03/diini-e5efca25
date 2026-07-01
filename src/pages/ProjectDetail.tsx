@@ -233,6 +233,13 @@ print("Model saved successfully for future use!")`,
       { title: "Correlation Between Happiness Factors", image: whCorrelationHeatmap },
     ],
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
+    role: "Exploratory data analysis",
+    stack: [
+      { name: "Python", role: "analysis and scripting" },
+      { name: "Pandas", role: "cleaning and grouping 2,363 rows across 166+ countries" },
+      { name: "NumPy", role: "numeric operations on the happiness factors" },
+      { name: "Matplotlib / Seaborn", role: "trend lines, top-10 rankings, correlation heatmap" },
+    ],
     codeFile: "World_Happiness_Report_2024.ipynb",
     codeContent: `# World Happiness Report Analysis
 # Exploring factors that influence global happiness
