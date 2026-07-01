@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { blogPosts } from "@/pages/Blog";
 
-const featured = blogPosts.filter((p) => p.featuredOnHome).slice(0, 5);
+const featured = blogPosts
+  .filter((p) => p.featuredOnHome)
+  .sort((a, b) => (a.date < b.date ? 1 : -1))
+  .slice(0, 5);
 
 export function WritingCarousel() {
   const [activeSlug, setActiveSlug] = useState(featured[0]?.slug ?? "");
@@ -16,6 +19,9 @@ export function WritingCarousel() {
     day: "numeric",
     year: "numeric",
   });
+
+  const platformLabel = active.source === "medium" ? "Medium" : "LinkedIn";
+  const platformUrl = active.source === "medium" ? active.externalUrl ?? active.linkedinUrl : active.linkedinUrl;
 
   return (
     <section className="mb-20">
@@ -32,24 +38,28 @@ export function WritingCarousel() {
               <button
                 key={p.slug}
                 onClick={() => setActiveSlug(p.slug)}
-                className={`shrink-0 text-xs px-3 py-1.5 rounded-full border transition-colors ${
+                className={`shrink-0 max-w-[220px] text-xs px-3 py-1.5 rounded-full border transition-colors truncate ${
                   isActive
                     ? "border-primary text-primary bg-primary/5"
                     : "border-border/60 text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {p.category}
+                {p.title}
               </button>
             );
           })}
         </div>
       </div>
 
-      <div className="grid md:grid-cols-[180px_1fr] gap-6 md:gap-8">
+      <div className="grid md:grid-cols-[220px_1fr] gap-6 md:gap-8">
         {/* Desktop left rail */}
         <ul className="hidden md:flex flex-col border-l border-border/50">
           {featured.map((p) => {
             const isActive = p.slug === activeSlug;
+            const d = new Date(p.date).toLocaleDateString("en-US", {
+              month: "short",
+              year: "numeric",
+            });
             return (
               <li key={p.slug}>
                 <button
@@ -61,11 +71,11 @@ export function WritingCarousel() {
                       : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
                   }`}
                 >
-                  <span className="block tracking-[0.15em] uppercase text-[10px] mb-1 opacity-70">
-                    {p.category}
-                  </span>
-                  <span className="block truncate text-[13px] font-medium">
+                  <span className="block text-[13px] font-medium leading-snug line-clamp-2 mb-1">
                     {p.title}
+                  </span>
+                  <span className="block text-[10px] opacity-70 tabular-nums">
+                    {d}
                   </span>
                 </button>
               </li>
@@ -75,10 +85,7 @@ export function WritingCarousel() {
 
         {/* Right pane */}
         <div key={active.slug} className="animate-fade-in min-h-[200px]">
-          <div className="flex items-baseline justify-between gap-3 mb-2">
-            <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground/70">
-              {active.category}
-            </span>
+          <div className="flex items-baseline justify-end gap-3 mb-2">
             <span className="text-xs text-muted-foreground tabular-nums">
               {dateLabel} · {active.readTime}
             </span>
@@ -91,25 +98,23 @@ export function WritingCarousel() {
               ? active.excerpt.slice(0, 220).trimEnd() + "…"
               : active.excerpt}
           </p>
-          <div className="flex items-center gap-4 text-sm">
+          <div className="flex items-center gap-2 text-sm">
             <Link
               to={`/blog/${active.slug}`}
-              className="inline-flex items-center gap-1.5 text-primary hover:underline"
+              className="inline-flex items-center gap-1.5 text-primary hover:underline font-medium"
             >
-              Read post
-              <ArrowRight className="w-3.5 h-3.5" />
+              Read the post
             </Link>
-            {active.linkedinUrl && (
-              <a
-                href={active.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
-              >
-                LinkedIn
-                <ExternalLink className="w-3 h-3" />
-              </a>
-            )}
+            <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
+            <a
+              href={platformUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors font-medium"
+            >
+              {platformLabel}
+              <ExternalLink className="w-3 h-3" />
+            </a>
           </div>
         </div>
       </div>
