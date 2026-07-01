@@ -59,7 +59,7 @@ But who is actually using it to make decisions?`,
     ],
   },
   "correlation-vs-causation": {
-    title: "Correlation vs Causation ",
+    title: "Correlation vs Causation",
 
     date: "2026-06-10",
     readTime: "5 min read",
