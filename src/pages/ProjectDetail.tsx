@@ -224,7 +224,7 @@ print("Model saved successfully for future use!")`,
   "world-happiness-analysis": {
     title: "World Happiness Report Analysis (2008-2021)",
     date: "2025",
-    description: "Exploration of global happiness trends across 166+ countries (2008–2021), looking at GDP, social support, freedom, and corruption.",
+    description: "An exploratory analysis of the World Happiness Report from 2008 to 2021 — 2,363 country-year observations across 166+ countries. Pandas handled the cleaning and grouping, NumPy powered the numeric work, and Matplotlib/Seaborn turned the result into trend lines, top-10 rankings, and a correlation heatmap that shows which factors (GDP, social support, freedom, corruption) actually move happiness scores.",
     tags: ["python", "pandas", "matplotlib", "seaborn", "numpy", "eda"],
     githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python",
     charts: [
