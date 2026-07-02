@@ -55,6 +55,18 @@ const groups: { name: string; projects: Project[] }[] = [
     ],
   },
   {
+    name: "SQL & Business Analysis",
+    projects: [
+      {
+        slug: "sql-business-analysis",
+        title: "SQL Business Data Analysis",
+        description:
+          "Analyzed ~10,000 retail sales transactions in SQL Server to answer real business questions — profitability by region, category performance, discount impact, and loss-making sub-categories.",
+        category: "SQL · SSMS · Business Analysis",
+      },
+    ],
+  },
+  {
     name: "Data Analysis",
     projects: [
       {
