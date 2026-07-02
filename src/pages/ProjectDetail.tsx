@@ -91,7 +91,7 @@ const projectsData: Record<string, ProjectData> = {
   "somalia-idps-unhcr": {
     title: "Somalia IDPs Movement Dashboard (UNHCR-PRMN)",
     date: "2025",
-    description: "Power BI dashboard built on the UNHCR-PRMN August 2023 dataset, exploring internal displacement movements across Somalia by region, reason, and priority need.",
+    description: "A Power BI report built directly on the UNHCR-PRMN August 2023 dataset — the primary tracker for internal displacement in Somalia. Power Query reshaped the raw feed, DAX measures rolled it up into region, reason and priority-need views, and the resulting dashboard lets you follow where people moved, why they moved, and what they needed on arrival.",
     tags: ["power-bi", "dax", "power-query", "unhcr", "humanitarian"],
     role: "Data analysis · BI dashboarding",
     charts: [
