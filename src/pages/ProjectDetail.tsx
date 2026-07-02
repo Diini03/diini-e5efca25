@@ -309,7 +309,7 @@ print("Key Finding: Nordic countries consistently rank highest.")`,
   "covid-19-analysis": {
     title: "Covid-19 Analysis and Visualization using Plotly Express",
     date: "2025",
-    description: "Global COVID-19 analysis across 209 countries using interactive Plotly visualizations — bar charts, scatter plots, and choropleth maps.",
+    description: "A global COVID-19 analysis across 209 countries using the Worldometer and daily grouped datasets. Pandas cleaned and shaped the records; Plotly Express and Graph Objects turned them into interactive bar charts, bubble scatter plots, time-series lines, and a choropleth world map — so the story of how the pandemic spread, tested, and diverged by continent can be read from the visuals alone.",
     tags: ["python", "pandas", "plotly", "matplotlib", "data-visualization"],
     charts: [
       { title: "Total Cases by Country", image: casesBubbleChart },
