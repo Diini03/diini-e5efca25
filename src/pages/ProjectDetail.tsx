@@ -403,7 +403,7 @@ fig.show()`,
   "netflix-data-analysis": {
     title: "Netflix Data Analysis & Visualization",
     date: "2025",
-    description: "Analysis of 8,807 Netflix titles exploring content distribution, ratings, and trends over time.",
+    description: "An EDA on the Netflix catalog — 8,807 titles cleaned and profiled with Pandas. The analysis breaks the library down by content type (movies vs TV shows), rating, country of origin, and year added, and traces how Netflix's release strategy has shifted over time. Matplotlib and Seaborn visuals surface the patterns behind a catalog most people only ever scroll.",
     tags: ["python", "pandas", "seaborn", "matplotlib", "numpy", "eda"],
     charts: [
       { title: "Movies vs TV Shows", image: netflixMoviesVsTvShows },
