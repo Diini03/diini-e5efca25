@@ -9,22 +9,12 @@ import {
   BookOpen,
 } from "lucide-react";
 
-// Import blog images
-import techTrends2025Img from "@/assets/blog/tech-trends-2025.png";
-import aiVsMlImg from "@/assets/blog/ai-vs-ml.png";
-import dataCareerTipsImg from "@/assets/blog/data-career-tips.png";
-import sqlJoinsImg from "@/assets/blog/sql-joins.png";
-import datasetUsefulImg from "@/assets/blog/what-makes-dataset-useful.png";
-import mlMistakesImg from "@/assets/blog/ml-learn-from-mistakes.png";
-import mlPredictionsImg from "@/assets/blog/ml-make-predictions.png";
-
 interface BlogPostData {
   title: string;
   date: string;
   readTime: string;
   category: string;
   tags: string[];
-  image: string;
   linkedinUrl: string;
   content: string;
   highlights?: string[];
@@ -40,7 +30,6 @@ const blogPostsData: Record<string, BlogPostData> = {
     readTime: "6 min read",
     category: "data-analysis",
     tags: ["data", "somalia", "humanitarian"],
-    image: datasetUsefulImg,
     linkedinUrl:
       "https://medium.com/@diiniyare74/why-most-data-in-somalia-never-gets-used-c88889eb3f22",
     source: "medium",
@@ -65,7 +54,6 @@ But who is actually using it to make decisions?`,
     readTime: "5 min read",
     category: "data-analysis",
     tags: ["data-analysis", "statistics", "fundamentals"],
-    image: mlPredictionsImg,
     linkedinUrl:
       "https://medium.com/@diiniyare74/correlation-vs-causation-the-mistake-every-beginner-makes-reading-data-efe8cc6e1fd4",
     source: "medium",
@@ -90,7 +78,6 @@ When two variables move in the same direction that is correlation. One goes up, 
     readTime: "6 min read",
     category: "machine-learning",
     tags: ["ai", "machine-learning", "fundamentals"],
-    image: aiVsMlImg,
     linkedinUrl:
       "https://medium.com/@diiniyare74/what-is-a-model-and-why-two-ais-can-give-you-completely-different-answers-2edc1ba3c669",
     source: "medium",
@@ -119,7 +106,6 @@ So what is a model, exactly? A model is a system trained on data to recognize pa
     readTime: "4 min read",
     category: "data-analysis",
     tags: ["data-analysis", "data-quality", "fundamentals"],
-    image: datasetUsefulImg,
     linkedinUrl: "https://www.linkedin.com/in/diinikahiye/",
     content: `At first, every dataset looks promising. Thousands of rows. Dozens of columns. The file opens cleanly. You think the hard part is over.
 
@@ -146,7 +132,6 @@ Tools come later. SQL, Pandas, Power BI — none of them save you if the input i
     readTime: "5 min read",
     category: "machine-learning",
     tags: ["machine-learning", "model-training", "fundamentals"],
-    image: mlMistakesImg,
     linkedinUrl: "https://www.linkedin.com/in/diinikahiye/",
     content: `Machine learning models learn the way people do — by being wrong first.
 
@@ -171,7 +156,6 @@ This is the quiet engine behind every model you trust: predict, fail, measure th
     readTime: "5 min read",
     category: "machine-learning",
     tags: ["machine-learning", "predictions", "explainability"],
-    image: mlPredictionsImg,
     linkedinUrl: "https://www.linkedin.com/in/diinikahiye/",
     content: `Why should anyone trust a number a machine learning model produces?
 
@@ -198,7 +182,6 @@ Understanding how the prediction was produced is what separates teams that use M
     readTime: "4 min read",
     category: "tech",
     tags: ["ai", "technology", "trends", "2025"],
-    image: techTrends2025Img,
     linkedinUrl:
       "https://www.linkedin.com/posts/diinikahiye_top-5-emerging-tech-trends-of-2025-activity-7335583585871040514-HiK_?utm_source=share&utm_medium=member_desktop",
     content: `The future is developing more quickly than before. These ground-breaking technologies — from synthetic media to agentic AI — aren't just catchphrases. They're fundamentally altering entire industries and daily life.
@@ -222,7 +205,6 @@ Edge Computing moves processing closer to where data is generated, reducing late
     readTime: "3 min read",
     category: "tech",
     tags: ["ai", "machine-learning", "beginners"],
-    image: aiVsMlImg,
     linkedinUrl:
       "https://www.linkedin.com/posts/diinikahiye_whats-the-difference-between-ai-and-ml-activity-7332661785382072320-o10x?utm_source=share&utm_medium=member_desktop",
     content: `Still confused between Artificial Intelligence and Machine Learning? You're not alone.
@@ -253,7 +235,6 @@ Understanding this distinction matters because it shapes how you approach proble
     readTime: "5 min read",
     category: "career",
     tags: ["career", "data-science", "tips"],
-    image: dataCareerTipsImg,
     linkedinUrl:
       "https://www.linkedin.com/posts/diinikahiye_7-data-career-tips-nobody-talks-about-activity-7325470658199543810-kRcC?utm_source=share&utm_medium=member_desktop",
     content: `These aren't motivational quotes — they're practical lessons drawn from real-world experience, mentor advice, and one impactful read: Build a Career in Data Science by Emily Robinson & Jacqueline Nolis.
@@ -288,7 +269,6 @@ Imposter syndrome is normal. Even senior data scientists feel it. Focus on learn
     readTime: "4 min read",
     category: "tutorials",
     tags: ["sql", "database", "beginners"],
-    image: sqlJoinsImg,
     linkedinUrl:
       "https://www.linkedin.com/posts/diinikahiye_7-things-i-wish-i-knew-about-sql-joins-activity-7319615813366263809-VN07?utm_source=share&utm_medium=member_desktop",
     content: `"I thought I understood SQL… until I met JOINs." This used to be me.
@@ -349,22 +329,27 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen animate-fade-in overflow-hidden">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
         {/* Back Link */}
         <Link
           to="/blog"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to blog
         </Link>
 
-        {/* Meta header (text-first) */}
-        <div className="mb-6">
-          <div className="flex flex-wrap items-center gap-3 mb-4 text-xs text-muted-foreground">
-            <span className="px-2.5 py-1 bg-primary/10 text-primary rounded-full capitalize font-medium">
-              {post.category.replace("-", " ")}
-            </span>
+        {/* Editorial header */}
+        <div className="mb-10">
+          <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-4">
+            {post.category.replace("-", " ")}
+          </div>
+
+          <h1 className="text-3xl md:text-[2.25rem] font-bold text-foreground leading-[1.15] mb-5 tracking-tight">
+            {post.title}
+          </h1>
+
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5" />
               {new Date(post.date).toLocaleDateString("en-US", {
@@ -377,43 +362,32 @@ export default function BlogPost() {
               <Clock className="w-3.5 h-3.5" />
               {post.readTime}
             </span>
-          </div>
-
-          <h1 className="text-2xl md:text-3xl font-bold text-foreground leading-tight mb-4">
-            {post.title}
-          </h1>
-
-          <div className="flex flex-wrap gap-1.5">
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-mono bg-secondary/60 text-muted-foreground rounded"
-              >
-                <Tag className="w-2.5 h-2.5" />
-                {tag}
+            {post.source && (
+              <span className="flex items-center gap-1.5 capitalize">
+                <span className="opacity-50">·</span>
+                Originally on {post.source}
               </span>
-            ))}
+            )}
           </div>
         </div>
 
-        {/* Small contained image — text remains the focus */}
-        <div className="mb-8 rounded-lg overflow-hidden border border-border/60 bg-secondary/30 max-w-sm">
-          <img
-            src={post.image}
-            alt={post.title}
-            className="w-full h-auto object-cover"
-          />
-        </div>
+        <div className="h-px bg-border/60 mb-10" />
 
-        {/* Content */}
-        <div className="prose prose-invert max-w-none mb-10">
+        {/* Ebook-style body */}
+        <article className="mb-12">
           {(() => {
             const paragraphs = post.content.split("\n\n");
             const isMedium = post.source === "medium" && post.externalUrl;
             const ctaAfter = isMedium ? Math.min(2, paragraphs.length - 1) : -1;
             return paragraphs.map((paragraph, index) => (
               <div key={index}>
-                <p className="text-[15px] text-foreground/85 leading-[1.8] mb-5">
+                <p
+                  className={`text-[17px] text-foreground/90 leading-[1.85] mb-6 ${
+                    index === 0
+                      ? "first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-1.5 first-letter:float-left first-letter:leading-[0.9] first-letter:mt-1"
+                      : ""
+                  }`}
+                >
                   {paragraph}
                 </p>
                 {index === ctaAfter && (
@@ -421,7 +395,7 @@ export default function BlogPost() {
                     href={post.externalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="not-prose my-8 flex items-center justify-between gap-4 rounded-xl border border-primary/40 bg-primary/5 p-5 hover:bg-primary/10 hover:border-primary/60 transition-all group"
+                    className="my-10 flex items-center justify-between gap-4 rounded-xl border border-primary/40 bg-primary/5 p-5 hover:bg-primary/10 hover:border-primary/60 transition-all group"
                   >
                     <div>
                       <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-1">
@@ -440,7 +414,21 @@ export default function BlogPost() {
               </div>
             ));
           })()}
+        </article>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-10">
+          {post.tags.map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-mono bg-secondary/60 text-muted-foreground rounded"
+            >
+              <Tag className="w-2.5 h-2.5" />
+              {tag}
+            </span>
+          ))}
         </div>
+
 
         {/* Highlights — "What to remember" */}
         {post.highlights && post.highlights.length > 0 && (

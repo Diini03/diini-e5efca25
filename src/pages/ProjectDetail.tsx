@@ -74,7 +74,7 @@ const projectsData: Record<string, ProjectData> = {
   "somalia-displacement-forecast": {
     title: "Somalia Displacement Forecast Dashboard",
     date: "2025",
-    description: "Interactive Power BI dashboard analyzing displacement across Somali districts — broken down by conflict, drought and flood, with forecast vs. actual comparison.",
+    description: "An interactive Power BI dashboard built on a Somalia displacement dataset covering 20+ districts and 8M+ displaced people. Records were cleaned in Power Query, modeled inside Power BI, and turned into KPIs and forecast-vs-actual measures with DAX — so the same view breaks displacement down by conflict, drought and flood, and lets a decision-maker see where the trend is heading, not just where it has been.",
     tags: ["power-bi", "dax", "power-query", "data-visualization", "humanitarian"],
     role: "Data analysis · BI dashboarding",
     charts: [
@@ -91,7 +91,7 @@ const projectsData: Record<string, ProjectData> = {
   "somalia-idps-unhcr": {
     title: "Somalia IDPs Movement Dashboard (UNHCR-PRMN)",
     date: "2025",
-    description: "Power BI dashboard built on the UNHCR-PRMN August 2023 dataset, exploring internal displacement movements across Somalia by region, reason, and priority need.",
+    description: "A Power BI report built directly on the UNHCR-PRMN August 2023 dataset — the primary tracker for internal displacement in Somalia. Power Query reshaped the raw feed, DAX measures rolled it up into region, reason and priority-need views, and the resulting dashboard lets you follow where people moved, why they moved, and what they needed on arrival.",
     tags: ["power-bi", "dax", "power-query", "unhcr", "humanitarian"],
     role: "Data analysis · BI dashboarding",
     charts: [
@@ -107,7 +107,7 @@ const projectsData: Record<string, ProjectData> = {
   "fall-armyworm-detection": {
     title: "Fall Armyworm Leaf Disease Detection Using Deep Learning",
     date: "2025",
-    description: "Image classification system that detects Fall Armyworm damage on maize leaves using deep learning. Compared 5 CNN architectures and selected the strongest model for real-world agricultural use.",
+    description: "A deep learning image classification project that detects Fall Armyworm damage on maize leaves — a pest responsible for major crop losses across East Africa. Five CNN architectures were trained end-to-end in TensorFlow/Keras, evaluated on held-out leaf images, and the strongest model reached 99.07% accuracy. Built for the PyCon Somalia 2025 Hackathon to make early, in-field disease detection practical for smallholder farmers.",
     tags: ["python", "tensorflow", "keras", "deep-learning", "cnn", "computer-vision"],
     competitionUrl: "https://zindi.africa/competitions/combating-food-insecurity-in-somalia",
     competitionName: "PyCon Somalia 2025 Hackathon",
@@ -224,7 +224,7 @@ print("Model saved successfully for future use!")`,
   "world-happiness-analysis": {
     title: "World Happiness Report Analysis (2008-2021)",
     date: "2025",
-    description: "Exploration of global happiness trends across 166+ countries (2008–2021), looking at GDP, social support, freedom, and corruption.",
+    description: "An exploratory analysis of the World Happiness Report from 2008 to 2021 — 2,363 country-year observations across 166+ countries. Pandas handled the cleaning and grouping, NumPy powered the numeric work, and Matplotlib/Seaborn turned the result into trend lines, top-10 rankings, and a correlation heatmap that shows which factors (GDP, social support, freedom, corruption) actually move happiness scores.",
     tags: ["python", "pandas", "matplotlib", "seaborn", "numpy", "eda"],
     githubUrl: "https://github.com/Diini03/Data-Analysis-with-Python",
     charts: [
@@ -309,7 +309,7 @@ print("Key Finding: Nordic countries consistently rank highest.")`,
   "covid-19-analysis": {
     title: "Covid-19 Analysis and Visualization using Plotly Express",
     date: "2025",
-    description: "Global COVID-19 analysis across 209 countries using interactive Plotly visualizations — bar charts, scatter plots, and choropleth maps.",
+    description: "A global COVID-19 analysis across 209 countries using the Worldometer and daily grouped datasets. Pandas cleaned and shaped the records; Plotly Express and Graph Objects turned them into interactive bar charts, bubble scatter plots, time-series lines, and a choropleth world map — so the story of how the pandemic spread, tested, and diverged by continent can be read from the visuals alone.",
     tags: ["python", "pandas", "plotly", "matplotlib", "data-visualization"],
     charts: [
       { title: "Total Cases by Country", image: casesBubbleChart },
@@ -403,7 +403,7 @@ fig.show()`,
   "netflix-data-analysis": {
     title: "Netflix Data Analysis & Visualization",
     date: "2025",
-    description: "Analysis of 8,807 Netflix titles exploring content distribution, ratings, and trends over time.",
+    description: "An EDA on the Netflix catalog — 8,807 titles cleaned and profiled with Pandas. The analysis breaks the library down by content type (movies vs TV shows), rating, country of origin, and year added, and traces how Netflix's release strategy has shifted over time. Matplotlib and Seaborn visuals surface the patterns behind a catalog most people only ever scroll.",
     tags: ["python", "pandas", "seaborn", "matplotlib", "numpy", "eda"],
     charts: [
       { title: "Movies vs TV Shows", image: netflixMoviesVsTvShows },
@@ -498,6 +498,89 @@ plt.xticks(rotation=45)
 plt.xlabel('Rating')
 plt.ylabel('Count')
 plt.show()`,
+  },
+  "sql-business-analysis": {
+    title: "SQL Business Data Analysis",
+    date: "2025",
+    description:
+      "An end-to-end SQL project built in Microsoft SQL Server Management Studio (SSMS). A retail sales dataset of nearly 10,000 transactions was imported, explored and interrogated with T-SQL to answer real business questions — revenue and profit by category, regional performance, discount impact on margin, and which sub-categories are quietly losing money. The goal was to turn raw transactional data into decisions, not just charts.",
+    tags: ["sql", "sql-server", "ssms", "business-analysis", "data-analysis"],
+    role: "SQL analysis · Business reporting",
+    keyInsight:
+      "Discounts weren't uniformly profitable — a handful of sub-categories flipped to a loss once discount depth crossed a threshold, and most of the profit was carried by a small set of regions.",
+    tools: ["SQL Server", "SSMS", "T-SQL"],
+    stack: [
+      { name: "SQL Server", role: "dataset storage & query engine" },
+      { name: "SSMS", role: "writing, running and debugging queries" },
+      { name: "T-SQL", role: "aggregations, filtering and business questions" },
+      { name: "Aggregate functions", role: "SUM, AVG, COUNT, MIN, MAX for KPIs" },
+      { name: "GROUP BY / HAVING", role: "category, region and segment breakdowns" },
+    ],
+    highlights: [
+      "Imported and explored ~10,000 retail transactions in SQL Server",
+      "Analyzed sales and profit across categories, regions and customer segments",
+      "Identified loss-making sub-categories and the discount thresholds behind them",
+      "Answered 6 core business questions with reusable, readable SQL queries",
+      "Practiced core SQL concepts: SELECT, WHERE, GROUP BY, HAVING, CASE, aggregate functions",
+    ],
+    codeFile: "business_analysis.sql",
+    codeContent: `-- SQL Business Data Analysis
+-- Retail sales dataset (~10,000 transactions) in SQL Server
+
+-- 1. Which product categories generated the highest sales?
+SELECT
+    Category,
+    SUM(Sales)  AS TotalSales,
+    SUM(Profit) AS TotalProfit
+FROM Sales
+GROUP BY Category
+ORDER BY TotalSales DESC;
+
+-- 2. Which regions were the most profitable?
+SELECT TOP 5
+    Region,
+    SUM(Profit) AS TotalProfit
+FROM Sales
+GROUP BY Region
+ORDER BY TotalProfit DESC;
+
+-- 3. How did discounts affect profitability?
+SELECT
+    CASE
+        WHEN Discount = 0             THEN 'No Discount'
+        WHEN Discount BETWEEN 0.01 AND 0.2 THEN 'Low (1-20%)'
+        WHEN Discount BETWEEN 0.21 AND 0.5 THEN 'Mid (21-50%)'
+        ELSE 'High (>50%)'
+    END AS DiscountBand,
+    AVG(Profit) AS AvgProfit,
+    COUNT(*)    AS Orders
+FROM Sales
+GROUP BY
+    CASE
+        WHEN Discount = 0             THEN 'No Discount'
+        WHEN Discount BETWEEN 0.01 AND 0.2 THEN 'Low (1-20%)'
+        WHEN Discount BETWEEN 0.21 AND 0.5 THEN 'Mid (21-50%)'
+        ELSE 'High (>50%)'
+    END
+ORDER BY AvgProfit DESC;
+
+-- 4. Which sub-categories generated losses?
+SELECT
+    SubCategory,
+    SUM(Profit) AS TotalProfit
+FROM Sales
+GROUP BY SubCategory
+HAVING SUM(Profit) < 0
+ORDER BY TotalProfit ASC;
+
+-- 5. Which customer segments contributed the most revenue?
+SELECT
+    Segment,
+    SUM(Sales)  AS Revenue,
+    SUM(Profit) AS Profit
+FROM Sales
+GROUP BY Segment
+ORDER BY Revenue DESC;`,
   },
 };
 
@@ -750,7 +833,7 @@ export default function ProjectDetail() {
               </div>
               <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
                 <SyntaxHighlighter
-                  language="python"
+                  language={project.codeFile?.endsWith(".sql") ? "sql" : "python"}
                   style={oneDark}
                   showLineNumbers
                   customStyle={{
