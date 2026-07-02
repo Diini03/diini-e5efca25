@@ -9,22 +9,12 @@ import {
   BookOpen,
 } from "lucide-react";
 
-// Import blog images
-import techTrends2025Img from "@/assets/blog/tech-trends-2025.png";
-import aiVsMlImg from "@/assets/blog/ai-vs-ml.png";
-import dataCareerTipsImg from "@/assets/blog/data-career-tips.png";
-import sqlJoinsImg from "@/assets/blog/sql-joins.png";
-import datasetUsefulImg from "@/assets/blog/what-makes-dataset-useful.png";
-import mlMistakesImg from "@/assets/blog/ml-learn-from-mistakes.png";
-import mlPredictionsImg from "@/assets/blog/ml-make-predictions.png";
-
 interface BlogPostData {
   title: string;
   date: string;
   readTime: string;
   category: string;
   tags: string[];
-  image: string;
   linkedinUrl: string;
   content: string;
   highlights?: string[];
