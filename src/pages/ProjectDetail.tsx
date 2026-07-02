@@ -833,7 +833,7 @@ export default function ProjectDetail() {
               </div>
               <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
                 <SyntaxHighlighter
-                  language="python"
+                  language={project.codeFile?.endsWith(".sql") ? "sql" : "python"}
                   style={oneDark}
                   showLineNumbers
                   customStyle={{
