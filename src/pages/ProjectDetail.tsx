@@ -499,6 +499,89 @@ plt.xlabel('Rating')
 plt.ylabel('Count')
 plt.show()`,
   },
+  "sql-business-analysis": {
+    title: "SQL Business Data Analysis",
+    date: "2025",
+    description:
+      "An end-to-end SQL project built in Microsoft SQL Server Management Studio (SSMS). A retail sales dataset of nearly 10,000 transactions was imported, explored and interrogated with T-SQL to answer real business questions — revenue and profit by category, regional performance, discount impact on margin, and which sub-categories are quietly losing money. The goal was to turn raw transactional data into decisions, not just charts.",
+    tags: ["sql", "sql-server", "ssms", "business-analysis", "data-analysis"],
+    role: "SQL analysis · Business reporting",
+    keyInsight:
+      "Discounts weren't uniformly profitable — a handful of sub-categories flipped to a loss once discount depth crossed a threshold, and most of the profit was carried by a small set of regions.",
+    tools: ["SQL Server", "SSMS", "T-SQL"],
+    stack: [
+      { name: "SQL Server", role: "dataset storage & query engine" },
+      { name: "SSMS", role: "writing, running and debugging queries" },
+      { name: "T-SQL", role: "aggregations, filtering and business questions" },
+      { name: "Aggregate functions", role: "SUM, AVG, COUNT, MIN, MAX for KPIs" },
+      { name: "GROUP BY / HAVING", role: "category, region and segment breakdowns" },
+    ],
+    highlights: [
+      "Imported and explored ~10,000 retail transactions in SQL Server",
+      "Analyzed sales and profit across categories, regions and customer segments",
+      "Identified loss-making sub-categories and the discount thresholds behind them",
+      "Answered 6 core business questions with reusable, readable SQL queries",
+      "Practiced core SQL concepts: SELECT, WHERE, GROUP BY, HAVING, CASE, aggregate functions",
+    ],
+    codeFile: "business_analysis.sql",
+    codeContent: `-- SQL Business Data Analysis
+-- Retail sales dataset (~10,000 transactions) in SQL Server
+
+-- 1. Which product categories generated the highest sales?
+SELECT
+    Category,
+    SUM(Sales)  AS TotalSales,
+    SUM(Profit) AS TotalProfit
+FROM Sales
+GROUP BY Category
+ORDER BY TotalSales DESC;
+
+-- 2. Which regions were the most profitable?
+SELECT TOP 5
+    Region,
+    SUM(Profit) AS TotalProfit
+FROM Sales
+GROUP BY Region
+ORDER BY TotalProfit DESC;
+
+-- 3. How did discounts affect profitability?
+SELECT
+    CASE
+        WHEN Discount = 0             THEN 'No Discount'
+        WHEN Discount BETWEEN 0.01 AND 0.2 THEN 'Low (1-20%)'
+        WHEN Discount BETWEEN 0.21 AND 0.5 THEN 'Mid (21-50%)'
+        ELSE 'High (>50%)'
+    END AS DiscountBand,
+    AVG(Profit) AS AvgProfit,
+    COUNT(*)    AS Orders
+FROM Sales
+GROUP BY
+    CASE
+        WHEN Discount = 0             THEN 'No Discount'
+        WHEN Discount BETWEEN 0.01 AND 0.2 THEN 'Low (1-20%)'
+        WHEN Discount BETWEEN 0.21 AND 0.5 THEN 'Mid (21-50%)'
+        ELSE 'High (>50%)'
+    END
+ORDER BY AvgProfit DESC;
+
+-- 4. Which sub-categories generated losses?
+SELECT
+    SubCategory,
+    SUM(Profit) AS TotalProfit
+FROM Sales
+GROUP BY SubCategory
+HAVING SUM(Profit) < 0
+ORDER BY TotalProfit ASC;
+
+-- 5. Which customer segments contributed the most revenue?
+SELECT
+    Segment,
+    SUM(Sales)  AS Revenue,
+    SUM(Profit) AS Profit
+FROM Sales
+GROUP BY Segment
+ORDER BY Revenue DESC;`,
+  },
 };
 
 export default function ProjectDetail() {
