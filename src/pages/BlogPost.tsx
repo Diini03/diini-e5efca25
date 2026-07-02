@@ -329,22 +329,27 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen animate-fade-in overflow-hidden">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
         {/* Back Link */}
         <Link
           to="/blog"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to blog
         </Link>
 
-        {/* Meta header (text-first) */}
-        <div className="mb-6">
-          <div className="flex flex-wrap items-center gap-3 mb-4 text-xs text-muted-foreground">
-            <span className="px-2.5 py-1 bg-primary/10 text-primary rounded-full capitalize font-medium">
-              {post.category.replace("-", " ")}
-            </span>
+        {/* Editorial header */}
+        <div className="mb-10">
+          <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-4">
+            {post.category.replace("-", " ")}
+          </div>
+
+          <h1 className="text-3xl md:text-[2.25rem] font-bold text-foreground leading-[1.15] mb-5 tracking-tight">
+            {post.title}
+          </h1>
+
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5" />
               {new Date(post.date).toLocaleDateString("en-US", {
@@ -357,43 +362,32 @@ export default function BlogPost() {
               <Clock className="w-3.5 h-3.5" />
               {post.readTime}
             </span>
-          </div>
-
-          <h1 className="text-2xl md:text-3xl font-bold text-foreground leading-tight mb-4">
-            {post.title}
-          </h1>
-
-          <div className="flex flex-wrap gap-1.5">
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-mono bg-secondary/60 text-muted-foreground rounded"
-              >
-                <Tag className="w-2.5 h-2.5" />
-                {tag}
+            {post.source && (
+              <span className="flex items-center gap-1.5 capitalize">
+                <span className="opacity-50">·</span>
+                Originally on {post.source}
               </span>
-            ))}
+            )}
           </div>
         </div>
 
-        {/* Small contained image — text remains the focus */}
-        <div className="mb-8 rounded-lg overflow-hidden border border-border/60 bg-secondary/30 max-w-sm">
-          <img
-            src={post.image}
-            alt={post.title}
-            className="w-full h-auto object-cover"
-          />
-        </div>
+        <div className="h-px bg-border/60 mb-10" />
 
-        {/* Content */}
-        <div className="prose prose-invert max-w-none mb-10">
+        {/* Ebook-style body */}
+        <article className="mb-12">
           {(() => {
             const paragraphs = post.content.split("\n\n");
             const isMedium = post.source === "medium" && post.externalUrl;
             const ctaAfter = isMedium ? Math.min(2, paragraphs.length - 1) : -1;
             return paragraphs.map((paragraph, index) => (
               <div key={index}>
-                <p className="text-[15px] text-foreground/85 leading-[1.8] mb-5">
+                <p
+                  className={`text-[17px] text-foreground/90 leading-[1.85] mb-6 ${
+                    index === 0
+                      ? "first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-1.5 first-letter:float-left first-letter:leading-[0.9] first-letter:mt-1"
+                      : ""
+                  }`}
+                >
                   {paragraph}
                 </p>
                 {index === ctaAfter && (
@@ -401,7 +395,7 @@ export default function BlogPost() {
                     href={post.externalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="not-prose my-8 flex items-center justify-between gap-4 rounded-xl border border-primary/40 bg-primary/5 p-5 hover:bg-primary/10 hover:border-primary/60 transition-all group"
+                    className="my-10 flex items-center justify-between gap-4 rounded-xl border border-primary/40 bg-primary/5 p-5 hover:bg-primary/10 hover:border-primary/60 transition-all group"
                   >
                     <div>
                       <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-1">
@@ -420,7 +414,21 @@ export default function BlogPost() {
               </div>
             ));
           })()}
+        </article>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-10">
+          {post.tags.map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-mono bg-secondary/60 text-muted-foreground rounded"
+            >
+              <Tag className="w-2.5 h-2.5" />
+              {tag}
+            </span>
+          ))}
         </div>
+
 
         {/* Highlights — "What to remember" */}
         {post.highlights && post.highlights.length > 0 && (
