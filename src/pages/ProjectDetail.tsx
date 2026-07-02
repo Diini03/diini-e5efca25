@@ -74,7 +74,7 @@ const projectsData: Record<string, ProjectData> = {
   "somalia-displacement-forecast": {
     title: "Somalia Displacement Forecast Dashboard",
     date: "2025",
-    description: "Interactive Power BI dashboard analyzing displacement across Somali districts — broken down by conflict, drought and flood, with forecast vs. actual comparison.",
+    description: "An interactive Power BI dashboard built on a Somalia displacement dataset covering 20+ districts and 8M+ displaced people. Records were cleaned in Power Query, modeled inside Power BI, and turned into KPIs and forecast-vs-actual measures with DAX — so the same view breaks displacement down by conflict, drought and flood, and lets a decision-maker see where the trend is heading, not just where it has been.",
     tags: ["power-bi", "dax", "power-query", "data-visualization", "humanitarian"],
     role: "Data analysis · BI dashboarding",
     charts: [
