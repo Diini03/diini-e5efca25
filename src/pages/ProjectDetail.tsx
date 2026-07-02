@@ -107,7 +107,7 @@ const projectsData: Record<string, ProjectData> = {
   "fall-armyworm-detection": {
     title: "Fall Armyworm Leaf Disease Detection Using Deep Learning",
     date: "2025",
-    description: "Image classification system that detects Fall Armyworm damage on maize leaves using deep learning. Compared 5 CNN architectures and selected the strongest model for real-world agricultural use.",
+    description: "A deep learning image classification project that detects Fall Armyworm damage on maize leaves — a pest responsible for major crop losses across East Africa. Five CNN architectures were trained end-to-end in TensorFlow/Keras, evaluated on held-out leaf images, and the strongest model reached 99.07% accuracy. Built for the PyCon Somalia 2025 Hackathon to make early, in-field disease detection practical for smallholder farmers.",
     tags: ["python", "tensorflow", "keras", "deep-learning", "cnn", "computer-vision"],
     competitionUrl: "https://zindi.africa/competitions/combating-food-insecurity-in-somalia",
     competitionName: "PyCon Somalia 2025 Hackathon",
