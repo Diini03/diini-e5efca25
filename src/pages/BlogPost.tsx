@@ -410,33 +410,57 @@ export default function BlogPost() {
 
         {/* Body */}
         {isCarousel ? (
-          <article className="mb-12">
-            {coverImg && (
-              <figure className="sm:float-left sm:mr-6 mb-4 w-full sm:w-[52%] md:w-[55%]">
-                <img
-                  src={coverImg}
-                  alt={post.title}
-                  className="w-full max-h-[420px] object-cover rounded-md border border-border/60"
-                />
-                <figcaption className="mt-2 text-[11px] italic text-muted-foreground font-serif">
-                  From the LinkedIn carousel · {dateLong}
-                </figcaption>
-              </figure>
-            )}
-            {post.content.split("\n\n").map((paragraph, index) => (
-              <p
-                key={index}
-                className={`font-serif text-[17px] text-foreground/90 leading-[1.75] mb-5 text-justify hyphens-auto ${
-                  index === 0
-                    ? "first-letter:font-serif first-letter:text-[3.75rem] first-letter:font-bold first-letter:text-foreground first-letter:mr-2 first-letter:float-left first-letter:leading-[0.85] first-letter:mt-1 first-letter:px-1"
-                    : ""
-                }`}
-              >
-                {paragraph}
-              </p>
-            ))}
-            <div className="clear-both" />
-          </article>
+          (() => {
+            const paragraphs = post.content.split("\n\n");
+            // Split: first 2 paragraphs sit beside the image, rest flow full-width below
+            const sideCount = Math.min(2, Math.max(1, paragraphs.length - 1));
+            const sideParagraphs = paragraphs.slice(0, sideCount);
+            const restParagraphs = paragraphs.slice(sideCount);
+            return (
+              <article className="mb-12">
+                <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start mb-8">
+                  {coverImg && (
+                    <figure className="md:sticky md:top-6">
+                      <img
+                        src={coverImg}
+                        alt={post.title}
+                        loading="eager"
+                        fetchPriority="high"
+                        decoding="async"
+                        width={1200}
+                        className="w-full max-h-[460px] object-cover rounded-lg border border-border/60 shadow-sm"
+                      />
+                      <figcaption className="mt-2 text-[11px] italic text-muted-foreground font-serif">
+                        From the LinkedIn carousel · {dateLong}
+                      </figcaption>
+                    </figure>
+                  )}
+                  <div>
+                    {sideParagraphs.map((paragraph, index) => (
+                      <p
+                        key={index}
+                        className={`font-serif text-[17px] text-foreground/90 leading-[1.75] mb-5 ${
+                          index === 0
+                            ? "first-letter:font-serif first-letter:text-[3.5rem] first-letter:font-bold first-letter:text-foreground first-letter:mr-2 first-letter:float-left first-letter:leading-[0.85] first-letter:mt-1"
+                            : ""
+                        }`}
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+                {restParagraphs.map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className="font-serif text-[17px] text-foreground/90 leading-[1.75] mb-5"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </article>
+            );
+          })()
         ) : (
           <article className="mb-12">
             {(() => {
