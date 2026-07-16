@@ -77,7 +77,7 @@ export function WritingCarousel() {
                   }`}
                 >
                   <span className="block text-[13px] font-medium leading-snug line-clamp-2 mb-1">
-                    {p.title}
+                    {displayTitle(p.title)}
                   </span>
                   <span className="block text-[10px] opacity-70 tabular-nums">
                     {d}
