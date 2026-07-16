@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { blogPosts } from "@/pages/Blog";
 
+const displayTitle = (t: string) => {
+  const cut = t.split("—")[0].trim();
+  return cut.replace(/[?:,-]+$/, "").trim();
+};
+
 const featured = blogPosts
   .filter((p) => p.featuredOnHome)
   .sort((a, b) => (a.date < b.date ? 1 : -1))
