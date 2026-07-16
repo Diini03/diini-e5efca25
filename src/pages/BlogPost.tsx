@@ -345,9 +345,17 @@ export default function BlogPost() {
     );
   }
 
+  const isCarousel = post.source === "linkedin";
+  const coverImg = isCarousel ? blogImages[slug ?? ""] : undefined;
+  const dateLong = new Date(post.date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
   return (
     <div className="min-h-screen animate-fade-in overflow-hidden">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
+      <div className={`${isCarousel ? "max-w-4xl" : "max-w-2xl"} mx-auto px-4 sm:px-6 py-12`}>
         {/* Back Link */}
         <Link
           to="/blog"
@@ -358,29 +366,34 @@ export default function BlogPost() {
         </Link>
 
         {/* Editorial header */}
-        <div className="mb-10">
+        <div className="mb-8">
           <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-4">
             {post.category.replace("-", " ")}
+            {isCarousel && (
+              <span className="ml-2 text-muted-foreground/70">· LinkedIn Carousel</span>
+            )}
           </div>
 
-          <h1 className="text-3xl md:text-[2.25rem] font-bold text-foreground leading-[1.15] mb-5 tracking-tight">
+          <h1
+            className={`${
+              isCarousel
+                ? "text-4xl md:text-5xl font-serif font-bold"
+                : "text-3xl md:text-[2.25rem] font-bold"
+            } text-foreground leading-[1.1] mb-5 tracking-tight`}
+          >
             {post.title}
           </h1>
 
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5" />
-              {new Date(post.date).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
+              {dateLong}
             </span>
             <span className="flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5" />
               {post.readTime}
             </span>
-            {post.source && (
+            {post.source && !isCarousel && (
               <span className="flex items-center gap-1.5 capitalize">
                 <span className="opacity-50">·</span>
                 Originally on {post.source}
@@ -389,50 +402,84 @@ export default function BlogPost() {
           </div>
         </div>
 
-        <div className="h-px bg-border/60 mb-10" />
+        <div className={`${isCarousel ? "border-t-2 border-b border-foreground/80 py-1 mb-8" : "h-px bg-border/60 mb-10"}`}>
+          {isCarousel && (
+            <div className="h-px bg-foreground/40" />
+          )}
+        </div>
 
-        {/* Ebook-style body */}
-        <article className="mb-12">
-          {(() => {
-            const paragraphs = post.content.split("\n\n");
-            const isMedium = post.source === "medium" && post.externalUrl;
-            const ctaAfter = isMedium ? Math.min(2, paragraphs.length - 1) : -1;
-            return paragraphs.map((paragraph, index) => (
-              <div key={index}>
-                <p
-                  className={`text-[17px] text-foreground/90 leading-[1.85] mb-6 ${
-                    index === 0
-                      ? "first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-1.5 first-letter:float-left first-letter:leading-[0.9] first-letter:mt-1"
-                      : ""
-                  }`}
-                >
-                  {paragraph}
-                </p>
-                {index === ctaAfter && (
-                  <a
-                    href={post.externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="my-10 flex items-center justify-between gap-4 rounded-xl border border-primary/40 bg-primary/5 p-5 hover:bg-primary/10 hover:border-primary/60 transition-all group"
+        {/* Body */}
+        {isCarousel ? (
+          <article className="mb-12">
+            {coverImg && (
+              <figure className="sm:float-left sm:mr-6 mb-4 w-full sm:w-[52%] md:w-[55%]">
+                <img
+                  src={coverImg}
+                  alt={post.title}
+                  className="w-full max-h-[420px] object-cover rounded-md border border-border/60"
+                />
+                <figcaption className="mt-2 text-[11px] italic text-muted-foreground font-serif">
+                  From the LinkedIn carousel · {dateLong}
+                </figcaption>
+              </figure>
+            )}
+            {post.content.split("\n\n").map((paragraph, index) => (
+              <p
+                key={index}
+                className={`font-serif text-[17px] text-foreground/90 leading-[1.75] mb-5 text-justify hyphens-auto ${
+                  index === 0
+                    ? "first-letter:font-serif first-letter:text-[3.75rem] first-letter:font-bold first-letter:text-foreground first-letter:mr-2 first-letter:float-left first-letter:leading-[0.85] first-letter:mt-1 first-letter:px-1"
+                    : ""
+                }`}
+              >
+                {paragraph}
+              </p>
+            ))}
+            <div className="clear-both" />
+          </article>
+        ) : (
+          <article className="mb-12">
+            {(() => {
+              const paragraphs = post.content.split("\n\n");
+              const isMedium = post.source === "medium" && post.externalUrl;
+              const ctaAfter = isMedium ? Math.min(2, paragraphs.length - 1) : -1;
+              return paragraphs.map((paragraph, index) => (
+                <div key={index}>
+                  <p
+                    className={`text-[17px] text-foreground/90 leading-[1.85] mb-6 ${
+                      index === 0
+                        ? "first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-1.5 first-letter:float-left first-letter:leading-[0.9] first-letter:mt-1"
+                        : ""
+                    }`}
                   >
-                    <div>
-                      <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-1">
-                        Continue on Medium
+                    {paragraph}
+                  </p>
+                  {index === ctaAfter && (
+                    <a
+                      href={post.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="my-10 flex items-center justify-between gap-4 rounded-xl border border-primary/40 bg-primary/5 p-5 hover:bg-primary/10 hover:border-primary/60 transition-all group"
+                    >
+                      <div>
+                        <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-1">
+                          Continue on Medium
+                        </div>
+                        <div className="text-[15px] font-semibold text-foreground">
+                          Read the full story on Medium →
+                        </div>
+                        <div className="text-xs text-muted-foreground mt-1">
+                          The rest of the breakdown, with the full argument.
+                        </div>
                       </div>
-                      <div className="text-[15px] font-semibold text-foreground">
-                        Read the full story on Medium →
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        The rest of the breakdown, with the full argument.
-                      </div>
-                    </div>
-                    <ExternalLink className="w-5 h-5 text-primary shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </a>
-                )}
-              </div>
-            ));
-          })()}
-        </article>
+                      <ExternalLink className="w-5 h-5 text-primary shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                  )}
+                </div>
+              ));
+            })()}
+          </article>
+        )}
 
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5 mb-10">
