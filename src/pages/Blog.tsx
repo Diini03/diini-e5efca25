@@ -259,6 +259,8 @@ export default function Blog() {
                 day: "numeric",
                 year: "numeric",
               });
+              const isCarousel = post.source === "linkedin";
+              const coverImg = isCarousel ? blogImages[post.slug] : undefined;
               return (
                 <Link
                   key={post.slug}
@@ -266,33 +268,53 @@ export default function Blog() {
                   className="group block animate-fade-in"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <article className="h-full flex flex-col rounded-lg border border-border/60 bg-card/50 hover:bg-card hover:border-primary/40 transition-all p-4">
-                    <div className="flex items-center gap-2 mb-3 text-[10px] tracking-[0.15em] uppercase text-muted-foreground/70">
-                      <span>{post.category.replace("-", " ")}</span>
-                      <span className="opacity-50">·</span>
-                      <span className="inline-flex items-center gap-1 normal-case tracking-normal">
-                        <Calendar className="w-3 h-3" />
-                        {dateLabel}
-                      </span>
-                    </div>
+                  <article className="h-full flex flex-col rounded-lg border border-border/60 bg-card/50 hover:bg-card hover:border-primary/40 transition-all overflow-hidden">
+                    {isCarousel && (
+                      <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary/40 border-b border-border/50">
+                        {coverImg ? (
+                          <img
+                            src={coverImg}
+                            alt={post.title}
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/40 to-transparent" />
+                        )}
+                        <span className="absolute top-2 left-2 inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-background/85 backdrop-blur text-[9px] font-mono uppercase tracking-[0.15em] text-foreground/80 border border-border/60">
+                          <Linkedin className="w-2.5 h-2.5 text-[#0A66C2]" />
+                          Carousel
+                        </span>
+                      </div>
+                    )}
+                    <div className="flex-1 flex flex-col p-4">
+                      <div className="flex items-center gap-2 mb-3 text-[10px] tracking-[0.15em] uppercase text-muted-foreground/70">
+                        <span>{post.category.replace("-", " ")}</span>
+                        <span className="opacity-50">·</span>
+                        <span className="inline-flex items-center gap-1 normal-case tracking-normal">
+                          <Calendar className="w-3 h-3" />
+                          {dateLabel}
+                        </span>
+                      </div>
 
-                    <h3 className="text-[15px] font-semibold leading-snug text-foreground group-hover:text-primary transition-colors mb-2 line-clamp-2">
-                      {post.title}
-                    </h3>
+                      <h3 className="text-[15px] font-semibold leading-snug text-foreground group-hover:text-primary transition-colors mb-2 line-clamp-2">
+                        {post.title}
+                      </h3>
 
-                    <p className="text-[13px] leading-relaxed text-muted-foreground mb-4 line-clamp-4 flex-1">
-                      {post.excerpt}
-                    </p>
+                      <p className="text-[13px] leading-relaxed text-muted-foreground mb-4 line-clamp-4 flex-1">
+                        {post.excerpt}
+                      </p>
 
-                    <div className="flex items-center justify-between mt-auto pt-3 border-t border-border/40">
-                      <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground">
-                        <Clock className="w-3 h-3" />
-                        {post.readTime}
-                      </span>
-                      <span className="inline-flex items-center gap-1 text-xs font-medium text-primary group-hover:gap-2 transition-all">
-                        Read
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </span>
+                      <div className="flex items-center justify-between mt-auto pt-3 border-t border-border/40">
+                        <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground">
+                          <Clock className="w-3 h-3" />
+                          {post.readTime}
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-xs font-medium text-primary group-hover:gap-2 transition-all">
+                          Read
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </span>
+                      </div>
                     </div>
                   </article>
                 </Link>
