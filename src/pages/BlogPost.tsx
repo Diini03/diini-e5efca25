@@ -9,6 +9,24 @@ import {
   BookOpen,
 } from "lucide-react";
 
+import imgAiVsMl from "@/assets/blog/ai-vs-ml.png";
+import imgDataCareer from "@/assets/blog/data-career-tips.png";
+import imgMlLearn from "@/assets/blog/ml-learn-from-mistakes.png";
+import imgMlPredict from "@/assets/blog/ml-make-predictions.png";
+import imgSqlJoins from "@/assets/blog/sql-joins.png";
+import imgTechTrends from "@/assets/blog/tech-trends-2025.png";
+import imgDataset from "@/assets/blog/what-makes-dataset-useful.png";
+
+const blogImages: Record<string, string> = {
+  "ai-vs-ml": imgAiVsMl,
+  "data-career-tips": imgDataCareer,
+  "ml-learn-from-mistakes": imgMlLearn,
+  "ml-make-predictions": imgMlPredict,
+  "sql-joins": imgSqlJoins,
+  "tech-trends-2025": imgTechTrends,
+  "what-makes-dataset-useful": imgDataset,
+};
+
 interface BlogPostData {
   title: string;
   date: string;
