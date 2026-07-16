@@ -49,7 +49,7 @@ export function WritingCarousel() {
                     : "border-border/60 text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {p.title}
+                {displayTitle(p.title)}
               </button>
             );
           })}
