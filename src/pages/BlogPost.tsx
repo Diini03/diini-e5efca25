@@ -8,6 +8,8 @@ import {
   Lightbulb,
   BookOpen,
 } from "lucide-react";
+import { EditorialArticle } from "@/components/blog/EditorialArticle";
+import { carouselBlocks } from "@/data/carousel-blocks";
 
 import imgAiVsMl from "@/assets/blog/ai-vs-ml.webp";
 import imgDataCareer from "@/assets/blog/data-career-tips.webp";
@@ -410,57 +412,37 @@ export default function BlogPost() {
 
         {/* Body */}
         {isCarousel ? (
-          (() => {
-            const paragraphs = post.content.split("\n\n");
-            // Split: first 2 paragraphs sit beside the image, rest flow full-width below
-            const sideCount = Math.min(2, Math.max(1, paragraphs.length - 1));
-            const sideParagraphs = paragraphs.slice(0, sideCount);
-            const restParagraphs = paragraphs.slice(sideCount);
-            return (
-              <article className="mb-12">
-                <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start mb-8">
-                  {coverImg && (
-                    <figure className="md:sticky md:top-6">
-                      <img
-                        src={coverImg}
-                        alt={post.title}
-                        loading="eager"
-                        fetchPriority="high"
-                        decoding="async"
-                        width={1200}
-                        className="w-full max-h-[460px] object-cover rounded-lg border border-border/60 shadow-sm"
-                      />
-                      <figcaption className="mt-2 text-[11px] italic text-muted-foreground font-serif">
-                        From the LinkedIn carousel · {dateLong}
-                      </figcaption>
-                    </figure>
-                  )}
-                  <div>
-                    {sideParagraphs.map((paragraph, index) => (
-                      <p
-                        key={index}
-                        className={`font-serif text-[17px] text-foreground/90 leading-[1.75] mb-5 ${
-                          index === 0
-                            ? "first-letter:font-serif first-letter:text-[3.5rem] first-letter:font-bold first-letter:text-foreground first-letter:mr-2 first-letter:float-left first-letter:leading-[0.85] first-letter:mt-1"
-                            : ""
-                        }`}
-                      >
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-                {restParagraphs.map((paragraph, index) => (
-                  <p
-                    key={index}
-                    className="font-serif text-[17px] text-foreground/90 leading-[1.75] mb-5"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </article>
-            );
-          })()
+          carouselBlocks[slug ?? ""] ? (
+            <div className="mb-12">
+              {coverImg && (
+                <figure className="mb-8">
+                  <img
+                    src={coverImg}
+                    alt={post.title}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    className="w-full h-auto max-h-[520px] object-cover rounded-xl border border-border/60 shadow-lg"
+                  />
+                  <figcaption className="mt-2 text-[11.5px] italic text-muted-foreground font-serif text-center">
+                    From the LinkedIn carousel · {dateLong}
+                  </figcaption>
+                </figure>
+              )}
+              <EditorialArticle blocks={carouselBlocks[slug ?? ""]} />
+            </div>
+          ) : (
+            <article className="mb-12">
+              {post.content.split("\n\n").map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="font-serif text-[17px] text-foreground/90 leading-[1.75] mb-5"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </article>
+          )
         ) : (
           <article className="mb-12">
             {(() => {
@@ -519,8 +501,8 @@ export default function BlogPost() {
         </div>
 
 
-        {/* Highlights — "What to remember" */}
-        {post.highlights && post.highlights.length > 0 && (
+        {/* Highlights — "What to remember" (only for non-carousel posts; carousels embed takeaways) */}
+        {!isCarousel && post.highlights && post.highlights.length > 0 && (
           <div className="relative mb-8 pl-5 border-l-2 border-primary/60">
             <div className="flex items-center gap-2 mb-4">
               <Lightbulb className="w-4 h-4 text-primary" />

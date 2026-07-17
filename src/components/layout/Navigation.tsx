@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight, FileText } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { RESUME_URL } from "@/lib/resume";
+import { CV_URL } from "@/lib/resume";
 
 const navItems = [
   { label: "About", path: "/about" },
