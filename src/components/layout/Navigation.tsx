@@ -124,13 +124,16 @@ export function Navigation({ onLogoClick }: NavigationProps) {
           </nav>
 
           <div className="mt-6 pt-6 border-t border-border/60">
-            <Link
-              to={CV_URL}
+            <a
+              href={RESUME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
               className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg text-sm font-mono text-primary border border-primary/40 hover:bg-primary/10 transition-all"
             >
               <FileText className="w-4 h-4" />
               Resume
-            </Link>
+            </a>
           </div>
 
           <div className="mt-auto pt-6 text-xs text-muted-foreground/50 font-mono">
