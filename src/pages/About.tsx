@@ -108,7 +108,7 @@ export default function About() {
           <div className="order-1 md:order-2">
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-2xl blur-md opacity-60 group-hover:opacity-100 transition" />
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-card aspect-[3/4]">
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-card aspect-[4/5]">
                 <img
                   src={DIINI_PHOTO_URL}
                   alt="Diini Kahiye"
