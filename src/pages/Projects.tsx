@@ -45,30 +45,6 @@ const groups: { name: string; projects: Project[] }[] = [
     ],
   },
   {
-    name: "Machine Learning",
-    projects: [
-      {
-        slug: "fall-armyworm-detection",
-        title: "Fall Armyworm Leaf Disease Detection",
-        description:
-          "Deep learning image classification achieving 99.07% accuracy to detect Fall Armyworm damage on maize leaves.",
-        category: "Python · TensorFlow · CNN",
-      },
-    ],
-  },
-  {
-    name: "SQL & Business Analysis",
-    projects: [
-      {
-        slug: "sql-business-analysis",
-        title: "SQL Business Data Analysis",
-        description:
-          "Analyzed ~10,000 retail sales transactions in SQL Server to answer real business questions — profitability by region, category performance, discount impact, and loss-making sub-categories.",
-        category: "SQL · SSMS · Business Analysis",
-      },
-    ],
-  },
-  {
     name: "Data Analysis",
     projects: [
       {
@@ -95,17 +71,29 @@ const groups: { name: string; projects: Project[] }[] = [
     ],
   },
   {
+    name: "Machine Learning",
+    projects: [
+      {
+        slug: "fall-armyworm-detection",
+        title: "Fall Armyworm Leaf Disease Detection",
+        description:
+          "Deep learning image classification achieving 99.07% accuracy to detect Fall Armyworm damage on maize leaves.",
+        category: "Python · TensorFlow · CNN",
+      },
+    ],
+  },
+  {
     name: "Product Engineering",
     projects: [
       {
-        slug: "learndata",
-        title: "LearnData — Data Analysis in Somali",
+        slug: "kulmid",
+        title: "Kulmid — Event Management Platform",
         description:
-          "Learn Data Analysis in Somali through notes, cheat sheets, projects, and practical examples.",
-        category: "React · TypeScript · Content Platform",
-        imageDark: learndataImg,
-        imageLight: learndataImg,
-        liveUrl: "https://learndata.diinikahiye.online/",
+          "Full-featured event management web app with registration, attendee management, invitations, and ticketing.",
+        category: "React · TypeScript · Supabase",
+        imageDark: kulmidDarkImg,
+        imageLight: kulmidLightImg,
+        liveUrl: "https://www.kulmid.com/",
       },
       {
         slug: "nadiifi-data",
@@ -118,14 +106,26 @@ const groups: { name: string; projects: Project[] }[] = [
         liveUrl: "https://nadiifi-data.diinikahiye.online/",
       },
       {
-        slug: "kulmid",
-        title: "Kulmid — Event Management Platform",
+        slug: "learndata",
+        title: "LearnData — Data Analysis in Somali",
         description:
-          "Full-featured event management web app with registration, attendee management, invitations, and ticketing.",
-        category: "React · TypeScript · Supabase",
-        imageDark: kulmidDarkImg,
-        imageLight: kulmidLightImg,
-        liveUrl: "https://www.kulmid.com/",
+          "Learn Data Analysis in Somali through notes, cheat sheets, projects, and practical examples.",
+        category: "React · TypeScript · Content Platform",
+        imageDark: learndataImg,
+        imageLight: learndataImg,
+        liveUrl: "https://learndata.diinikahiye.online/",
+      },
+    ],
+  },
+  {
+    name: "SQL & Business Analysis",
+    projects: [
+      {
+        slug: "sql-business-analysis",
+        title: "SQL Business Data Analysis",
+        description:
+          "Analyzed ~10,000 retail sales transactions in SQL Server to answer real business questions — profitability by region, category performance, discount impact, and loss-making sub-categories.",
+        category: "SQL · SSMS · Business Analysis",
       },
     ],
   },
