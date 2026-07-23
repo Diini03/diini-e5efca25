@@ -4,6 +4,8 @@ import { useTheme } from "@/hooks/useTheme";
 
 import kulmidDarkImg from "@/assets/projects/kulmid-dark.png";
 import kulmidLightImg from "@/assets/projects/kulmid-light.png";
+import learndataImg from "@/assets/projects/learndata.png";
+import nadiifidataImg from "@/assets/projects/nadiifidata.png";
 
 type Project = {
   slug: string;
@@ -95,6 +97,26 @@ const groups: { name: string; projects: Project[] }[] = [
   {
     name: "Product Engineering",
     projects: [
+      {
+        slug: "learndata",
+        title: "LearnData — Data Analysis in Somali",
+        description:
+          "Learn Data Analysis in Somali through notes, cheat sheets, projects, and practical examples.",
+        category: "React · TypeScript · Content Platform",
+        imageDark: learndataImg,
+        imageLight: learndataImg,
+        liveUrl: "https://learndata.diinikahiye.online/",
+      },
+      {
+        slug: "nadiifi-data",
+        title: "NadiifiData — No-Code Data Cleaning",
+        description:
+          "Clean, profile, analyze, and visualize your datasets with zero code. Turn messy data into dashboards in minutes.",
+        category: "React · TypeScript · In-Browser Analytics",
+        imageDark: nadiifidataImg,
+        imageLight: nadiifidataImg,
+        liveUrl: "https://nadiifi-data.diinikahiye.online/",
+      },
       {
         slug: "kulmid",
         title: "Kulmid — Event Management Platform",

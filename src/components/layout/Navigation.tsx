@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight, FileText } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { CV_URL } from "@/lib/resume";
+import { RESUME_URL } from "@/lib/resume";
 
 const navItems = [
   { label: "About", path: "/about" },
@@ -53,13 +53,15 @@ export function Navigation({ onLogoClick }: NavigationProps) {
                   {item.label}
                 </NavLink>
               ))}
-              <Link
-                to={CV_URL}
+              <a
+                href={RESUME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-primary/40 text-xs font-mono text-primary hover:bg-primary/10 hover:border-primary/60 transition-all"
               >
                 <FileText className="w-3.5 h-3.5" />
                 Resume
-              </Link>
+              </a>
             </div>
 
             <button
@@ -122,13 +124,16 @@ export function Navigation({ onLogoClick }: NavigationProps) {
           </nav>
 
           <div className="mt-6 pt-6 border-t border-border/60">
-            <Link
-              to={CV_URL}
+            <a
+              href={RESUME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
               className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg text-sm font-mono text-primary border border-primary/40 hover:bg-primary/10 transition-all"
             >
               <FileText className="w-4 h-4" />
               Resume
-            </Link>
+            </a>
           </div>
 
           <div className="mt-auto pt-6 text-xs text-muted-foreground/50 font-mono">
