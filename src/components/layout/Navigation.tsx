@@ -53,13 +53,15 @@ export function Navigation({ onLogoClick }: NavigationProps) {
                   {item.label}
                 </NavLink>
               ))}
-              <Link
-                to={CV_URL}
+              <a
+                href={RESUME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-primary/40 text-xs font-mono text-primary hover:bg-primary/10 hover:border-primary/60 transition-all"
               >
                 <FileText className="w-3.5 h-3.5" />
                 Resume
-              </Link>
+              </a>
             </div>
 
             <button
