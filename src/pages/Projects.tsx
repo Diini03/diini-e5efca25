@@ -4,6 +4,8 @@ import { useTheme } from "@/hooks/useTheme";
 
 import kulmidDarkImg from "@/assets/projects/kulmid-dark.png";
 import kulmidLightImg from "@/assets/projects/kulmid-light.png";
+import learndataImg from "@/assets/projects/learndata.png";
+import nadiifidataImg from "@/assets/projects/nadiifidata.png";
 
 type Project = {
   slug: string;
