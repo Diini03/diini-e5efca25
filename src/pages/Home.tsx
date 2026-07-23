@@ -36,7 +36,7 @@ export default function Home() {
               <span className="text-foreground font-medium">AI</span>.
             </p>
             <p>
-              Using Python, SQL, and modern analytics tools, I build projects that turn complex data into practical solutions.
+              Using Python, SQL, and modern analytics tools like <span className="text-foreground font-medium">Power BI</span>, <span className="text-foreground font-medium">Tableau</span>, and <span className="text-foreground font-medium">Excel</span>, I build projects that turn complex data into practical solutions.
             </p>
           </div>
 
