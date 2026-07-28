@@ -24,7 +24,7 @@ export default function Home() {
               className="text-primary inline-block hover:text-primary/80 transition-colors duration-300"
               style={{ textShadow: "0 4px 20px hsl(24 95% 53% / 0.3)" }}
             >
-              Diini Kahiye
+              Diini M. Kahiye
             </span>
           </h1>
 
