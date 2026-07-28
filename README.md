@@ -1,73 +1,72 @@
-# Welcome to My Portfolio
+# 🌐 Diini Kahiye Portfolio
 
-## Project info
+Welcome to my personal portfolio repository.
 
-**URL**: https://www.diinikahiye.online/
+This portfolio showcases who I am, what I build, and the projects I've worked on as a Computer Science student with a strong interest in Data Analysis, Machine Learning, and Web Development.
 
-## How can I edit this code?
+## Live Website
 
-There are several ways of editing your application.
+**Portfolio:** https://www.diinikahiye.online/
 
-**Use Lovable**
+## About
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+I'm **Diini Kahiye**, a Computer Science student passionate about turning data into insights and building useful digital products.
 
-Changes made via Lovable will be committed automatically to this repo.
+My interests include:
 
-**Use your preferred IDE**
+* Data Analysis
+* Machine Learning
+* Python
+* SQL
+* Power BI
+* Web Development
+* Open Source
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## What You'll Find
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+* Personal introduction
+* Featured projects
+* Technical skills
+* Certifications
+* Experience
+* Contact information
 
-Follow these steps:
+## Tech Stack
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+* React
+* TypeScript
+* Tailwind CSS
+* Vite
+* Framer Motion
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Featured Projects
 
-# Step 3: Install the necessary dependencies.
-npm i
+Some of the projects showcased include:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+* ChartWorld — A collection of data visualisations with Python code.
+* LearnData — A platform for learning Data Analysis in Somali.
+* Nadiifi-Data — Clean datasets and prepare them for analysis.
+* Machine Learning projects built with Python.
+
+## Running Locally
+
+```bash
+git clone <repository-url>
+
+cd <repository-name>
+
+npm install
+
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Connect With Me
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+* Portfolio: https://www.diinikahiye.online/
+* GitHub: https://github.com/Diini03
+* LinkedIn: https://www.linkedin.com/in/diinikahiye/
+* Medium: https://medium.com/@diiniyare74
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Thank you for visiting my portfolio. If you like my work, feel free to star the repository or connect with me.
