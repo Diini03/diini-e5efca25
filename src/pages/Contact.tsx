@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
+import { ArrowLeft, Mail, Phone, MapPin, Github, Linkedin, Send, Copy, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
@@ -20,6 +20,22 @@ export default function Contact() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText("diiniyare74@gmail.com");
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+      toast({ title: "Email copied", description: "diiniyare74@gmail.com" });
+    } catch {
+      toast({
+        title: "Couldn't copy",
+        description: "Copy manually: diiniyare74@gmail.com",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
