@@ -39,6 +39,7 @@ import whGdpVsHappiness from "@/assets/projects/world-happiness/gdp-vs-happiness
 // Power BI Dashboards
 import somaliaForecastDashboard from "@/assets/projects/powerbi/somalia-displacement-forecast.png";
 import somaliaIdpsDashboard from "@/assets/projects/powerbi/somalia-idps-unhcr.png";
+import { Seo } from "@/components/Seo";
 
 
 interface ChartData {
@@ -613,6 +614,18 @@ export default function ProjectDetail() {
 
   return (
     <div className="min-h-screen animate-fade-in">
+      <Seo
+        title={`${project.title} | Diini Kahiye`}
+        description={project.description.slice(0, 155)}
+        type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          description: project.description,
+          author: { "@type": "Person", name: "Diini Kahiye" },
+        }}
+      />
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Back Link */}
         <Link
