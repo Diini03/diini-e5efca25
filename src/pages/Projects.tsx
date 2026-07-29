@@ -19,6 +19,7 @@ type Project = {
 
 import somaliaForecastImg from "@/assets/projects/powerbi/somalia-displacement-forecast.png";
 import somaliaIdpsImg from "@/assets/projects/powerbi/somalia-idps-unhcr.png";
+import { Seo } from "@/components/Seo";
 
 const groups: { name: string; projects: Project[] }[] = [
   {
@@ -136,6 +137,11 @@ export default function Projects() {
 
   return (
     <div className="min-h-screen animate-fade-in">
+      <Seo
+        title="Projects — Power BI, Machine Learning & SQL | Diini Kahiye"
+        description="Selected data projects: Somalia displacement dashboards in Power BI, deep-learning crop disease detection, SQL business analysis and data tools."
+        path="/projects"
+      />
       <div className="max-w-4xl mx-auto px-6 py-12">
         <Link
           to="/"
@@ -172,6 +178,8 @@ export default function Projects() {
                     {(project.imageDark || project.imageLight) && (
                       <div className="relative overflow-hidden h-32">
                         <img
+                          loading="lazy"
+                          decoding="async"
                           src={project.imageLight || project.imageDark}
                           alt={project.title}
                           className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"

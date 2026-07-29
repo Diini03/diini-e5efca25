@@ -18,6 +18,7 @@ import imgMlPredict from "@/assets/blog/ml-make-predictions.webp";
 import imgSqlJoins from "@/assets/blog/sql-joins.webp";
 import imgTechTrends from "@/assets/blog/tech-trends-2025.webp";
 import imgDataset from "@/assets/blog/what-makes-dataset-useful.webp";
+import { Seo } from "@/components/Seo";
 
 const blogImages: Record<string, string> = {
   "ai-vs-ml": imgAiVsMl,
@@ -355,8 +356,28 @@ export default function BlogPost() {
     year: "numeric",
   });
 
+  const metaDescription = post.content
+    .replace(/[#>*_`\-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 155);
+
   return (
     <div className="min-h-screen animate-fade-in overflow-hidden">
+      <Seo
+        title={`${post.title} | Diini Kahiye`}
+        description={metaDescription}
+        type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: metaDescription,
+          datePublished: post.date,
+          keywords: post.tags?.join(", "),
+          author: { "@type": "Person", name: "Diini Kahiye" },
+        }}
+      />
       <div className={`${isCarousel ? "max-w-4xl" : "max-w-2xl"} mx-auto px-4 sm:px-6 py-12`}>
         {/* Back Link */}
         <Link

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
+import { ArrowLeft, Mail, Phone, MapPin, Github, Linkedin, Send, Copy, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
+import { Seo } from "@/components/Seo";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -19,6 +20,22 @@ export default function Contact() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText("diiniyare74@gmail.com");
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+      toast({ title: "Email copied", description: "diiniyare74@gmail.com" });
+    } catch {
+      toast({
+        title: "Couldn't copy",
+        description: "Copy manually: diiniyare74@gmail.com",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,6 +90,11 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen animate-fade-in">
+      <Seo
+        title="Contact Diini Kahiye — Data Analyst"
+        description="Get in touch about data analysis, Power BI dashboards, machine learning projects or collaborations."
+        path="/contact"
+      />
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Back Link */}
         <Link
@@ -105,20 +127,37 @@ export default function Contact() {
               <div className="flex items-center gap-4">
                 <a
                   href="mailto:diiniyare74@gmail.com"
+                  aria-label="Send an email to Diini Kahiye"
                   className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center hover:bg-primary/20 transition-colors"
                 >
                   <Mail className="w-5 h-5 text-primary" />
                 </a>
-                <div>
+                <div className="min-w-0">
                   <div className="text-xs text-muted-foreground">Email</div>
-                  <a
-                    href="mailto:diiniyare74@gmail.com"
-                    className="text-sm text-foreground hover:text-primary transition-colors"
-                  >
-                    diiniyare74@gmail.com
-                  </a>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href="mailto:diiniyare74@gmail.com"
+                      className="text-sm text-foreground hover:text-primary transition-colors truncate"
+                    >
+                      diiniyare74@gmail.com
+                    </a>
+                    <button
+                      type="button"
+                      onClick={handleCopyEmail}
+                      aria-label="Copy email address"
+                      title="Copy email address"
+                      className="shrink-0 p-1 rounded text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {emailCopied ? (
+                        <Check className="w-3.5 h-3.5 text-primary" />
+                      ) : (
+                        <Copy className="w-3.5 h-3.5" />
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
+
 
               {/* Phone - WhatsApp */}
               <div className="flex items-center gap-4">

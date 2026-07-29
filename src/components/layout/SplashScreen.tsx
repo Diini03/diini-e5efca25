@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { LogoMark } from "@/components/LogoMark";
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -16,7 +17,6 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
         clearTimeout(doneTimer);
       };
     };
-    // Wait until the browser reports the page is interactive, then fade fast.
     if (document.readyState === "complete") {
       return start();
     }
@@ -25,7 +25,6 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       cleanup = start();
     };
     window.addEventListener("load", onReady, { once: true });
-    // Safety net so the splash never sticks beyond 1.5s.
     const failsafe = setTimeout(onReady, 1500);
     return () => {
       window.removeEventListener("load", onReady);
@@ -36,14 +35,20 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-background transition-opacity duration-700 ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-background bg-grid transition-opacity duration-700 ${
         phase === "fading" ? "opacity-0" : "opacity-100"
       }`}
     >
-      <div className="text-center animate-fade-in">
-        <h1 className="text-2xl md:text-4xl font-bold text-foreground font-mono">
+      <div className="text-center">
+        <div className="relative mx-auto w-24 h-24">
+          <span className="absolute inset-0 rounded-[26px] bg-primary/20 blur-xl animate-pulse" aria-hidden />
+          <LogoMark className="relative w-24 h-24 animate-logo-float" animated />
+        </div>
+
+        <p className="mt-5 text-sm md:text-base font-mono text-muted-foreground tracking-wide">
           ~/Diini Kahiye<span className="text-primary animate-pulse">.</span>
-        </h1>
+        </p>
+
         <div className="mt-4 mx-auto h-0.5 w-32 overflow-hidden rounded-full bg-muted/40">
           <div className="h-full w-1/3 bg-primary animate-[splash-bar_1s_ease-in-out_infinite]" />
         </div>
