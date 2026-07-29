@@ -772,6 +772,8 @@ export default function ProjectDetail() {
                   </div>
                   <div className="relative aspect-video bg-card overflow-hidden">
                     <img
+                          loading="lazy"
+                          decoding="async"
                       src={chart.image}
                       alt={chart.title}
                       className="w-full h-full object-contain"

@@ -279,6 +279,7 @@ export default function Blog() {
                       <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary/40 border-b border-border/50">
                         {coverImg ? (
                           <img
+                          decoding="async"
                             src={coverImg}
                             alt={post.title}
                             loading="lazy"

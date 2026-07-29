@@ -117,6 +117,7 @@ export default function About() {
               <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-2xl blur-md opacity-60 group-hover:opacity-100 transition" />
               <div className="relative overflow-hidden rounded-2xl border border-border bg-card aspect-[4/5]">
                 <img
+                          decoding="async"
                   src={DIINI_PHOTO_URL}
                   alt="Diini Kahiye"
                   className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
@@ -241,6 +242,8 @@ export default function About() {
                   <div className="p-5 flex gap-4">
                     <div className="w-14 h-14 rounded-lg overflow-hidden border border-border/60 bg-background shrink-0 group-hover:scale-105 transition-transform">
                       <img
+                          loading="lazy"
+                          decoding="async"
                         src={cert.logo}
                         alt={cert.provider}
                         className="w-full h-full object-cover"
