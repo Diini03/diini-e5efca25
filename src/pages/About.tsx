@@ -17,6 +17,7 @@ const LINKTREE_URL = "https://linktr.ee/diinicade";
 import freecodecampLogo from "@/assets/certifications/freecodecamp.png";
 import analystBuilderLogo from "@/assets/certifications/analyst-builder.png";
 import courseraLogo from "@/assets/certifications/coursera.png";
+import { Seo, personJsonLd } from "@/components/Seo";
 
 const skillCategories = [
   {
@@ -57,6 +58,12 @@ const certifications = [
 export default function About() {
   return (
     <div className="min-h-screen">
+      <Seo
+        title="About Diini Kahiye — Data Analyst in Mogadishu"
+        description="Who I am, how I work with data, the tools I use daily, and the certifications behind my data analysis and machine learning practice."
+        path="/about"
+        jsonLd={personJsonLd}
+      />
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Back Link */}
         <Link

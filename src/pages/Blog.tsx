@@ -9,6 +9,7 @@ import imgMlPredict from "@/assets/blog/ml-make-predictions.webp";
 import imgSqlJoins from "@/assets/blog/sql-joins.webp";
 import imgTechTrends from "@/assets/blog/tech-trends-2025.webp";
 import imgDataset from "@/assets/blog/what-makes-dataset-useful.webp";
+import { Seo } from "@/components/Seo";
 
 const blogImages: Record<string, string> = {
   "ai-vs-ml": imgAiVsMl,
@@ -183,6 +184,11 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen animate-fade-in overflow-hidden">
+      <Seo
+        title="Writing on Data, ML & Analytics | Diini Kahiye"
+        description="Essays and short reads on data quality, machine learning fundamentals, SQL and building a data career — written for beginners and practitioners."
+        path="/blog"
+      />
       <div className="max-w-4xl mx-auto px-6 py-12 overflow-hidden">
         {/* Back Link */}
         <Link

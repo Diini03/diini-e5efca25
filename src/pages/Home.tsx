@@ -8,10 +8,17 @@ import { WritingCarousel } from "@/components/home/WritingCarousel";
 import { ParticleBackground } from "@/components/home/ParticleBackground";
 import { InteractiveGradient } from "@/components/home/InteractiveGradient";
 import { CompactClickCounter } from "@/components/home/DashboardCard";
+import { Seo, personJsonLd } from "@/components/Seo";
 
 export default function Home() {
   return (
     <div className="animate-fade-in relative">
+      <Seo
+        title="Diini Kahiye — Data Analyst & Junior Data Scientist"
+        description="Portfolio of Diini Kahiye: Power BI dashboards, machine learning models, SQL analysis and data products built in Mogadishu, Somalia."
+        path="/"
+        jsonLd={personJsonLd}
+      />
       <InteractiveGradient />
       <ParticleBackground />
 

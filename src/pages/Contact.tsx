@@ -4,6 +4,7 @@ import { ArrowLeft, Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-r
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
+import { Seo } from "@/components/Seo";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -73,6 +74,11 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen animate-fade-in">
+      <Seo
+        title="Contact Diini Kahiye — Data Analyst"
+        description="Get in touch about data analysis, Power BI dashboards, machine learning projects or collaborations."
+        path="/contact"
+      />
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Back Link */}
         <Link
