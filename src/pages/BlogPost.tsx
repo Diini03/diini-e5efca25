@@ -356,17 +356,23 @@ export default function BlogPost() {
     year: "numeric",
   });
 
+  const metaDescription = post.content
+    .replace(/[#>*_`\-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 155);
+
   return (
     <div className="min-h-screen animate-fade-in overflow-hidden">
       <Seo
         title={`${post.title} | Diini Kahiye`}
-        description={post.excerpt.slice(0, 155)}
+        description={metaDescription}
         type="article"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "BlogPosting",
           headline: post.title,
-          description: post.excerpt,
+          description: metaDescription,
           datePublished: post.date,
           keywords: post.tags?.join(", "),
           author: { "@type": "Person", name: "Diini Kahiye" },
