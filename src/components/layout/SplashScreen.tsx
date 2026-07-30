@@ -10,8 +10,8 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
 
   useEffect(() => {
     const start = () => {
-      const fadeTimer = setTimeout(() => setPhase("fading"), 700);
-      const doneTimer = setTimeout(() => onComplete(), 1100);
+      const fadeTimer = setTimeout(() => setPhase("fading"), 600);
+      const doneTimer = setTimeout(() => onComplete(), 900);
       return () => {
         clearTimeout(fadeTimer);
         clearTimeout(doneTimer);
@@ -25,7 +25,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       cleanup = start();
     };
     window.addEventListener("load", onReady, { once: true });
-    const failsafe = setTimeout(onReady, 1500);
+    const failsafe = setTimeout(onReady, 1200);
     return () => {
       window.removeEventListener("load", onReady);
       clearTimeout(failsafe);
@@ -35,22 +35,20 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-background bg-grid transition-opacity duration-700 ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-background transition-opacity duration-500 ease-out ${
         phase === "fading" ? "opacity-0" : "opacity-100"
       }`}
     >
-      <div className="text-center">
-        <div className="relative mx-auto w-24 h-24">
-          <span className="absolute inset-0 rounded-[26px] bg-primary/20 blur-xl animate-pulse" aria-hidden />
-          <LogoMark className="relative w-24 h-24 animate-logo-float" animated />
+      <div className="flex flex-col items-center gap-6">
+        <LogoMark className="w-20 h-20" animated />
+
+        <div className="flex items-center gap-1 font-mono text-sm md:text-base text-muted-foreground tracking-wide">
+          <span>~/Diini Kahiye</span>
+          <span className="inline-block w-1.5 h-4 bg-primary animate-cursor-blink" />
         </div>
 
-        <p className="mt-5 text-sm md:text-base font-mono text-muted-foreground tracking-wide">
-          ~/Diini Kahiye<span className="text-primary animate-pulse">.</span>
-        </p>
-
-        <div className="mt-4 mx-auto h-0.5 w-32 overflow-hidden rounded-full bg-muted/40">
-          <div className="h-full w-1/3 bg-primary animate-[splash-bar_1s_ease-in-out_infinite]" />
+        <div className="h-0.5 w-28 overflow-hidden rounded-full bg-muted/40">
+          <div className="h-full w-full origin-left animate-splash-bar bg-primary" />
         </div>
       </div>
     </div>

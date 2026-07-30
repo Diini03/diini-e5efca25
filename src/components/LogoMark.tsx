@@ -30,9 +30,7 @@ export function LogoMark({ className = "w-16 h-16", animated = false }: LogoMark
         fill="hsl(var(--terminal-bg))"
         stroke="url(#dk-stroke)"
         strokeWidth="3"
-        strokeDasharray={animated ? "352" : undefined}
-        strokeDashoffset={animated ? "352" : undefined}
-        className={animated ? "animate-logo-draw" : undefined}
+        className={animated ? "animate-logo-enter" : undefined}
       />
 
       <text
@@ -44,7 +42,7 @@ export function LogoMark({ className = "w-16 h-16", animated = false }: LogoMark
         fontWeight="700"
         fontSize="34"
         fill="hsl(var(--primary))"
-        className={animated ? "animate-logo-pop" : undefined}
+        className={animated ? "animate-logo-enter" : undefined}
       >
         DK
       </text>
