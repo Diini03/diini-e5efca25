@@ -1,6 +1,6 @@
 # 🌐 Diini Kahiye Portfolio
 
-Welcome to my personal portfolio repository.
+Welcome to my personal portfolio repository....
 
 This portfolio showcases who I am, what I build, and the projects I've worked on as a Computer Science student with a strong interest in Data Analysis, Machine Learning, and Web Development.
 
