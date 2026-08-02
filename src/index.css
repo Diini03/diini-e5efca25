@@ -250,19 +250,24 @@
     100% { transform: translateX(420%); }
   }
 
-  /* Animated logo mark (splash screen) */
-  @keyframes logo-enter {
-    0% { opacity: 0; transform: scale(0.92); }
-    100% { opacity: 1; transform: scale(1); }
+  /* Hexagon loader mark (splash screen) */
+  @keyframes hex-draw {
+    0% { stroke-dasharray: 40 240; stroke-dashoffset: 0; }
+    100% { stroke-dasharray: 40 240; stroke-dashoffset: -280; }
   }
-  @keyframes logo-cursor {
-    0%, 100% { opacity: 0.15; transform: scaleX(0.6); }
-    50% { opacity: 1; transform: scaleX(1); }
+  @keyframes hex-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+  }
+  @keyframes mono-in {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
   }
   @keyframes cursor-blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.2; }
   }
+
 
   .animate-logo-enter {
     transform-origin: center;
