@@ -1,6 +1,6 @@
-import somaliaForecast from "@/assets/dashboards/somalia-displacement-forecast.png.asset.json";
-import somaliaIdps from "@/assets/dashboards/somalia-idps-movement.png.asset.json";
-import primeVideo from "@/assets/dashboards/prime-video-dashboard.png.asset.json";
+import somaliaForecast from "@/assets/dashboards/somalia-displacement-forecast.webp";
+import somaliaIdps from "@/assets/dashboards/somalia-idps-movement.webp";
+import primeVideo from "@/assets/dashboards/prime-video.webp";
 
 export interface DashboardItem {
   id: string;
