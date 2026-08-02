@@ -12,16 +12,16 @@ export const dashboards: DashboardItem[] = [
   {
     id: "somalia-displacement-forecast",
     title: "Somalia Displacement Forecast",
-    image: somaliaForecast.url,
+    image: somaliaForecast,
   },
   {
     id: "somalia-idps-movement",
     title: "Somalia IDPs Movement",
-    image: somaliaIdps.url,
+    image: somaliaIdps,
   },
   {
     id: "prime-video",
     title: "Prime Video Content",
-    image: primeVideo.url,
+    image: primeVideo,
   },
 ];
