@@ -4,9 +4,12 @@ interface LogoMarkProps {
 }
 
 /**
- * "DK" monogram inside a rounded terminal frame — matches the favicon branding.
+ * Hexagon loader mark — an outer hexagon that draws itself while a fainter
+ * inner hexagon counter-rotates, with a "DK" monogram at the center.
  */
 export function LogoMark({ className = "w-16 h-16", animated = false }: LogoMarkProps) {
+  const hex = "50,4 90,27 90,73 50,96 10,73 10,27";
+
   return (
     <svg
       viewBox="0 0 100 100"
@@ -14,48 +17,52 @@ export function LogoMark({ className = "w-16 h-16", animated = false }: LogoMark
       role="img"
       aria-label="Diini Kahiye logo"
     >
-      <defs>
-        <linearGradient id="dk-stroke" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="hsl(var(--primary))" />
-          <stop offset="100%" stopColor="hsl(var(--primary) / 0.45)" />
-        </linearGradient>
-      </defs>
+      {/* Static base ring */}
+      <polygon
+        points={hex}
+        fill="none"
+        stroke="hsl(var(--primary) / 0.15)"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
 
-      <rect
-        x="6"
-        y="6"
-        width="88"
-        height="88"
-        rx="22"
-        fill="hsl(var(--terminal-bg))"
-        stroke="url(#dk-stroke)"
-        strokeWidth="3"
-        className={animated ? "animate-logo-enter" : undefined}
+      {/* Drawing arc — acts as the loading indicator */}
+      <polygon
+        points={hex}
+        fill="none"
+        stroke="hsl(var(--primary))"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={animated ? "animate-hex-draw" : undefined}
+      />
+
+      {/* Inner counter-rotating hexagon */}
+      <polygon
+        points={hex}
+        fill="none"
+        stroke="hsl(var(--primary) / 0.28)"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        transform="scale(0.66) translate(25.5, 25.5)"
+        className={animated ? "animate-hex-spin" : undefined}
+        style={{ transformOrigin: "50px 50px" }}
       />
 
       <text
         x="50"
-        y="50"
+        y="52"
         textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="'JetBrains Mono', monospace"
+        dominantBaseline="middle"
+        fontFamily="'Space Grotesk', 'JetBrains Mono', monospace"
         fontWeight="700"
-        fontSize="34"
-        fill="hsl(var(--primary))"
-        className={animated ? "animate-logo-enter" : undefined}
+        fontSize="26"
+        letterSpacing="2"
+        fill="hsl(var(--foreground))"
+        className={animated ? "animate-mono-in" : undefined}
       >
         DK
       </text>
-
-      <rect
-        x="34"
-        y="72"
-        width="32"
-        height="4"
-        rx="2"
-        fill="hsl(var(--primary) / 0.5)"
-        className={animated ? "animate-logo-cursor" : undefined}
-      />
     </svg>
   );
 }
