@@ -1,27 +1,14 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Seo } from "@/components/Seo";
 import { dashboards, photos } from "@/data/dashboards";
 import { DashboardViewer } from "@/components/dashboards/DashboardViewer";
 import { GalleryGrid } from "@/components/dashboards/GalleryGrid";
-import { Eye, EyeOff } from "lucide-react";
 
 const tools = ["Power BI", "Power Query", "DAX"];
 
 export default function Dashboards() {
   const [openSet, setOpenSet] = useState<"work" | "personal" | null>(null);
   const [openIndex, setOpenIndex] = useState(0);
-  const [showPhotos, setShowPhotos] = useState(false);
-  const photosRef = useRef<HTMLDivElement>(null);
-
-  const togglePhotos = () => {
-    const next = !showPhotos;
-    setShowPhotos(next);
-    if (next) {
-      requestAnimationFrame(() =>
-        photosRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
-      );
-    }
-  };
 
   const activeItems = openSet === "personal" ? photos : dashboards;
 
