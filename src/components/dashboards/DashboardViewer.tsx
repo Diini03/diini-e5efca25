@@ -81,7 +81,7 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
       >
         <img
           src={item.image}
-          alt={`${item.title} — Power BI dashboard`}
+          alt={item.title}
           className="max-h-[75vh] max-w-[80vw] w-auto rounded-lg border border-border/60 shadow-2xl object-contain"
         />
         <figcaption className="flex items-center gap-3 font-mono text-xs text-muted-foreground">
