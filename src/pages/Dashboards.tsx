@@ -63,36 +63,21 @@ export default function Dashboards() {
         }}
       />
 
-      {/* Personal reveal */}
-      <div ref={photosRef} className="mt-12 border-t border-border/40 pt-8">
-        <div className="flex flex-col items-center gap-2 text-center">
-          <button
-            onClick={togglePhotos}
-            aria-expanded={showPhotos}
-            className="inline-flex items-center gap-2 rounded-full border border-primary/40 px-4 py-2 font-mono text-xs text-primary transition-all hover:bg-primary/10 hover:border-primary/60"
-          >
-            {showPhotos ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
-            {showPhotos ? "Hide photos" : "$ whoami --photos"}
-          </button>
-          <p className="text-xs text-muted-foreground">
-            {showPhotos
-              ? "Hover a photo to bring it back to colour."
-              : "Curious who's behind these dashboards? Click here."}
-          </p>
-        </div>
-
-        {showPhotos && (
-          <div className="mt-8 animate-fade-in">
-            <GalleryGrid
-              items={photos}
-              variant="personal"
-              onOpen={(i) => {
-                setOpenSet("personal");
-                setOpenIndex(i);
-              }}
-            />
-          </div>
-        )}
+      {/* Personal photos */}
+      <div className="mt-12 border-t border-border/40 pt-8">
+        <p className="font-mono text-xs text-primary mb-1">~/gallery/me</p>
+        <h2 className="text-xl font-bold text-foreground mb-1">Besides the work</h2>
+        <p className="text-sm text-muted-foreground mb-6">
+          Besides my work, here are a few pictures of me.
+        </p>
+        <GalleryGrid
+          items={photos}
+          variant="personal"
+          onOpen={(i) => {
+            setOpenSet("personal");
+            setOpenIndex(i);
+          }}
+        />
       </div>
 
       {openSet !== null && (
