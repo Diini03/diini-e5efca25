@@ -35,9 +35,7 @@ export function GalleryGrid({ items, onOpen, variant = "work" }: GalleryGridProp
               alt={personal ? `Diini Kahiye — ${item.title}` : `${item.title} — Power BI dashboard`}
               loading="lazy"
               decoding="async"
-              className={`w-full transition-all duration-500 group-hover:scale-[1.02] ${
-                personal ? "grayscale group-hover:grayscale-0 group-active:grayscale-0" : ""
-              }`}
+              className="w-full transition-transform duration-500 group-hover:scale-[1.02]"
             />
             <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-background/50 opacity-0 transition-opacity group-hover:opacity-100">
               <Maximize2 className="h-5 w-5 text-primary" />
