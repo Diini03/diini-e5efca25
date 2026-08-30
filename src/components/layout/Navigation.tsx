@@ -7,7 +7,7 @@ import { RESUME_URL } from "@/lib/resume";
 const navItems = [
   { label: "About", path: "/about" },
   { label: "Projects", path: "/projects" },
-  { label: "Dashboards", path: "/dashboards" },
+  { label: "Gallery", path: "/dashboards" },
   { label: "Blog", path: "/blog" },
   { label: "Contact", path: "/contact" },
 ];
