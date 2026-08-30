@@ -18,6 +18,7 @@ import freecodecampLogo from "@/assets/certifications/freecodecamp.png";
 import analystBuilderLogo from "@/assets/certifications/analyst-builder.png";
 import courseraLogo from "@/assets/certifications/coursera.png";
 import { Seo, personJsonLd } from "@/components/Seo";
+import { AgeCounter } from "@/components/about/AgeCounter";
 
 const skillCategories = [
   {
