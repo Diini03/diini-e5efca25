@@ -42,7 +42,7 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
       role="dialog"
       aria-modal="true"
       aria-label={item.title}
-      className="fixed inset-0 z-[90] flex items-center justify-center bg-background/95 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-[90] flex items-center justify-center overscroll-contain touch-none bg-background/95 backdrop-blur-sm animate-fade-in"
       onClick={onClose}
     >
       <button
