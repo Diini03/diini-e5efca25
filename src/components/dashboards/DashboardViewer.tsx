@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import type { DashboardItem } from "@/data/dashboards";
 
 interface DashboardViewerProps {
