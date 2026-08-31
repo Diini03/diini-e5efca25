@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import type { DashboardItem } from "@/data/dashboards";
 
 interface DashboardViewerProps {
@@ -21,6 +22,8 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
     [index, items.length, onNavigate]
   );
 
+  useScrollLock(true);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -28,12 +31,9 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
       if (e.key === "ArrowRight") next();
     };
     document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
+    return () => document.removeEventListener("keydown", onKey);
   }, [onClose, prev, next]);
+
 
   if (!item) return null;
 
@@ -42,7 +42,7 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
       role="dialog"
       aria-modal="true"
       aria-label={item.title}
-      className="fixed inset-0 z-[90] flex items-center justify-center bg-background/95 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-[90] flex items-center justify-center overscroll-contain touch-none bg-background/95 backdrop-blur-sm animate-fade-in"
       onClick={onClose}
     >
       <button

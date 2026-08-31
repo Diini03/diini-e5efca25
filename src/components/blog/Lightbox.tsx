@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { X } from "lucide-react";
+import { useScrollLock } from "@/hooks/useScrollLock";
 
 interface LightboxProps {
   src: string;
@@ -8,22 +9,19 @@ interface LightboxProps {
 }
 
 export function Lightbox({ src, alt, onClose }: LightboxProps) {
+  useScrollLock(true);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
   return (
     <div
-      className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8 animate-fade-in"
+      className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8 overscroll-contain touch-none animate-fade-in"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
