@@ -35,18 +35,19 @@ export function AgeCounter() {
     daysLeft <= 1
       ? "birthday today"
       : monthsLeft >= 3
-        ? `${nextAge} in October`
+        ? `turns ${nextAge} in October`
         : monthsLeft >= 1
-          ? `${nextAge} in ${monthsLeft}mo`
-          : `${nextAge} in ${daysLeft}d`;
+          ? `turns ${nextAge} in ${monthsLeft} month${monthsLeft > 1 ? "s" : ""}`
+          : `turns ${nextAge} in ${daysLeft} day${daysLeft > 1 ? "s" : ""}`;
 
   return (
     <div className="mt-2 flex items-center gap-2 font-mono text-[11px] text-muted-foreground/80">
       <Cake className="h-3 w-3 shrink-0 text-primary" />
-      <span className="text-primary font-semibold tabular-nums">{years}</span>
-      <span>yrs</span>
-      <span className="text-muted-foreground/40">·</span>
-      <span className="truncate">{countdown}</span>
+      <span>
+        <span className="text-primary font-semibold tabular-nums">{years}</span> years old
+        <span className="text-muted-foreground/40"> · </span>
+        {countdown}
+      </span>
     </div>
   );
 }
