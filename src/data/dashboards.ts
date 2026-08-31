@@ -34,7 +34,7 @@ export const dashboards: DashboardItem[] = [
 export const photos: DashboardItem[] = [
   { id: "portrait", title: "Portrait", image: portraitSuit },
   { id: "street", title: "Mogadishu streets", image: streetThobe },
-  { id: "coffee", title: "Coffee break", image: coffeeShop },
+  { id: "graduation", title: "Graduation day", image: graduation },
   { id: "evening", title: "Evening", image: eveningChair },
   { id: "selfie", title: "Looking up", image: ceilingSelfie },
 ];
