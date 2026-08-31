@@ -9,7 +9,8 @@ import {
   Link2,
 } from "lucide-react";
 import { RESUME_URL } from "@/lib/resume";
-const DIINI_PHOTO_URL = "/diini-graduation.jpg?v=2026-07-29";
+import diiniPhoto from "@/assets/gallery/about-coffee.webp";
+const DIINI_PHOTO_URL = diiniPhoto;
 
 const LINKTREE_URL = "https://linktr.ee/diinicade";
 
