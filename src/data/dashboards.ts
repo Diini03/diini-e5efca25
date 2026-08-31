@@ -3,7 +3,7 @@ import somaliaIdps from "@/assets/dashboards/somalia-idps-movement.webp";
 import primeVideo from "@/assets/dashboards/prime-video.webp";
 import portraitSuit from "@/assets/gallery/portrait-suit.webp";
 import streetThobe from "@/assets/gallery/street-thobe.webp";
-import coffeeShop from "@/assets/gallery/coffee-shop.webp";
+import graduation from "@/assets/gallery/graduation.webp";
 import eveningChair from "@/assets/gallery/evening-chair.webp";
 import ceilingSelfie from "@/assets/gallery/ceiling-selfie.webp";
 
