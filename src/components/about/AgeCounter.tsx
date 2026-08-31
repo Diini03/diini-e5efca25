@@ -33,23 +33,21 @@ export function AgeCounter() {
 
   const countdown =
     daysLeft <= 1
-      ? "birthday is today 🎂"
+      ? "birthday today"
       : monthsLeft >= 3
-        ? `turns ${nextAge} in the next October`
+        ? `${nextAge} in October`
         : monthsLeft >= 1
-          ? `turns ${nextAge} in ${monthsLeft} month${monthsLeft > 1 ? "s" : ""}`
-          : `turns ${nextAge} in ${daysLeft} days`;
+          ? `${nextAge} in ${monthsLeft}mo`
+          : `${nextAge} in ${daysLeft}d`;
 
   return (
-    <div className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-card/60 px-3 py-2">
-      <span className="text-sm">
-        <span className="font-mono font-bold text-primary tabular-nums">{years}</span>{" "}
-        <span className="text-muted-foreground text-xs">years old</span>
-      </span>
-      <span className="flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground/80">
-        <Cake className="h-3 w-3 text-primary" />
-        {countdown}
-      </span>
+    <div className="mt-2 flex items-center gap-2 font-mono text-[11px] text-muted-foreground/80">
+      <Cake className="h-3 w-3 shrink-0 text-primary" />
+      <span className="text-primary font-semibold tabular-nums">{years}</span>
+      <span>yrs</span>
+      <span className="text-muted-foreground/40">·</span>
+      <span className="truncate">{countdown}</span>
     </div>
   );
 }
+
