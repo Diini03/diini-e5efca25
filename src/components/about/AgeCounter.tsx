@@ -10,48 +10,46 @@ function computeAge(now: Date) {
   );
   if (now < anniversaryThisYear) years -= 1;
 
-  const last = new Date(
-    Date.UTC(now.getUTCFullYear() - (now < anniversaryThisYear ? 1 : 0), BIRTH.getUTCMonth(), BIRTH.getUTCDate())
-  );
-  const next = new Date(Date.UTC(last.getUTCFullYear() + 1, BIRTH.getUTCMonth(), BIRTH.getUTCDate()));
-  const fraction = (now.getTime() - last.getTime()) / (next.getTime() - last.getTime());
+  const next =
+    now < anniversaryThisYear
+      ? anniversaryThisYear
+      : new Date(Date.UTC(now.getUTCFullYear() + 1, BIRTH.getUTCMonth(), BIRTH.getUTCDate()));
 
   const daysLeft = Math.ceil((next.getTime() - now.getTime()) / 86_400_000);
-  const monthsLeft = Math.floor(daysLeft / 30);
+  const monthsLeft = Math.floor(daysLeft / 30.44);
 
-  return { years, precise: years + fraction, next: years + 1, daysLeft, monthsLeft };
+  return { years, nextAge: years + 1, daysLeft, monthsLeft };
 }
 
 export function AgeCounter() {
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 50);
+    const id = setInterval(() => setNow(new Date()), 60_000);
     return () => clearInterval(id);
   }, []);
 
-  const { years, precise, next, daysLeft, monthsLeft } = computeAge(now);
+  const { years, nextAge, daysLeft, monthsLeft } = computeAge(now);
 
   const countdown =
     daysLeft <= 1
       ? "birthday is today 🎂"
-      : monthsLeft >= 1
-        ? `turns ${next} in ${monthsLeft} month${monthsLeft > 1 ? "s" : ""}`
-        : `turns ${next} in ${daysLeft} days`;
+      : monthsLeft >= 3
+        ? `turns ${nextAge} in the next October`
+        : monthsLeft >= 1
+          ? `turns ${nextAge} in ${monthsLeft} month${monthsLeft > 1 ? "s" : ""}`
+          : `turns ${nextAge} in ${daysLeft} days`;
 
   return (
     <div className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-card/60 px-3 py-2">
-      <div className="flex items-baseline gap-1.5">
-        <span className="font-mono text-sm font-bold text-primary tabular-nums">
-          {precise.toFixed(8)}
-        </span>
-        <span className="text-xs text-muted-foreground">years old</span>
-      </div>
+      <span className="text-sm">
+        <span className="font-mono font-bold text-primary tabular-nums">{years}</span>{" "}
+        <span className="text-muted-foreground text-xs">years old</span>
+      </span>
       <span className="flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground/80">
         <Cake className="h-3 w-3 text-primary" />
         {countdown}
       </span>
-      <span className="sr-only">{years} years old</span>
     </div>
   );
 }
