@@ -22,6 +22,8 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
     [index, items.length, onNavigate]
   );
 
+  useScrollLock(true);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -29,12 +31,9 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
       if (e.key === "ArrowRight") next();
     };
     document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
+    return () => document.removeEventListener("keydown", onKey);
   }, [onClose, prev, next]);
+
 
   if (!item) return null;
 
