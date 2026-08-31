@@ -85,7 +85,7 @@ export default function About() {
         <div className="grid md:grid-cols-[1fr_240px] gap-8 mb-10 items-start">
           <div className="space-y-4 text-muted-foreground text-sm leading-relaxed order-2 md:order-1">
             <p>
-              I'm <span className="text-primary">Diini Kahiye</span>, a senior
+              I'm <span className="text-primary">Diini M. Kahiye</span>, a senior
               data analyst, where I use Python, SQL, and modern BI tools like
               Power BI to clean, analyze, and visualize data — turning raw
               numbers into clear, actionable insights.
