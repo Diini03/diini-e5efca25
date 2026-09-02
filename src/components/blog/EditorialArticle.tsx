@@ -20,10 +20,20 @@ export type EditorialBlock =
       side: "left" | "right" | "full";
       text?: string; // paragraph that wraps beside the figure
     }
+  | {
+      // Image floated inside a running column of text, magazine style.
+      type: "wrap";
+      src: string;
+      alt: string;
+      caption?: string;
+      float: "left" | "right";
+      text: string; // paragraphs separated by \n\n, wrapping around the image
+    }
   | { type: "pullquote"; text: string; attribution?: string }
   | { type: "stats"; items: { value: string; label: string }[] }
   | { type: "callout"; title: string; body: string }
   | { type: "takeaways"; title?: string; items: string[] };
+
 
 interface Props {
   blocks: EditorialBlock[];
