@@ -20,10 +20,20 @@ export type EditorialBlock =
       side: "left" | "right" | "full";
       text?: string; // paragraph that wraps beside the figure
     }
+  | {
+      // Image floated inside a running column of text, magazine style.
+      type: "wrap";
+      src: string;
+      alt: string;
+      caption?: string;
+      float: "left" | "right";
+      text: string; // paragraphs separated by \n\n, wrapping around the image
+    }
   | { type: "pullquote"; text: string; attribution?: string }
   | { type: "stats"; items: { value: string; label: string }[] }
   | { type: "callout"; title: string; body: string }
   | { type: "takeaways"; title?: string; items: string[] };
+
 
 interface Props {
   blocks: EditorialBlock[];
@@ -62,14 +72,14 @@ function BlockRenderer({
   switch (block.type) {
     case "lede":
       return (
-        <p className="font-serif text-[18px] sm:text-[19px] text-foreground/95 leading-[1.75] first-letter:font-serif first-letter:text-[4rem] first-letter:font-bold first-letter:text-primary first-letter:mr-2 first-letter:float-left first-letter:leading-[0.85] first-letter:mt-1">
+        <p className="font-serif text-[18px] sm:text-[19px] text-foreground/95 leading-[1.75] text-justify first-letter:font-serif first-letter:text-[4rem] first-letter:font-bold first-letter:text-primary first-letter:mr-2 first-letter:float-left first-letter:leading-[0.85] first-letter:mt-1">
           {block.text}
         </p>
       );
 
     case "paragraph":
       return (
-        <p className="font-serif text-[17px] text-foreground/90 leading-[1.8]">
+        <p className="font-serif text-[17px] text-foreground/90 leading-[1.8] text-justify whitespace-pre-line">
           {block.text}
         </p>
       );
