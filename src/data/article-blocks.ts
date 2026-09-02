@@ -1,15 +1,15 @@
 import type { EditorialBlock } from "@/components/blog/EditorialArticle";
 
-import imgSomArchive from "@/assets/blog/articles/som-archive.webp";
-import imgSomLoop from "@/assets/blog/articles/som-loop.webp";
-import imgSomQuote from "@/assets/blog/articles/som-quote.webp";
-import imgCcSun from "@/assets/blog/articles/cc-sun.webp";
-import imgCcGrowth from "@/assets/blog/articles/cc-growth.webp";
-import imgCcFramework from "@/assets/blog/articles/cc-framework.webp";
-import imgModelQuestion from "@/assets/blog/articles/model-question.webp";
-import imgModelCutoff from "@/assets/blog/articles/model-cutoff.webp";
-import imgModelTable from "@/assets/blog/articles/model-table.webp";
-import imgModelPoem from "@/assets/blog/articles/model-poem.webp";
+import imgSomArchive from "@/assets/blog/articles/som-archive.webp.asset.json";
+import imgSomLoop from "@/assets/blog/articles/som-loop.webp.asset.json";
+import imgSomQuote from "@/assets/blog/articles/som-quote.webp.asset.json";
+import imgCcSun from "@/assets/blog/articles/cc-sun.webp.asset.json";
+import imgCcGrowth from "@/assets/blog/articles/cc-growth.webp.asset.json";
+import imgCcFramework from "@/assets/blog/articles/cc-framework.webp.asset.json";
+import imgModelQuestion from "@/assets/blog/articles/model-question.webp.asset.json";
+import imgModelCutoff from "@/assets/blog/articles/model-cutoff.webp.asset.json";
+import imgModelTable from "@/assets/blog/articles/model-table.webp.asset.json";
+import imgModelPoem from "@/assets/blog/articles/model-poem.webp.asset.json";
 
 /**
  * Full long-form articles (originally published on Medium), laid out with the
@@ -24,7 +24,7 @@ export const articleBlocks: Record<string, EditorialBlock[]> = {
     },
     {
       type: "wrap",
-      src: imgSomArchive,
+      src: imgSomArchive.url,
       alt: "Stacks of paper archives beside an empty desk lit by a glowing question mark",
       caption: "Fig. 1 — Collected, filed, and never opened again.",
       float: "right",
@@ -33,7 +33,7 @@ export const articleBlocks: Record<string, EditorialBlock[]> = {
     { type: "heading", text: "The humanitarian loop" },
     {
       type: "figure",
-      src: imgSomLoop,
+      src: imgSomLoop.url,
       alt: "Circular diagram: collect data, clean and analyze, build report, send to funder",
       caption: "Fig. 2 — The loop most Somali data never escapes.",
       side: "left",
@@ -50,7 +50,7 @@ export const articleBlocks: Record<string, EditorialBlock[]> = {
     },
     {
       type: "wrap",
-      src: imgSomQuote,
+      src: imgSomQuote.url,
       alt: "Black card reading: The data exists. Nobody is using it.",
       caption: "Fig. 3 — The whole problem, in six words.",
       float: "left",
@@ -95,7 +95,7 @@ export const articleBlocks: Record<string, EditorialBlock[]> = {
     { type: "heading", text: "The AI example" },
     {
       type: "wrap",
-      src: imgCcGrowth,
+      src: imgCcGrowth.url,
       alt: "Line chart showing AI growth and tech jobs rising together above market conditions",
       caption: "Fig. 1 — Two lines rising together is not an explanation.",
       float: "right",
@@ -107,7 +107,7 @@ export const articleBlocks: Record<string, EditorialBlock[]> = {
     },
     {
       type: "figure",
-      src: imgCcSun,
+      src: imgCcSun.url,
       alt: "Diagram showing the sun driving both ice cream sales and beach swimming",
       caption: "Fig. 2 — The hidden third variable, doing all the work.",
       side: "left",
@@ -133,7 +133,7 @@ export const articleBlocks: Record<string, EditorialBlock[]> = {
     { type: "heading", text: "Before you write any finding" },
     {
       type: "figure",
-      src: imgCcFramework,
+      src: imgCcFramework.url,
       alt: "Causal analysis framework: three checklist cards with questions",
       caption: "Fig. 3 — Three questions to ask before calling anything a cause.",
       side: "full",
@@ -165,7 +165,7 @@ export const articleBlocks: Record<string, EditorialBlock[]> = {
     },
     {
       type: "wrap",
-      src: imgModelPoem,
+      src: imgModelPoem.url,
       alt: "Same prompt sent to ChatGPT and Claude producing two different poems",
       caption: "Fig. 1 — One question, two brains, two answers.",
       float: "right",
@@ -191,7 +191,7 @@ export const articleBlocks: Record<string, EditorialBlock[]> = {
     { type: "heading", text: "What makes one model different from another?" },
     {
       type: "wrap",
-      src: imgModelTable,
+      src: imgModelTable.url,
       alt: "Table comparing Model A and Model B on optimization, behavior and tone",
       caption: "Fig. 2 — Different priorities, baked in during training.",
       float: "left",
@@ -199,7 +199,7 @@ export const articleBlocks: Record<string, EditorialBlock[]> = {
     },
     {
       type: "figure",
-      src: imgModelCutoff,
+      src: imgModelCutoff.url,
       alt: "Timeline showing knowledge cutoff at 2023 separating known from unknown",
       caption: "Fig. 3 — Everything after the cutoff simply was not there.",
       side: "right",
@@ -230,7 +230,7 @@ export const articleBlocks: Record<string, EditorialBlock[]> = {
     },
     {
       type: "figure",
-      src: imgModelQuestion,
+      src: imgModelQuestion.url,
       alt: "Crossed out question 'Why did AI say this?' replaced with 'Which model said this — and why?'",
       caption: "Fig. 4 — The better question.",
       side: "full",
