@@ -72,14 +72,14 @@ function BlockRenderer({
   switch (block.type) {
     case "lede":
       return (
-        <p className="font-serif text-[18px] sm:text-[19px] text-foreground/95 leading-[1.75] first-letter:font-serif first-letter:text-[4rem] first-letter:font-bold first-letter:text-primary first-letter:mr-2 first-letter:float-left first-letter:leading-[0.85] first-letter:mt-1">
+        <p className="font-serif text-[18px] sm:text-[19px] text-foreground/95 leading-[1.75] text-justify first-letter:font-serif first-letter:text-[4rem] first-letter:font-bold first-letter:text-primary first-letter:mr-2 first-letter:float-left first-letter:leading-[0.85] first-letter:mt-1">
           {block.text}
         </p>
       );
 
     case "paragraph":
       return (
-        <p className="font-serif text-[17px] text-foreground/90 leading-[1.8]">
+        <p className="font-serif text-[17px] text-foreground/90 leading-[1.8] text-justify whitespace-pre-line">
           {block.text}
         </p>
       );
