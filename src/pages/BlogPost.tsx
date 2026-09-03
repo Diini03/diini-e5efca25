@@ -464,47 +464,24 @@ export default function BlogPost() {
               ))}
             </article>
           )
+        ) : articleBlocks[slug ?? ""] ? (
+          <div className="mb-12">
+            <EditorialArticle blocks={articleBlocks[slug ?? ""]} />
+          </div>
         ) : (
           <article className="mb-12">
-            {(() => {
-              const paragraphs = post.content.split("\n\n");
-              const isMedium = post.source === "medium" && post.externalUrl;
-              const ctaAfter = isMedium ? Math.min(2, paragraphs.length - 1) : -1;
-              return paragraphs.map((paragraph, index) => (
-                <div key={index}>
-                  <p
-                    className={`text-[17px] text-foreground/90 leading-[1.85] mb-6 ${
-                      index === 0
-                        ? "first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-1.5 first-letter:float-left first-letter:leading-[0.9] first-letter:mt-1"
-                        : ""
-                    }`}
-                  >
-                    {paragraph}
-                  </p>
-                  {index === ctaAfter && (
-                    <a
-                      href={post.externalUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="my-10 flex items-center justify-between gap-4 rounded-xl border border-primary/40 bg-primary/5 p-5 hover:bg-primary/10 hover:border-primary/60 transition-all group"
-                    >
-                      <div>
-                        <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-1">
-                          Continue on Medium
-                        </div>
-                        <div className="text-[15px] font-semibold text-foreground">
-                          Read the full story on Medium →
-                        </div>
-                        <div className="text-xs text-muted-foreground mt-1">
-                          The rest of the breakdown, with the full argument.
-                        </div>
-                      </div>
-                      <ExternalLink className="w-5 h-5 text-primary shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </a>
-                  )}
-                </div>
-              ));
-            })()}
+            {post.content.split("\n\n").map((paragraph, index) => (
+              <p
+                key={index}
+                className={`text-[17px] text-foreground/90 leading-[1.85] mb-6 text-justify hyphens-auto ${
+                  index === 0
+                    ? "first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-1.5 first-letter:float-left first-letter:leading-[0.9] first-letter:mt-1"
+                    : ""
+                }`}
+              >
+                {paragraph}
+              </p>
+            ))}
           </article>
         )}
 
