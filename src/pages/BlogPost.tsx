@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { EditorialArticle } from "@/components/blog/EditorialArticle";
 import { carouselBlocks } from "@/data/carousel-blocks";
+import { articleBlocks } from "@/data/article-blocks";
 
 import imgAiVsMl from "@/assets/blog/ai-vs-ml.webp";
 import imgDataCareer from "@/assets/blog/data-career-tips.webp";
@@ -349,6 +350,7 @@ export default function BlogPost() {
   }
 
   const isCarousel = post.source === "linkedin";
+  const hasArticleBlocks = !!articleBlocks[slug ?? ""];
   const coverImg = isCarousel ? blogImages[slug ?? ""] : undefined;
   const dateLong = new Date(post.date).toLocaleDateString("en-US", {
     month: "long",
@@ -378,7 +380,7 @@ export default function BlogPost() {
           author: { "@type": "Person", name: "Diini Kahiye" },
         }}
       />
-      <div className={`${isCarousel ? "max-w-4xl" : "max-w-2xl"} mx-auto px-4 sm:px-6 py-12`}>
+      <div className={`${isCarousel || hasArticleBlocks ? "max-w-4xl" : "max-w-2xl"} mx-auto px-4 sm:px-6 py-12`}>
         {/* Back Link */}
         <Link
           to="/blog"
@@ -500,7 +502,7 @@ export default function BlogPost() {
 
 
         {/* Highlights — "What to remember" (only for non-carousel posts; carousels embed takeaways) */}
-        {!isCarousel && post.highlights && post.highlights.length > 0 && (
+        {!isCarousel && !hasArticleBlocks && post.highlights && post.highlights.length > 0 && (
           <div className="relative mb-8 pl-5 border-l-2 border-primary/60">
             <div className="flex items-center gap-2 mb-4">
               <Lightbulb className="w-4 h-4 text-primary" />
