@@ -161,6 +161,50 @@ function BlockRenderer({
       );
     }
 
+    case "wrap": {
+      const { src, alt, caption, float, text } = block;
+      return (
+        <div className="my-2 clear-both after:block after:clear-both after:content-['']">
+          <figure
+            className={`${
+              float === "left" ? "float-left mr-6" : "float-left md:float-right md:ml-6 mr-6 md:mr-0"
+            } w-1/2 max-w-[320px] mb-3`}
+          >
+            <button
+              type="button"
+              onClick={() => onZoom({ src, alt })}
+              className="group relative block w-full overflow-hidden rounded-lg border border-border/60 shadow-md hover:shadow-lg transition-shadow"
+              aria-label="Open image"
+            >
+              <img
+                src={src}
+                alt={alt}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
+              />
+              <span className="absolute top-2 right-2 p-1.5 rounded-full bg-background/70 backdrop-blur opacity-0 group-hover:opacity-100 transition-opacity">
+                <ZoomIn className="w-4 h-4 text-foreground" />
+              </span>
+            </button>
+            {caption && (
+              <figcaption className="mt-2 text-[11.5px] italic text-muted-foreground font-serif">
+                {caption}
+              </figcaption>
+            )}
+          </figure>
+          {text.split("\n\n").map((p, i) => (
+            <p
+              key={i}
+              className="font-serif text-[17px] text-foreground/90 leading-[1.8] text-justify hyphens-auto whitespace-pre-line mb-5"
+            >
+              {p}
+            </p>
+          ))}
+        </div>
+      );
+    }
+
     case "pullquote":
       return (
         <blockquote className="my-4 relative border-l-4 border-primary pl-6 py-2">

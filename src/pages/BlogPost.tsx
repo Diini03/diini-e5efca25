@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { EditorialArticle } from "@/components/blog/EditorialArticle";
 import { carouselBlocks } from "@/data/carousel-blocks";
+import { articleBlocks } from "@/data/article-blocks";
 
 import imgAiVsMl from "@/assets/blog/ai-vs-ml.webp";
 import imgDataCareer from "@/assets/blog/data-career-tips.webp";
@@ -349,6 +350,7 @@ export default function BlogPost() {
   }
 
   const isCarousel = post.source === "linkedin";
+  const hasArticleBlocks = !!articleBlocks[slug ?? ""];
   const coverImg = isCarousel ? blogImages[slug ?? ""] : undefined;
   const dateLong = new Date(post.date).toLocaleDateString("en-US", {
     month: "long",
@@ -378,7 +380,7 @@ export default function BlogPost() {
           author: { "@type": "Person", name: "Diini Kahiye" },
         }}
       />
-      <div className={`${isCarousel ? "max-w-4xl" : "max-w-2xl"} mx-auto px-4 sm:px-6 py-12`}>
+      <div className={`${isCarousel || hasArticleBlocks ? "max-w-4xl" : "max-w-2xl"} mx-auto px-4 sm:px-6 py-12`}>
         {/* Back Link */}
         <Link
           to="/blog"
@@ -464,47 +466,24 @@ export default function BlogPost() {
               ))}
             </article>
           )
+        ) : articleBlocks[slug ?? ""] ? (
+          <div className="mb-12">
+            <EditorialArticle blocks={articleBlocks[slug ?? ""]} />
+          </div>
         ) : (
           <article className="mb-12">
-            {(() => {
-              const paragraphs = post.content.split("\n\n");
-              const isMedium = post.source === "medium" && post.externalUrl;
-              const ctaAfter = isMedium ? Math.min(2, paragraphs.length - 1) : -1;
-              return paragraphs.map((paragraph, index) => (
-                <div key={index}>
-                  <p
-                    className={`text-[17px] text-foreground/90 leading-[1.85] mb-6 ${
-                      index === 0
-                        ? "first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-1.5 first-letter:float-left first-letter:leading-[0.9] first-letter:mt-1"
-                        : ""
-                    }`}
-                  >
-                    {paragraph}
-                  </p>
-                  {index === ctaAfter && (
-                    <a
-                      href={post.externalUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="my-10 flex items-center justify-between gap-4 rounded-xl border border-primary/40 bg-primary/5 p-5 hover:bg-primary/10 hover:border-primary/60 transition-all group"
-                    >
-                      <div>
-                        <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-1">
-                          Continue on Medium
-                        </div>
-                        <div className="text-[15px] font-semibold text-foreground">
-                          Read the full story on Medium →
-                        </div>
-                        <div className="text-xs text-muted-foreground mt-1">
-                          The rest of the breakdown, with the full argument.
-                        </div>
-                      </div>
-                      <ExternalLink className="w-5 h-5 text-primary shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </a>
-                  )}
-                </div>
-              ));
-            })()}
+            {post.content.split("\n\n").map((paragraph, index) => (
+              <p
+                key={index}
+                className={`text-[17px] text-foreground/90 leading-[1.85] mb-6 text-justify hyphens-auto ${
+                  index === 0
+                    ? "first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-1.5 first-letter:float-left first-letter:leading-[0.9] first-letter:mt-1"
+                    : ""
+                }`}
+              >
+                {paragraph}
+              </p>
+            ))}
           </article>
         )}
 
@@ -523,7 +502,7 @@ export default function BlogPost() {
 
 
         {/* Highlights — "What to remember" (only for non-carousel posts; carousels embed takeaways) */}
-        {!isCarousel && post.highlights && post.highlights.length > 0 && (
+        {!isCarousel && !hasArticleBlocks && post.highlights && post.highlights.length > 0 && (
           <div className="relative mb-8 pl-5 border-l-2 border-primary/60">
             <div className="flex items-center gap-2 mb-4">
               <Lightbulb className="w-4 h-4 text-primary" />
