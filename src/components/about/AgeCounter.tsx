@@ -1,24 +1,45 @@
 import { useEffect, useState } from "react";
 import { Cake } from "lucide-react";
 
-const BIRTH = new Date("2004-10-26T00:00:00Z");
+const BIRTH_YEAR = 2004;
+const BIRTH_MONTH = 9; // October (0-indexed)
+const BIRTH_DAY = 26;
+
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
 
 function computeAge(now: Date) {
-  let years = now.getUTCFullYear() - BIRTH.getUTCFullYear();
-  const anniversaryThisYear = new Date(
-    Date.UTC(now.getUTCFullYear(), BIRTH.getUTCMonth(), BIRTH.getUTCDate())
+  const y = now.getUTCFullYear();
+  const anniversaryThisYear = Date.UTC(y, BIRTH_MONTH, BIRTH_DAY);
+  const t = now.getTime();
+
+  // Age in completed years
+  const years = (t >= anniversaryThisYear ? y : y - 1) - BIRTH_YEAR;
+
+  // Next birthday
+  const nextYear = t >= anniversaryThisYear ? y + 1 : y;
+  const next = Date.UTC(nextYear, BIRTH_MONTH, BIRTH_DAY);
+
+  // Exact calendar months + remaining days until the next birthday
+  let monthsLeft = 0;
+  let cursor = Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate()
   );
-  if (now < anniversaryThisYear) years -= 1;
+  while (true) {
+    const d = new Date(cursor);
+    const step = Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate());
+    if (step > next) break;
+    cursor = step;
+    monthsLeft += 1;
+  }
+  const daysLeft = Math.round((next - cursor) / 86_400_000);
+  const totalDaysLeft = Math.ceil((next - t) / 86_400_000);
 
-  const next =
-    now < anniversaryThisYear
-      ? anniversaryThisYear
-      : new Date(Date.UTC(now.getUTCFullYear() + 1, BIRTH.getUTCMonth(), BIRTH.getUTCDate()));
-
-  const daysLeft = Math.ceil((next.getTime() - now.getTime()) / 86_400_000);
-  const monthsLeft = Math.floor(daysLeft / 30.44);
-
-  return { years, nextAge: years + 1, daysLeft, monthsLeft };
+  return { years, nextAge: years + 1, monthsLeft, daysLeft, totalDaysLeft };
 }
 
 export function AgeCounter() {
@@ -29,16 +50,20 @@ export function AgeCounter() {
     return () => clearInterval(id);
   }, []);
 
-  const { years, nextAge, daysLeft, monthsLeft } = computeAge(now);
+  const { years, nextAge, monthsLeft, daysLeft, totalDaysLeft } = computeAge(now);
+  const birthMonthName = MONTH_NAMES[BIRTH_MONTH];
+
+  const plural = (n: number, unit: string) => `${n} ${unit}${n > 1 ? "s" : ""}`;
 
   const countdown =
-    daysLeft <= 1
-      ? "birthday today"
-      : monthsLeft >= 3
-        ? `turns ${nextAge} in October`
+    totalDaysLeft <= 0
+      ? `turns ${nextAge - 1} today 🎉`
+      : monthsLeft >= 6
+        ? `turns ${nextAge} next ${birthMonthName}`
         : monthsLeft >= 1
-          ? `turns ${nextAge} in ${monthsLeft} month${monthsLeft > 1 ? "s" : ""}`
-          : `turns ${nextAge} in ${daysLeft} day${daysLeft > 1 ? "s" : ""}`;
+          ? `turns ${nextAge} in ${plural(monthsLeft, "month")}${daysLeft > 0 ? ` ${plural(daysLeft, "day")}` : ""}`
+          : `turns ${nextAge} in ${plural(totalDaysLeft, "day")}`;
+
 
   return (
     <div className="mt-2 flex items-center gap-2 font-mono text-[11px] text-muted-foreground/80">
