@@ -12,17 +12,17 @@ type Item = {
 const items: Item[] = [
   {
     kind: "learning",
-    role: "Machine Learning",
-    org: "Self-directed",
-    date: "2026 — Present",
-    note: "Started building ML models — CNNs, classification, and applied deep learning projects.",
+    role: "Data Science & Machine Learning",
+    org: "Goobo Labs · self-directed bootcamps",
+    date: "Jun 2026 — Present",
+    note: "Building ML models — CNNs, classification and applied deep learning projects.",
   },
   {
     kind: "learning",
     role: "Data Analytics",
-    org: "Self-directed",
+    org: "Analyst Builder",
     date: "Oct 2024 — Present",
-    note: "Learning data analysis with Python, SQL, Power BI and statistics through hands-on projects.",
+    note: "Python, SQL, Power BI and statistics, learned through hands-on projects.",
   },
   {
     kind: "education",
@@ -32,6 +32,7 @@ const items: Item[] = [
     note: "Focus on Data Science, Machine Learning and AI.",
   },
 ];
+
 
 const iconFor = (kind: Item["kind"]) => {
   if (kind === "education") return GraduationCap;
