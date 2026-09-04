@@ -131,40 +131,31 @@ export default function About() {
           </div>
         </div>
 
-        {/* Linktree — bold CTA */}
-        <a
-          href={LINKTREE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative block overflow-hidden rounded-xl border-2 border-primary/40 bg-gradient-to-br from-primary/10 via-card to-card hover:border-primary hover:-translate-y-0.5 transition-all mb-8 shadow-lg shadow-primary/10 hover:shadow-xl hover:shadow-primary/20"
-        >
-          <div className="p-5 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-              <Link2 className="w-6 h-6 text-primary" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-base font-bold text-foreground">
-                Peek at my Linktree
-              </div>
-              <div className="text-sm text-muted-foreground mt-0.5">
-                Warning: contains every link I've ever made. Click if you're
-                curious 👀
-              </div>
-            </div>
-            <ExternalLink className="w-5 h-5 text-primary group-hover:translate-x-0.5 transition-transform" />
-          </div>
-        </a>
+        {/* Actions — CV + Linktree side by side */}
+        <div className="flex flex-wrap items-center gap-3 mb-12">
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
+          >
+            <Download className="w-4 h-4" />
+            Download My CV
+          </a>
 
-        {/* Download CV Button - Enhanced */}
-        <a
-          href={RESUME_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] mb-12"
-        >
-          <Download className="w-5 h-5" />
-          Download My CV
-        </a>
+          <a
+            href={LINKTREE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Warning: contains every link I've ever made 👀"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-primary/40 text-sm font-medium text-primary hover:bg-primary/10 hover:border-primary/60 transition-all"
+          >
+            <Link2 className="w-4 h-4" />
+            Peek at my Linktree
+            <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+          </a>
+        </div>
+
 
         {/* Skills & Technologies — editorial */}
         <section className="mb-12">
