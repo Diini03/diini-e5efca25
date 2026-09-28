@@ -75,6 +75,7 @@ export const personJsonLd = {
     "https://github.com/Diini03",
     "https://www.linkedin.com/in/diinikahiye/",
     "https://medium.com/@diiniyare74",
+    "https://substack.com/@diinimkahiye",
     "https://x.com/DiiniCade0",
   ],
 };

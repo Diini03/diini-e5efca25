@@ -1,8 +1,11 @@
 import { Github, Linkedin, Facebook, Twitter, Mail } from "lucide-react";
+import { SubstackIcon } from "@/components/SubstackIcon";
+import { SUBSTACK_URL } from "@/lib/links";
 
 const links = [
   { href: "https://github.com/Diini03", label: "GitHub", Icon: Github },
   { href: "https://www.linkedin.com/in/diinikahiye/", label: "LinkedIn", Icon: Linkedin },
+  { href: SUBSTACK_URL, label: "Substack", Icon: SubstackIcon },
   { href: "https://x.com/DiiniCade0", label: "Twitter", Icon: Twitter },
   { href: "https://www.facebook.com/diiniCade8", label: "Facebook", Icon: Facebook },
   { href: "mailto:diiniyare74@gmail.com", label: "Email", Icon: Mail },

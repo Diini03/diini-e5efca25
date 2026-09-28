@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import { SubstackIcon } from "@/components/SubstackIcon";
+import { SUBSTACK_URL } from "@/lib/links";
 import { blogPosts } from "@/pages/Blog";
 
 const displayTitle = (t: string) => {
@@ -119,6 +121,17 @@ export function WritingCarousel() {
             >
               {platformLabel}
               <ExternalLink className="w-3 h-3" />
+            </a>
+            <span className="text-muted-foreground/40">·</span>
+            <a
+              href={SUBSTACK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="I also publish everything on Substack — get it by email"
+              className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors font-medium"
+            >
+              Also on Substack
+              <SubstackIcon className="w-3 h-3" />
             </a>
           </div>
         </div>
