@@ -75,6 +75,14 @@ const groups: { name: string; projects: Project[] }[] = [
     name: "Machine Learning",
     projects: [
       {
+        slug: "displacement-severity-predictor",
+        title: "Displacement Severity Predictor",
+        description:
+          "Machine learning model trained on 3,091 real displacement events across Somalia, predicting whether an incoming event will displace more than 50 people before it peaks — with a live interactive tool anyone can test.",
+        category: "Machine Learning · Live Tool",
+        liveUrl: "https://displacement-som.diinikahiye.online/",
+      },
+      {
         slug: "fall-armyworm-detection",
         title: "Fall Armyworm Leaf Disease Detection",
         description:

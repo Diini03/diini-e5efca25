@@ -28,6 +28,16 @@ const P: Record<string, Proj> = {
       "Interactive Power BI dashboard exploring internal displacement flows in Somalia using the UNHCR-PRMN 2023 dataset.",
     metric: "UNHCR-PRMN · DAX · Power Query",
   },
+  displacementPredictor: {
+    slug: "displacement-severity-predictor",
+    category: "Machine Learning",
+    title: "Displacement Severity Predictor",
+    description:
+      "ML model trained on 3,091 real displacement events in Somalia — predicts whether an event will displace more than 50 people before it peaks.",
+    metric: "3,091 events · Live interactive tool",
+    href: "https://displacement-som.diinikahiye.online/",
+    external: true,
+  },
   fallArmyworm: {
     slug: "fall-armyworm-detection",
     category: "Machine Learning",
@@ -65,9 +75,9 @@ const P: Record<string, Proj> = {
 };
 
 const TABS: { id: string; label: string; projects: Proj[] }[] = [
-  { id: "featured", label: "Featured", projects: [P.somaliaForecast, P.covid] },
+  { id: "featured", label: "Featured", projects: [P.displacementPredictor, P.covid] },
   { id: "bi", label: "BI", projects: [P.somaliaForecast, P.somaliaIdps] },
-  { id: "ml", label: "ML", projects: [P.fallArmyworm] },
+  { id: "ml", label: "ML", projects: [P.displacementPredictor, P.fallArmyworm] },
   { id: "analysis", label: "Analysis", projects: [P.covid, P.happiness] },
   { id: "product", label: "Product", projects: [P.kulmid] },
 ];
