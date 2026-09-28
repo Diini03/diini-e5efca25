@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Mail, Phone, MapPin, Github, Linkedin, Send, Copy, Check } from "lucide-react";
+import { SubstackIcon } from "@/components/SubstackIcon";
+import { SUBSTACK_URL } from "@/lib/links";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
@@ -215,6 +217,15 @@ export default function Contact() {
                 className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href={SUBSTACK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Substack"
+                className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <SubstackIcon className="w-5 h-5" />
               </a>
             </div>
 

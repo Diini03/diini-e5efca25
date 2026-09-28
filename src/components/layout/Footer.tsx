@@ -1,4 +1,6 @@
 import { Github, Linkedin, Facebook, Twitter, Mail, MapPin, Code } from "lucide-react";
+import { SubstackIcon } from "@/components/SubstackIcon";
+import { SUBSTACK_URL } from "@/lib/links";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -63,6 +65,15 @@ export function Footer() {
                 aria-label="Twitter"
               >
                 <Twitter className="w-4 h-4" />
+              </a>
+              <a
+                href={SUBSTACK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-md bg-muted/50 hover:bg-primary/20 hover:text-primary transition-all"
+                aria-label="Substack"
+              >
+                <SubstackIcon className="w-4 h-4" />
               </a>
             </div>
           </div>

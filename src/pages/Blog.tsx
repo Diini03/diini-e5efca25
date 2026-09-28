@@ -10,6 +10,8 @@ import imgSqlJoins from "@/assets/blog/sql-joins.webp";
 import imgTechTrends from "@/assets/blog/tech-trends-2025.webp";
 import imgDataset from "@/assets/blog/what-makes-dataset-useful.webp";
 import { Seo } from "@/components/Seo";
+import { SubstackIcon } from "@/components/SubstackIcon";
+import { SUBSTACK_URL } from "@/lib/links";
 
 const blogImages: Record<string, string> = {
   "ai-vs-ml": imgAiVsMl,
@@ -201,15 +203,27 @@ export default function Blog() {
 
         {/* Header */}
         <div className="mb-10">
-          <div className="flex items-baseline gap-3 mb-3">
-            <h1 className="text-3xl font-bold text-primary">Writing</h1>
-            <span className="text-xs font-mono text-muted-foreground/70">
-              {blogPosts.length} posts
-            </span>
+          <div className="flex items-center justify-between flex-wrap gap-3 mb-3">
+            <div className="flex items-baseline gap-3">
+              <h1 className="text-3xl font-bold text-primary">Writing</h1>
+              <span className="text-xs font-mono text-muted-foreground/70">
+                {blogPosts.length} posts
+              </span>
+            </div>
+            <a
+              href={SUBSTACK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/40 text-sm font-medium text-primary hover:bg-primary/10 hover:border-primary/60 transition-all"
+            >
+              <SubstackIcon className="w-3.5 h-3.5" />
+              Subscribe on Substack
+            </a>
           </div>
           <p className="text-muted-foreground max-w-2xl">
             Notes, essays, and short reads on data, machine learning, and the
-            craft of turning information into decisions.
+            craft of turning information into decisions. Everything I publish
+            also goes out on Substack — get it straight to your inbox.
           </p>
         </div>
 
