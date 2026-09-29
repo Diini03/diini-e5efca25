@@ -12,6 +12,7 @@ import imgDataset from "@/assets/blog/what-makes-dataset-useful.webp";
 import { Seo } from "@/components/Seo";
 import { SubstackIcon } from "@/components/SubstackIcon";
 import { SUBSTACK_URL } from "@/lib/links";
+import { SubscribeForm } from "@/components/SubscribeForm";
 
 const blogImages: Record<string, string> = {
   "ai-vs-ml": imgAiVsMl,
@@ -226,6 +227,8 @@ export default function Blog() {
             also goes out on Substack — get it straight to your inbox.
           </p>
         </div>
+
+        <SubscribeForm source="blog" className="mb-8" />
 
         {/* Search */}
         <div className="relative mb-5">

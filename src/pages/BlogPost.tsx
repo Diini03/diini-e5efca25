@@ -9,6 +9,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import { SubstackIcon } from "@/components/SubstackIcon";
+import { SubscribeForm } from "@/components/SubscribeForm";
 import { SUBSTACK_URL } from "@/lib/links";
 import { EditorialArticle } from "@/components/blog/EditorialArticle";
 import { carouselBlocks } from "@/data/carousel-blocks";
@@ -553,6 +554,8 @@ export default function BlogPost() {
             <ExternalLink className="w-4 h-4" />
           </a>
         )}
+
+        <SubscribeForm source="blog-post" className="mb-4" />
 
         {/* Substack — get posts by email */}
         <a
