@@ -85,10 +85,15 @@ export default function About() {
         <div className="grid md:grid-cols-[1fr_240px] gap-8 mb-10 items-start">
           <div className="space-y-4 text-muted-foreground text-sm leading-relaxed order-2 md:order-1">
             <p>
-              I'm <span className="text-primary">Diini M. Kahiye</span>, a senior
-              data analyst, where I use Python, SQL, and modern BI tools like
-              Power BI to clean, analyze, and visualize data — turning raw
-              numbers into clear, actionable insights.
+              I'm <span className="text-primary">Diini M. Kahiye</span> — I work
+              at the intersection of Data Science, Machine Learning, and AI.
+            </p>
+            <p>
+              Using Python, SQL, and modern analytics tools like{" "}
+              <span className="text-foreground">Power BI</span>,{" "}
+              <span className="text-foreground">Tableau</span>, and{" "}
+              <span className="text-foreground">Excel</span>, I build projects
+              that turn complex data into practical solutions.
             </p>
             <p>
               I'm a certified Data Visualization developer at freeCodeCamp, with
