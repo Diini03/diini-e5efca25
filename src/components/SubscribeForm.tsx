@@ -23,9 +23,9 @@ export function SubscribeForm({ source = "site", className = "" }: { source?: st
   return (
     <div className={`rounded-lg border border-border/60 bg-card/50 p-5 ${className}`}>
       <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary mb-1">$ subscribe</p>
-      <h3 className="text-base font-semibold text-foreground mb-1">Get new writing & projects by email</h3>
+      <h3 className="text-base font-semibold text-foreground mb-1">Subscribe for updates</h3>
       <p className="text-xs text-muted-foreground mb-4">
-        A direct email when I publish an article or ship a project. No spam, unsubscribe anytime.
+        Get more updates about me — new articles, projects and what I'm building, straight to your inbox. No spam, unsubscribe anytime.
       </p>
       {state === "done" || state === "already" ? (
         <p className="flex items-center gap-2 text-sm text-primary">
