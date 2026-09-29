@@ -32,6 +32,33 @@ export type Database = {
         }
         Relationships: []
       }
+      subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          source: string | null
+          subscribed: boolean
+          unsubscribe_token: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          source?: string | null
+          subscribed?: boolean
+          unsubscribe_token?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          source?: string | null
+          subscribed?: boolean
+          unsubscribe_token?: string
+        }
+        Relationships: []
+      }
       visitor_clicks: {
         Row: {
           click_count: number
