@@ -32,12 +32,21 @@ async function send(key: string, payload: Record<string, unknown>) {
 }
 
 const shell = (title: string, inner: string) => `
-<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#f4f4f5;padding:24px">
-  <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e4e4e7">
-    <div style="background:#303446;padding:18px 24px;color:#fff;font-family:monospace">
-      <span style="color:#EA580C">~/</span>diini-kahiye <span style="color:#a5adce">· ${title}</span>
+<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,sans-serif;background:#ffffff;padding:40px 20px">
+  <div style="max-width:520px;margin:0 auto;color:#18181b;font-size:15px;line-height:1.7">
+    <p style="margin:0 0 32px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#a1a1aa">${title}</p>
+    ${inner}
+    <div style="margin-top:40px;padding-top:20px;border-top:1px solid #f4f4f5">
+      <p style="margin:0;font-weight:600;color:#18181b">Diini M. Kahiye</p>
+      <p style="margin:2px 0 10px;font-size:13px;color:#71717a">Data Analyst &amp; Junior Data Scientist · Mogadishu</p>
+      <p style="margin:0;font-size:13px">
+        <a href="https://www.diinikahiye.online" style="color:#18181b;text-decoration:none">diinikahiye.online</a>
+        <span style="color:#d4d4d8">&nbsp;/&nbsp;</span>
+        <a href="https://www.linkedin.com/in/diinikahiye/" style="color:#18181b;text-decoration:none">LinkedIn</a>
+        <span style="color:#d4d4d8">&nbsp;/&nbsp;</span>
+        <a href="https://github.com/Diini03" style="color:#18181b;text-decoration:none">GitHub</a>
+      </p>
     </div>
-    <div style="padding:24px;color:#27272a;font-size:15px;line-height:1.6">${inner}</div>
   </div>
 </div>`;
 
@@ -65,11 +74,11 @@ Deno.serve(async (req) => {
       to: [OWNER],
       reply_to: email.trim(),
       subject: `New message from ${name.trim()}`,
-      html: shell("contact form", `
-        <p style="margin:0 0 4px"><b>From:</b> ${n}</p>
-        <p style="margin:0 0 16px"><b>Email:</b> <a href="mailto:${e}" style="color:#EA580C">${e}</a></p>
-        <div style="border-left:3px solid #EA580C;padding:8px 14px;background:#fafafa">${m}</div>
-        <p style="color:#71717a;font-size:13px;margin-top:16px">Hit reply to answer ${n} directly.</p>`),
+      html: shell("New message · Contact form", `
+        <p style="margin:0 0 2px;font-size:20px;font-weight:600">${n}</p>
+        <p style="margin:0 0 28px"><a href="mailto:${e}" style="color:#71717a;text-decoration:none;font-size:14px">${e}</a></p>
+        <div style="padding-left:16px;border-left:2px solid #EA580C;color:#27272a">${m}</div>
+        <p style="margin:28px 0 0;font-size:13px;color:#a1a1aa">Reply to this email to answer ${n} directly.</p>`),
     });
 
     // Receipt to the visitor (non-blocking failure)
@@ -79,11 +88,11 @@ Deno.serve(async (req) => {
         to: [email.trim()],
         reply_to: OWNER,
         subject: "Thanks for reaching out — Diini Kahiye",
-        html: shell("message received", `
-          <p>Hi ${n},</p>
-          <p>Thanks for your message — I've received it and will get back to you shortly.</p>
-          <div style="border-left:3px solid #EA580C;padding:8px 14px;background:#fafafa;color:#52525b">${m}</div>
-          <p style="margin-top:20px">— Diini Kahiye<br><a href="https://www.diinikahiye.online" style="color:#EA580C">diinikahiye.online</a></p>`),
+        html: shell("Message received", `
+          <p style="margin:0 0 16px">Hi ${n},</p>
+          <p style="margin:0 0 24px">Thanks for getting in touch. I've received your message and will get back to you shortly.</p>
+          <div style="padding-left:16px;border-left:2px solid #e4e4e7;color:#71717a;font-size:14px">${m}</div>
+          <p style="margin:28px 0 0">Best,</p>`),
       });
     } catch (err) {
       console.error("Receipt failed:", err);
