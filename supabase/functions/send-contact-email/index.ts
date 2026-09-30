@@ -74,11 +74,11 @@ Deno.serve(async (req) => {
       to: [OWNER],
       reply_to: email.trim(),
       subject: `New message from ${name.trim()}`,
-      html: shell("contact form", `
-        <p style="margin:0 0 4px"><b>From:</b> ${n}</p>
-        <p style="margin:0 0 16px"><b>Email:</b> <a href="mailto:${e}" style="color:#EA580C">${e}</a></p>
-        <div style="border-left:3px solid #EA580C;padding:8px 14px;background:#fafafa">${m}</div>
-        <p style="color:#71717a;font-size:13px;margin-top:16px">Hit reply to answer ${n} directly.</p>`),
+      html: shell("New message · Contact form", `
+        <p style="margin:0 0 2px;font-size:20px;font-weight:600">${n}</p>
+        <p style="margin:0 0 28px"><a href="mailto:${e}" style="color:#71717a;text-decoration:none;font-size:14px">${e}</a></p>
+        <div style="padding-left:16px;border-left:2px solid #EA580C;color:#27272a">${m}</div>
+        <p style="margin:28px 0 0;font-size:13px;color:#a1a1aa">Reply to this email to answer ${n} directly.</p>`),
     });
 
     // Receipt to the visitor (non-blocking failure)
@@ -88,11 +88,11 @@ Deno.serve(async (req) => {
         to: [email.trim()],
         reply_to: OWNER,
         subject: "Thanks for reaching out — Diini Kahiye",
-        html: shell("message received", `
-          <p>Hi ${n},</p>
-          <p>Thanks for your message — I've received it and will get back to you shortly.</p>
-          <div style="border-left:3px solid #EA580C;padding:8px 14px;background:#fafafa;color:#52525b">${m}</div>
-          <p style="margin-top:20px">— Diini Kahiye<br><a href="https://www.diinikahiye.online" style="color:#EA580C">diinikahiye.online</a></p>`),
+        html: shell("Message received", `
+          <p style="margin:0 0 16px">Hi ${n},</p>
+          <p style="margin:0 0 24px">Thanks for getting in touch. I've received your message and will get back to you shortly.</p>
+          <div style="padding-left:16px;border-left:2px solid #e4e4e7;color:#71717a;font-size:14px">${m}</div>
+          <p style="margin:28px 0 0">Best,</p>`),
       });
     } catch (err) {
       console.error("Receipt failed:", err);
