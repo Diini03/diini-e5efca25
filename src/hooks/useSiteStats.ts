@@ -38,12 +38,24 @@ export function useSiteStats() {
     initRef.current = true;
     const initializeStats = async () => {
       try {
-        // Atomically increment views and get updated stats
-        const { data: viewData, error: viewError } = await supabase
-          .rpc("increment_site_views");
-
-        if (viewError) {
-          console.error("Error incrementing views:", viewError);
+        // Count a view once per browser session; reloads only read stats
+        // (still pings the database every load, keeping it active).
+        const SESSION_KEY = "site_view_counted";
+        const alreadyCounted = sessionStorage.getItem(SESSION_KEY) === "1";
+        let viewData: any = null;
+        if (!alreadyCounted) {
+          const { data, error } = await supabase.rpc("increment_site_views");
+          if (error) console.error("Error incrementing views:", error);
+          else sessionStorage.setItem(SESSION_KEY, "1");
+          viewData = data;
+        } else {
+          const { data, error } = await supabase
+            .from("site_stats")
+            .select("total_views, total_clicks")
+            .eq("id", 1)
+            .maybeSingle();
+          if (error) console.error("Error reading stats:", error);
+          viewData = data;
         }
 
         // Get or create visitor clicks record

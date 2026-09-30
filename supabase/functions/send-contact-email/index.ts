@@ -1,163 +1,97 @@
-import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+const FROM = "Diini Kahiye <no-reply@diinikahiye.online>";
+const OWNER = "diiniyare74@gmail.com";
 
-interface ContactEmailRequest {
-  name: string;
-  email: string;
-  message: string;
-}
-
-// Simple in-memory rate limiting (resets on function cold start)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT = 5; // Max requests
-const RATE_WINDOW = 60 * 60 * 1000; // 1 hour in ms
-
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
-  const record = rateLimitMap.get(ip);
-  
-  if (!record || now > record.resetTime) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
+  const r = rateLimitMap.get(ip);
+  if (!r || now > r.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + 3600_000 });
     return false;
   }
-  
-  if (record.count >= RATE_LIMIT) {
-    return true;
-  }
-  
-  record.count++;
+  if (r.count >= 5) return true;
+  r.count++;
   return false;
 }
 
-const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
-  if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
-  }
+const esc = (s: string) =>
+  s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
+
+const json = (body: unknown, status = 200) =>
+  new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+
+async function send(key: string, payload: Record<string, unknown>) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) throw new Error(`Resend [${res.status}]: ${await res.text()}`);
+}
+
+const shell = (title: string, inner: string) => `
+<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#f4f4f5;padding:24px">
+  <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e4e4e7">
+    <div style="background:#303446;padding:18px 24px;color:#fff;font-family:monospace">
+      <span style="color:#EA580C">~/</span>diini-kahiye <span style="color:#a5adce">· ${title}</span>
+    </div>
+    <div style="padding:24px;color:#27272a;font-size:15px;line-height:1.6">${inner}</div>
+  </div>
+</div>`;
+
+Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   try {
-    // Get client IP for rate limiting
-    const clientIP = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || 
-                     req.headers.get("cf-connecting-ip") || 
-                     "unknown";
-    
-    if (isRateLimited(clientIP)) {
-      console.log(`Rate limited IP: ${clientIP}`);
-      return new Response(
-        JSON.stringify({ error: "Too many requests. Please try again later." }),
-        { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (isRateLimited(ip)) return json({ error: "Too many requests. Please try again later." }, 429);
 
-    const { name, email, message }: ContactEmailRequest = await req.json();
+    const { name, email, message } = await req.json();
+    if (typeof name !== "string" || !name.trim() || name.length > 100) return json({ error: "Invalid name" }, 400);
+    if (typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 255)
+      return json({ error: "Invalid email address" }, 400);
+    if (typeof message !== "string" || !message.trim() || message.length > 1000)
+      return json({ error: "Invalid message" }, 400);
 
-    // Server-side validation
-    if (!name || typeof name !== "string" || name.trim().length === 0 || name.length > 100) {
-      return new Response(
-        JSON.stringify({ error: "Invalid name" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
+    const key = Deno.env.get("RESEND_API_KEY");
+    if (!key) return json({ error: "Email service not configured" }, 500);
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || typeof email !== "string" || !emailRegex.test(email) || email.length > 255) {
-      return new Response(
-        JSON.stringify({ error: "Invalid email address" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
+    const n = esc(name.trim()), e = esc(email.trim()), m = esc(message.trim()).replace(/\n/g, "<br>");
 
-    if (!message || typeof message !== "string" || message.trim().length === 0 || message.length > 1000) {
-      return new Response(
-        JSON.stringify({ error: "Invalid message" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    // Get EmailJS credentials from secrets
-    const serviceId = Deno.env.get("EMAILJS_SERVICE_ID");
-    const templateId = Deno.env.get("EMAILJS_TEMPLATE_ID");
-    const publicKey = Deno.env.get("EMAILJS_PUBLIC_KEY");
-    const privateKey = Deno.env.get("EMAILJS_PRIVATE_KEY");
-
-    // Log which secrets are present (length only for security)
-    console.log("EmailJS config check:", {
-      serviceId: serviceId ? `set (${serviceId.length} chars)` : "MISSING",
-      templateId: templateId ? `set (${templateId.length} chars)` : "MISSING",
-      publicKey: publicKey ? `set (${publicKey.length} chars)` : "MISSING",
-      privateKey: privateKey ? `set (${privateKey.length} chars)` : "MISSING",
+    await send(key, {
+      from: FROM,
+      to: [OWNER],
+      reply_to: email.trim(),
+      subject: `New message from ${name.trim()}`,
+      html: shell("contact form", `
+        <p style="margin:0 0 4px"><b>From:</b> ${n}</p>
+        <p style="margin:0 0 16px"><b>Email:</b> <a href="mailto:${e}" style="color:#EA580C">${e}</a></p>
+        <div style="border-left:3px solid #EA580C;padding:8px 14px;background:#fafafa">${m}</div>
+        <p style="color:#71717a;font-size:13px;margin-top:16px">Hit reply to answer ${n} directly.</p>`),
     });
 
-    if (!serviceId || !templateId || !publicKey || !privateKey) {
-      console.error("Missing EmailJS configuration - one or more secrets not set");
-      return new Response(
-        JSON.stringify({ error: "Email service not configured", details: "Missing required secrets" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+    // Receipt to the visitor (non-blocking failure)
+    try {
+      await send(key, {
+        from: FROM,
+        to: [email.trim()],
+        reply_to: OWNER,
+        subject: "Thanks for reaching out — Diini Kahiye",
+        html: shell("message received", `
+          <p>Hi ${n},</p>
+          <p>Thanks for your message — I've received it and will get back to you shortly.</p>
+          <div style="border-left:3px solid #EA580C;padding:8px 14px;background:#fafafa;color:#52525b">${m}</div>
+          <p style="margin-top:20px">— Diini Kahiye<br><a href="https://www.diinikahiye.online" style="color:#EA580C">diinikahiye.online</a></p>`),
+      });
+    } catch (err) {
+      console.error("Receipt failed:", err);
     }
 
-    const requestOrigin = req.headers.get("origin") ?? "http://localhost";
-    console.log("Sending EmailJS request with origin:", requestOrigin);
-
-    // Send email via EmailJS REST API with accessToken for server-side calls
-    const emailResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // EmailJS requires browser-like headers for server-side calls
-        "Origin": requestOrigin,
-        "Referer": requestOrigin + "/",
-        "User-Agent": "Mozilla/5.0 (compatible; LovableApp/1.0)",
-      },
-      body: JSON.stringify({
-        service_id: serviceId,
-        template_id: templateId,
-        user_id: publicKey,
-        accessToken: privateKey,
-        template_params: {
-          name: name.trim(),
-          email: email.trim(),
-          message: message.trim(),
-          title: name.trim(),
-        },
-      }),
-    });
-
-    const responseText = await emailResponse.text();
-    console.log("EmailJS response:", {
-      status: emailResponse.status,
-      statusText: emailResponse.statusText,
-      body: responseText,
-    });
-
-    if (!emailResponse.ok) {
-      return new Response(
-        JSON.stringify({ 
-          error: "Failed to send email", 
-          emailjs_status: emailResponse.status,
-          emailjs_response: responseText 
-        }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    console.log(`Email sent successfully from ${email}`);
-
-    return new Response(
-      JSON.stringify({ success: true, message: "Email sent successfully" }),
-      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
-  } catch (error: any) {
-    console.error("Error in send-contact-email function:", error);
-    return new Response(
-      JSON.stringify({ error: "An unexpected error occurred" }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    return json({ success: true });
+  } catch (err) {
+    console.error("send-contact-email error:", err);
+    return json({ error: "Failed to send message. Please try again later." }, 500);
   }
-};
-
-serve(handler);
+});
