@@ -142,7 +142,7 @@ function Dashboard() {
               <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-3">Signups · last 14 days</div>
               <div className="flex items-end gap-1.5 h-24">
                 {r.days.map(({ d, n }) => (
-                  <div key={d.toISOString()} className="flex-1 flex flex-col items-center gap-1" title={`${d.toDateString()}: ${n}`}>
+                  <div key={d.toISOString()} className="flex-1 h-full flex flex-col justify-end" title={`${d.toDateString()}: ${n}`}>
                     <div className="w-full rounded-sm bg-primary/70" style={{ height: `${(n / r.max) * 100}%`, minHeight: 2 }} />
                   </div>
                 ))}
