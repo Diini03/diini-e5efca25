@@ -1,6 +1,14 @@
 import { useState } from "react";
-import { Check, CornerDownLeft, Loader2 } from "lucide-react";
+import { AlertCircle, Check, CornerDownLeft, Loader2 } from "lucide-react";
+import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+
+const emailSchema = z
+  .string()
+  .trim()
+  .min(1, "Enter your email to subscribe.")
+  .max(255, "That email is too long.")
+  .email("That doesn't look like a valid email — try name@example.com.");
 
 const PERKS = [
   "New articles, the day they're published",
@@ -10,13 +18,26 @@ const PERKS = [
 
 export function SubscribeForm({ source = "site", className = "" }: { source?: string; className?: string }) {
   const [email, setEmail] = useState("");
+  const [touched, setTouched] = useState(false);
   const [state, setState] = useState<"idle" | "loading" | "done" | "already" | "error">("idle");
   const [msg, setMsg] = useState("");
 
+  // Real-time check once the field has been touched (blur or submit attempt)
+  const trimmed = email.trim();
+  const validationResult = touched ? emailSchema.safeParse(trimmed) : null;
+  const localError = validationResult && !validationResult.success ? validationResult.error.issues[0].message : null;
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setTouched(true);
+    const parsed = emailSchema.safeParse(trimmed);
+    if (!parsed.success) {
+      setState("error");
+      setMsg(parsed.error.issues[0].message);
+      return;
+    }
     setState("loading");
-    const { data, error } = await supabase.functions.invoke("subscribe", { body: { email, source } });
+    const { data, error } = await supabase.functions.invoke("subscribe", { body: { email: parsed.data, source } });
     if (error || data?.error) {
       setState("error");
       setMsg(data?.error ?? "Something went wrong. Please try again.");
@@ -24,6 +45,7 @@ export function SubscribeForm({ source = "site", className = "" }: { source?: st
     }
     setState(data.status === "already" ? "already" : "done");
     setEmail("");
+    setTouched(false);
   };
 
   return (
