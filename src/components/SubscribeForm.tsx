@@ -1,6 +1,14 @@
 import { useState } from "react";
-import { Check, CornerDownLeft, Loader2 } from "lucide-react";
+import { AlertCircle, Check, CornerDownLeft, Loader2 } from "lucide-react";
+import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+
+const emailSchema = z
+  .string()
+  .trim()
+  .min(1, "Enter your email to subscribe.")
+  .max(255, "That email is too long.")
+  .email("That doesn't look like a valid email — try name@example.com.");
 
 const PERKS = [
   "New articles, the day they're published",
@@ -10,13 +18,26 @@ const PERKS = [
 
 export function SubscribeForm({ source = "site", className = "" }: { source?: string; className?: string }) {
   const [email, setEmail] = useState("");
+  const [touched, setTouched] = useState(false);
   const [state, setState] = useState<"idle" | "loading" | "done" | "already" | "error">("idle");
   const [msg, setMsg] = useState("");
 
+  // Real-time check once the field has been touched (blur or submit attempt)
+  const trimmed = email.trim();
+  const validationResult = touched ? emailSchema.safeParse(trimmed) : null;
+  const localError = validationResult && !validationResult.success ? validationResult.error.issues[0].message : null;
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setTouched(true);
+    const parsed = emailSchema.safeParse(trimmed);
+    if (!parsed.success) {
+      setState("error");
+      setMsg(parsed.error.issues[0].message);
+      return;
+    }
     setState("loading");
-    const { data, error } = await supabase.functions.invoke("subscribe", { body: { email, source } });
+    const { data, error } = await supabase.functions.invoke("subscribe", { body: { email: parsed.data, source } });
     if (error || data?.error) {
       setState("error");
       setMsg(data?.error ?? "Something went wrong. Please try again.");
@@ -24,6 +45,7 @@ export function SubscribeForm({ source = "site", className = "" }: { source?: st
     }
     setState(data.status === "already" ? "already" : "done");
     setEmail("");
+    setTouched(false);
   };
 
   return (
@@ -72,26 +94,40 @@ export function SubscribeForm({ source = "site", className = "" }: { source?: st
               </p>
             </div>
           ) : (
-            <form onSubmit={submit}>
-              <div className="flex items-center gap-2 rounded-md border border-border/60 bg-secondary/40 px-3 py-2.5 focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/30 transition-all">
-                <span className="font-mono text-sm text-primary/80 select-none">❯</span>
+            <form onSubmit={submit} noValidate>
+              <div
+                className={`flex items-center gap-2 rounded-md border bg-secondary/40 px-3 py-2.5 transition-all focus-within:ring-1 ${
+                  localError
+                    ? "border-destructive/60 focus-within:border-destructive/60 focus-within:ring-destructive/30"
+                    : "border-border/60 focus-within:border-primary/50 focus-within:ring-primary/30"
+                }`}
+              >
+                <span className={`font-mono text-sm select-none ${localError ? "text-destructive" : "text-primary/80"}`}>❯</span>
                 <input
                   type="email"
-                  required
                   maxLength={255}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() => setTouched(true)}
                   placeholder="you@example.com"
                   aria-label="Email address"
+                  aria-invalid={!!localError}
                   className="w-full bg-transparent font-mono text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
                 />
-                {email === "" && (
+                {email === "" && !localError && (
                   <span
                     aria-hidden
                     className="inline-block w-2 h-3.5 bg-primary/70 animate-cursor-blink shrink-0"
                   />
                 )}
               </div>
+
+              {localError && (
+                <p className="mt-2 text-xs text-destructive flex items-center gap-1.5">
+                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                  {localError}
+                </p>
+              )}
 
               <button
                 type="submit"
@@ -108,7 +144,7 @@ export function SubscribeForm({ source = "site", className = "" }: { source?: st
             </form>
           )}
 
-          {state === "error" && <p className="text-xs text-destructive mt-2">{msg}</p>}
+          {state === "error" && !localError && <p className="text-xs text-destructive mt-2">{msg}</p>}
         </div>
 
         {/* right — why subscribe */}

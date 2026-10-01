@@ -200,7 +200,7 @@ export default function About() {
             Certifications
           </h2>
 
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-6">
             {certifications.map((cert, index) => {
               const isLinked = !!cert.url;
               const Wrapper: any = isLinked ? "a" : "div";
@@ -216,64 +216,46 @@ export default function About() {
                 <Wrapper
                   key={index}
                   {...wrapperProps}
-                  className={`group relative block overflow-hidden rounded-xl border border-border bg-card/60 backdrop-blur-sm transition-all duration-300 ${
+                  className={`group relative flex flex-col rounded-2xl border border-border bg-card/50 p-7 transition-all duration-300 ${
                     isLinked
-                      ? "hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 cursor-pointer"
+                      ? "hover:border-primary/50 hover:bg-card hover:shadow-lg hover:shadow-primary/5 cursor-pointer"
                       : "opacity-90"
                   }`}
                 >
-                  {/* Glow accent */}
-                  <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                  {/* Header bar */}
-                  <div className="flex items-center justify-between px-4 py-2.5 border-b border-border/60 bg-secondary/30">
-                    <div className="flex items-center gap-1.5">
-                      <div className="terminal-dot terminal-dot-orange" />
-                      <div className="terminal-dot terminal-dot-blue" />
-                      <div className="terminal-dot terminal-dot-purple" />
-                    </div>
-                    <span className="text-[10px] font-mono text-muted-foreground tracking-wider uppercase">
-                      cert / {cert.year}
-                    </span>
+                  {/* Large logo */}
+                  <div className="w-20 h-20 rounded-xl overflow-hidden border border-border/60 bg-background shrink-0 mb-6 group-hover:scale-[1.03] transition-transform">
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={cert.logo}
+                      alt={cert.provider}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
 
-                  {/* Body */}
-                  <div className="p-5 flex gap-4">
-                    <div className="w-14 h-14 rounded-lg overflow-hidden border border-border/60 bg-background shrink-0 group-hover:scale-105 transition-transform">
-                      <img
-                          loading="lazy"
-                          decoding="async"
-                        src={cert.logo}
-                        alt={cert.provider}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
-                        {cert.name}
-                      </h3>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        {cert.provider}
-                      </p>
+                  <h3 className="text-lg font-semibold text-foreground leading-snug">
+                    {cert.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1.5">
+                    {cert.provider} · {cert.year}
+                  </p>
 
-                      <div className="flex items-center gap-2 mt-3">
-                        <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
-                          <CheckCircle className="w-3 h-3" />
-                          Verified
-                        </span>
-                        {isLinked ? (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 group-hover:bg-primary/20 transition-colors">
-                            <ExternalLink className="w-3 h-3" />
-                            View
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-secondary/60 text-muted-foreground border border-border/60">
-                            <Lock className="w-3 h-3" />
-                            Soon
-                          </span>
-                        )}
-                      </div>
-                    </div>
+                  <div className="mt-auto pt-6 flex items-center gap-2.5">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                      Verified
+                    </span>
+                    {isLinked ? (
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 group-hover:bg-primary/20 transition-colors">
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        View
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-full bg-secondary/60 text-muted-foreground border border-border/60">
+                        <Lock className="w-3.5 h-3.5" />
+                        Soon
+                      </span>
+                    )}
                   </div>
                 </Wrapper>
               );
