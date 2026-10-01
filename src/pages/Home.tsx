@@ -4,6 +4,7 @@ import { QuickStatsCard } from "@/components/home/QuickStatsCard";
 import { FeaturedProjects } from "@/components/home/FeaturedProjects";
 import { TrajectoryStrip } from "@/components/home/TrajectoryStrip";
 import { WritingCarousel } from "@/components/home/WritingCarousel";
+import { SubscribeForm } from "@/components/SubscribeForm";
 
 import { ParticleBackground } from "@/components/home/ParticleBackground";
 import { InteractiveGradient } from "@/components/home/InteractiveGradient";
@@ -101,6 +102,11 @@ export default function Home() {
 
         {/* Writing — interactive carousel */}
         <WritingCarousel />
+
+        {/* Subscribe — after reading, invite them to follow along */}
+        <section className="mb-20">
+          <SubscribeForm source="home" />
+        </section>
 
         {/* Quick Stats */}
         <section className="mb-20">
