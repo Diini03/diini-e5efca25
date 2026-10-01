@@ -94,26 +94,40 @@ export function SubscribeForm({ source = "site", className = "" }: { source?: st
               </p>
             </div>
           ) : (
-            <form onSubmit={submit}>
-              <div className="flex items-center gap-2 rounded-md border border-border/60 bg-secondary/40 px-3 py-2.5 focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/30 transition-all">
-                <span className="font-mono text-sm text-primary/80 select-none">❯</span>
+            <form onSubmit={submit} noValidate>
+              <div
+                className={`flex items-center gap-2 rounded-md border bg-secondary/40 px-3 py-2.5 transition-all focus-within:ring-1 ${
+                  localError
+                    ? "border-destructive/60 focus-within:border-destructive/60 focus-within:ring-destructive/30"
+                    : "border-border/60 focus-within:border-primary/50 focus-within:ring-primary/30"
+                }`}
+              >
+                <span className={`font-mono text-sm select-none ${localError ? "text-destructive" : "text-primary/80"}`}>❯</span>
                 <input
                   type="email"
-                  required
                   maxLength={255}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() => setTouched(true)}
                   placeholder="you@example.com"
                   aria-label="Email address"
+                  aria-invalid={!!localError}
                   className="w-full bg-transparent font-mono text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
                 />
-                {email === "" && (
+                {email === "" && !localError && (
                   <span
                     aria-hidden
                     className="inline-block w-2 h-3.5 bg-primary/70 animate-cursor-blink shrink-0"
                   />
                 )}
               </div>
+
+              {localError && (
+                <p className="mt-2 text-xs text-destructive flex items-center gap-1.5">
+                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                  {localError}
+                </p>
+              )}
 
               <button
                 type="submit"
@@ -130,7 +144,7 @@ export function SubscribeForm({ source = "site", className = "" }: { source?: st
             </form>
           )}
 
-          {state === "error" && <p className="text-xs text-destructive mt-2">{msg}</p>}
+          {state === "error" && !localError && <p className="text-xs text-destructive mt-2">{msg}</p>}
         </div>
 
         {/* right — why subscribe */}
