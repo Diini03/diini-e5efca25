@@ -208,7 +208,7 @@ export function ProjectsManager() {
     </FormShell>
   );
 
-  return <List table="projects" {...list} onEdit={open} onNew={() => open(emptyProject)} sub={(r) => r.category} />;
+  return <List<DbProject> table="projects" {...list} onEdit={open} onNew={() => open(emptyProject)} sub={(r) => r.category} />;
 }
 
 /* ---------------- blog ---------------- */
@@ -275,5 +275,5 @@ export function PostsManager() {
     </FormShell>
   );
 
-  return <List table="blog_posts" {...list} onEdit={(r) => { setEdit(r); setErr(""); }} onNew={() => { setEdit(emptyPost()); setErr(""); }} sub={(r) => `${r.category} · ${r.published_at}`} />;
+  return <List<DbPost> table="blog_posts" {...list} onEdit={(r) => { setEdit(r); setErr(""); }} onNew={() => { setEdit(emptyPost()); setErr(""); }} sub={(r) => `${r.category} · ${r.published_at}`} />;
 }

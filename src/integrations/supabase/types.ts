@@ -14,6 +14,114 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          body: string
+          category: string
+          cover_url: string | null
+          created_at: string
+          excerpt: string
+          featured: boolean
+          id: string
+          linkedin_url: string | null
+          medium_url: string | null
+          published: boolean
+          published_at: string
+          slug: string
+          substack_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string
+          category?: string
+          cover_url?: string | null
+          created_at?: string
+          excerpt?: string
+          featured?: boolean
+          id?: string
+          linkedin_url?: string | null
+          medium_url?: string | null
+          published?: boolean
+          published_at?: string
+          slug: string
+          substack_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          category?: string
+          cover_url?: string | null
+          created_at?: string
+          excerpt?: string
+          featured?: boolean
+          id?: string
+          linkedin_url?: string | null
+          medium_url?: string | null
+          published?: boolean
+          published_at?: string
+          slug?: string
+          substack_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          body: string
+          category: string
+          cover_url: string | null
+          created_at: string
+          description: string
+          featured: boolean
+          github_url: string | null
+          id: string
+          live_url: string | null
+          published: boolean
+          slug: string
+          sort_order: number
+          stack: string[]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string
+          category?: string
+          cover_url?: string | null
+          created_at?: string
+          description?: string
+          featured?: boolean
+          github_url?: string | null
+          id?: string
+          live_url?: string | null
+          published?: boolean
+          slug: string
+          sort_order?: number
+          stack?: string[]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          category?: string
+          cover_url?: string | null
+          created_at?: string
+          description?: string
+          featured?: boolean
+          github_url?: string | null
+          id?: string
+          live_url?: string | null
+          published?: boolean
+          slug?: string
+          sort_order?: number
+          stack?: string[]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       site_stats: {
         Row: {
           id: number
