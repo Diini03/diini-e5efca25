@@ -20,6 +20,7 @@ type Project = {
 import somaliaForecastImg from "@/assets/projects/powerbi/somalia-displacement-forecast.png";
 import somaliaIdpsImg from "@/assets/projects/powerbi/somalia-idps-unhcr.png";
 import { Seo } from "@/components/Seo";
+import { useDbProjects } from "@/lib/content";
 
 const groups: { name: string; projects: Project[] }[] = [
   {
@@ -142,6 +143,13 @@ const groups: { name: string; projects: Project[] }[] = [
 
 export default function Projects() {
   const { theme } = useTheme();
+  const { data: dbProjects = [] } = useDbProjects();
+  const allGroups = groups.map((g) => ({ ...g, projects: [...g.projects] }));
+  dbProjects.forEach((d) => {
+    const card: Project = { slug: d.slug, title: d.title, description: d.description, category: d.category, imageLight: d.cover_url ?? undefined };
+    const g = allGroups.find((x) => x.name.toLowerCase() === d.category.toLowerCase());
+    if (g) g.projects.unshift(card); else allGroups.push({ name: d.category, projects: [card] });
+  });
 
   return (
     <div className="min-h-screen animate-fade-in">
@@ -165,7 +173,7 @@ export default function Projects() {
         </p>
 
         <div className="space-y-14">
-          {groups.map((group) => (
+          {allGroups.map((group) => (
             <section key={group.name}>
               <div className="flex items-center gap-3 mb-5">
                 <h2 className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground/80">
