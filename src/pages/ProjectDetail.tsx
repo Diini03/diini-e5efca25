@@ -1,3 +1,4 @@
+import { DbProjectDetail } from "@/components/DbDetail";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Calendar, Github, CheckCircle, Copy, Check, BarChart3, Lightbulb, ExternalLink, Trophy } from "lucide-react";
@@ -599,6 +600,7 @@ export default function ProjectDetail() {
     }
   };
 
+  if (!project && id) return <DbProjectDetail slug={id} />;
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center">
