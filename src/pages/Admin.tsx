@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
-import { supabase } from "@/integrations/supabase/client";
+import { adminClient as supabase } from "@/lib/adminClient";
+import { ProjectsManager, PostsManager } from "@/components/admin/AdminContent";
 import { LogOut, Lock, Download } from "lucide-react";
 
 type Sub = { id: string; email: string; source: string | null; subscribed: boolean; created_at: string };
@@ -17,7 +18,16 @@ export default function Admin() {
     document.title = "root";
     const { data } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
     supabase.auth.getSession().then(({ data }) => { setSession(data.session); setReady(true); });
-    return () => { data.subscription.unsubscribe(); meta.remove(); };
+    let t: ReturnType<typeof setTimeout>;
+    const reset = () => { clearTimeout(t); t = setTimeout(() => supabase.auth.signOut(), 15 * 60 * 1000); };
+    const evs = ["mousemove", "keydown", "click", "scroll"];
+    evs.forEach((e) => window.addEventListener(e, reset));
+    reset();
+    return () => {
+      data.subscription.unsubscribe(); meta.remove(); clearTimeout(t);
+      evs.forEach((e) => window.removeEventListener(e, reset));
+      supabase.auth.signOut();
+    };
   }, []);
 
   if (!ready) return null;
@@ -70,6 +80,26 @@ function Login() {
 }
 
 function Dashboard() {
+  const [tab, setTab] = useState<"report" | "projects" | "blog">("report");
+  return (
+    <div className="max-w-4xl mx-auto px-6 pt-10">
+      <div className="flex items-center justify-between">
+        <nav className="flex gap-1.5">
+          {(["report", "projects", "blog"] as const).map((t) => (
+            <button key={t} onClick={() => setTab(t)}
+              className={`text-xs rounded-full border px-3 py-1 ${tab === t ? "border-primary/60 text-primary bg-primary/10" : "border-border text-muted-foreground"}`}>./{t}</button>
+          ))}
+        </nav>
+        <button onClick={() => supabase.auth.signOut()} className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground">
+          <LogOut className="w-3.5 h-3.5" /> logout
+        </button>
+      </div>
+      {tab === "report" ? <Report /> : <div className="py-8">{tab === "projects" ? <ProjectsManager /> : <PostsManager />}</div>}
+    </div>
+  );
+}
+
+function Report() {
   const [subs, setSubs] = useState<Sub[]>([]);
   const [stats, setStats] = useState<{ total_views: number; total_clicks: number } | null>(null);
   const [loading, setLoading] = useState(true);
@@ -117,15 +147,12 @@ function Dashboard() {
   );
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10 space-y-8">
+    <div className="py-8 space-y-8">
       <header className="flex items-center justify-between">
         <div>
           <div className="text-xs text-muted-foreground">root@diinikahiye:~#</div>
           <h1 className="text-xl text-primary">./report</h1>
         </div>
-        <button onClick={() => supabase.auth.signOut()} className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground">
-          <LogOut className="w-3.5 h-3.5" /> logout
-        </button>
       </header>
 
       {loading ? <p className="text-sm text-muted-foreground">loading…</p> : (

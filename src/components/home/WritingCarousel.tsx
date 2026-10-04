@@ -4,18 +4,23 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { SubstackIcon } from "@/components/SubstackIcon";
 import { SUBSTACK_URL } from "@/lib/links";
 import { blogPosts } from "@/pages/Blog";
+import { useDbPosts, dbPostToBlogPost } from "@/lib/content";
 
 const displayTitle = (t: string) => {
   const cut = t.split("—")[0].trim();
   return cut.replace(/[?:,-]+$/, "").trim();
 };
 
-const featured = blogPosts
+const staticFeatured = blogPosts
   .filter((p) => p.featuredOnHome)
   .sort((a, b) => (a.date < b.date ? 1 : -1))
   .slice(0, 5);
 
 export function WritingCarousel() {
+  const { data: dbPosts = [] } = useDbPosts();
+  const featured = [...dbPosts.filter((p) => p.featured).map(dbPostToBlogPost), ...staticFeatured]
+    .sort((a, b) => (a.date < b.date ? 1 : -1))
+    .slice(0, 5);
   const [activeSlug, setActiveSlug] = useState(featured[0]?.slug ?? "");
   const active = featured.find((p) => p.slug === activeSlug) ?? featured[0];
 

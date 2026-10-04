@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Search, Calendar, Clock, ArrowRight, Linkedin } from "lucide-react";
+import { useDbPosts, dbPostToBlogPost } from "@/lib/content";
 
 import imgAiVsMl from "@/assets/blog/ai-vs-ml.webp";
 import imgDataCareer from "@/assets/blog/data-career-tips.webp";
@@ -170,11 +171,13 @@ export const blogPosts: BlogPost[] = [
 ];
 
 export default function Blog() {
+  const { data: dbPosts = [] } = useDbPosts();
+  const allPosts = useMemo(() => [...dbPosts.map(dbPostToBlogPost), ...blogPosts.filter((b) => !dbPosts.some((d) => d.slug === b.slug))], [dbPosts]);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
 
   const filteredPosts = useMemo(() => {
-    return blogPosts.filter((post) => {
+    return allPosts.filter((post) => {
       const q = searchQuery.toLowerCase();
       const matchesSearch =
         post.title.toLowerCase().includes(q) ||
@@ -183,7 +186,7 @@ export default function Blog() {
       const matchesCategory = activeCategory === "all" || post.category === activeCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, activeCategory]);
+  }, [searchQuery, activeCategory, allPosts]);
 
   return (
     <div className="min-h-screen animate-fade-in overflow-hidden">
@@ -208,7 +211,7 @@ export default function Blog() {
             <div className="flex items-baseline gap-3">
               <h1 className="text-3xl font-bold text-primary">Writing</h1>
               <span className="text-xs font-mono text-muted-foreground/70">
-                {blogPosts.length} posts
+                {allPosts.length} posts
               </span>
             </div>
             <a

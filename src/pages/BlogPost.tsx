@@ -1,3 +1,4 @@
+import { DbPostDetail } from "@/components/DbDetail";
 import { useParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -327,6 +328,7 @@ export default function BlogPost() {
   const { slug } = useParams();
   const post = slug ? blogPostsData[slug] : null;
 
+  if (!post && slug) return <DbPostDetail slug={slug} />;
   if (!post) {
     return (
       <div className="min-h-screen flex items-center justify-center animate-fade-in">
