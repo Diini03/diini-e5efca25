@@ -1,4 +1,6 @@
 import { useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
+import { Button } from "@/components/ui/button";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import type { DashboardItem } from "@/data/dashboards";
@@ -37,7 +39,7 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
 
   if (!item) return null;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -45,15 +47,15 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
       className="fixed inset-0 z-[90] flex items-center justify-center overscroll-contain touch-none bg-background/95 backdrop-blur-sm animate-fade-in"
       onClick={onClose}
     >
-      <button
+      <Button variant="ghost" size="icon" title="Close viewer"
         onClick={onClose}
         aria-label="Close viewer"
         className="absolute top-4 right-4 p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
       >
         <X className="w-5 h-5" />
-      </button>
+      </Button>
 
-      <button
+      <Button variant="ghost" size="icon" title="Previous image"
         onClick={(e) => {
           e.stopPropagation();
           prev();
@@ -62,9 +64,9 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
         className="absolute left-2 sm:left-6 z-10 p-2 rounded-full border border-border/60 bg-card/80 text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
       >
         <ChevronLeft className="w-5 h-5" />
-      </button>
+      </Button>
 
-      <button
+      <Button variant="ghost" size="icon" title="Next image"
         onClick={(e) => {
           e.stopPropagation();
           next();
@@ -73,7 +75,7 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
         className="absolute right-2 sm:right-6 z-10 p-2 rounded-full border border-border/60 bg-card/80 text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
       >
         <ChevronRight className="w-5 h-5" />
-      </button>
+      </Button>
 
       <figure
         className="flex flex-col items-center gap-3 px-12 sm:px-20 animate-scale-in"
@@ -84,13 +86,14 @@ export function DashboardViewer({ items, index, onClose, onNavigate }: Dashboard
           alt={item.title}
           className="max-h-[75vh] max-w-[80vw] w-auto rounded-lg border border-border/60 shadow-2xl object-contain"
         />
-        <figcaption className="flex items-center gap-3 font-mono text-xs text-muted-foreground">
+        <figcaption className="flex flex-wrap justify-center items-center gap-3 font-mono text-xs text-muted-foreground text-center">
           <span className="text-foreground">{item.title}</span>
           <span className="text-primary/70">
             {index + 1} / {items.length}
           </span>
         </figcaption>
       </figure>
-    </div>
+    </div>,
+    document.body
   );
 }
